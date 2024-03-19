@@ -1,19 +1,13 @@
 <?php
 
-namespace Centrobill\Sdk\Http\Request;
+namespace Centrobill\Sdk\Http\Response;
 
-use Centrobill\SDK\Http\Response\ResponseInterface;
+use stdClass;
 
 class BlockTestPaymentDataResponse extends AbstractResponse implements ResponseInterface
 {
-
     public function isSuccessful()
     {
         return true;
-    }
-
-    public function getData()
-    {
-        return [];
     }
 }

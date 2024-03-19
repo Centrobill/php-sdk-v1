@@ -13,9 +13,4 @@ class RecoverSubscriptionRequest implements RequestInterface
     {
         return self::HTTP_METHOD_PUT;
     }
-
-    public function getPayload()
-    {
-        // TODO: Implement getPayload() method.
-    }
 }

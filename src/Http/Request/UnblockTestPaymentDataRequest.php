@@ -13,9 +13,4 @@ class UnblockTestPaymentDataRequest implements RequestInterface
     {
         return self::HTTP_METHOD_POST;
     }
-
-    public function getPayload()
-    {
-        // TODO: Implement getPayload() method.
-    }
 }

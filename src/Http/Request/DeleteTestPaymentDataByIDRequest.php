@@ -13,9 +13,4 @@ class DeleteTestPaymentDataByIDRequest implements RequestInterface
     {
         return self::HTTP_METHOD_DELETE;
     }
-
-    public function getPayload()
-    {
-        // TODO: Implement getPayload() method.
-    }
 }

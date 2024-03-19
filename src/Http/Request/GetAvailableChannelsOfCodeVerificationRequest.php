@@ -13,9 +13,4 @@ class GetAvailableChannelsOfCodeVerificationRequest implements RequestInterface
     {
         return self::HTTP_METHOD_GET;
     }
-
-    public function getPayload()
-    {
-        // TODO: Implement getPayload() method.
-    }
 }

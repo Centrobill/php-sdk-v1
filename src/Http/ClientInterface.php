@@ -3,75 +3,75 @@
 namespace Centrobill\Sdk;
 
 use Centrobill\Sdk\Http\Request\BlockTestPaymentDataRequest;
-use Centrobill\Sdk\Http\Request\BlockTestPaymentDataResponse;
 use Centrobill\Sdk\Http\Request\CancelSubscriptionRequest;
-use Centrobill\Sdk\Http\Request\CancelSubscriptionResponse;
 use Centrobill\Sdk\Http\Request\ChangeConsumerGroupRequest;
-use Centrobill\Sdk\Http\Request\ChangeConsumerGroupResponse;
 use Centrobill\Sdk\Http\Request\ChangePaymentAccountForsubscriptionRequest;
-use Centrobill\Sdk\Http\Request\ChangePaymentAccountForsubscriptionResponse;
 use Centrobill\Sdk\Http\Request\ChangeSubscriptionRequest;
-use Centrobill\Sdk\Http\Request\ChangeSubscriptionResponse;
 use Centrobill\Sdk\Http\Request\CheckVerificationCodeRequest;
-use Centrobill\Sdk\Http\Request\CheckVerificationCodeResponse;
 use Centrobill\Sdk\Http\Request\CreateConsumerRequest;
-use Centrobill\Sdk\Http\Request\CreateConsumerResponse;
 use Centrobill\Sdk\Http\Request\CreateProductRequest;
-use Centrobill\Sdk\Http\Request\CreateProductResponse;
 use Centrobill\Sdk\Http\Request\CreateSiteRequest;
-use Centrobill\Sdk\Http\Request\CreateSiteResponse;
 use Centrobill\Sdk\Http\Request\CreateTestPaymentDataRequest;
-use Centrobill\Sdk\Http\Request\CreateTestPaymentDataResponse;
 use Centrobill\Sdk\Http\Request\CreditRequest;
-use Centrobill\Sdk\Http\Request\CreditResponse;
 use Centrobill\Sdk\Http\Request\DeleteTestPaymentDataByIDRequest;
-use Centrobill\Sdk\Http\Request\DeleteTestPaymentDataByIDResponse;
 use Centrobill\Sdk\Http\Request\DisablePaymentAccountForQuickSaleRequest;
-use Centrobill\Sdk\Http\Request\DisablePaymentAccountForQuickSaleResponse;
 use Centrobill\Sdk\Http\Request\Emulate3DsForTestPaymentDataRequest;
-use Centrobill\Sdk\Http\Request\Emulate3DsForTestPaymentDataResponse;
 use Centrobill\Sdk\Http\Request\EnablePaymentAccountForQuickSaleRequest;
-use Centrobill\Sdk\Http\Request\EnablePaymentAccountForQuickSaleResponse;
 use Centrobill\Sdk\Http\Request\GenerateCardDataTokenRequest;
-use Centrobill\Sdk\Http\Request\GenerateCardDataTokenResponse;
 use Centrobill\Sdk\Http\Request\GenerateCardDataTokenUsingPaymentAccountIdRequest;
-use Centrobill\Sdk\Http\Request\GenerateCardDataTokenUsingPaymentAccountIdResponse;
 use Centrobill\Sdk\Http\Request\GenerateUrlToPaymentPageRequest;
-use Centrobill\Sdk\Http\Request\GenerateUrlToPaymentPageResponse;
 use Centrobill\Sdk\Http\Request\GetApplePaySessionRequest;
-use Centrobill\Sdk\Http\Request\GetApplePaySessionResponse;
 use Centrobill\Sdk\Http\Request\GetAvailableChannelsOfCodeVerificationRequest;
-use Centrobill\Sdk\Http\Request\GetAvailableChannelsOfCodeVerificationResponse;
 use Centrobill\Sdk\Http\Request\GetChargebackIdRepaidLinkRequest;
-use Centrobill\Sdk\Http\Request\GetChargebackIdRepaidLinkResponse;
 use Centrobill\Sdk\Http\Request\GetCurrencyExchangeRatesRequest;
-use Centrobill\Sdk\Http\Request\GetCurrencyExchangeRatesResponse;
 use Centrobill\Sdk\Http\Request\GetExchangeRateByIso3Request;
-use Centrobill\Sdk\Http\Request\GetExchangeRateByIso3Response;
 use Centrobill\Sdk\Http\Request\GetListOfExternalIpsRequest;
-use Centrobill\Sdk\Http\Request\GetListOfExternalIpsResponse;
 use Centrobill\Sdk\Http\Request\ListPaymentaccountIDsByConsumerIdRequest;
-use Centrobill\Sdk\Http\Request\ListPaymentaccountIDsByConsumerIdResponse;
 use Centrobill\Sdk\Http\Request\NotEmulate3DsForTestPaymentDataRequest;
-use Centrobill\Sdk\Http\Request\NotEmulate3DsForTestPaymentDataResponse;
 use Centrobill\Sdk\Http\Request\PayRequest;
-use Centrobill\Sdk\Http\Request\PayResponse;
 use Centrobill\Sdk\Http\Request\PayoutRequest;
-use Centrobill\Sdk\Http\Request\PayoutResponse;
 use Centrobill\Sdk\Http\Request\RecoverSubscriptionRequest;
-use Centrobill\Sdk\Http\Request\RecoverSubscriptionResponse;
 use Centrobill\Sdk\Http\Request\SendMessageWithVerificationCodeRequest;
-use Centrobill\Sdk\Http\Request\SendMessageWithVerificationCodeResponse;
 use Centrobill\Sdk\Http\Request\UnblockTestPaymentDataRequest;
-use Centrobill\Sdk\Http\Request\UnblockTestPaymentDataResponse;
 use Centrobill\Sdk\Http\Request\UpdateAllowedIPsRequest;
-use Centrobill\Sdk\Http\Request\UpdateAllowedIPsResponse;
 use Centrobill\Sdk\Http\Request\UpdateBalanceOfTheTestPaymentDataRequest;
-use Centrobill\Sdk\Http\Request\UpdateBalanceOfTheTestPaymentDataResponse;
 use Centrobill\Sdk\Http\Request\UpdateProductRequest;
-use Centrobill\Sdk\Http\Request\UpdateProductResponse;
 use Centrobill\Sdk\Http\Request\UpdateSiteRequest;
-use Centrobill\Sdk\Http\Request\UpdateSiteResponse;
+use Centrobill\Sdk\Http\Response\BlockTestPaymentDataResponse;
+use Centrobill\Sdk\Http\Response\CancelSubscriptionResponse;
+use Centrobill\Sdk\Http\Response\ChangeConsumerGroupResponse;
+use Centrobill\Sdk\Http\Response\ChangePaymentAccountForsubscriptionResponse;
+use Centrobill\Sdk\Http\Response\ChangeSubscriptionResponse;
+use Centrobill\Sdk\Http\Response\CheckVerificationCodeResponse;
+use Centrobill\Sdk\Http\Response\CreateConsumerResponse;
+use Centrobill\Sdk\Http\Response\CreateProductResponse;
+use Centrobill\Sdk\Http\Response\CreateSiteResponse;
+use Centrobill\Sdk\Http\Response\CreateTestPaymentDataResponse;
+use Centrobill\Sdk\Http\Response\CreditResponse;
+use Centrobill\Sdk\Http\Response\DeleteTestPaymentDataByIDResponse;
+use Centrobill\Sdk\Http\Response\DisablePaymentAccountForQuickSaleResponse;
+use Centrobill\Sdk\Http\Response\Emulate3DsForTestPaymentDataResponse;
+use Centrobill\Sdk\Http\Response\EnablePaymentAccountForQuickSaleResponse;
+use Centrobill\Sdk\Http\Response\GenerateCardDataTokenResponse;
+use Centrobill\Sdk\Http\Response\GenerateCardDataTokenUsingPaymentAccountIdResponse;
+use Centrobill\Sdk\Http\Response\GenerateUrlToPaymentPageResponse;
+use Centrobill\Sdk\Http\Response\GetApplePaySessionResponse;
+use Centrobill\Sdk\Http\Response\GetAvailableChannelsOfCodeVerificationResponse;
+use Centrobill\Sdk\Http\Response\GetChargebackIdRepaidLinkResponse;
+use Centrobill\Sdk\Http\Response\GetCurrencyExchangeRatesResponse;
+use Centrobill\Sdk\Http\Response\GetExchangeRateByIso3Response;
+use Centrobill\Sdk\Http\Response\GetListOfExternalIpsResponse;
+use Centrobill\Sdk\Http\Response\ListPaymentaccountIDsByConsumerIdResponse;
+use Centrobill\Sdk\Http\Response\NotEmulate3DsForTestPaymentDataResponse;
+use Centrobill\Sdk\Http\Response\PayResponse;
+use Centrobill\Sdk\Http\Response\PayoutResponse;
+use Centrobill\Sdk\Http\Response\RecoverSubscriptionResponse;
+use Centrobill\Sdk\Http\Response\SendMessageWithVerificationCodeResponse;
+use Centrobill\Sdk\Http\Response\UnblockTestPaymentDataResponse;
+use Centrobill\Sdk\Http\Response\UpdateAllowedIPsResponse;
+use Centrobill\Sdk\Http\Response\UpdateBalanceOfTheTestPaymentDataResponse;
+use Centrobill\Sdk\Http\Response\UpdateProductResponse;
+use Centrobill\Sdk\Http\Response\UpdateSiteResponse;
 
 interface ClientInterface
 {
@@ -245,7 +245,7 @@ interface ClientInterface
      * @param CheckVerificationCodeRequest $request
      * @return CheckVerificationCodeResponse
      */
-    public function checkVerificationCode(CheckVerificationCodeRequest $request): \CheckVerificationCodeResponse;
+    public function checkVerificationCode(CheckVerificationCodeRequest $request): CheckVerificationCodeResponse;
 
     /**
      * @param GetCurrencyExchangeRatesRequest $request

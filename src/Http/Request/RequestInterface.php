@@ -15,19 +15,26 @@ interface RequestInterface
      *
      * @return array
      */
-    public function getPayload();
+    public function getPayload(): array;
 
     /**
      * Get the uri
      *
      * @return string
      */
-    public function getUri();
+    public function getUri(): string;
 
     /**
      * Get HTTP method
      *
      * @return string
      */
-    public function getHttpMethod();
+    public function getHttpMethod(): string;
+
+    /**
+     * Get headers
+     *
+     * @return array
+     */
+    public function getHeaders(): array;
 }

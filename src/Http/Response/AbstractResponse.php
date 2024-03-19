@@ -1,15 +1,22 @@
 <?php
 
-namespace Centrobill\Sdk\Http\Request;
+namespace Centrobill\Sdk\Http\Response;
 
 use stdClass;
 
-abstract class AbstractResponse
-{1
+abstract class AbstractResponse implements ResponseInterface
+{
     protected stdClass $data;
 
     public function __construct(stdClass $data)
     {
         $this->data = $data;
+    }
+
+    abstract public function isSuccessful();
+
+    public function getData()
+    {
+        return Utils::convertObjectToArray($this->data);
     }
 }

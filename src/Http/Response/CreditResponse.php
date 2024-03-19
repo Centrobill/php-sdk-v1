@@ -3,22 +3,16 @@
 namespace Centrobill\Sdk\Http\Response;
 
 use Centrobill\Sdk\Utils\Utils;
+use stdClass;
 
-
-class CreditResponse implements ResponseInterface
+class CreditResponse extends AbstractResponse implements ResponseInterface
 {
-    public function __construct(stdClass $data)
-    {
-        $this->data = $data;
-    }
+    
 
     public function isSuccessful()
     {
         return true;
     }
 
-    public function getData()
-    {
-        return [];
-    }
+    
 }

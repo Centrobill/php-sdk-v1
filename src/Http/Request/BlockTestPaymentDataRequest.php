@@ -9,14 +9,8 @@ class BlockTestPaymentDataRequest implements RequestInterface
         return '/testPaymentData/{id}/block';
     }
 
-
     public function getHttpMethod()
     {
         return self::HTTP_METHOD_POST;
-    }
-
-    public function getPayload()
-    {
-        // TODO: Implement getPayload() method.
     }
 }
