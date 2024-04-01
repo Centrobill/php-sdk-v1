@@ -6,7 +6,7 @@ class EnablePaymentAccountForQuickSaleRequest implements RequestInterface
 {
     public function getUri()
     {
-        return '/paymentAccount/{paymentAccountId}/enable';
+        return 'paymentAccount/{paymentAccountId}/enable';
     }
 
     public function getHttpMethod()

@@ -6,7 +6,7 @@ class DeleteTestPaymentDataByIDRequest implements RequestInterface
 {
     public function getUri()
     {
-        return '/testPaymentData/{id}';
+        return 'testPaymentData/{id}';
     }
 
     public function getHttpMethod()

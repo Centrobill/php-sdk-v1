@@ -4,7 +4,7 @@ namespace Centrobill\Sdk\ValueObject;
 
 use Centrobill\Sdk\Exception\PhoneException;
 use Centrobill\Sdk\Exception\SDKExceptionInterface;
-use Centrobill\Sdk\ValueObject\Trait\ValueToStringTrait;
+use Centrobill\Sdk\ValueObject\Traits\ValueToStringTrait;
 
 final class Phone
 {
@@ -22,8 +22,13 @@ final class Phone
         if (empty($value)) {
             throw PhoneException::emptyValue();
         }
+
         if (strlen($value) < self::MIN_LENGTH || strlen($value) > self::MAX_LENGTH) {
             throw PhoneException::invalidLength();
+        }
+
+        if (!preg_match('/^[+0-9][0-9 \.()-]{5,24}$/', $value)) {
+            throw PhoneException::invalidValue();
         }
     }
 }

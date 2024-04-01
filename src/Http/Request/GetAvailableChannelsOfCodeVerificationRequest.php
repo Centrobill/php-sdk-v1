@@ -6,7 +6,7 @@ class GetAvailableChannelsOfCodeVerificationRequest implements RequestInterface
 {
     public function getUri()
     {
-        return '/antifraud/verification/{phone}';
+        return 'antifraud/verification/{phone}';
     }
 
     public function getHttpMethod()

@@ -77,7 +77,7 @@ class CreateTestPaymentDataRequest implements RequestInterface
 
     public function getUri()
     {
-        return '/testPaymentData';
+        return 'testPaymentData';
     }
 
     public function getHttpMethod()

@@ -35,7 +35,7 @@ class Emulate3DsForTestPaymentDataRequest implements RequestInterface
 
     public function getUri()
     {
-        return '/testPaymentData/{id}/emulate3ds';
+        return 'testPaymentData/{id}/emulate3ds';
     }
 
     public function getHttpMethod()

@@ -2,19 +2,18 @@
 
 namespace Centrobill\Sdk\Http\Request;
 
-use Centrobill\Sdk\Entity\PaymentConsumer;
+use Centrobill\Sdk\Entity\Consumer;
+use Centrobill\Sdk\Entity\PaymentSource\AbstractPaymentSource;
 use Centrobill\Sdk\Entity\PaymentUrl;
-use Centrobill\Sdk\ValueObject\EmailOptions;
-use Centrobill\Sdk\ValueObject\Metadata;
-use Centrobill\Sdk\ValueObject\PaymentSource;
-use Centrobill\Sdk\ValueObject\Sku;
+use Centrobill\Sdk\Entity\Sku;
+use Centrobill\Sdk\ValueObject\Field;
 
 class PayRequest implements RequestInterface
 {
     /**
-     * @var PaymentSource $paymentSource
+     * @var AbstractPaymentSource $paymentSource
      */
-    private PaymentSource $paymentSource;
+    private AbstractPaymentSource $paymentSource;
 
     /**
      * @var Sku $sku
@@ -22,9 +21,9 @@ class PayRequest implements RequestInterface
     private Sku $sku;
 
     /**
-     * @var PaymentConsumer $consumer
+     * @var Consumer $consumer
      */
-    private PaymentConsumer $consumer;
+    private Consumer $consumer;
 
     /**
      * @var PaymentUrl $url
@@ -32,22 +31,22 @@ class PayRequest implements RequestInterface
     private PaymentUrl $url;
 
     /**
-     * @var Metadata $metadata
+     * @var Array<Field> $metadata
      */
-    private Metadata $metadata;
+    private $metadata;
 
     /**
-     * @var EmailOptions $emailOptions
+     * @var bool $emailOptions
      */
-    private EmailOptions $emailOptions;
+    private $emailOptions;
 
     public function __construct(
-        PaymentSource $paymentSource,
+        AbstractPaymentSource $paymentSource,
         Sku $sku,
-        PaymentConsumer $consumer,
+        Consumer $consumer,
         PaymentUrl $url,
-        Metadata $metadata = null,
-        EmailOptions $emailOptions = null,
+        $metadata = [],
+        $emailOptions = false,
     ) {
         $this->paymentSource = $paymentSource;
         $this->sku = $sku;
@@ -57,45 +56,58 @@ class PayRequest implements RequestInterface
         $this->emailOptions = $emailOptions;
     }
 
-    public function setMetadata(Metadata $metadata)
+    public function addMetadataField(Field $field): self
+    {
+        $this->metadata[] = $field;
+        return $this;
+    }
+
+    public function setMetadata($metadata): self
     {
         $this->metadata = $metadata;
         return $this;
     }
 
-    public function setEmailOptions(EmailOptions $emailOptions)
+    public function setEmailOptions($emailOptions): self
     {
         $this->emailOptions = $emailOptions;
         return $this;
     }
 
-    public function getPayload()
+    public function getPayload(): array
     {
         $data = [
             'paymentSource' => (string)$this->paymentSource,
-            'sku' => (string)$this->sku,
+            'sku' => $this->sku->toArray(),
             'consumer' => $this->consumer->toArray(),
             'url' => $this->url->toArray(),
+            'emailOptions' => $this->emailOptions,
         ];
 
-        if ($this->metadata !== null) {
-            $data['metadata'] = (string)$this->metadata;
-        }
-
-        if ($this->emailOptions !== null) {
-            $data['emailOptions'] = (string)$this->emailOptions;
+        if (!empty($this->metadata)) {
+            foreach($this->metadata as $field) {
+                $data['metadata'][$field->getKey()] = $field->getValue();
+                
+            }
         }
 
         return $data;
     }
 
-    public function getUri()
+    public function getUri(): string 
     {
-        return '/payment';
+        return 'payment';
     }
 
-    public function getHttpMethod()
+    public function getHttpMethod(): string
     {
         return self::HTTP_METHOD_POST;
+    }
+
+    public function getHeaders(): array
+    {
+        return [
+            'X-Requested-With' => 'XMLHttpRequest',
+        ];
     }
 }

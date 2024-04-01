@@ -35,7 +35,7 @@ class UpdateBalanceOfTheTestPaymentDataRequest implements RequestInterface
 
     public function getUri()
     {
-        return '/testPaymentData/{id}/balance';
+        return 'testPaymentData/{id}/balance';
     }
 
     public function getHttpMethod()

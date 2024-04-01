@@ -6,7 +6,7 @@ class GetChargebackIdRepaidLinkRequest implements RequestInterface
 {
     public function getUri()
     {
-        return '/chargeback/{id}/repaidLink';
+        return 'chargeback/{id}/repaidLink';
     }
 
     public function getHttpMethod()

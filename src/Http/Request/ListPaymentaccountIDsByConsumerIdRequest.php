@@ -6,7 +6,7 @@ class ListPaymentaccountIDsByConsumerIdRequest implements RequestInterface
 {
     public function getUri()
     {
-        return '/consumer/{id}/paymentAccounts';
+        return 'consumer/{id}/paymentAccounts';
     }
 
     public function getHttpMethod()

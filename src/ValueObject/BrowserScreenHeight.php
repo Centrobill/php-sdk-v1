@@ -4,20 +4,35 @@ namespace Centrobill\Sdk\ValueObject;
 
 use Centrobill\Sdk\Exception\BrowserScreenHeightException;
 use Centrobill\Sdk\Exception\SDKExceptionInterface;
-use Centrobill\Sdk\ValueObject\Trait\ValueToStringTrait;
 
 final class BrowserScreenHeight
 {
-    use ValueToStringTrait;
+    /**
+     * @var int
+     */
+    private $value;
 
     /**
      * @throws SDKExceptionInterface
      */
-    function checkValue($value)
-
+    public function __construct($value)
     {
         if (empty($value)) {
             throw BrowserScreenHeightException::emptyValue();
         }
+        
+        if (filter_var($value, FILTER_VALIDATE_INT) === false || (int)$value < 0) {
+            throw BrowserScreenHeightException::invalidValue();
+        }
+
+        $this->value = (int)$value;
+    }
+
+    /**
+     * @return int
+     */
+    public function getValue()
+    {
+        return $this->value;
     }
 }

@@ -2,21 +2,21 @@
 
 namespace Centrobill\Sdk\Entity;
 
-use Centrobill\Sdk\ValueObject\IpnUrl;
+use Centrobill\Sdk\ValueObject\Url;
 
 class PayoutUrl
 {
     /**
-     * @var IpnUrl $ipnUrl
+     * @var Url $ipnUrl
      */
-    private IpnUrl $ipnUrl;
+    private Url $ipnUrl;
 
-    public function __construct(IpnUrl $ipnUrl = null)
+    public function __construct(Url $ipnUrl = null)
     {
         $this->ipnUrl = $ipnUrl;
     }
 
-    public function setIpnUrl(IpnUrl $ipnUrl)
+    public function setIpnUrl(Url $ipnUrl)
     {
         $this->ipnUrl = $ipnUrl;
         return $this;

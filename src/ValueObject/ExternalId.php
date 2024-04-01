@@ -4,7 +4,7 @@ namespace Centrobill\Sdk\ValueObject;
 
 use Centrobill\Sdk\Exception\ExternalIdException;
 use Centrobill\Sdk\Exception\SDKExceptionInterface;
-use Centrobill\Sdk\ValueObject\Trait\ValueToStringTrait;
+use Centrobill\Sdk\ValueObject\Traits\ValueToStringTrait;
 
 final class ExternalId
 {
@@ -22,6 +22,7 @@ final class ExternalId
         if (empty($value)) {
             throw ExternalIdException::emptyValue();
         }
+        
         if (strlen($value) < self::MIN_LENGTH || strlen($value) > self::MAX_LENGTH) {
             throw ExternalIdException::invalidLength();
         }

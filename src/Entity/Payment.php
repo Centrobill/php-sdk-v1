@@ -3,41 +3,38 @@
 namespace Centrobill\Sdk\Entity;
 
 use Centrobill\Sdk\ValueObject\Bin;
-use Centrobill\Sdk\ValueObject\Domain;
+use Centrobill\Sdk\ValueObject\DomainName;
 use Centrobill\Sdk\ValueObject\EmulateCode;
-use Centrobill\Sdk\ValueObject\Method;
 use Centrobill\Sdk\ValueObject\Mid;
-use Centrobill\Sdk\ValueObject\Secure;
-use Centrobill\Sdk\ValueObject\Selected;
+use Centrobill\Sdk\ValueObject\PaymentMethod;
 use Centrobill\Sdk\ValueObject\TerminalMode;
-use Centrobill\Sdk\ValueObject\Test;
 
 class Payment
 {
     /**
-     * @var array<Method> $method
+     * @var array<PaymentMethod> $method
      */
     private $method;
 
     /**
-     * @var Selected $selected
+     * @var PaymentMethod $selected
      */
-    private Selected $selected;
+    private PaymentMethod $selected;
 
     /**
-     * @var Secure $secure
+     * @var bool $secure
      */
-    private Secure $secure;
+    private $secure;
 
     /**
-     * @var Test $test
+     * @var bool $test
      */
-    private Test $test;
+    private $test;
 
     /**
-     * @var EmulateCode $emulateCode
+     * @var bool $emulateCode
      */
-    private EmulateCode $emulateCode;
+    private $emulateCode;
 
     /**
      * @var Mid $mid
@@ -45,9 +42,9 @@ class Payment
     private Mid $mid;
 
     /**
-     * @var TerminalMode $terminalMode
+     * @var bool $terminalMode
      */
-    private TerminalMode $terminalMode;
+    private $terminalMode;
 
     /**
      * @var Bin $bin
@@ -55,20 +52,20 @@ class Payment
     private Bin $bin;
 
     /**
-     * @var Domain $domain
+     * @var DomainName $domain
      */
-    private Domain $domain;
+    private DomainName $domain;
 
     public function __construct(
         $method = [],
-        Selected $selected = null,
-        Secure $secure = null,
-        Test $test = null,
+        PaymentMethod $selected = null,
         EmulateCode $emulateCode = null,
         Mid $mid = null,
-        TerminalMode $terminalMode = null,
         Bin $bin = null,
-        Domain $domain = null,
+        DomainName $domain = null,
+        $terminalMode = false,
+        $secure = false,
+        $test = false
     ) {
         $this->method = $method;
         $this->selected = $selected;
@@ -87,19 +84,19 @@ class Payment
         return $this;
     }
 
-    public function setSelected(Selected $selected)
+    public function setSelected($selected)
     {
         $this->selected = $selected;
         return $this;
     }
 
-    public function setSecure(Secure $secure)
+    public function setSecure($secure)
     {
         $this->secure = $secure;
         return $this;
     }
 
-    public function setTest(Test $test)
+    public function setTest($test)
     {
         $this->test = $test;
         return $this;
@@ -129,7 +126,7 @@ class Payment
         return $this;
     }
 
-    public function setDomain(Domain $domain)
+    public function setDomain(DomainName $domain)
     {
         $this->domain = $domain;
         return $this;
@@ -137,22 +134,18 @@ class Payment
 
     public function toArray()
     {
-        $data = [];
+        $data = [
+            'secure' => $this->secure,
+            'test' => $this->test,
+            'terminalMode' => $this->terminalMode,
+        ];
 
-        if ($this->method !== null) {
-            $data['method'] = $this->method;
-        }
+        $data['method'] = array_map(function($item) {
+            return (string)$item;
+        }, $this->method);
 
         if ($this->selected !== null) {
             $data['selected'] = (string)$this->selected;
-        }
-
-        if ($this->secure !== null) {
-            $data['secure'] = (string)$this->secure;
-        }
-
-        if ($this->test !== null) {
-            $data['test'] = (string)$this->test;
         }
 
         if ($this->emulateCode !== null) {
@@ -161,10 +154,6 @@ class Payment
 
         if ($this->mid !== null) {
             $data['mid'] = (string)$this->mid;
-        }
-
-        if ($this->terminalMode !== null) {
-            $data['terminalMode'] = (string)$this->terminalMode;
         }
 
         if ($this->bin !== null) {

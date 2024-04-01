@@ -23,31 +23,31 @@ class CreditRequest implements RequestInterface
         $this->amount = $amount;
     }
 
-    public function setAmount(Amount $amount)
+    public function setAmount(Amount $amount): self
     {
         $this->amount = $amount;
         return $this;
     }
 
-    public function getPayload()
+    public function getPayload(): array
     {
         $data = [
             'reason' => (string)$this->reason,
         ];
 
         if ($this->amount !== null) {
-            $data['amount'] = (string)$this->amount;
+            $data['amount'] = $this->amount->getValue();
         }
 
         return $data;
     }
 
-    public function getUri()
+    public function getUri(): string
     {
-        return '/payment/{id}/credit';
+        return 'payment/{id}/credit';
     }
 
-    public function getHttpMethod()
+    public function getHttpMethod(): string
     {
         return self::HTTP_METHOD_POST;
     }

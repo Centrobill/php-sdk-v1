@@ -35,7 +35,7 @@ class NotEmulate3DsForTestPaymentDataRequest implements RequestInterface
 
     public function getUri()
     {
-        return '/testPaymentData/{id}/notEmulate3ds';
+        return 'testPaymentData/{id}/notEmulate3ds';
     }
 
     public function getHttpMethod()

@@ -4,7 +4,7 @@ namespace Centrobill\Sdk\ValueObject;
 
 use Centrobill\Sdk\Exception\AddressException;
 use Centrobill\Sdk\Exception\SDKExceptionInterface;
-use Centrobill\Sdk\ValueObject\Trait\ValueToStringTrait;
+use Centrobill\Sdk\ValueObject\Traits\ValueToStringTrait;
 
 final class Address
 {
@@ -20,6 +20,7 @@ final class Address
         if (empty($value)) {
             throw AddressException::emptyValue();
         }
+
         if (strlen($value) > self::MAX_LENGTH) {
             throw AddressException::invalidLength();
         }

@@ -16,6 +16,7 @@ final class UserAgent
         if (empty($value)) {
             throw UserAgentException::emptyValue();
         }
+        
         if (strlen($value) > self::MAX_LENGTH) {
             throw UserAgentException::invalidLength();
         }

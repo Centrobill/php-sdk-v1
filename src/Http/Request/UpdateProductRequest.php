@@ -105,7 +105,7 @@ class UpdateProductRequest implements RequestInterface
         }
 
         if ($this->amount !== null) {
-            $data['amount'] = (string)$this->amount;
+            $data['amount'] = $this->amount->getValue();
         }
 
         if ($this->currency !== null) {
@@ -117,7 +117,7 @@ class UpdateProductRequest implements RequestInterface
 
     public function getUri()
     {
-        return '/sku/{name}';
+        return 'sku/{name}';
     }
 
     public function getHttpMethod()

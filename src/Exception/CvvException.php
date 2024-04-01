@@ -16,4 +16,9 @@ class CvvException extends Exception implements SDKExceptionInterface
     {
         return new self('Cvv should be between 3 and 4 characters long.');
     }
+    
+    public static function invalidValue()
+    {
+        return new self('Cvv should be numeric.');
+    }
 }

@@ -5,7 +5,6 @@ namespace Centrobill\Sdk\Entity;
 use Centrobill\Sdk\ValueObject\Amount;
 use Centrobill\Sdk\ValueObject\Currency;
 use Centrobill\Sdk\ValueObject\Offset;
-use stdClass;
 
 class Price
 {
@@ -25,15 +24,15 @@ class Price
     private Currency $currency;
 
     /**
-     * @var stdClass $repeat
+     * @var bool $repeat
      */
-    private stdClass $repeat;
+    private $repeat;
 
     public function __construct(
         Offset $offset = null,
         Amount $amount = null,
         Currency $currency = null,
-        stdClass $repeat = null,
+        $repeat = false,
     ) {
         $this->offset = $offset;
         $this->amount = $amount;
@@ -59,7 +58,7 @@ class Price
         return $this;
     }
 
-    public function setRepeat(stdClass $repeat)
+    public function setRepeat($repeat)
     {
         $this->repeat = $repeat;
         return $this;
@@ -74,7 +73,7 @@ class Price
         }
 
         if ($this->amount !== null) {
-            $data['amount'] = (string)$this->amount;
+            $data['amount'] = $this->amount->getValue();
         }
 
         if ($this->currency !== null) {
@@ -82,7 +81,7 @@ class Price
         }
 
         if ($this->repeat !== null) {
-            $data['repeat'] = (string)$this->repeat;
+            $data['repeat'] = $this->repeat;
         }
 
         return $data;

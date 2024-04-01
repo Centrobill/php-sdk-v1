@@ -16,6 +16,7 @@ final class Token
         if (empty($value)) {
             throw TokenException::emptyValue();
         }
+        
         if (strlen($value) > self::MAX_LENGTH) {
             throw TokenException::invalidLength();
         }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Centrobill\Sdk;
+namespace Centrobill\Sdk\Http;
 
 use Centrobill\Sdk\Http\Request\BlockTestPaymentDataRequest;
 use Centrobill\Sdk\Http\Request\CancelSubscriptionRequest;
@@ -28,8 +28,8 @@ use Centrobill\Sdk\Http\Request\GetExchangeRateByIso3Request;
 use Centrobill\Sdk\Http\Request\GetListOfExternalIpsRequest;
 use Centrobill\Sdk\Http\Request\ListPaymentaccountIDsByConsumerIdRequest;
 use Centrobill\Sdk\Http\Request\NotEmulate3DsForTestPaymentDataRequest;
-use Centrobill\Sdk\Http\Request\PayRequest;
 use Centrobill\Sdk\Http\Request\PayoutRequest;
+use Centrobill\Sdk\Http\Request\PayRequest;
 use Centrobill\Sdk\Http\Request\RecoverSubscriptionRequest;
 use Centrobill\Sdk\Http\Request\SendMessageWithVerificationCodeRequest;
 use Centrobill\Sdk\Http\Request\UnblockTestPaymentDataRequest;
@@ -63,9 +63,10 @@ use Centrobill\Sdk\Http\Response\GetExchangeRateByIso3Response;
 use Centrobill\Sdk\Http\Response\GetListOfExternalIpsResponse;
 use Centrobill\Sdk\Http\Response\ListPaymentaccountIDsByConsumerIdResponse;
 use Centrobill\Sdk\Http\Response\NotEmulate3DsForTestPaymentDataResponse;
-use Centrobill\Sdk\Http\Response\PayResponse;
 use Centrobill\Sdk\Http\Response\PayoutResponse;
+use Centrobill\Sdk\Http\Response\PayResponse;
 use Centrobill\Sdk\Http\Response\RecoverSubscriptionResponse;
+use Centrobill\Sdk\Http\Response\ResponseInterface;
 use Centrobill\Sdk\Http\Response\SendMessageWithVerificationCodeResponse;
 use Centrobill\Sdk\Http\Response\UnblockTestPaymentDataResponse;
 use Centrobill\Sdk\Http\Response\UpdateAllowedIPsResponse;
@@ -77,239 +78,239 @@ interface ClientInterface
 {
     /**
      * @param GenerateCardDataTokenRequest $request
-     * @return GenerateCardDataTokenResponse
+     * @return GenerateCardDataTokenResponse|ErrorResponse
      */
-    public function generateCardDataToken(GenerateCardDataTokenRequest $request): GenerateCardDataTokenResponse;
+    public function generateCardDataToken(GenerateCardDataTokenRequest $request): ResponseInterface;
 
     /**
      * @param GenerateCardDataTokenUsingPaymentAccountIdRequest $request
-     * @return GenerateCardDataTokenUsingPaymentAccountIdResponse
+     * @return GenerateCardDataTokenUsingPaymentAccountIdResponse|ErrorResponse
      */
     public function generateCardDataTokenUsingPaymentAccountId(
-        GenerateCardDataTokenUsingPaymentAccountIdRequest $request,
-    ): GenerateCardDataTokenUsingPaymentAccountIdResponse;
+        GenerateCardDataTokenUsingPaymentAccountIdRequest $request
+    ): ResponseInterface;
 
     /**
      * @param PayRequest $request
-     * @return PayResponse
+     * @return PayResponse|ErrorResponse
      */
-    public function pay(PayRequest $request): PayResponse;
+    public function pay(PayRequest $request): ResponseInterface;
 
     /**
      * @param GenerateUrlToPaymentPageRequest $request
-     * @return GenerateUrlToPaymentPageResponse
+     * @return GenerateUrlToPaymentPageResponse|ErrorResponse
      */
     public function generateUrlToPaymentPage(
-        GenerateUrlToPaymentPageRequest $request,
-    ): GenerateUrlToPaymentPageResponse;
+        GenerateUrlToPaymentPageRequest $request
+    ): ResponseInterface;
 
     /**
      * @param CreditRequest $request
-     * @return CreditResponse
+     * @return CreditResponse|ErrorResponse
      */
-    public function credit(CreditRequest $request): CreditResponse;
+    public function credit(CreditRequest $request): ResponseInterface;
 
     /**
      * @param PayoutRequest $request
-     * @return PayoutResponse
+     * @return PayoutResponse|ErrorResponse
      */
-    public function payout(PayoutRequest $request): PayoutResponse;
+    public function payout(PayoutRequest $request): ResponseInterface;
 
     /**
      * @param ChangeSubscriptionRequest $request
-     * @return ChangeSubscriptionResponse
+     * @return ChangeSubscriptionResponse|ErrorResponse
      */
-    public function changeSubscription(ChangeSubscriptionRequest $request): ChangeSubscriptionResponse;
+    public function changeSubscription(ChangeSubscriptionRequest $request): ResponseInterface;
 
     /**
      * @param CancelSubscriptionRequest $request
-     * @return CancelSubscriptionResponse
+     * @return CancelSubscriptionResponse|ErrorResponse
      */
-    public function cancelSubscription(CancelSubscriptionRequest $request): CancelSubscriptionResponse;
+    public function cancelSubscription(CancelSubscriptionRequest $request): ResponseInterface;
 
     /**
      * @param RecoverSubscriptionRequest $request
-     * @return RecoverSubscriptionResponse
+     * @return RecoverSubscriptionResponse|ErrorResponse
      */
-    public function recoverSubscription(RecoverSubscriptionRequest $request): RecoverSubscriptionResponse;
+    public function recoverSubscription(RecoverSubscriptionRequest $request): ResponseInterface;
 
     /**
      * @param CreateSiteRequest $request
-     * @return CreateSiteResponse
+     * @return CreateSiteResponse|ErrorResponse
      */
-    public function createSite(CreateSiteRequest $request): CreateSiteResponse;
+    public function createSite(CreateSiteRequest $request): ResponseInterface;
 
     /**
      * @param UpdateSiteRequest $request
-     * @return UpdateSiteResponse
+     * @return UpdateSiteResponse|ErrorResponse
      */
-    public function updateSite(UpdateSiteRequest $request): UpdateSiteResponse;
+    public function updateSite(UpdateSiteRequest $request): ResponseInterface;
 
     /**
      * @param CreateProductRequest $request
-     * @return CreateProductResponse
+     * @return CreateProductResponse|ErrorResponse
      */
-    public function createProduct(CreateProductRequest $request): CreateProductResponse;
+    public function createProduct(CreateProductRequest $request): ResponseInterface;
 
     /**
      * @param UpdateProductRequest $request
-     * @return UpdateProductResponse
+     * @return UpdateProductResponse|ErrorResponse
      */
-    public function updateProduct(UpdateProductRequest $request): UpdateProductResponse;
+    public function updateProduct(UpdateProductRequest $request): ResponseInterface;
 
     /**
      * @param CreateConsumerRequest $request
-     * @return CreateConsumerResponse
+     * @return CreateConsumerResponse|ErrorResponse
      */
-    public function createConsumer(CreateConsumerRequest $request): CreateConsumerResponse;
+    public function createConsumer(CreateConsumerRequest $request): ResponseInterface;
 
     /**
      * @param ChangeConsumerGroupRequest $request
-     * @return ChangeConsumerGroupResponse
+     * @return ChangeConsumerGroupResponse|ErrorResponse
      */
-    public function changeConsumerGroup(ChangeConsumerGroupRequest $request): ChangeConsumerGroupResponse;
+    public function changeConsumerGroup(ChangeConsumerGroupRequest $request): ResponseInterface;
 
     /**
      * @param GetListOfExternalIpsRequest $request
-     * @return GetListOfExternalIpsResponse
+     * @return GetListOfExternalIpsResponse|ErrorResponse
      */
-    public function getListOfExternalIps(GetListOfExternalIpsRequest $request): GetListOfExternalIpsResponse;
+    public function getListOfExternalIps(GetListOfExternalIpsRequest $request): ResponseInterface;
 
     /**
      * @param DeleteTestPaymentDataByIDRequest $request
-     * @return DeleteTestPaymentDataByIDResponse
+     * @return DeleteTestPaymentDataByIDResponse|ErrorResponse
      */
     public function deleteTestPaymentDataByID(
-        DeleteTestPaymentDataByIDRequest $request,
-    ): DeleteTestPaymentDataByIDResponse;
+        DeleteTestPaymentDataByIDRequest $request
+    ): ResponseInterface;
 
     /**
      * @param UpdateBalanceOfTheTestPaymentDataRequest $request
-     * @return UpdateBalanceOfTheTestPaymentDataResponse
+     * @return UpdateBalanceOfTheTestPaymentDataResponse|ErrorResponse
      */
     public function updateBalanceOfTheTestPaymentData(
-        UpdateBalanceOfTheTestPaymentDataRequest $request,
-    ): UpdateBalanceOfTheTestPaymentDataResponse;
+        UpdateBalanceOfTheTestPaymentDataRequest $request
+    ): ResponseInterface;
 
     /**
      * @param CreateTestPaymentDataRequest $request
-     * @return CreateTestPaymentDataResponse
+     * @return CreateTestPaymentDataResponse|ErrorResponse
      */
-    public function createTestPaymentData(CreateTestPaymentDataRequest $request): CreateTestPaymentDataResponse;
+    public function createTestPaymentData(CreateTestPaymentDataRequest $request): ResponseInterface;
 
     /**
      * @param BlockTestPaymentDataRequest $request
-     * @return BlockTestPaymentDataResponse
+     * @return BlockTestPaymentDataResponse|ErrorResponse
      */
-    public function blockTestPaymentData(BlockTestPaymentDataRequest $request): BlockTestPaymentDataResponse;
+    public function blockTestPaymentData(BlockTestPaymentDataRequest $request): ResponseInterface;
 
     /**
      * @param UnblockTestPaymentDataRequest $request
-     * @return UnblockTestPaymentDataResponse
+     * @return UnblockTestPaymentDataResponse|ErrorResponse
      */
-    public function unblockTestPaymentData(UnblockTestPaymentDataRequest $request): UnblockTestPaymentDataResponse;
+    public function unblockTestPaymentData(UnblockTestPaymentDataRequest $request): ResponseInterface;
 
     /**
      * @param Emulate3DsForTestPaymentDataRequest $request
-     * @return Emulate3DsForTestPaymentDataResponse
+     * @return Emulate3DsForTestPaymentDataResponse|ErrorResponse
      */
     public function emulate3DsForTestPaymentData(
-        Emulate3DsForTestPaymentDataRequest $request,
-    ): Emulate3DsForTestPaymentDataResponse;
+        Emulate3DsForTestPaymentDataRequest $request
+    ): ResponseInterface;
 
     /**
      * @param NotEmulate3DsForTestPaymentDataRequest $request
-     * @return NotEmulate3DsForTestPaymentDataResponse
+     * @return NotEmulate3DsForTestPaymentDataResponse|ErrorResponse
      */
     public function notEmulate3DsForTestPaymentData(
-        NotEmulate3DsForTestPaymentDataRequest $request,
-    ): NotEmulate3DsForTestPaymentDataResponse;
+        NotEmulate3DsForTestPaymentDataRequest $request
+    ): ResponseInterface;
 
     /**
      * @param GetAvailableChannelsOfCodeVerificationRequest $request
-     * @return GetAvailableChannelsOfCodeVerificationResponse
+     * @return GetAvailableChannelsOfCodeVerificationResponse|ErrorResponse
      */
     public function getAvailableChannelsOfCodeVerification(
-        GetAvailableChannelsOfCodeVerificationRequest $request,
-    ): GetAvailableChannelsOfCodeVerificationResponse;
+        GetAvailableChannelsOfCodeVerificationRequest $request
+    ): ResponseInterface;
 
     /**
      * @param SendMessageWithVerificationCodeRequest $request
-     * @return SendMessageWithVerificationCodeResponse
+     * @return SendMessageWithVerificationCodeResponse|ErrorResponse
      */
     public function sendMessageWithVerificationCode(
-        SendMessageWithVerificationCodeRequest $request,
-    ): SendMessageWithVerificationCodeResponse;
+        SendMessageWithVerificationCodeRequest $request
+    ): ResponseInterface;
 
     /**
      * @param CheckVerificationCodeRequest $request
-     * @return CheckVerificationCodeResponse
+     * @return CheckVerificationCodeResponse|ErrorResponse
      */
-    public function checkVerificationCode(CheckVerificationCodeRequest $request): CheckVerificationCodeResponse;
+    public function checkVerificationCode(CheckVerificationCodeRequest $request): ResponseInterface;
 
     /**
      * @param GetCurrencyExchangeRatesRequest $request
-     * @return GetCurrencyExchangeRatesResponse
+     * @return GetCurrencyExchangeRatesResponse|ErrorResponse
      */
     public function getCurrencyExchangeRates(
-        GetCurrencyExchangeRatesRequest $request,
-    ): GetCurrencyExchangeRatesResponse;
+        GetCurrencyExchangeRatesRequest $request
+    ): ResponseInterface;
 
     /**
      * @param GetExchangeRateByIso3Request $request
-     * @return GetExchangeRateByIso3Response
+     * @return GetExchangeRateByIso3Response|ErrorResponse
      */
-    public function getExchangeRateByIso3(GetExchangeRateByIso3Request $request): GetExchangeRateByIso3Response;
+    public function getExchangeRateByIso3(GetExchangeRateByIso3Request $request): ResponseInterface;
 
     /**
      * @param GetChargebackIdRepaidLinkRequest $request
-     * @return GetChargebackIdRepaidLinkResponse
+     * @return GetChargebackIdRepaidLinkResponse|ErrorResponse
      */
     public function getChargebackIdRepaidLink(
-        GetChargebackIdRepaidLinkRequest $request,
-    ): GetChargebackIdRepaidLinkResponse;
+        GetChargebackIdRepaidLinkRequest $request
+    ): ResponseInterface;
 
     /**
      * @param UpdateAllowedIPsRequest $request
-     * @return UpdateAllowedIPsResponse
+     * @return UpdateAllowedIPsResponse|ErrorResponse
      */
-    public function updateAllowedIPs(UpdateAllowedIPsRequest $request): UpdateAllowedIPsResponse;
+    public function updateAllowedIPs(UpdateAllowedIPsRequest $request): ResponseInterface;
 
     /**
      * @param ListPaymentaccountIDsByConsumerIdRequest $request
-     * @return ListPaymentaccountIDsByConsumerIdResponse
+     * @return ListPaymentaccountIDsByConsumerIdResponse|ErrorResponse
      */
     public function listPaymentaccountIDsByConsumerId(
-        ListPaymentaccountIDsByConsumerIdRequest $request,
-    ): ListPaymentaccountIDsByConsumerIdResponse;
+        ListPaymentaccountIDsByConsumerIdRequest $request
+    ): ResponseInterface;
 
     /**
      * @param ChangePaymentAccountForsubscriptionRequest $request
-     * @return ChangePaymentAccountForsubscriptionResponse
+     * @return ChangePaymentAccountForsubscriptionResponse|ErrorResponse
      */
     public function changePaymentAccountForsubscription(
-        ChangePaymentAccountForsubscriptionRequest $request,
-    ): ChangePaymentAccountForsubscriptionResponse;
+        ChangePaymentAccountForsubscriptionRequest $request
+    ): ResponseInterface;
 
     /**
      * @param DisablePaymentAccountForQuickSaleRequest $request
-     * @return DisablePaymentAccountForQuickSaleResponse
+     * @return DisablePaymentAccountForQuickSaleResponse|ErrorResponse
      */
     public function disablePaymentAccountForQuickSale(
-        DisablePaymentAccountForQuickSaleRequest $request,
-    ): DisablePaymentAccountForQuickSaleResponse;
+        DisablePaymentAccountForQuickSaleRequest $request
+    ): ResponseInterface;
 
     /**
      * @param EnablePaymentAccountForQuickSaleRequest $request
-     * @return EnablePaymentAccountForQuickSaleResponse
+     * @return EnablePaymentAccountForQuickSaleResponse|ErrorResponse
      */
     public function enablePaymentAccountForQuickSale(
-        EnablePaymentAccountForQuickSaleRequest $request,
-    ): EnablePaymentAccountForQuickSaleResponse;
+        EnablePaymentAccountForQuickSaleRequest $request
+    ): ResponseInterface;
 
     /**
      * @param GetApplePaySessionRequest $request
-     * @return GetApplePaySessionResponse
+     * @return GetApplePaySessionResponse|ErrorResponse
      */
-    public function getApplePaySession(GetApplePaySessionRequest $request): GetApplePaySessionResponse;
+    public function getApplePaySession(GetApplePaySessionRequest $request): ResponseInterface;
 }

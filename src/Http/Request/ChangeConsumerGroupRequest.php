@@ -35,7 +35,7 @@ class ChangeConsumerGroupRequest implements RequestInterface
 
     public function getUri()
     {
-        return '/consumer/{id}';
+        return 'consumer/{id}';
     }
 
     public function getHttpMethod()

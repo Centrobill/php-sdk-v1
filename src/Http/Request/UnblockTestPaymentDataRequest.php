@@ -6,7 +6,7 @@ class UnblockTestPaymentDataRequest implements RequestInterface
 {
     public function getUri()
     {
-        return '/testPaymentData/{id}/unblock';
+        return 'testPaymentData/{id}/unblock';
     }
 
     public function getHttpMethod()

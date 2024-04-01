@@ -35,7 +35,7 @@ class ChangePaymentAccountForsubscriptionRequest implements RequestInterface
 
     public function getUri()
     {
-        return '/subscription/{id}/paymentAccount';
+        return 'subscription/{id}/paymentAccount';
     }
 
     public function getHttpMethod()

@@ -17,6 +17,7 @@ final class DomainName
         if (empty($value)) {
             throw DomainNameException::emptyValue();
         }
+        
         if (strlen($value) < self::MIN_LENGTH || strlen($value) > self::MAX_LENGTH) {
             throw DomainNameException::invalidLength();
         }

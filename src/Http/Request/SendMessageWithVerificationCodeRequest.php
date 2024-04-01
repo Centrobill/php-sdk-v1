@@ -44,7 +44,7 @@ class SendMessageWithVerificationCodeRequest implements RequestInterface
 
     public function getUri()
     {
-        return '/antifraud/verification/{channel}/send';
+        return 'antifraud/verification/{channel}/send';
     }
 
     public function getHttpMethod()

@@ -11,13 +11,31 @@ use Centrobill\Sdk\ValueObject\Zip;
 
 class GenerateCardDataTokenRequest implements RequestInterface
 {
+    /** @var Number $number */
+    private Number $number;
+
+    /** @var ExpirationYear $expirationYear */
+    private ExpirationYear $expirationYear;
+
+    /** @var ExpirationMonth $expirationMonth */
+    private ExpirationMonth $expirationMonth;
+
+    /** @var ?Cvv $cvv */
+    private ?Cvv $cvv;
+
+    /** @var ?CardHolder $cardHolder */
+    private ?CardHolder $cardHolder;
+
+    /** @var ?Zip $zip */
+    private ?Zip $zip;
+
     public function __construct(
-        private Number $number,
-        private ExpirationYear $expirationYear,
-        private ExpirationMonth $expirationMonth,
-        private ?Cvv $cvv = null,
-        private ?CardHolder $cardHolder = null,
-        private ?Zip $zip = null,
+        Number $number,
+        ExpirationYear $expirationYear,
+        ExpirationMonth $expirationMonth,
+        ?Cvv $cvv = null,
+        ?CardHolder $cardHolder = null,
+        ?Zip $zip = null
     ) {
         $this->number = $number;
         $this->expirationYear = $expirationYear;
@@ -27,19 +45,19 @@ class GenerateCardDataTokenRequest implements RequestInterface
         $this->zip = $zip;
     }
 
-    public function setCvv(Cvv $cvv): static
+    public function setCvv(Cvv $cvv): self
     {
         $this->cvv = $cvv;
         return $this;
     }
 
-    public function setCardHolder(CardHolder $cardHolder): static
+    public function setCardHolder(CardHolder $cardHolder): self
     {
         $this->cardHolder = $cardHolder;
         return $this;
     }
 
-    public function setZip(Zip $zip): static
+    public function setZip(Zip $zip): self
     {
         $this->zip = $zip;
         return $this;
@@ -70,7 +88,7 @@ class GenerateCardDataTokenRequest implements RequestInterface
 
     public function getUri(): string
     {
-        return '/tokenize';
+        return 'tokenize';
     }
 
     public function getHttpMethod(): string

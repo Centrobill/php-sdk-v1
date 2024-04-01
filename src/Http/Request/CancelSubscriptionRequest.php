@@ -90,7 +90,7 @@ class CancelSubscriptionRequest implements RequestInterface
 
     public function getUri()
     {
-        return '/subscription/{id}/cancel';
+        return 'subscription/{id}/cancel';
     }
 
     public function getHttpMethod()

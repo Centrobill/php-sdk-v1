@@ -33,7 +33,7 @@ class ChangeSubscriptionRequest implements RequestInterface
 
     public function getUri()
     {
-        return '/subscription/{id}';
+        return 'subscription/{id}';
     }
 
     public function getHttpMethod()

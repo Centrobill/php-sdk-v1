@@ -4,7 +4,7 @@ namespace Centrobill\Sdk\ValueObject;
 
 use Centrobill\Sdk\Exception\CvvException;
 use Centrobill\Sdk\Exception\SDKExceptionInterface;
-use Centrobill\Sdk\ValueObject\Trait\ValueToStringTrait;
+use Centrobill\Sdk\ValueObject\Traits\ValueToStringTrait;
 
 final class Cvv
 {
@@ -21,6 +21,10 @@ final class Cvv
     {
         if (empty($value)) {
             throw CvvException::emptyValue();
+        }
+
+        if (!is_numeric($value)) {
+            throw CvvException::invalidValue();
         }
 
         if (strlen($value) < self::MIN_LENGTH || strlen($value) > self::MAX_LENGTH) {

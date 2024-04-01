@@ -8,7 +8,7 @@ use MyCLabs\Enum\Enum;
 final class AccountType extends Enum
 {
     const ACCOUNT_TYPE_С = 'С';
-    const ACCOUNT_TYPE_S = 's';
+    const ACCOUNT_TYPE_S = 'S';
 
     static function isValid($value)
     {

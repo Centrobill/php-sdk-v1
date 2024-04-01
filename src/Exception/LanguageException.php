@@ -11,4 +11,9 @@ class LanguageException extends Exception implements SDKExceptionInterface
     {
         return new self('Language should not be empty.');
     }
+
+    public static function invalidLength()
+    {
+        return new self('Language should be 2 characters long.');
+    }
 }

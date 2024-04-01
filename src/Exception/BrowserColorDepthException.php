@@ -11,4 +11,9 @@ class BrowserColorDepthException extends Exception implements SDKExceptionInterf
     {
         return new self('Browser color depth should not be empty.');
     }
+
+    public static function invalidValue()
+    {
+        return new self('Browser color depth is not valid.');
+    }
 }

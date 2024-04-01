@@ -154,7 +154,7 @@ class CreateConsumerRequest implements RequestInterface
 
     public function getUri()
     {
-        return '/consumer';
+        return 'consumer';
     }
 
     public function getHttpMethod()

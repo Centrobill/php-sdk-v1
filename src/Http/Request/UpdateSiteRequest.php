@@ -90,7 +90,7 @@ class UpdateSiteRequest implements RequestInterface
 
     public function getUri()
     {
-        return '/site/{id}';
+        return 'site/{id}';
     }
 
     public function getHttpMethod()

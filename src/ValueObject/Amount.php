@@ -3,20 +3,33 @@
 namespace Centrobill\Sdk\ValueObject;
 
 use Centrobill\Sdk\Exception\AmountException;
-use Centrobill\Sdk\Exception\SDKExceptionInterface;
-use Centrobill\Sdk\ValueObject\Trait\ValueToStringTrait;
 
 final class Amount
 {
-    use ValueToStringTrait;
+    /**
+     * @var float
+     */
+    private $value;
 
     /**
-     * @throws SDKExceptionInterface
+     * Amount constructor.
+     *
+     * @param mixed $value
      */
-    function checkValue($value): void
+    public function __construct($value)
     {
-        if (empty($value)) {
-            throw AmountException::emptyValue();
+        if (filter_var($value, FILTER_VALIDATE_FLOAT) === false || (float)$value < 0) {
+            throw AmountException::invalidValue();
         }
+
+        $this->value = (float)$value;
+    }
+
+    /**
+     * @return float
+     */
+    public function getValue()
+    {
+        return $this->value;
     }
 }

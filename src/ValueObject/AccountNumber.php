@@ -16,6 +16,7 @@ final class AccountNumber
         if (empty($value)) {
             throw AccountNumberException::emptyValue();
         }
+
         if (strlen($value) > self::MAX_LENGTH) {
             throw AccountNumberException::invalidLength();
         }

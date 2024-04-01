@@ -112,7 +112,7 @@ class PayoutRequest implements RequestInterface
     public function getPayload()
     {
         $data = [
-            'amount' => (string)$this->amount,
+            'amount' => $this->amount->getValue(),
             'currency' => (string)$this->currency,
         ];
 
@@ -145,7 +145,7 @@ class PayoutRequest implements RequestInterface
 
     public function getUri()
     {
-        return '/payout';
+        return 'payout';
     }
 
     public function getHttpMethod()

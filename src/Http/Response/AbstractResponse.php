@@ -2,6 +2,7 @@
 
 namespace Centrobill\Sdk\Http\Response;
 
+use Centrobill\Sdk\Utils\Utils;
 use stdClass;
 
 abstract class AbstractResponse implements ResponseInterface

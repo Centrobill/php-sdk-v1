@@ -27,7 +27,7 @@ class GetApplePaySessionRequest implements RequestInterface
 
     public function getUri()
     {
-        return '/payment/applePaySession';
+        return 'payment/applePaySession';
     }
 
     public function getHttpMethod()

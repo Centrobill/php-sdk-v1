@@ -7,8 +7,8 @@ use Exception;
 
 class AmountException extends Exception implements SDKExceptionInterface
 {
-    public static function emptyValue(): AmountException
+    public static function invalidValue(): self
     {
-        return new self('Amount should not be empty.');
+        return new self('Amount is not valid.');
     }
 }

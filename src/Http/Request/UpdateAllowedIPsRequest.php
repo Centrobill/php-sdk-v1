@@ -33,7 +33,7 @@ class UpdateAllowedIPsRequest implements RequestInterface
 
     public function getUri()
     {
-        return '/testPaymentData/{id}/allowedIps';
+        return 'testPaymentData/{id}/allowedIps';
     }
 
     public function getHttpMethod()

@@ -6,7 +6,7 @@ class CheckVerificationCodeRequest implements RequestInterface
 {
     public function getUri()
     {
-        return '/antifraud/verification/{phone}/{code}';
+        return 'antifraud/verification/{phone}/{code}';
     }
 
     public function getHttpMethod()

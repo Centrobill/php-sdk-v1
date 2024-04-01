@@ -4,7 +4,7 @@ namespace Centrobill\Sdk\ValueObject;
 
 use Centrobill\Sdk\Exception\NumberException;
 use Centrobill\Sdk\Exception\SDKExceptionInterface;
-use Centrobill\Sdk\ValueObject\Trait\ValueToStringTrait;
+use Centrobill\Sdk\ValueObject\Traits\ValueToStringTrait;
 
 final class Number
 {
@@ -16,7 +16,7 @@ final class Number
     /**
      * @throws SDKExceptionInterface
      */
-    function checkValue(mixed $value): void
+    function checkValue($value): void
     {
         if (empty($value)) {
             throw NumberException::emptyValue();

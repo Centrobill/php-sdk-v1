@@ -10,6 +10,9 @@
         }
     },
     "autoload-dev": {
+        "files": [
+            "src/constants.php"
+        ],
         "psr-4": {
             "Tests\\Centrobill\\Sdk\\": "tests/"
         }

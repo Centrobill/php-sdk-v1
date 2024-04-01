@@ -3,7 +3,7 @@
 namespace Centrobill\Sdk\ValueObject;
 
 use Centrobill\Sdk\Exception\RequestException;
-use Centrobill\Sdk\ValueObject\Traits\ValueToStringTrait;
+use Centrobill\Sdk\ValueObject\Traitss\ValueToStringTrait;
 
 final class Request
 {

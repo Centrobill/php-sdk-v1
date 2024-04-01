@@ -16,4 +16,9 @@ class PhoneException extends Exception implements SDKExceptionInterface
     {
         return new self('Phone should be between 7 and 18 characters long.');
     }
+
+    public static function invalidValue()
+    {
+        return new self('Phone is not valid.');
+    }
 }

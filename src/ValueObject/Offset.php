@@ -16,8 +16,13 @@ final class Offset
         if (empty($value)) {
             throw OffsetException::emptyValue();
         }
+
         if (strlen($value) > self::MAX_LENGTH) {
             throw OffsetException::invalidLength();
+        }
+
+        if (!preg_match('/^\d+d$/', $value)) {
+            throw OffsetException::invalidValue();
         }
     }
 }

@@ -14,6 +14,6 @@ class BinException extends Exception implements SDKExceptionInterface
 
     public static function invalidLength()
     {
-        return new self('Bin should be between 100000 and 99999999 characters long.');
+        return new self('Bin should be between 6 and 8 characters long.');
     }
 }

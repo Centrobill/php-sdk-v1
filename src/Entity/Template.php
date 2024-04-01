@@ -4,7 +4,6 @@ namespace Centrobill\Sdk\Entity;
 
 use Centrobill\Sdk\ValueObject\Language;
 use Centrobill\Sdk\ValueObject\Layout;
-use Centrobill\Sdk\ValueObject\TemplateParameters;
 
 class Template
 {
@@ -19,14 +18,14 @@ class Template
     private Layout $layout;
 
     /**
-     * @var TemplateParameters $templateParameters
+     * @var array $templateParameters
      */
-    private TemplateParameters $templateParameters;
+    private $templateParameters;
 
     public function __construct(
         Language $language = null,
         Layout $layout = null,
-        TemplateParameters $templateParameters = null,
+        $templateParameters = [],
     ) {
         $this->language = $language;
         $this->layout = $layout;
@@ -45,7 +44,7 @@ class Template
         return $this;
     }
 
-    public function setTemplateParameters(TemplateParameters $templateParameters)
+    public function setTemplateParameters($templateParameters)
     {
         $this->templateParameters = $templateParameters;
         return $this;
@@ -53,7 +52,9 @@ class Template
 
     public function toArray()
     {
-        $data = [];
+        $data = [
+            'templateParameters' => $this->templateParameters,
+        ];
 
         if ($this->language !== null) {
             $data['language'] = (string)$this->language;
@@ -61,10 +62,6 @@ class Template
 
         if ($this->layout !== null) {
             $data['layout'] = (string)$this->layout;
-        }
-
-        if ($this->templateParameters !== null) {
-            $data['templateParameters'] = (string)$this->templateParameters;
         }
 
         return $data;

@@ -73,7 +73,7 @@ class CreateSiteRequest implements RequestInterface
 
     public function getUri()
     {
-        return '/site';
+        return 'site';
     }
 
     public function getHttpMethod()

@@ -11,4 +11,9 @@ class BrowserScreenHeightException extends Exception implements SDKExceptionInte
     {
         return new self('Browser screen height should not be empty.');
     }
+
+    public static function invalidValue()
+    {
+        return new self('Browser screen height is not valid.');
+    }
 }

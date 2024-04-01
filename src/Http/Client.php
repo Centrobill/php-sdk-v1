@@ -1,8 +1,7 @@
 <?php
 
-namespace Centrobill\Sdk;
+namespace Centrobill\Sdk\Http;
 
-use Centrobill\Sdk\Exception\ClientException;
 use Centrobill\Sdk\Http\Request\BlockTestPaymentDataRequest;
 use Centrobill\Sdk\Http\Request\CancelSubscriptionRequest;
 use Centrobill\Sdk\Http\Request\ChangeConsumerGroupRequest;
@@ -29,8 +28,8 @@ use Centrobill\Sdk\Http\Request\GetExchangeRateByIso3Request;
 use Centrobill\Sdk\Http\Request\GetListOfExternalIpsRequest;
 use Centrobill\Sdk\Http\Request\ListPaymentaccountIDsByConsumerIdRequest;
 use Centrobill\Sdk\Http\Request\NotEmulate3DsForTestPaymentDataRequest;
-use Centrobill\Sdk\Http\Request\PayRequest;
 use Centrobill\Sdk\Http\Request\PayoutRequest;
+use Centrobill\Sdk\Http\Request\PayRequest;
 use Centrobill\Sdk\Http\Request\RecoverSubscriptionRequest;
 use Centrobill\Sdk\Http\Request\RequestInterface;
 use Centrobill\Sdk\Http\Request\SendMessageWithVerificationCodeRequest;
@@ -65,19 +64,21 @@ use Centrobill\Sdk\Http\Response\GetExchangeRateByIso3Response;
 use Centrobill\Sdk\Http\Response\GetListOfExternalIpsResponse;
 use Centrobill\Sdk\Http\Response\ListPaymentaccountIDsByConsumerIdResponse;
 use Centrobill\Sdk\Http\Response\NotEmulate3DsForTestPaymentDataResponse;
-use Centrobill\Sdk\Http\Response\PayResponse;
 use Centrobill\Sdk\Http\Response\PayoutResponse;
+use Centrobill\Sdk\Http\Response\PayResponse;
 use Centrobill\Sdk\Http\Response\RecoverSubscriptionResponse;
+use Centrobill\Sdk\Http\Response\ResponseFactory;
+use Centrobill\Sdk\Http\Response\ResponseInterface;
 use Centrobill\Sdk\Http\Response\SendMessageWithVerificationCodeResponse;
 use Centrobill\Sdk\Http\Response\UnblockTestPaymentDataResponse;
 use Centrobill\Sdk\Http\Response\UpdateAllowedIPsResponse;
 use Centrobill\Sdk\Http\Response\UpdateBalanceOfTheTestPaymentDataResponse;
 use Centrobill\Sdk\Http\Response\UpdateProductResponse;
 use Centrobill\Sdk\Http\Response\UpdateSiteResponse;
+use Centrobill\Sdk\ValueObject\ApiKey;
 use GuzzleHttp\ClientInterface as HttpClientInterface;
-use GuzzleHttp\Exception\GuzzleException;
+use GuzzleHttp\Exception\ClientException as GuzzleClientException;
 use GuzzleHttp\RequestOptions;
-use stdClass;
 
 class Client implements ClientInterface
 {
@@ -87,360 +88,364 @@ class Client implements ClientInterface
 
     private HttpClientInterface $client;
 
+    private ApiKey $apiKey;
+
     private array $historyContainer;
 
     public function __construct(
         HttpClientInterface $client,
         array $historyContainer
+//        ApiKey $apiKey
      ) {
         $this->client = $client;
         $this->historyContainer = $historyContainer;
+//        $this->apiKey = $apiKey;
     }
 
     /**
      * @param GenerateCardDataTokenRequest $request
-     * @return GenerateCardDataTokenResponse
+     * @return GenerateCardDataTokenResponse|ErrorResponse
      */
-    public function generateCardDataToken(GenerateCardDataTokenRequest $request): GenerateCardDataTokenResponse
+    public function generateCardDataToken(GenerateCardDataTokenRequest $request): ResponseInterface
     {
-        return new GenerateCardDataTokenResponse($this->request($request));
+        return $this->request($request);
     }
 
     /**
      * @param GenerateCardDataTokenUsingPaymentAccountIdRequest $request
-     * @return GenerateCardDataTokenUsingPaymentAccountIdResponse
+     * @return GenerateCardDataTokenUsingPaymentAccountIdResponse|ErrorResponse
      */
     public function generateCardDataTokenUsingPaymentAccountId(
-        GenerateCardDataTokenUsingPaymentAccountIdRequest $request,
-    ): GenerateCardDataTokenUsingPaymentAccountIdResponse
+        GenerateCardDataTokenUsingPaymentAccountIdRequest $request
+    ): ResponseInterface
     {
-        return new GenerateCardDataTokenUsingPaymentAccountIdResponse($this->request($request));
+        return $this->request($request);
     }
 
     /**
      * @param PayRequest $request
-     * @return PayResponse
+     * @return PayResponse|ErrorResponse
      */
-    public function pay(PayRequest $request): PayResponse
+    public function pay(PayRequest $request): ResponseInterface
     {
-        return new PayResponse($this->request($request));
+        return $this->request($request);
     }
 
     /**
      * @param GenerateUrlToPaymentPageRequest $request
-     * @return GenerateUrlToPaymentPageResponse
+     * @return GenerateUrlToPaymentPageResponse|ErrorResponse
      */
     public function generateUrlToPaymentPage(
-        GenerateUrlToPaymentPageRequest $request,
-    ): GenerateUrlToPaymentPageResponse
+        GenerateUrlToPaymentPageRequest $request
+    ): ResponseInterface
     {
-        return new GenerateUrlToPaymentPageResponse($this->request($request));
+        return $this->request($request);
     }
 
     /**
      * @param CreditRequest $request
-     * @return CreditResponse
+     * @return CreditResponse|ErrorResponse
      */
-    public function credit(CreditRequest $request): CreditResponse
+    public function credit(CreditRequest $request): ResponseInterface
     {
-        return new CreditResponse($this->request($request));
+        return $this->request($request);
     }
 
     /**
      * @param PayoutRequest $request
-     * @return PayoutResponse
+     * @return PayoutResponse|ErrorResponse
      */
-    public function payout(PayoutRequest $request): PayoutResponse
+    public function payout(PayoutRequest $request): ResponseInterface
     {
-        return new PayoutResponse($this->request($request));
+        return $this->request($request);
     }
 
     /**
      * @param ChangeSubscriptionRequest $request
-     * @return ChangeSubscriptionResponse
+     * @return ChangeSubscriptionResponse|ErrorResponse
      */
-    public function changeSubscription(ChangeSubscriptionRequest $request): ChangeSubscriptionResponse
+    public function changeSubscription(ChangeSubscriptionRequest $request): ResponseInterface
     {
-        return new ChangeSubscriptionResponse($this->request($request));
+        return $this->request($request);
     }
 
     /**
      * @param CancelSubscriptionRequest $request
-     * @return CancelSubscriptionResponse
+     * @return CancelSubscriptionResponse|ErrorResponse
      */
-    public function cancelSubscription(CancelSubscriptionRequest $request): CancelSubscriptionResponse
+    public function cancelSubscription(CancelSubscriptionRequest $request): ResponseInterface
     {
-        return new CancelSubscriptionResponse($this->request($request));
+        return $this->request($request);
     }
 
     /**
      * @param RecoverSubscriptionRequest $request
-     * @return RecoverSubscriptionResponse
+     * @return RecoverSubscriptionResponse|ErrorResponse
      */
-    public function recoverSubscription(RecoverSubscriptionRequest $request): RecoverSubscriptionResponse
+    public function recoverSubscription(RecoverSubscriptionRequest $request): ResponseInterface
     {
-        return new RecoverSubscriptionResponse($this->request($request));
+        return $this->request($request);
     }
 
     /**
      * @param CreateSiteRequest $request
-     * @return CreateSiteResponse
+     * @return CreateSiteResponse|ErrorResponse
      */
-    public function createSite(CreateSiteRequest $request): CreateSiteResponse
+    public function createSite(CreateSiteRequest $request): ResponseInterface
     {
-        return new CreateSiteResponse($this->request($request));
+        return $this->request($request);
     }
 
     /**
      * @param UpdateSiteRequest $request
-     * @return UpdateSiteResponse
+     * @return UpdateSiteResponse|ErrorResponse
      */
-    public function updateSite(UpdateSiteRequest $request): UpdateSiteResponse
+    public function updateSite(UpdateSiteRequest $request): ResponseInterface
     {
-        return new UpdateSiteResponse($this->request($request));
+        return $this->request($request);
     }
 
     /**
      * @param CreateProductRequest $request
-     * @return CreateProductResponse
+     * @return CreateProductResponse|ErrorResponse
      */
-    public function createProduct(CreateProductRequest $request): CreateProductResponse
+    public function createProduct(CreateProductRequest $request): ResponseInterface
     {
-        return new CreateProductResponse($this->request($request));
+        return $this->request($request);
     }
 
     /**
      * @param UpdateProductRequest $request
-     * @return UpdateProductResponse
+     * @return UpdateProductResponse|ErrorResponse
      */
-    public function updateProduct(UpdateProductRequest $request): UpdateProductResponse
+    public function updateProduct(UpdateProductRequest $request): ResponseInterface
     {
-        return new UpdateProductResponse($this->request($request));
+        return $this->request($request);
     }
 
     /**
      * @param CreateConsumerRequest $request
-     * @return CreateConsumerResponse
+     * @return CreateConsumerResponse|ErrorResponse
      */
-    public function createConsumer(CreateConsumerRequest $request): CreateConsumerResponse
+    public function createConsumer(CreateConsumerRequest $request): ResponseInterface
     {
-        return new CreateConsumerResponse($this->request($request));
+        return $this->request($request);
     }
 
     /**
      * @param ChangeConsumerGroupRequest $request
-     * @return ChangeConsumerGroupResponse
+     * @return ChangeConsumerGroupResponse|ErrorResponse
      */
-    public function changeConsumerGroup(ChangeConsumerGroupRequest $request): ChangeConsumerGroupResponse
+    public function changeConsumerGroup(ChangeConsumerGroupRequest $request): ResponseInterface
     {
-        return new ChangeConsumerGroupResponse($this->request($request));
+        return $this->request($request);
     }
 
     /**
      * @param GetListOfExternalIpsRequest $request
-     * @return GetListOfExternalIpsResponse
+     * @return GetListOfExternalIpsResponse|ErrorResponse
      */
-    public function getListOfExternalIps(GetListOfExternalIpsRequest $request): GetListOfExternalIpsResponse
+    public function getListOfExternalIps(GetListOfExternalIpsRequest $request): ResponseInterface
     {
-        return new GetListOfExternalIpsResponse($this->request($request));
+        return $this->request($request);
     }
 
     /**
      * @param DeleteTestPaymentDataByIDRequest $request
-     * @return DeleteTestPaymentDataByIDResponse
+     * @return DeleteTestPaymentDataByIDResponse|ErrorResponse
      */
     public function deleteTestPaymentDataByID(
-        DeleteTestPaymentDataByIDRequest $request,
-    ): DeleteTestPaymentDataByIDResponse
+        DeleteTestPaymentDataByIDRequest $request
+    ): ResponseInterface
     {
-        return new DeleteTestPaymentDataByIDResponse($this->request($request));
+        return $this->request($request);
     }
 
     /**
      * @param UpdateBalanceOfTheTestPaymentDataRequest $request
-     * @return UpdateBalanceOfTheTestPaymentDataResponse
+     * @return UpdateBalanceOfTheTestPaymentDataResponse|ErrorResponse
      */
     public function updateBalanceOfTheTestPaymentData(
-        UpdateBalanceOfTheTestPaymentDataRequest $request,
-    ): UpdateBalanceOfTheTestPaymentDataResponse
+        UpdateBalanceOfTheTestPaymentDataRequest $request
+    ): ResponseInterface
     {
-        return new UpdateBalanceOfTheTestPaymentDataResponse($this->request($request));
+        return $this->request($request);
     }
 
     /**
      * @param CreateTestPaymentDataRequest $request
-     * @return CreateTestPaymentDataResponse
+     * @return CreateTestPaymentDataResponse|ErrorResponse
      */
-    public function createTestPaymentData(CreateTestPaymentDataRequest $request): CreateTestPaymentDataResponse
+    public function createTestPaymentData(CreateTestPaymentDataRequest $request): ResponseInterface
     {
-        return new CreateTestPaymentDataResponse($this->request($request));
+        return $this->request($request);
     }
 
     /**
      * @param BlockTestPaymentDataRequest $request
-     * @return BlockTestPaymentDataResponse
+     * @return BlockTestPaymentDataResponse|ErrorResponse
      */
-    public function blockTestPaymentData(BlockTestPaymentDataRequest $request): BlockTestPaymentDataResponse
+    public function blockTestPaymentData(BlockTestPaymentDataRequest $request): ResponseInterface
     {
-        return new BlockTestPaymentDataResponse($this->request($request));
+        return $this->request($request);
     }
 
     /**
      * @param UnblockTestPaymentDataRequest $request
-     * @return UnblockTestPaymentDataResponse
+     * @return UnblockTestPaymentDataResponse|ErrorResponse
      */
-    public function unblockTestPaymentData(UnblockTestPaymentDataRequest $request): UnblockTestPaymentDataResponse
+    public function unblockTestPaymentData(UnblockTestPaymentDataRequest $request): ResponseInterface
     {
-        return new UnblockTestPaymentDataResponse($this->request($request));
+        return $this->request($request);
     }
 
     /**
      * @param Emulate3DsForTestPaymentDataRequest $request
-     * @return Emulate3DsForTestPaymentDataResponse
+     * @return Emulate3DsForTestPaymentDataResponse|ErrorResponse
      */
     public function emulate3DsForTestPaymentData(
-        Emulate3DsForTestPaymentDataRequest $request,
-    ): Emulate3DsForTestPaymentDataResponse
+        Emulate3DsForTestPaymentDataRequest $request
+    ): ResponseInterface
     {
-        return new Emulate3DsForTestPaymentDataResponse($this->request($request));
+        return $this->request($request);
     }
 
     /**
      * @param NotEmulate3DsForTestPaymentDataRequest $request
-     * @return NotEmulate3DsForTestPaymentDataResponse
+     * @return NotEmulate3DsForTestPaymentDataResponse|ErrorResponse
      */
     public function notEmulate3DsForTestPaymentData(
-        NotEmulate3DsForTestPaymentDataRequest $request,
-    ): NotEmulate3DsForTestPaymentDataResponse
+        NotEmulate3DsForTestPaymentDataRequest $request
+    ): ResponseInterface
     {
-        return new NotEmulate3DsForTestPaymentDataResponse($this->request($request));
+        return $this->request($request);
     }
 
     /**
      * @param GetAvailableChannelsOfCodeVerificationRequest $request
-     * @return GetAvailableChannelsOfCodeVerificationResponse
+     * @return GetAvailableChannelsOfCodeVerificationResponse|ErrorResponse
      */
     public function getAvailableChannelsOfCodeVerification(
-        GetAvailableChannelsOfCodeVerificationRequest $request,
-    ): GetAvailableChannelsOfCodeVerificationResponse
+        GetAvailableChannelsOfCodeVerificationRequest $request
+    ): ResponseInterface
     {
-        return new GetAvailableChannelsOfCodeVerificationResponse($this->request($request));
+        return $this->request($request);
     }
 
     /**
      * @param SendMessageWithVerificationCodeRequest $request
-     * @return SendMessageWithVerificationCodeResponse
+     * @return SendMessageWithVerificationCodeResponse|ErrorResponse
      */
     public function sendMessageWithVerificationCode(
-        SendMessageWithVerificationCodeRequest $request,
-    ): SendMessageWithVerificationCodeResponse
+        SendMessageWithVerificationCodeRequest $request
+    ): ResponseInterface
     {
-        return new SendMessageWithVerificationCodeResponse($this->request($request));
+        return $this->request($request);
     }
 
     /**
      * @param CheckVerificationCodeRequest $request
-     * @return CheckVerificationCodeResponse
+     * @return CheckVerificationCodeResponse|ErrorResponse
      */
-    public function checkVerificationCode(CheckVerificationCodeRequest $request): CheckVerificationCodeResponse
+    public function checkVerificationCode(CheckVerificationCodeRequest $request): ResponseInterface
     {
-        return new CheckVerificationCodeResponse($this->request($request));
+        return $this->request($request);
     }
 
     /**
      * @param GetCurrencyExchangeRatesRequest $request
-     * @return GetCurrencyExchangeRatesResponse
+     * @return GetCurrencyExchangeRatesResponse|ErrorResponse
      */
     public function getCurrencyExchangeRates(
-        GetCurrencyExchangeRatesRequest $request,
-    ): GetCurrencyExchangeRatesResponse
+        GetCurrencyExchangeRatesRequest $request
+    ): ResponseInterface
     {
-        return new GetCurrencyExchangeRatesResponse($this->request($request));
+        return $this->request($request);
     }
 
     /**
      * @param GetExchangeRateByIso3Request $request
-     * @return GetExchangeRateByIso3Response
+     * @return GetExchangeRateByIso3Response|ErrorResponse
      */
-    public function getExchangeRateByIso3(GetExchangeRateByIso3Request $request): GetExchangeRateByIso3Response
+    public function getExchangeRateByIso3(GetExchangeRateByIso3Request $request): ResponseInterface
     {
-        return new GetExchangeRateByIso3Response($this->request($request));
+        return $this->request($request);
     }
 
     /**
      * @param GetChargebackIdRepaidLinkRequest $request
-     * @return GetChargebackIdRepaidLinkResponse
+     * @return GetChargebackIdRepaidLinkResponse|ErrorResponse
      */
     public function getChargebackIdRepaidLink(
-        GetChargebackIdRepaidLinkRequest $request,
-    ): GetChargebackIdRepaidLinkResponse
+        GetChargebackIdRepaidLinkRequest $request
+    ): ResponseInterface
     {
-        return new GetChargebackIdRepaidLinkResponse($this->request($request));
+        return $this->request($request);
     }
 
     /**
      * @param UpdateAllowedIPsRequest $request
-     * @return UpdateAllowedIPsResponse
+     * @return UpdateAllowedIPsResponse|ErrorResponse
      */
-    public function updateAllowedIPs(UpdateAllowedIPsRequest $request): UpdateAllowedIPsResponse
+    public function updateAllowedIPs(UpdateAllowedIPsRequest $request): ResponseInterface
     {
-        return new UpdateAllowedIPsResponse($this->request($request));
+        return $this->request($request);
     }
 
     /**
      * @param ListPaymentaccountIDsByConsumerIdRequest $request
-     * @return ListPaymentaccountIDsByConsumerIdResponse
+     * @return ListPaymentaccountIDsByConsumerIdResponse|ErrorResponse
      */
     public function listPaymentaccountIDsByConsumerId(
-        ListPaymentaccountIDsByConsumerIdRequest $request,
-    ): ListPaymentaccountIDsByConsumerIdResponse
+        ListPaymentaccountIDsByConsumerIdRequest $request
+    ): ResponseInterface
     {
-        return new ListPaymentaccountIDsByConsumerIdResponse($this->request($request));
+        return $this->request($request);
     }
 
     /**
      * @param ChangePaymentAccountForsubscriptionRequest $request
-     * @return ChangePaymentAccountForsubscriptionResponse
+     * @return ChangePaymentAccountForsubscriptionResponse|ErrorResponse
      */
     public function changePaymentAccountForsubscription(
-        ChangePaymentAccountForsubscriptionRequest $request,
-    ): ChangePaymentAccountForsubscriptionResponse
+        ChangePaymentAccountForsubscriptionRequest $request
+    ): ResponseInterface
     {
-        return new ChangePaymentAccountForsubscriptionResponse($this->request($request));
+        return $this->request($request);
     }
 
     /**
      * @param DisablePaymentAccountForQuickSaleRequest $request
-     * @return DisablePaymentAccountForQuickSaleResponse
+     * @return DisablePaymentAccountForQuickSaleResponse|ErrorResponse
      */
     public function disablePaymentAccountForQuickSale(
-        DisablePaymentAccountForQuickSaleRequest $request,
-    ): DisablePaymentAccountForQuickSaleResponse
+        DisablePaymentAccountForQuickSaleRequest $request
+    ): ResponseInterface
     {
-        return new DisablePaymentAccountForQuickSaleResponse($this->request($request));
+        return $this->request($request);
     }
 
     /**
      * @param EnablePaymentAccountForQuickSaleRequest $request
-     * @return EnablePaymentAccountForQuickSaleResponse
+     * @return EnablePaymentAccountForQuickSaleResponse|ErrorResponse
      */
     public function enablePaymentAccountForQuickSale(
-        EnablePaymentAccountForQuickSaleRequest $request,
-    ): EnablePaymentAccountForQuickSaleResponse
+        EnablePaymentAccountForQuickSaleRequest $request
+    ): ResponseInterface
     {
-        return new EnablePaymentAccountForQuickSaleResponse($this->request($request));
+        return $this->request($request);
     }
 
     /**
      * @param GetApplePaySessionRequest $request
-     * @return GetApplePaySessionResponse
+     * @return GetApplePaySessionResponse|ErrorResponse
      */
-    public function getApplePaySession(GetApplePaySessionRequest $request): GetApplePaySessionResponse
+    public function getApplePaySession(GetApplePaySessionRequest $request): ResponseInterface
     {
-        return new GetApplePaySessionResponse($this->request($request));
+        return $this->request($request);
     }
 
-    private function request(RequestInterface $request): stdClass
+    private function request(RequestInterface $request)
     {
         try {
             $response = $this->client->request(
@@ -452,10 +457,9 @@ class Client implements ClientInterface
                 ]
             );
 
-            return json_decode($response->getBody()->getContents());
-        } catch (GuzzleException $e) {
-            /** @var \Exception $e */
-            throw new ClientException($e->getMessage(), $e);
+            return ResponseFactory::createResponse($request, $response);
+        } catch (GuzzleClientException $e) {
+            return ResponseFactory::createResponse($request, $e->getResponse());
         }
     }
 
@@ -468,6 +472,7 @@ class Client implements ClientInterface
     private function getHeaders(RequestInterface $request): array
     {
         return [
+            'Accept' => 'application/json',
             self::HEADER_USER_AGENT => self::USER_AGENT,
         ] + $request->getHeaders();
     }

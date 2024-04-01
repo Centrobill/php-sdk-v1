@@ -11,4 +11,9 @@ class BrowserScreenWidthException extends Exception implements SDKExceptionInter
     {
         return new self('Browser screen width should not be empty.');
     }
+
+    public static function invalidValue()
+    {
+        return new self('Browser screen width is not valid.');
+    }
 }

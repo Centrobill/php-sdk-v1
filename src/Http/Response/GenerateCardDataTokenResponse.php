@@ -2,17 +2,20 @@
 
 namespace Centrobill\Sdk\Http\Response;
 
-use Centrobill\Sdk\Utils\Utils;
-use stdClass;
-
 class GenerateCardDataTokenResponse extends AbstractResponse implements ResponseInterface
 {
-    
-
     public function isSuccessful()
     {
         return true;
     }
 
-    
+    public function getToken()
+    {
+        return $this->data->token;
+    }
+
+    public function getExpiredAt()
+    {
+        return $this->data->expiredAt;
+    }
 }

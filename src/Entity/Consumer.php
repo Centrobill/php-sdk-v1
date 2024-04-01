@@ -3,10 +3,8 @@
 namespace Centrobill\Sdk\Entity;
 
 use Centrobill\Sdk\ValueObject\Address;
-use Centrobill\Sdk\ValueObject\Birthday;
 use Centrobill\Sdk\ValueObject\BrowserAcceptHeader;
 use Centrobill\Sdk\ValueObject\BrowserColorDepth;
-use Centrobill\Sdk\ValueObject\BrowserJavaEnabled;
 use Centrobill\Sdk\ValueObject\BrowserLanguage;
 use Centrobill\Sdk\ValueObject\BrowserScreenHeight;
 use Centrobill\Sdk\ValueObject\BrowserScreenWidth;
@@ -24,6 +22,7 @@ use Centrobill\Sdk\ValueObject\Phone;
 use Centrobill\Sdk\ValueObject\State;
 use Centrobill\Sdk\ValueObject\UserAgent;
 use Centrobill\Sdk\ValueObject\Zip;
+use DateTimeImmutable;
 
 class Consumer
 {
@@ -53,9 +52,9 @@ class Consumer
     private LastName $lastName;
 
     /**
-     * @var Birthday $birthday
+     * @var DateTimeImmutable $birthday
      */
-    private Birthday $birthday;
+    private DateTimeImmutable $birthday;
 
     /**
      * @var Phone $phone
@@ -108,9 +107,9 @@ class Consumer
     private BrowserAcceptHeader $browserAcceptHeader;
 
     /**
-     * @var BrowserJavaEnabled $browserJavaEnabled
+     * @var bool $browserJavaEnabled
      */
-    private BrowserJavaEnabled $browserJavaEnabled;
+    private $browserJavaEnabled;
 
     /**
      * @var BrowserLanguage $browserLanguage
@@ -143,7 +142,7 @@ class Consumer
         Email $email = null,
         FirstName $firstName = null,
         LastName $lastName = null,
-        Birthday $birthday = null,
+        DateTimeImmutable $birthday = null,
         Phone $phone = null,
         Country $country = null,
         State $state = null,
@@ -154,7 +153,7 @@ class Consumer
         UserAgent $userAgent = null,
         DeviceId $deviceId = null,
         BrowserAcceptHeader $browserAcceptHeader = null,
-        BrowserJavaEnabled $browserJavaEnabled = null,
+        $browserJavaEnabled = false,
         BrowserLanguage $browserLanguage = null,
         BrowserColorDepth $browserColorDepth = null,
         BrowserScreenHeight $browserScreenHeight = null,
@@ -215,7 +214,7 @@ class Consumer
         return $this;
     }
 
-    public function setBirthday(Birthday $birthday)
+    public function setBirthday(DateTimeImmutable $birthday)
     {
         $this->birthday = $birthday;
         return $this;
@@ -281,7 +280,7 @@ class Consumer
         return $this;
     }
 
-    public function setBrowserJavaEnabled(BrowserJavaEnabled $browserJavaEnabled)
+    public function setBrowserJavaEnabled($browserJavaEnabled)
     {
         $this->browserJavaEnabled = $browserJavaEnabled;
         return $this;
@@ -342,7 +341,7 @@ class Consumer
         }
 
         if ($this->birthday !== null) {
-            $data['birthday'] = (string)$this->birthday;
+            $data['birthday'] = $this->birthday->format('Y-m-d');
         }
 
         if ($this->phone !== null) {
@@ -386,7 +385,7 @@ class Consumer
         }
 
         if ($this->browserJavaEnabled !== null) {
-            $data['browserJavaEnabled'] = (string)$this->browserJavaEnabled;
+            $data['browserJavaEnabled'] = $this->browserJavaEnabled;
         }
 
         if ($this->browserLanguage !== null) {
@@ -394,15 +393,15 @@ class Consumer
         }
 
         if ($this->browserColorDepth !== null) {
-            $data['browserColorDepth'] = (string)$this->browserColorDepth;
+            $data['browserColorDepth'] = $this->browserColorDepth->getValue();
         }
 
         if ($this->browserScreenHeight !== null) {
-            $data['browserScreenHeight'] = (string)$this->browserScreenHeight;
+            $data['browserScreenHeight'] = $this->browserScreenHeight->getValue();
         }
 
         if ($this->browserScreenWidth !== null) {
-            $data['browserScreenWidth'] = (string)$this->browserScreenWidth;
+            $data['browserScreenWidth'] = $this->browserScreenWidth->getValue();
         }
 
         if ($this->browserTimezone !== null) {

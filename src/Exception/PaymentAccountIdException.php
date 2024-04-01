@@ -11,4 +11,9 @@ class PaymentAccountIdException extends Exception implements SDKExceptionInterfa
     {
         return new self('Payment account id should not be empty.');
     }
+
+    public static function invalidFormat()
+    {
+        return new self('Payment account id should be valid UUID.');
+    }
 }

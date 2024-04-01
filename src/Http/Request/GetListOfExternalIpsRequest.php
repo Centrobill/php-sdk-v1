@@ -6,7 +6,7 @@ class GetListOfExternalIpsRequest implements RequestInterface
 {
     public function getUri(): string
     {
-        return '/ips';
+        return 'ips';
     }
 
     public function getHttpMethod(): string

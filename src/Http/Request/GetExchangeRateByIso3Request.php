@@ -6,7 +6,7 @@ class GetExchangeRateByIso3Request implements RequestInterface
 {
     public function getUri()
     {
-        return '/currency-exchange-rate/{iso3}';
+        return 'currency-exchange-rate/{iso3}';
     }
 
     public function getHttpMethod()

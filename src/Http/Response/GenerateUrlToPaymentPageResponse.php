@@ -2,17 +2,20 @@
 
 namespace Centrobill\Sdk\Http\Response;
 
-use Centrobill\Sdk\Utils\Utils;
-use stdClass;
-
 class GenerateUrlToPaymentPageResponse extends AbstractResponse implements ResponseInterface
 {
-    
-
     public function isSuccessful()
     {
         return true;
     }
 
-    
+    public function getCode()
+    {
+        return $this->data->code;
+    }
+
+    public function getUrl()
+    {
+        return $this->data->url;
+    }
 }

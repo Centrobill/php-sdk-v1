@@ -6,7 +6,7 @@ class RecoverSubscriptionRequest implements RequestInterface
 {
     public function getUri()
     {
-        return '/subscription/{id}/recover';
+        return 'subscription/{id}/recover';
     }
 
     public function getHttpMethod()

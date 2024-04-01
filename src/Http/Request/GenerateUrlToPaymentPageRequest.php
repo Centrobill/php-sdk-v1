@@ -4,10 +4,10 @@ namespace Centrobill\Sdk\Http\Request;
 
 use Centrobill\Sdk\Entity\Consumer;
 use Centrobill\Sdk\Entity\Payment;
+use Centrobill\Sdk\Entity\Sku;
 use Centrobill\Sdk\Entity\Template;
-use Centrobill\Sdk\ValueObject\EmailOptions;
-use Centrobill\Sdk\ValueObject\Metadata;
-use Centrobill\Sdk\ValueObject\Sku;
+use Centrobill\Sdk\ValueObject\ApiKey;
+use Centrobill\Sdk\ValueObject\Field;
 use Centrobill\Sdk\ValueObject\Ttl;
 
 /**
@@ -15,15 +15,41 @@ use Centrobill\Sdk\ValueObject\Ttl;
  */
 class GenerateUrlToPaymentPageRequest implements RequestInterface
 {
+    /** @var ApiKey $apiKey */
+    private ApiKey $apiKey;
+
+    /** @var Array<Sku> $sku */
+    private $sku;
+
+    /** @var ?Consumer $consumer */
+    private ?Consumer $consumer;
+
+    /** @var ?Template $template */
+    private ?Template $template;
+
+    /** @var ?Payment $payment */
+    private ?Payment $payment;
+
+    /** @var Array<Field> $metadata */
+    private $metadata;
+
+    /** @var ?Ttl $ttl */
+    private ?Ttl $ttl;
+
+    /** @var bool $emailOptions */
+    private $emailOptions;
+
     public function __construct(
-        private $sku = [],
-        private ?Consumer $consumer = null,
-        private ?Template $template = null,
-        private ?Payment $payment = null,
-        private ?Metadata $metadata = null,
-        private ?Ttl $ttl = null,
-        private ?EmailOptions $emailOptions = null,
+        ApiKey $apiKey,
+        $sku = [],
+        ?Consumer $consumer = null,
+        ?Template $template = null,
+        ?Payment $payment = null,
+        $metadata = [],
+        ?Ttl $ttl = null,
+        $emailOptions = false
     ) {
+        $this->apiKey = $apiKey;
         $this->sku = $sku;
         $this->consumer = $consumer;
         $this->template = $template;
@@ -33,37 +59,49 @@ class GenerateUrlToPaymentPageRequest implements RequestInterface
         $this->emailOptions = $emailOptions;
     }
 
-    public function setConsumer(Consumer $consumer): static
+    public function addSku(Sku $sku): self
+    {
+        $this->sku[] = $sku;
+        return $this;
+    }
+
+    public function setConsumer(Consumer $consumer): self
     {
         $this->consumer = $consumer;
         return $this;
     }
 
-    public function setTemplate(Template $template): static
+    public function setTemplate(Template $template): self
     {
         $this->template = $template;
         return $this;
     }
 
-    public function setPayment(Payment $payment): static
+    public function setPayment(Payment $payment): self
     {
         $this->payment = $payment;
         return $this;
     }
 
-    public function setMetadata(Metadata $metadata): static
+    public function addMetadataField(Field $field): self
+    {
+        $this->metadata[] = $field;
+        return $this;
+    }
+
+    public function setMetadata($metadata): self
     {
         $this->metadata = $metadata;
         return $this;
     }
 
-    public function setTtl(Ttl $ttl): static
+    public function setTtl(Ttl $ttl): self
     {
         $this->ttl = $ttl;
         return $this;
     }
 
-    public function setEmailOptions(EmailOptions $emailOptions): static
+    public function setEmailOptions($emailOptions): self
     {
         $this->emailOptions = $emailOptions;
         return $this;
@@ -71,8 +109,16 @@ class GenerateUrlToPaymentPageRequest implements RequestInterface
 
     public function getPayload(): array
     {
+        if (empty($this->sku)) {
+            // TODO create an exception class
+            throw new \InvalidArgumentException('Sku cannot be empty');
+        }
+
         $data = [
-            'sku' => $this->sku,
+            'sku' => array_map(function($item) {
+                return $item->toArray();
+            }, $this->sku),
+            'emailOptions' => $this->emailOptions
         ];
 
         if ($this->consumer !== null) {
@@ -87,16 +133,14 @@ class GenerateUrlToPaymentPageRequest implements RequestInterface
             $data['payment'] = $this->payment->toArray();
         }
 
-        if ($this->metadata !== null) {
-            $data['metadata'] = (string)$this->metadata;
+        if (!empty($this->metadata)) {
+            foreach($this->metadata as $field) {
+                $data['metadata'][$field->getKey()] = $field->getValue();
+            }
         }
 
         if ($this->ttl !== null) {
             $data['ttl'] = (string)$this->ttl;
-        }
-
-        if ($this->emailOptions !== null) {
-            $data['emailOptions'] = (string)$this->emailOptions;
         }
 
         return $data;
@@ -104,7 +148,7 @@ class GenerateUrlToPaymentPageRequest implements RequestInterface
 
     public function getUri(): string
     {
-        return '/paymentPage';
+        return 'paymentPage';
     }
 
     public function getHttpMethod(): string
@@ -114,6 +158,8 @@ class GenerateUrlToPaymentPageRequest implements RequestInterface
 
     public function getHeaders(): array
     {
-        return [];
+        return [
+            'Authorization' => (string)$this->apiKey,
+        ];
     }
 }

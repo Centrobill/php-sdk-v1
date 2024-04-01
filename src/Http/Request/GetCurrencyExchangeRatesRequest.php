@@ -6,7 +6,7 @@ class GetCurrencyExchangeRatesRequest implements RequestInterface
 {
     public function getUri()
     {
-        return '/currency-exchange-rate';
+        return 'currency-exchange-rate';
     }
 
     public function getHttpMethod()

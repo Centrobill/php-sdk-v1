@@ -6,7 +6,7 @@ class DisablePaymentAccountForQuickSaleRequest implements RequestInterface
 {
     public function getUri()
     {
-        return '/paymentAccount/{paymentAccountId}/disable';
+        return 'paymentAccount/{paymentAccountId}/disable';
     }
 
     public function getHttpMethod()

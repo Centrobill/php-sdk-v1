@@ -6,7 +6,7 @@ class BlockTestPaymentDataRequest implements RequestInterface
 {
     public function getUri()
     {
-        return '/testPaymentData/{id}/block';
+        return 'testPaymentData/{id}/block';
     }
 
     public function getHttpMethod()
