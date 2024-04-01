@@ -2,42 +2,66 @@
 
 namespace Centrobill\Sdk\Http\Request;
 
+use Centrobill\Sdk\ValueObject\Id;
+use Centrobill\Sdk\ValueObject\Ip;
+
 class UpdateAllowedIPsRequest implements RequestInterface
 {
     /**
-     * @var array $items
+     * @var Id $id
+     */
+    private $id;
+
+    /**
+     * @var Array<Ip> $items
      */
     private $items;
 
-    public function __construct($items = [])
+    public function __construct(Id $id, $items = [])
     {
+        $this->id = $id;
         $this->items = $items;
     }
 
-    public function setItems($items)
+    public function addItem(Ip $item)
+    {
+        $this->items[] = $item;
+        return $this;
+    }
+
+    public function setItems($items): self
     {
         $this->items = $items;
         return $this;
     }
 
-    public function getPayload()
+    public function getPayload(): array
     {
         $data = [];
 
-        if ($this->items !== null) {
-            $data['items'] = $this->items;
+        if (!empty($this->items)) {
+            $data['items'] = array_map(function (Ip $item) {
+                return (string)$item;
+            }, $this->items);
         }
 
         return $data;
     }
 
-    public function getUri()
+    public function getUri(): string
     {
-        return 'testPaymentData/{id}/allowedIps';
+        return sprintf('testPaymentData/%s/allowedIps', (string)$this->id);
     }
 
-    public function getHttpMethod()
+    public function getHttpMethod(): string
     {
         return self::HTTP_METHOD_POST;
+    }
+
+    public function getHeaders(): array
+    {
+        return [
+            'X-Requested-With' => 'XMLHttpRequest',
+        ];
     }
 }

@@ -2,15 +2,37 @@
 
 namespace Centrobill\Sdk\Http\Request;
 
+use Centrobill\Sdk\ValueObject\Currency;
+
 class GetExchangeRateByIso3Request implements RequestInterface
 {
-    public function getUri()
+    /**
+     * @var Currency $currency
+     */
+    private Currency $currency;
+
+    public function __construct(Currency $currency)
     {
-        return 'currency-exchange-rate/{iso3}';
+        $this->currency = $currency;
     }
 
-    public function getHttpMethod()
+    public function getUri(): string
+    {
+        return sprintf('currency-exchange-rate/%s', (string)$this->currency);
+    }
+
+    public function getHttpMethod(): string
     {
         return self::HTTP_METHOD_GET;
+    }
+
+    public function getHeaders(): array
+    {
+        return [];
+    }
+
+    public function getPayload(): array
+    {
+        return [];
     }
 }

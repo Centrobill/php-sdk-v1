@@ -2,15 +2,40 @@
 
 namespace Centrobill\Sdk\Http\Request;
 
+use Centrobill\Sdk\ValueObject\Id;
+
 class RecoverSubscriptionRequest implements RequestInterface
 {
-    public function getUri()
+    /**
+     * @var Id $id
+     */
+    private Id $id;
+
+    public function __construct(Id $id)
     {
-        return 'subscription/{id}/recover';
+        $this->id = $id;
     }
 
-    public function getHttpMethod()
+    public function getUri(): string
+    {
+        return 'subscription/{id}/recover';
+        return sprintf('subscription/%s/recover', (string)$this->id);
+    }
+
+    public function getHttpMethod(): string
     {
         return self::HTTP_METHOD_PUT;
+    }
+
+    public function getHeaders(): array
+    {
+        return [
+            'X-Requested-With' => 'XMLHttpRequest',
+        ];
+    }
+
+    public function getPayload(): array
+    {
+        return [];
     }
 }

@@ -2,15 +2,23 @@
 
 namespace Centrobill\Sdk\Http\Request;
 
+use Centrobill\Sdk\ValueObject\Id;
+
 class ChangeSubscriptionRequest implements RequestInterface
 {
+    /**
+     * @var Id $id
+     */
+    private Id $id;
+
     /**
      * @var array $price
      */
     private $price;
 
-    public function __construct($price = [])
+    public function __construct(Id $id, $price = [])
     {
+        $this->id = $id;
         $this->price = $price;
     }
 
@@ -20,7 +28,7 @@ class ChangeSubscriptionRequest implements RequestInterface
         return $this;
     }
 
-    public function getPayload()
+    public function getPayload(): array
     {
         $data = [];
 
@@ -31,13 +39,20 @@ class ChangeSubscriptionRequest implements RequestInterface
         return $data;
     }
 
-    public function getUri()
+    public function getUri(): string 
     {
-        return 'subscription/{id}';
+        return sprintf('subscription/%s', (string)$this->id);
     }
 
-    public function getHttpMethod()
+    public function getHttpMethod(): string
     {
         return self::HTTP_METHOD_PUT;
+    }
+
+    public function getHeaders(): array
+    {
+        return [
+            'X-Requested-With' => 'XMLHttpRequest',
+        ];
     }
 }

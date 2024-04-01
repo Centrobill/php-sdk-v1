@@ -3,10 +3,16 @@
 namespace Centrobill\Sdk\Http\Request;
 
 use Centrobill\Sdk\ValueObject\Amount;
+use Centrobill\Sdk\ValueObject\Id;
 use Centrobill\Sdk\ValueObject\Reason;
 
 class CreditRequest implements RequestInterface
 {
+    /**
+     * @var Id $id
+     */
+    private Id $id;
+    
     /**
      * @var Amount $amount
      */
@@ -17,8 +23,9 @@ class CreditRequest implements RequestInterface
      */
     private Reason $reason;
 
-    public function __construct(Reason $reason, Amount $amount = null)
+    public function __construct(Id $id, Reason $reason, Amount $amount = null)
     {
+        $this->id = $id;
         $this->reason = $reason;
         $this->amount = $amount;
     }
@@ -44,11 +51,18 @@ class CreditRequest implements RequestInterface
 
     public function getUri(): string
     {
-        return 'payment/{id}/credit';
+        return sprintf('payment/%s/credit', (string)$this->id);
     }
 
     public function getHttpMethod(): string
     {
         return self::HTTP_METHOD_POST;
+    }
+
+    public function getHeaders(): array
+    {
+        return [
+            'X-Requested-With' => 'XMLHttpRequest',
+        ];
     }
 }

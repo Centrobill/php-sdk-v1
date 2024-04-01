@@ -2,12 +2,13 @@
 
 namespace Centrobill\Sdk\Http\Request;
 
+use Centrobill\Sdk\Entity\Price;
 use Centrobill\Sdk\ValueObject\Amount;
 use Centrobill\Sdk\ValueObject\Currency;
 use Centrobill\Sdk\ValueObject\ExternalId;
-use Centrobill\Sdk\ValueObject\SiteId;
-use Centrobill\Sdk\ValueObject\Title;
-use Centrobill\Sdk\ValueObject\Type;
+use Centrobill\Sdk\ValueObject\Sku\SiteId;
+use Centrobill\Sdk\ValueObject\Sku\SkuType;
+use Centrobill\Sdk\ValueObject\Sku\Title;
 
 class CreateProductRequest implements RequestInterface
 {
@@ -27,9 +28,9 @@ class CreateProductRequest implements RequestInterface
     private ExternalId $externalId;
 
     /**
-     * @var Type $type
+     * @var SkuType $type
      */
-    private Type $type;
+    private SkuType $type;
 
     /**
      * @var Amount $amount
@@ -37,7 +38,7 @@ class CreateProductRequest implements RequestInterface
     private Amount $amount;
 
     /**
-     * @var array $price
+     * @var Array<Price> $price
      */
     private $price;
 
@@ -50,7 +51,7 @@ class CreateProductRequest implements RequestInterface
         $price = [],
         SiteId $siteId,
         Title $title,
-        Type $type,
+        SkuType $type,
         ExternalId $externalId = null,
         Amount $amount = null,
         Currency $currency = null,
@@ -82,14 +83,19 @@ class CreateProductRequest implements RequestInterface
         return $this;
     }
 
-    public function getPayload()
+    public function getPayload(): array
     {
         $data = [
-            'price' => $this->price,
             'siteId' => (string)$this->siteId,
             'title' => (string)$this->title,
             'type' => (string)$this->type,
         ];
+
+        if (!empty($this->price)) {
+            $data['price'] = array_map(function (Price $price) {
+                return $price->toArray();
+            }, $this->price);
+        }
 
         if ($this->externalId !== null) {
             $data['externalId'] = (string)$this->externalId;
@@ -106,13 +112,20 @@ class CreateProductRequest implements RequestInterface
         return $data;
     }
 
-    public function getUri()
+    public function getUri(): string
     {
         return 'sku';
     }
 
-    public function getHttpMethod()
+    public function getHttpMethod(): string
     {
         return self::HTTP_METHOD_POST;
+    }
+
+    public function getHeaders(): array
+    {
+        return [
+            'X-Requested-With' => 'XMLHttpRequest',
+        ];
     }
 }

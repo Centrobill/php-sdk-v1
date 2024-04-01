@@ -2,15 +2,39 @@
 
 namespace Centrobill\Sdk\Http\Request;
 
+use Centrobill\Sdk\ValueObject\PaymentAccountId;
+
 class EnablePaymentAccountForQuickSaleRequest implements RequestInterface
 {
-    public function getUri()
+    /**
+     * @var PaymentAccountId $paymentAccountId
+     */
+    private PaymentAccountId $paymentAccountId;
+
+    public function __construct(PaymentAccountId $paymentAccountId)
     {
-        return 'paymentAccount/{paymentAccountId}/enable';
+        $this->paymentAccountId = $paymentAccountId;
     }
 
-    public function getHttpMethod()
+    public function getUri(): string
+    {
+        return sprintf('paymentAccount/%s/enable', (string)$this->paymentAccountId);
+    }
+
+    public function getHttpMethod(): string
     {
         return self::HTTP_METHOD_POST;
+    }
+
+    public function getHeaders(): array
+    {
+        return [
+            'X-Requested-With' => 'XMLHttpRequest',
+        ];
+    }
+
+    public function getPayload(): array
+    {
+        return [];
     }
 }

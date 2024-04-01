@@ -2,15 +2,22 @@
 
 namespace Centrobill\Sdk\Http\Request;
 
+use Centrobill\Sdk\Entity\Price;
 use Centrobill\Sdk\ValueObject\Amount;
 use Centrobill\Sdk\ValueObject\Currency;
 use Centrobill\Sdk\ValueObject\ExternalId;
-use Centrobill\Sdk\ValueObject\SiteId;
-use Centrobill\Sdk\ValueObject\Title;
-use Centrobill\Sdk\ValueObject\Type;
+use Centrobill\Sdk\ValueObject\Sku\Name;
+use Centrobill\Sdk\ValueObject\Sku\SiteId;
+use Centrobill\Sdk\ValueObject\Sku\SkuType;
+use Centrobill\Sdk\ValueObject\Sku\Title;
 
 class UpdateProductRequest implements RequestInterface
 {
+    /**
+     * @var Name $name
+     */
+    private Name $name;
+
     /**
      * @var SiteId $siteId
      */
@@ -27,9 +34,9 @@ class UpdateProductRequest implements RequestInterface
     private ExternalId $externalId;
 
     /**
-     * @var Type $type
+     * @var SkuType $type
      */
-    private Type $type;
+    private SkuType $type;
 
     /**
      * @var Amount $amount
@@ -37,7 +44,7 @@ class UpdateProductRequest implements RequestInterface
     private Amount $amount;
 
     /**
-     * @var array $price
+     * @var Array<Price> $price
      */
     private $price;
 
@@ -47,9 +54,10 @@ class UpdateProductRequest implements RequestInterface
     private Currency $currency;
 
     public function __construct(
+        Name $name,
         SiteId $siteId,
         Title $title,
-        Type $type,
+        SkuType $type,
         $price = [],
         ExternalId $externalId = null,
         Amount $amount = null,
@@ -88,7 +96,7 @@ class UpdateProductRequest implements RequestInterface
         return $this;
     }
 
-    public function getPayload()
+    public function getPayload(): array
     {
         $data = [
             'siteId' => (string)$this->siteId,
@@ -96,8 +104,10 @@ class UpdateProductRequest implements RequestInterface
             'type' => (string)$this->type,
         ];
 
-        if ($this->price !== null) {
-            $data['price'] = $this->price;
+        if (!empty($this->price)) {
+            $data['price'] = array_map(function (Price $price) {
+                return $price->toArray();
+            }, $this->price);
         }
 
         if ($this->externalId !== null) {
@@ -115,13 +125,20 @@ class UpdateProductRequest implements RequestInterface
         return $data;
     }
 
-    public function getUri()
+    public function getUri(): string
     {
-        return 'sku/{name}';
+        return sprintf('sku/%s', (string)$this->name);
     }
 
-    public function getHttpMethod()
+    public function getHttpMethod(): string
     {
         return self::HTTP_METHOD_PUT;
+    }
+
+    public function getHeaders(): array
+    {
+        return [
+            'X-Requested-With' => 'XMLHttpRequest',
+        ];
     }
 }

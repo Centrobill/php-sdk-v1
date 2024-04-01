@@ -2,14 +2,15 @@
 
 namespace Centrobill\Sdk\Exception;
 
-use Centrobill\Sdk\ValueObject\PaymentSourceType;
+use Centrobill\Sdk\Exception\SDKExceptionInterface;
+use Centrobill\Sdk\ValueObject\Sku\SkuType;
 use Exception;
 
-class PaymentSourceTypeException extends Exception implements SDKExceptionInterface
+class SkuTypeException extends Exception implements SDKExceptionInterface
 {
     public static function emptyValue()
     {
-        return new self('Source type should not be empty.');
+        return new self('Sku type should not be empty.');
     }
 
     public static function invalidValue()
@@ -17,8 +18,9 @@ class PaymentSourceTypeException extends Exception implements SDKExceptionInterf
         return new self(
             sprintf(
                 'Source type should be one of these values: [%s].',
-                implode(', ', PaymentSourceType::toArray())
+                implode(', ', SkuType::toArray())
             )
         );
     }
+
 }

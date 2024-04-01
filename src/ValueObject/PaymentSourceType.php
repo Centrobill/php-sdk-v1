@@ -46,7 +46,7 @@ final class PaymentSourceType extends Enum
         }
 
         if (!in_array($value, PaymentSourceType::toArray())) {
-            throw PaymentSourceTypeException::invalidValue($value);
+            throw PaymentSourceTypeException::invalidValue();
         }
     }
 }

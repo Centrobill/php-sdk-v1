@@ -2,15 +2,47 @@
 
 namespace Centrobill\Sdk\Http\Request;
 
+use Centrobill\Sdk\ValueObject\Id;
+
 class BlockTestPaymentDataRequest implements RequestInterface
 {
-    public function getUri()
-    {
-        return 'testPaymentData/{id}/block';
+    private Id $id;
+
+    public function __construct(
+        Id $id
+    ) {
+        $this->id = $id;
     }
 
-    public function getHttpMethod()
+    public function getUri(): string
+    {
+        return sprintf('testPaymentData/%s/block', (string)$this->id);
+    }
+
+    public function getHttpMethod(): string
     {
         return self::HTTP_METHOD_POST;
+    }
+    
+    /**
+     * Get headers
+     *
+     * @return array
+     */
+    public function getHeaders(): array
+    {
+        return [
+            'X-Requested-With' => 'XMLHttpRequest',
+        ];
+    }
+
+    /**
+     * Get request data
+     *
+     * @return array
+     */
+    public function getPayload(): array
+    {
+        return [];
     }
 }

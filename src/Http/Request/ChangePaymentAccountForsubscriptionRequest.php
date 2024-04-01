@@ -2,28 +2,35 @@
 
 namespace Centrobill\Sdk\Http\Request;
 
-use Centrobill\Sdk\Entity\Consumer2;
-use Centrobill\Sdk\ValueObject\PaymentSource;
+use Centrobill\Sdk\Entity\Consumer;
+use Centrobill\Sdk\ValueObject\Id;
+use Centrobill\Sdk\ValueObject\PaymentSourceType;
 
 class ChangePaymentAccountForsubscriptionRequest implements RequestInterface
 {
     /**
-     * @var PaymentSource $paymentSource
+     * @var Id $id
      */
-    private PaymentSource $paymentSource;
+    private Id $id;
+    
+    /**
+     * @var PaymentSourceType $paymentSource
+     */
+    private PaymentSourceType $paymentSource;
 
     /**
-     * @var Consumer2 $consumer
+     * @var Consumer $consumer
      */
-    private Consumer2 $consumer;
+    private Consumer $consumer;
 
-    public function __construct(PaymentSource $paymentSource, Consumer2 $consumer)
+    public function __construct(Id $id, PaymentSourceType $paymentSource, Consumer $consumer)
     {
+        $this->id = $id;
         $this->paymentSource = $paymentSource;
         $this->consumer = $consumer;
     }
 
-    public function getPayload()
+    public function getPayload(): array
     {
         $data = [
             'paymentSource' => (string)$this->paymentSource,
@@ -33,13 +40,20 @@ class ChangePaymentAccountForsubscriptionRequest implements RequestInterface
         return $data;
     }
 
-    public function getUri()
+    public function getUri(): string
     {
-        return 'subscription/{id}/paymentAccount';
+        return sprintf('subscription/%s/paymentAccount', (string)$this->id);
     }
 
-    public function getHttpMethod()
+    public function getHttpMethod(): string
     {
         return self::HTTP_METHOD_PUT;
+    }
+
+    public function getHeaders(): array
+    {
+        return [
+            'X-Requested-With' => 'XMLHttpRequest',
+        ];
     }
 }

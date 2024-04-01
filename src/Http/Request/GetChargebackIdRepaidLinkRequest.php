@@ -2,15 +2,37 @@
 
 namespace Centrobill\Sdk\Http\Request;
 
+use Centrobill\Sdk\ValueObject\Id;
+
 class GetChargebackIdRepaidLinkRequest implements RequestInterface
 {
-    public function getUri()
+    /**
+     * @var Id $id
+     */
+    private Id $id;
+
+    public function __construct(Id $id)
     {
-        return 'chargeback/{id}/repaidLink';
+        $this->id = $id;
     }
 
-    public function getHttpMethod()
+    public function getUri(): string
+    {
+        return sprintf('chargeback/%s/repaidLink', (string)$this->id);
+    }
+
+    public function getHttpMethod(): string
     {
         return self::HTTP_METHOD_GET;
+    }
+
+    public function getHeaders(): array
+    {
+        return [];
+    }
+
+    public function getPayload(): array
+    {
+        return [];
     }
 }

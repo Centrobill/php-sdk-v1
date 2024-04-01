@@ -2,11 +2,17 @@
 
 namespace Centrobill\Sdk\Http\Request;
 
+use Centrobill\Sdk\ValueObject\Channel;
 use Centrobill\Sdk\ValueObject\From;
 use Centrobill\Sdk\ValueObject\Phone;
 
 class SendMessageWithVerificationCodeRequest implements RequestInterface
 {
+    /**
+     * @var Channel $channel
+     */
+    private Channel $channel;
+
     /**
      * @var Phone $phone
      */
@@ -17,8 +23,9 @@ class SendMessageWithVerificationCodeRequest implements RequestInterface
      */
     private From $from;
 
-    public function __construct(Phone $phone, From $from = null)
+    public function __construct(Channel $channel, Phone $phone, From $from = null)
     {
+        $this->channel = $channel;
         $this->phone = $phone;
         $this->from = $from;
     }
@@ -29,7 +36,7 @@ class SendMessageWithVerificationCodeRequest implements RequestInterface
         return $this;
     }
 
-    public function getPayload()
+    public function getPayload(): array
     {
         $data = [
             'phone' => (string)$this->phone,
@@ -42,13 +49,20 @@ class SendMessageWithVerificationCodeRequest implements RequestInterface
         return $data;
     }
 
-    public function getUri()
+    public function getUri(): string
     {
-        return 'antifraud/verification/{channel}/send';
+        return sprintf('antifraud/verification/%s/send', (string)$this->channel);
     }
 
-    public function getHttpMethod()
+    public function getHttpMethod(): string
     {
         return self::HTTP_METHOD_POST;
+    }
+
+    public function getHeaders(): array
+    {
+        return [
+            'X-Requested-With' => 'XMLHttpRequest',
+        ];
     }
 }

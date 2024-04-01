@@ -2,27 +2,33 @@
 
 namespace Centrobill\Sdk\Http\Request;
 
-use Centrobill\Sdk\ValueObject\Emulate3ds;
+use Centrobill\Sdk\ValueObject\Id;
 
 class NotEmulate3DsForTestPaymentDataRequest implements RequestInterface
 {
     /**
-     * @var Emulate3ds $emulate3ds
+     * @var Id $id
      */
-    private Emulate3ds $emulate3ds;
+    private $id;
+    
+    /**
+     * @var bool $emulate3ds
+     */
+    private $emulate3ds;
 
-    public function __construct(Emulate3ds $emulate3ds = null)
+    public function __construct($emulate3ds = null)
     {
         $this->emulate3ds = $emulate3ds;
     }
 
-    public function setEmulate3ds(Emulate3ds $emulate3ds)
+    public function setEmulate3ds(Id $id, $emulate3ds)
     {
+        $this->id = $id;
         $this->emulate3ds = $emulate3ds;
         return $this;
     }
 
-    public function getPayload()
+    public function getPayload(): array
     {
         $data = [];
 
@@ -33,13 +39,20 @@ class NotEmulate3DsForTestPaymentDataRequest implements RequestInterface
         return $data;
     }
 
-    public function getUri()
+    public function getUri(): string
     {
-        return 'testPaymentData/{id}/notEmulate3ds';
+        return sprintf('testPaymentData/%s/notEmulate3ds', (string)$this->id);
     }
 
-    public function getHttpMethod()
+    public function getHttpMethod(): string
     {
         return self::HTTP_METHOD_POST;
+    }
+
+    public function getHeaders(): array
+    {
+        return [
+            'X-Requested-With' => 'XMLHttpRequest',
+        ];
     }
 }

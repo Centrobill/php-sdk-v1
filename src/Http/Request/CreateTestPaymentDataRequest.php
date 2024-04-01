@@ -3,20 +3,21 @@
 namespace Centrobill\Sdk\Http\Request;
 
 use Centrobill\Sdk\ValueObject\Balance;
-use Centrobill\Sdk\ValueObject\Emulate3ds;
+use Centrobill\Sdk\ValueObject\Ip;
+use Centrobill\Sdk\ValueObject\PaymentSourceType;
 use Centrobill\Sdk\ValueObject\Type;
 
 class CreateTestPaymentDataRequest implements RequestInterface
 {
     /**
-     * @var Type $type
+     * @var PaymentSourceType $type
      */
-    private Type $type;
+    private PaymentSourceType $type;
 
     /**
-     * @var Emulate3ds $emulate3ds
+     * @var bool $emulate3ds
      */
-    private Emulate3ds $emulate3ds;
+    private $emulate3ds;
 
     /**
      * @var Balance $balance
@@ -24,11 +25,11 @@ class CreateTestPaymentDataRequest implements RequestInterface
     private Balance $balance;
 
     /**
-     * @var array $allowedIps
+     * @var Array<Ip> $allowedIps
      */
     private $allowedIps;
 
-    public function __construct(Type $type, $allowedIps = [], Emulate3ds $emulate3ds = null, Balance $balance = null)
+    public function __construct(PaymentSourceType $type, $allowedIps = [], $emulate3ds = false, Balance $balance = null)
     {
         $this->type = $type;
         $this->allowedIps = $allowedIps;
@@ -42,7 +43,7 @@ class CreateTestPaymentDataRequest implements RequestInterface
         return $this;
     }
 
-    public function setEmulate3ds(Emulate3ds $emulate3ds)
+    public function setEmulate3ds(bool $emulate3ds)
     {
         $this->emulate3ds = $emulate3ds;
         return $this;
@@ -54,18 +55,20 @@ class CreateTestPaymentDataRequest implements RequestInterface
         return $this;
     }
 
-    public function getPayload()
+    public function getPayload(): array
     {
         $data = [
             'type' => (string)$this->type,
         ];
 
-        if ($this->allowedIps !== null) {
-            $data['allowedIps'] = $this->allowedIps;
+        if (!empty($this->allowedIps)) {
+            $data['allowedIps'] = array_map(function (Ip $ip) {
+                return (string)$ip;
+            }, $this->allowedIps);
         }
 
         if ($this->emulate3ds !== null) {
-            $data['emulate3ds'] = (string)$this->emulate3ds;
+            $data['emulate3ds'] = $this->emulate3ds;
         }
 
         if ($this->balance !== null) {
@@ -75,13 +78,20 @@ class CreateTestPaymentDataRequest implements RequestInterface
         return $data;
     }
 
-    public function getUri()
+    public function getUri(): string
     {
         return 'testPaymentData';
     }
 
-    public function getHttpMethod()
+    public function getHttpMethod(): string
     {
         return self::HTTP_METHOD_POST;
+    }
+
+    public function getHeaders(): array
+    {
+        return [
+            'X-Requested-With' => 'XMLHttpRequest',
+        ];
     }
 }

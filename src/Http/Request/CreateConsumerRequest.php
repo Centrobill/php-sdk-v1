@@ -10,6 +10,7 @@ use Centrobill\Sdk\ValueObject\FirstName;
 use Centrobill\Sdk\ValueObject\GroupId;
 use Centrobill\Sdk\ValueObject\LastName;
 use Centrobill\Sdk\ValueObject\Username;
+use DateTimeImmutable;
 
 class CreateConsumerRequest implements RequestInterface
 {
@@ -39,9 +40,9 @@ class CreateConsumerRequest implements RequestInterface
     private LastName $lastName;
 
     /**
-     * @var Birthday $birthday
+     * @var DateTimeImmutable $birthday
      */
-    private Birthday $birthday;
+    private DateTimeImmutable $birthday;
 
     /**
      * @var Country $country
@@ -59,7 +60,7 @@ class CreateConsumerRequest implements RequestInterface
         Email $email = null,
         FirstName $firstName = null,
         LastName $lastName = null,
-        Birthday $birthday = null,
+        DateTimeImmutable $birthday = null,
         Country $country = null,
         GroupId $groupId = null,
     ) {
@@ -97,7 +98,7 @@ class CreateConsumerRequest implements RequestInterface
         return $this;
     }
 
-    public function setBirthday(Birthday $birthday)
+    public function setBirthday(DateTimeImmutable $birthday)
     {
         $this->birthday = $birthday;
         return $this;
@@ -115,7 +116,7 @@ class CreateConsumerRequest implements RequestInterface
         return $this;
     }
 
-    public function getPayload()
+    public function getPayload(): array
     {
         $data = [
             'externalId' => (string)$this->externalId,
@@ -138,7 +139,7 @@ class CreateConsumerRequest implements RequestInterface
         }
 
         if ($this->birthday !== null) {
-            $data['birthday'] = (string)$this->birthday;
+            $data['birthday'] = $this->birthday->format('Y-m-d');
         }
 
         if ($this->country !== null) {
@@ -152,13 +153,20 @@ class CreateConsumerRequest implements RequestInterface
         return $data;
     }
 
-    public function getUri()
+    public function getUri(): string
     {
         return 'consumer';
     }
 
-    public function getHttpMethod()
+    public function getHttpMethod(): string
     {
         return self::HTTP_METHOD_POST;
+    }
+
+    public function getHeaders(): array
+    {
+        return [
+            'X-Requested-With' => 'XMLHttpRequest',
+        ];
     }
 }

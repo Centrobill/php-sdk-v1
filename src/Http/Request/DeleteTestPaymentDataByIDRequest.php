@@ -2,15 +2,49 @@
 
 namespace Centrobill\Sdk\Http\Request;
 
+use Centrobill\Sdk\ValueObject\Id;
+
 class DeleteTestPaymentDataByIDRequest implements RequestInterface
 {
-    public function getUri()
+    /**
+     * @var Id $id
+     */
+    private Id $id;
+
+    public function __construct(Id $id)
     {
-        return 'testPaymentData/{id}';
+        $this->id = $id;
     }
 
-    public function getHttpMethod()
+    public function getUri(): string
+    {
+        return sprintf('testPaymentData/%s', (string)$this->id);
+    }
+
+    public function getHttpMethod(): string
     {
         return self::HTTP_METHOD_DELETE;
+    }
+
+    /**
+     * Get headers
+     *
+     * @return array
+     */
+    public function getHeaders(): array
+    {
+        return [
+            'X-Requested-With' => 'XMLHttpRequest',
+        ];
+    }
+
+    /**
+     * Get request data
+     *
+     * @return array
+     */
+    public function getPayload(): array
+    {
+        return [];
     }
 }

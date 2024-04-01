@@ -2,6 +2,7 @@
 
 namespace Centrobill\Sdk\Http\Request;
 
+use Centrobill\Sdk\ValueObject\Id;
 use Centrobill\Sdk\ValueObject\KeepActiveUntilNextRebill;
 use Centrobill\Sdk\ValueObject\Reason;
 use Centrobill\Sdk\ValueObject\SendEmail;
@@ -9,6 +10,8 @@ use DateTimeImmutable;
 
 class CancelSubscriptionRequest implements RequestInterface
 {
+    private Id $id;
+
     /**
      * @var DateTimeImmutable $cancelDate
      */
@@ -30,11 +33,13 @@ class CancelSubscriptionRequest implements RequestInterface
     private KeepActiveUntilNextRebill $keepActiveUntilNextRebill;
 
     public function __construct(
+        Id $id,
         DateTimeImmutable $cancelDate = null,
         Reason $reason = null,
         SendEmail $sendEmail = null,
         KeepActiveUntilNextRebill $keepActiveUntilNextRebill = null,
     ) {
+        $this->id = $id;
         $this->cancelDate = $cancelDate;
         $this->reason = $reason;
         $this->sendEmail = $sendEmail;
@@ -65,7 +70,7 @@ class CancelSubscriptionRequest implements RequestInterface
         return $this;
     }
 
-    public function getPayload()
+    public function getPayload(): array
     {
         $data = [];
 
@@ -88,13 +93,20 @@ class CancelSubscriptionRequest implements RequestInterface
         return $data;
     }
 
-    public function getUri()
+    public function getUri(): string 
     {
-        return 'subscription/{id}/cancel';
+        return sprintf('subscription/%s/cancel', (string)$this->id);
     }
 
-    public function getHttpMethod()
+    public function getHttpMethod(): string
     {
         return self::HTTP_METHOD_PUT;
+    }
+
+    public function getHeaders(): array
+    {
+        return [
+            'X-Requested-With' => 'XMLHttpRequest',
+        ];
     }
 }

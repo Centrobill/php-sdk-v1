@@ -2,15 +2,37 @@
 
 namespace Centrobill\Sdk\Http\Request;
 
+use Centrobill\Sdk\ValueObject\Id;
+
 class ListPaymentaccountIDsByConsumerIdRequest implements RequestInterface
 {
-    public function getUri()
+    /**
+     * @var id $id
+     */
+    private Id $id;
+
+    public function __construct(Id $id)
     {
-        return 'consumer/{id}/paymentAccounts';
+        $this->id = $id;
     }
 
-    public function getHttpMethod()
+    public function getUri(): string
+    {
+        return sprintf('consumer/%s/paymentAccounts', (string)$this->id);
+    }
+
+    public function getHttpMethod(): string
     {
         return self::HTTP_METHOD_GET;
+    }
+
+    public function getHeaders(): array
+    {
+        return [];
+    }
+
+    public function getPayload(): array
+    {
+        return [];
     }
 }

@@ -11,6 +11,7 @@ final class Id
     use ValueToStringTrait;
 
     public const MIN_LENGTH = 5;
+    
     public const MAX_LENGTH = 36;
 
     /**

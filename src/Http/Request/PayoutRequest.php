@@ -6,10 +6,11 @@ use Centrobill\Sdk\Entity\PayoutUrl;
 use Centrobill\Sdk\ValueObject\Amount;
 use Centrobill\Sdk\ValueObject\ConsumerId;
 use Centrobill\Sdk\ValueObject\Currency;
+use Centrobill\Sdk\ValueObject\Field;
 use Centrobill\Sdk\ValueObject\Metadata;
 use Centrobill\Sdk\ValueObject\Parameters;
 use Centrobill\Sdk\ValueObject\PaymentAccountId;
-use Centrobill\Sdk\ValueObject\SiteId;
+use Centrobill\Sdk\ValueObject\Sku\SiteId;
 
 class PayoutRequest implements RequestInterface
 {
@@ -49,9 +50,9 @@ class PayoutRequest implements RequestInterface
     private PayoutUrl $url;
 
     /**
-     * @var Metadata $metadata
+     * @var Array<Field> $metadata
      */
-    private Metadata $metadata;
+    private $metadata;
 
     public function __construct(
         Amount $amount,
@@ -61,7 +62,7 @@ class PayoutRequest implements RequestInterface
         SiteId $siteId = null,
         Parameters $parameters = null,
         PayoutUrl $url = null,
-        Metadata $metadata = null,
+        $metadata = [],
     ) {
         $this->amount = $amount;
         $this->currency = $currency;
@@ -103,13 +104,19 @@ class PayoutRequest implements RequestInterface
         return $this;
     }
 
-    public function setMetadata(Metadata $metadata)
+    public function addMetadataField(Field $field): self
+    {
+        $this->metadata[] = $field;
+        return $this;
+    }
+
+    public function setMetadata($metadata): self
     {
         $this->metadata = $metadata;
         return $this;
     }
 
-    public function getPayload()
+    public function getPayload(): array
     {
         $data = [
             'amount' => $this->amount->getValue(),
@@ -136,20 +143,30 @@ class PayoutRequest implements RequestInterface
             $data['url'] = $this->url->toArray();
         }
 
-        if ($this->metadata !== null) {
-            $data['metadata'] = (string)$this->metadata;
+        if (!empty($this->metadata)) {
+            foreach($this->metadata as $field) {
+                $data['metadata'][$field->getKey()] = $field->getValue();
+                
+            }
         }
 
         return $data;
     }
 
-    public function getUri()
+    public function getUri(): string
     {
         return 'payout';
     }
 
-    public function getHttpMethod()
+    public function getHttpMethod(): string
     {
         return self::HTTP_METHOD_POST;
+    }
+
+    public function getHeaders(): array
+    {
+        return [
+            'X-Requested-With' => 'XMLHttpRequest',
+        ];
     }
 }

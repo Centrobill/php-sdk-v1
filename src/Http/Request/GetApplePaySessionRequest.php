@@ -2,21 +2,21 @@
 
 namespace Centrobill\Sdk\Http\Request;
 
-use Centrobill\Sdk\ValueObject\Domain;
+use Centrobill\Sdk\ValueObject\DomainName;
 
 class GetApplePaySessionRequest implements RequestInterface
 {
     /**
-     * @var Domain $domain
+     * @var DomainName $domain
      */
-    private Domain $domain;
+    private DomainName $domain;
 
-    public function __construct(Domain $domain)
+    public function __construct(DomainName $domain)
     {
         $this->domain = $domain;
     }
 
-    public function getPayload()
+    public function getPayload(): array
     {
         $data = [
             'domain' => (string)$this->domain,
@@ -25,13 +25,20 @@ class GetApplePaySessionRequest implements RequestInterface
         return $data;
     }
 
-    public function getUri()
+    public function getUri(): string
     {
         return 'payment/applePaySession';
     }
 
-    public function getHttpMethod()
+    public function getHttpMethod(): string
     {
         return self::HTTP_METHOD_POST;
+    }
+
+    public function getHeaders(): array
+    {
+        return [
+            'X-Requested-With' => 'XMLHttpRequest',
+        ];
     }
 }

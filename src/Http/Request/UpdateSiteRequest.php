@@ -3,12 +3,17 @@
 namespace Centrobill\Sdk\Http\Request;
 
 use Centrobill\Sdk\ValueObject\ExternalId;
-use Centrobill\Sdk\ValueObject\IpnUrl;
+use Centrobill\Sdk\ValueObject\Id;
 use Centrobill\Sdk\ValueObject\Name;
-use Centrobill\Sdk\ValueObject\RedirectUrl;
+use Centrobill\Sdk\ValueObject\Url;
 
 class UpdateSiteRequest implements RequestInterface
 {
+    /**
+     * @var Id $id
+     */
+    private Id $id;
+
     /**
      * @var Name $name
      */
@@ -20,21 +25,23 @@ class UpdateSiteRequest implements RequestInterface
     private ExternalId $externalId;
 
     /**
-     * @var IpnUrl $ipnUrl
+     * @var Url $ipnUrl
      */
-    private IpnUrl $ipnUrl;
+    private Url $ipnUrl;
 
     /**
-     * @var RedirectUrl $redirectUrl
+     * @var Url $redirectUrl
      */
-    private RedirectUrl $redirectUrl;
+    private Url $redirectUrl;
 
     public function __construct(
+        Id $id,
         Name $name = null,
         ExternalId $externalId = null,
-        IpnUrl $ipnUrl = null,
-        RedirectUrl $redirectUrl = null,
+        Url $ipnUrl = null,
+        Url $redirectUrl = null,
     ) {
+        $this->id = $id;
         $this->name = $name;
         $this->externalId = $externalId;
         $this->ipnUrl = $ipnUrl;
@@ -53,19 +60,19 @@ class UpdateSiteRequest implements RequestInterface
         return $this;
     }
 
-    public function setIpnUrl(IpnUrl $ipnUrl)
+    public function setIpnUrl(Url $ipnUrl)
     {
         $this->ipnUrl = $ipnUrl;
         return $this;
     }
 
-    public function setRedirectUrl(RedirectUrl $redirectUrl)
+    public function setRedirectUrl(Url $redirectUrl)
     {
         $this->redirectUrl = $redirectUrl;
         return $this;
     }
 
-    public function getPayload()
+    public function getPayload(): array
     {
         $data = [];
 
@@ -88,13 +95,20 @@ class UpdateSiteRequest implements RequestInterface
         return $data;
     }
 
-    public function getUri()
+    public function getUri(): string
     {
-        return 'site/{id}';
+        return sprintf('site/%s', (string)$this->id);
     }
 
-    public function getHttpMethod()
+    public function getHttpMethod(): string
     {
         return self::HTTP_METHOD_PUT;
+    }
+
+    public function getHeaders(): array
+    {
+        return [
+            'X-Requested-With' => 'XMLHttpRequest',
+        ];
     }
 }
