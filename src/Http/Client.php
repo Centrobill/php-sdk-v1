@@ -75,7 +75,6 @@ use Centrobill\Sdk\Http\Response\UpdateAllowedIPsResponse;
 use Centrobill\Sdk\Http\Response\UpdateBalanceOfTheTestPaymentDataResponse;
 use Centrobill\Sdk\Http\Response\UpdateProductResponse;
 use Centrobill\Sdk\Http\Response\UpdateSiteResponse;
-use Centrobill\Sdk\ValueObject\ApiKey;
 use GuzzleHttp\ClientInterface as HttpClientInterface;
 use GuzzleHttp\Exception\ClientException as GuzzleClientException;
 use GuzzleHttp\RequestOptions;
@@ -88,18 +87,14 @@ class Client implements ClientInterface
 
     private HttpClientInterface $client;
 
-    private ApiKey $apiKey;
-
     private array $historyContainer;
 
     public function __construct(
         HttpClientInterface $client,
         array $historyContainer
-//        ApiKey $apiKey
      ) {
         $this->client = $client;
         $this->historyContainer = $historyContainer;
-//        $this->apiKey = $apiKey;
     }
 
     /**

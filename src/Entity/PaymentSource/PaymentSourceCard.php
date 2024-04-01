@@ -9,15 +9,9 @@ use Centrobill\Sdk\ValueObject\ExpirationYear;
 use Centrobill\Sdk\ValueObject\Mid;
 use Centrobill\Sdk\ValueObject\Number;
 use Centrobill\Sdk\ValueObject\PaymentSourceType;
-use Centrobill\Sdk\ValueObject\threeDS;
 
 class PaymentSourceCard extends AbstractPaymentSource
 {
-    /**
-     * @var PaymentSourceType $type
-     */
-    private PaymentSourceType $type;
-
     /**
      * @var Number $number
      */
@@ -44,26 +38,24 @@ class PaymentSourceCard extends AbstractPaymentSource
     private $threeDS;
 
     /**
-     * @var EmulateCode $emulateCode
+     * @var ?EmulateCode $emulateCode
      */
-    private EmulateCode $emulateCode;
+    private ?EmulateCode $emulateCode;
 
     /**
-     * @var Mid $mid
+     * @var ?Mid $mid
      */
-    private Mid $mid;
+    private ?Mid $mid;
 
     public function __construct(
-        PaymentSourceType $type,
         Number $number,
         ExpirationYear $expirationYear,
         ExpirationMonth $expirationMonth,
         Cvv $cvv,
         $threeDS = false,
-        EmulateCode $emulateCode = null,
-        Mid $mid = null,
+        ?EmulateCode $emulateCode = null,
+        ?Mid $mid = null
     ) {
-        $this->type = $type;
         $this->number = $number;
         $this->expirationYear = $expirationYear;
         $this->expirationMonth = $expirationMonth;
@@ -94,7 +86,7 @@ class PaymentSourceCard extends AbstractPaymentSource
     public function toArray()
     {
         $data = [
-            'type' => (string)$this->type,
+            'type' => PaymentSourceType::PAYMENT_SOURCE_CARD,
             'number' => (string)$this->number,
             'expirationYear' => (string)$this->expirationYear,
             'expirationMonth' => (string)$this->expirationMonth,

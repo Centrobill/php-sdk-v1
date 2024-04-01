@@ -23,9 +23,9 @@ class CreateProductRequest implements RequestInterface
     private Title $title;
 
     /**
-     * @var ExternalId $externalId
+     * @var ?ExternalId $externalId
      */
-    private ExternalId $externalId;
+    private ?ExternalId $externalId;
 
     /**
      * @var SkuType $type
@@ -33,9 +33,9 @@ class CreateProductRequest implements RequestInterface
     private SkuType $type;
 
     /**
-     * @var Amount $amount
+     * @var ?Amount $amount
      */
-    private Amount $amount;
+    private ?Amount $amount;
 
     /**
      * @var Array<Price> $price
@@ -43,18 +43,18 @@ class CreateProductRequest implements RequestInterface
     private $price;
 
     /**
-     * @var Currency $currency
+     * @var ?Currency $currency
      */
-    private Currency $currency;
+    private ?Currency $currency;
 
     public function __construct(
         $price = [],
         SiteId $siteId,
         Title $title,
         SkuType $type,
-        ExternalId $externalId = null,
-        Amount $amount = null,
-        Currency $currency = null,
+        ?ExternalId $externalId = null,
+        ?Amount $amount = null,
+        ?Currency $currency = null,
     ) {
         $this->price = $price;
         $this->siteId = $siteId;

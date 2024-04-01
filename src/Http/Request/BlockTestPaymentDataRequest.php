@@ -8,9 +8,7 @@ class BlockTestPaymentDataRequest implements RequestInterface
 {
     private Id $id;
 
-    public function __construct(
-        Id $id
-    ) {
+    public function __construct(Id $id) {
         $this->id = $id;
     }
 

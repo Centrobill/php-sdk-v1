@@ -59,10 +59,11 @@ class UpdateProductRequest implements RequestInterface
         Title $title,
         SkuType $type,
         $price = [],
-        ExternalId $externalId = null,
-        Amount $amount = null,
-        Currency $currency = null,
+        ?ExternalId $externalId = null,
+        ?Amount $amount = null,
+        ?Currency $currency = null,
     ) {
+        $this->name = $name;
         $this->siteId = $siteId;
         $this->title = $title;
         $this->type = $type;

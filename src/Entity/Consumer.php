@@ -27,138 +27,138 @@ use DateTimeImmutable;
 class Consumer
 {
     /**
-     * @var Id $id
+     * @var ?Id $id
      */
-    private Id $id;
+    private ?Id $id;
 
     /**
-     * @var ExternalId $externalId
+     * @var ?ExternalId $externalId
      */
-    private ExternalId $externalId;
+    private ?ExternalId $externalId;
 
     /**
-     * @var Email $email
+     * @var ?Email $email
      */
-    private Email $email;
+    private ?Email $email;
 
     /**
-     * @var FirstName $firstName
+     * @var ?FirstName $firstName
      */
-    private FirstName $firstName;
+    private ?FirstName $firstName;
 
     /**
-     * @var LastName $lastName
+     * @var ?LastName $lastName
      */
-    private LastName $lastName;
+    private ?LastName $lastName;
 
     /**
-     * @var DateTimeImmutable $birthday
+     * @var ?DateTimeImmutable $birthday
      */
-    private DateTimeImmutable $birthday;
+    private ?DateTimeImmutable $birthday;
 
     /**
-     * @var Phone $phone
+     * @var ?Phone $phone
      */
-    private Phone $phone;
+    private ?Phone $phone;
 
     /**
-     * @var Country $country
+     * @var ?Country $country
      */
-    private Country $country;
+    private ?Country $country;
 
     /**
-     * @var State $state
+     * @var ?State $state
      */
-    private State $state;
+    private ?State $state;
 
     /**
-     * @var City $city
+     * @var ?City $city
      */
-    private City $city;
+    private ?City $city;
 
     /**
-     * @var Address $address
+     * @var ?Address $address
      */
-    private Address $address;
+    private ?Address $address;
 
     /**
-     * @var Zip $zip
+     * @var ?Zip $zip
      */
-    private Zip $zip;
+    private ?Zip $zip;
 
     /**
-     * @var Ip $ip
+     * @var ?Ip $ip
      */
-    private Ip $ip;
+    private ?Ip $ip;
 
     /**
-     * @var UserAgent $userAgent
+     * @var ?UserAgent $userAgent
      */
-    private UserAgent $userAgent;
+    private ?UserAgent $userAgent;
 
     /**
-     * @var DeviceId $deviceId
+     * @var ?DeviceId $deviceId
      */
-    private DeviceId $deviceId;
+    private ?DeviceId $deviceId;
 
     /**
-     * @var BrowserAcceptHeader $browserAcceptHeader
+     * @var ?BrowserAcceptHeader $browserAcceptHeader
      */
-    private BrowserAcceptHeader $browserAcceptHeader;
+    private ?BrowserAcceptHeader $browserAcceptHeader;
 
     /**
-     * @var bool $browserJavaEnabled
+     * @var ?bool $browserJavaEnabled
      */
     private $browserJavaEnabled;
 
     /**
-     * @var BrowserLanguage $browserLanguage
+     * @var ?BrowserLanguage $browserLanguage
      */
-    private BrowserLanguage $browserLanguage;
+    private ?BrowserLanguage $browserLanguage;
 
     /**
-     * @var BrowserColorDepth $browserColorDepth
+     * @var ?BrowserColorDepth $browserColorDepth
      */
-    private BrowserColorDepth $browserColorDepth;
+    private ?BrowserColorDepth $browserColorDepth;
 
     /**
-     * @var BrowserScreenHeight $browserScreenHeight
+     * @var ?BrowserScreenHeight $browserScreenHeight
      */
-    private BrowserScreenHeight $browserScreenHeight;
+    private ?BrowserScreenHeight $browserScreenHeight;
 
     /**
-     * @var BrowserScreenWidth $browserScreenWidth
+     * @var ?BrowserScreenWidth $browserScreenWidth
      */
-    private BrowserScreenWidth $browserScreenWidth;
+    private ?BrowserScreenWidth $browserScreenWidth;
 
     /**
-     * @var BrowserTimezone $browserTimezone
+     * @var ?BrowserTimezone $browserTimezone
      */
-    private BrowserTimezone $browserTimezone;
+    private ?BrowserTimezone $browserTimezone;
 
     public function __construct(
-        Id $id = null,
-        ExternalId $externalId = null,
-        Email $email = null,
-        FirstName $firstName = null,
-        LastName $lastName = null,
-        DateTimeImmutable $birthday = null,
-        Phone $phone = null,
-        Country $country = null,
-        State $state = null,
-        City $city = null,
-        Address $address = null,
-        Zip $zip = null,
-        Ip $ip = null,
-        UserAgent $userAgent = null,
-        DeviceId $deviceId = null,
-        BrowserAcceptHeader $browserAcceptHeader = null,
+        ?Id $id = null,
+        ?ExternalId $externalId = null,
+        ?Email $email = null,
+        ?FirstName $firstName = null,
+        ?LastName $lastName = null,
+        ?DateTimeImmutable $birthday = null,
+        ?Phone $phone = null,
+        ?Country $country = null,
+        ?State $state = null,
+        ?City $city = null,
+        ?Address $address = null,
+        ?Zip $zip = null,
+        ?Ip $ip = null,
+        ?UserAgent $userAgent = null,
+        ?DeviceId $deviceId = null,
+        ?BrowserAcceptHeader $browserAcceptHeader = null,
         $browserJavaEnabled = false,
-        BrowserLanguage $browserLanguage = null,
-        BrowserColorDepth $browserColorDepth = null,
-        BrowserScreenHeight $browserScreenHeight = null,
-        BrowserScreenWidth $browserScreenWidth = null,
-        BrowserTimezone $browserTimezone = null,
+        ?BrowserLanguage $browserLanguage = null,
+        ?BrowserColorDepth $browserColorDepth = null,
+        ?BrowserScreenHeight $browserScreenHeight = null,
+        ?BrowserScreenWidth $browserScreenWidth = null,
+        ?BrowserTimezone $browserTimezone = null
     ) {
         $this->id = $id;
         $this->externalId = $externalId;

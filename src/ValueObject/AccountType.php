@@ -10,11 +10,12 @@ final class AccountType extends Enum
     const ACCOUNT_TYPE_С = 'С';
     const ACCOUNT_TYPE_S = 'S';
 
-    static function isValid($value)
+    public static function isValid($value)
     {
         if (empty($value)) {
             throw AccountTypeException::emptyValue();
         }
+
         if (!in_array($value, AccountType::toArray())) {
             throw AccountTypeException::invalidValue($value);
         }

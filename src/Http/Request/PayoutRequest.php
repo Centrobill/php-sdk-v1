@@ -2,37 +2,42 @@
 
 namespace Centrobill\Sdk\Http\Request;
 
+use Centrobill\Sdk\Entity\Parameters;
 use Centrobill\Sdk\Entity\PayoutUrl;
 use Centrobill\Sdk\ValueObject\Amount;
+use Centrobill\Sdk\ValueObject\ApiKey;
 use Centrobill\Sdk\ValueObject\ConsumerId;
 use Centrobill\Sdk\ValueObject\Currency;
 use Centrobill\Sdk\ValueObject\Field;
-use Centrobill\Sdk\ValueObject\Metadata;
-use Centrobill\Sdk\ValueObject\Parameters;
 use Centrobill\Sdk\ValueObject\PaymentAccountId;
 use Centrobill\Sdk\ValueObject\Sku\SiteId;
 
 class PayoutRequest implements RequestInterface
 {
     /**
-     * @var ConsumerId $consumerId
+     * @var ApiKey $apiKey
      */
-    private ConsumerId $consumerId;
+    private ApiKey $apiKey;
+    
+    /**
+     * @var ?ConsumerId $consumerId
+     */
+    private ?ConsumerId $consumerId;
 
     /**
-     * @var PaymentAccountId $paymentAccountId
+     * @var ?PaymentAccountId $paymentAccountId
      */
-    private PaymentAccountId $paymentAccountId;
+    private ?PaymentAccountId $paymentAccountId;
 
     /**
-     * @var SiteId $siteId
+     * @var ?SiteId $siteId
      */
-    private SiteId $siteId;
+    private ?SiteId $siteId;
 
     /**
-     * @var Parameters $parameters
+     * @var ?Parameters $parameters
      */
-    private Parameters $parameters;
+    private ?Parameters $parameters;
 
     /**
      * @var Amount $amount
@@ -45,9 +50,9 @@ class PayoutRequest implements RequestInterface
     private Currency $currency;
 
     /**
-     * @var PayoutUrl $url
+     * @var ?PayoutUrl $url
      */
-    private PayoutUrl $url;
+    private ?PayoutUrl $url;
 
     /**
      * @var Array<Field> $metadata
@@ -55,15 +60,17 @@ class PayoutRequest implements RequestInterface
     private $metadata;
 
     public function __construct(
+        ApiKey $apiKey,
         Amount $amount,
         Currency $currency,
-        ConsumerId $consumerId = null,
-        PaymentAccountId $paymentAccountId = null,
-        SiteId $siteId = null,
-        Parameters $parameters = null,
-        PayoutUrl $url = null,
+        ?ConsumerId $consumerId = null,
+        ?PaymentAccountId $paymentAccountId = null,
+        ?SiteId $siteId = null,
+        ?Parameters $parameters = null,
+        ?PayoutUrl $url = null,
         $metadata = [],
     ) {
+        $this->apiKey = $apiKey;
         $this->amount = $amount;
         $this->currency = $currency;
         $this->consumerId = $consumerId;
@@ -136,7 +143,7 @@ class PayoutRequest implements RequestInterface
         }
 
         if ($this->parameters !== null) {
-            $data['parameters'] = (string)$this->parameters;
+            $data['parameters'] = $this->parameters->toArray();
         }
 
         if ($this->url !== null) {
@@ -167,6 +174,7 @@ class PayoutRequest implements RequestInterface
     {
         return [
             'X-Requested-With' => 'XMLHttpRequest',
+            'Authorization' => (string)$this->apiKey,
         ];
     }
 }

@@ -9,23 +9,17 @@ use Centrobill\Sdk\ValueObject\PaymentSourceType;
 class PaymentSourcePaymentAccountId extends AbstractPaymentSource
 {
     /**
-     * @var PaymentSourceType $type
-     */
-    private PaymentSourceType $type;
-
-    /**
      * @var PaymentAccountId $paymentAccountId
      */
     private PaymentAccountId $paymentAccountId;
 
     /**
-     * @var EmulateCode $emulateCode
+     * @var ?EmulateCode $emulateCode
      */
-    private EmulateCode $emulateCode;
+    private ?EmulateCode $emulateCode;
 
-    public function __construct(PaymentSourceType $type, PaymentAccountId $paymentAccountId, EmulateCode $emulateCode = null)
+    public function __construct(PaymentAccountId $paymentAccountId, ?EmulateCode $emulateCode = null)
     {
-        $this->type = $type;
         $this->paymentAccountId = $paymentAccountId;
         $this->emulateCode = $emulateCode;
     }
@@ -39,7 +33,7 @@ class PaymentSourcePaymentAccountId extends AbstractPaymentSource
     public function toArray()
     {
         $data = [
-            'type' => (string)$this->type,
+            'type' => PaymentSourceType::PAYMENT_SOURCE_PAYMENTACCOUNTID,
             'paymentAccountId' => (string)$this->paymentAccountId,
         ];
 

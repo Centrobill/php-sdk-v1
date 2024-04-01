@@ -11,13 +11,13 @@ final class Title
     use ValueToStringTrait;
 
     public const MIN_LENGTH = 3;
+
     public const MAX_LENGTH = 128;
 
     /**
      * @throws SDKExceptionInterface
      */
     function checkValue($value)
-
     {
         if (empty($value)) {
             throw TitleException::emptyValue();

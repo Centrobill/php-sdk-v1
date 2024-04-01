@@ -10,11 +10,6 @@ use Centrobill\Sdk\ValueObject\PaymentSourceType;
 class PaymentSourcePaymentAccountIdWithCvv extends AbstractPaymentSource
 {
     /**
-     * @var PaymentSourceType $type
-     */
-    private PaymentSourceType $type;
-
-    /**
      * @var PaymentAccountId $paymentAccountId
      */
     private PaymentAccountId $paymentAccountId;
@@ -25,17 +20,15 @@ class PaymentSourcePaymentAccountIdWithCvv extends AbstractPaymentSource
     private Cvv $cvv;
 
     /**
-     * @var EmulateCode $emulateCode
+     * @var ?EmulateCode $emulateCode
      */
-    private EmulateCode $emulateCode;
+    private ?EmulateCode $emulateCode;
 
     public function __construct(
-        PaymentSourceType $type,
         PaymentAccountId $paymentAccountId,
         Cvv $cvv,
-        EmulateCode $emulateCode = null,
+        ?EmulateCode $emulateCode = null,
     ) {
-        $this->type = $type;
         $this->paymentAccountId = $paymentAccountId;
         $this->cvv = $cvv;
         $this->emulateCode = $emulateCode;
@@ -50,7 +43,7 @@ class PaymentSourcePaymentAccountIdWithCvv extends AbstractPaymentSource
     public function toArray()
     {
         $data = [
-            'type' => (string)$this->type,
+            'type' => PaymentSourceType::PAYMENT_SOURCE_PAYMENT_ACCOUNT_ID_WITH_CVV,
             'paymentAccountId' => (string)$this->paymentAccountId,
             'cvv' => (string)$this->cvv,
         ];

@@ -18,7 +18,7 @@ class GetAvailableChannelsOfCodeVerificationRequest implements RequestInterface
 
     public function getUri(): string
     {
-        return 'antifraud/verification/{phone}';
+        return sprintf('antifraud/verification/%s', (string)$this->phone);
     }
 
     public function getHttpMethod(): string

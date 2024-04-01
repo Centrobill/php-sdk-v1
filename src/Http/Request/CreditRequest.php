@@ -14,16 +14,16 @@ class CreditRequest implements RequestInterface
     private Id $id;
     
     /**
-     * @var Amount $amount
+     * @var ?Amount $amount
      */
-    private Amount $amount;
+    private ?Amount $amount;
 
     /**
      * @var Reason $reason
      */
     private Reason $reason;
 
-    public function __construct(Id $id, Reason $reason, Amount $amount = null)
+    public function __construct(Id $id, Reason $reason, ?Amount $amount = null)
     {
         $this->id = $id;
         $this->reason = $reason;

@@ -2,7 +2,6 @@
 
 namespace Centrobill\Sdk\Http\Request;
 
-use Centrobill\Sdk\ValueObject\Birthday;
 use Centrobill\Sdk\ValueObject\Country;
 use Centrobill\Sdk\ValueObject\Email;
 use Centrobill\Sdk\ValueObject\ExternalId;
@@ -20,49 +19,49 @@ class CreateConsumerRequest implements RequestInterface
     private ExternalId $externalId;
 
     /**
-     * @var Username $username
+     * @var ?Username $username
      */
-    private Username $username;
+    private ?Username $username;
 
     /**
-     * @var Email $email
+     * @var ?Email $email
      */
-    private Email $email;
+    private ?Email $email;
 
     /**
-     * @var FirstName $firstName
+     * @var ?FirstName $firstName
      */
-    private FirstName $firstName;
+    private ?FirstName $firstName;
 
     /**
-     * @var LastName $lastName
+     * @var ?LastName $lastName
      */
-    private LastName $lastName;
+    private ?LastName $lastName;
 
     /**
-     * @var DateTimeImmutable $birthday
+     * @var ?DateTimeImmutable $birthday
      */
-    private DateTimeImmutable $birthday;
+    private ?DateTimeImmutable $birthday;
 
     /**
-     * @var Country $country
+     * @var ?Country $country
      */
-    private Country $country;
+    private ?Country $country;
 
     /**
-     * @var GroupId $groupId
+     * @var ?GroupId $groupId
      */
-    private GroupId $groupId;
+    private ?GroupId $groupId;
 
     public function __construct(
         ExternalId $externalId,
-        Username $username = null,
-        Email $email = null,
-        FirstName $firstName = null,
-        LastName $lastName = null,
-        DateTimeImmutable $birthday = null,
-        Country $country = null,
-        GroupId $groupId = null,
+        ?Username $username = null,
+        ?Email $email = null,
+        ?FirstName $firstName = null,
+        ?LastName $lastName = null,
+        ?DateTimeImmutable $birthday = null,
+        ?Country $country = null,
+        ?GroupId $groupId = null
     ) {
         $this->externalId = $externalId;
         $this->username = $username;

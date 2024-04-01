@@ -25,12 +25,10 @@ class PaymentSourceAch extends AbstractPaymentSource
     private AccountNumber $accountNumber;
 
     public function __construct(
-        PaymentSourceType $type,
         AccountType $accountType,
         AbaNumber $abaNumber,
-        AccountNumber $accountNumber,
+        AccountNumber $accountNumber
     ) {
-        $this->type = $type;
         $this->accountType = $accountType;
         $this->abaNumber = $abaNumber;
         $this->accountNumber = $accountNumber;
@@ -39,7 +37,7 @@ class PaymentSourceAch extends AbstractPaymentSource
     public function toArray()
     {
         $data = [
-            'type' => (string)$this->type,
+            'type' => PaymentSourceType::PAYMENT_SOURCE_ACH,
             'accountPaymentSourceType' => (string)$this->accountType,
             'abaNumber' => (string)$this->abaNumber,
             'accountNumber' => (string)$this->accountNumber,

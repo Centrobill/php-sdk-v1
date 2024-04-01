@@ -11,10 +11,6 @@ trait ValueToStringTrait
 
     public function __construct(string $value)
     {
-        if (is_string($value)) {
-            $value = trim(filter_var($value, FILTER_UNSAFE_RAW));
-        }
-
         $this->checkValue($value);
 
         $this->value = $value;

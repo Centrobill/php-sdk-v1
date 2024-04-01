@@ -14,7 +14,6 @@ final class SendEmail
      * @throws SDKExceptionInterface
      */
     function checkValue($value)
-
     {
         if (empty($value)) {
             throw SendEmailException::emptyValue();

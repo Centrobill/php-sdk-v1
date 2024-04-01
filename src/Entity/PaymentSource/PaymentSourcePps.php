@@ -9,23 +9,17 @@ use Centrobill\Sdk\ValueObject\PaymentSourceType;
 class PaymentSourcePps extends AbstractPaymentSource
 {
     /**
-     * @var PaymentSourceType $type
+     * @var ?EmulateCode $emulateCode
      */
-    private PaymentSourceType $type;
+    private ?EmulateCode $emulateCode;
 
     /**
-     * @var EmulateCode $emulateCode
+     * @var ?Mid $mid
      */
-    private EmulateCode $emulateCode;
+    private ?Mid $mid;
 
-    /**
-     * @var Mid $mid
-     */
-    private Mid $mid;
-
-    public function __construct(PaymentSourceType $type, EmulateCode $emulateCode = null, Mid $mid = null)
+    public function __construct(?EmulateCode $emulateCode = null, ?Mid $mid = null)
     {
-        $this->type = $type;
         $this->emulateCode = $emulateCode;
         $this->mid = $mid;
     }
@@ -45,7 +39,7 @@ class PaymentSourcePps extends AbstractPaymentSource
     public function toArray()
     {
         $data = [
-            'type' => (string)$this->type,
+            'type' => PaymentSourceType::PAYMENT_SOURCE_PPS,
         ];
 
         if ($this->emulateCode !== null) {

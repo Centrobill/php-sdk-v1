@@ -14,9 +14,9 @@ class CreateSiteRequest implements RequestInterface
     private Name $name;
 
     /**
-     * @var ExternalId $externalId
+     * @var ?ExternalId $externalId
      */
-    private ExternalId $externalId;
+    private ?ExternalId $externalId;
 
     /**
      * @var Url $ipnUrl
@@ -24,15 +24,15 @@ class CreateSiteRequest implements RequestInterface
     private Url $ipnUrl;
 
     /**
-     * @var Url $redirectUrl
+     * @var ?Url $redirectUrl
      */
-    private Url $redirectUrl;
+    private ?Url $redirectUrl;
 
     public function __construct(
         Name $name,
         Url $ipnUrl,
-        ExternalId $externalId = null,
-        Url $redirectUrl = null,
+        ?ExternalId $externalId = null,
+        ?Url $redirectUrl = null,
     ) {
         $this->name = $name;
         $this->ipnUrl = $ipnUrl;

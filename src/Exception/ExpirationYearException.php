@@ -14,7 +14,7 @@ class ExpirationYearException extends Exception implements SDKExceptionInterface
 
     public static function invalidLength(): self
     {
-        return new self('Expiration year should be between 2 and 2 characters long.');
+        return new self('Expiration year should be 2 characters long.');
     }
 
     public static function invalidValue(): self

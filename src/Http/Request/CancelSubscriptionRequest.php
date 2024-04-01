@@ -13,31 +13,31 @@ class CancelSubscriptionRequest implements RequestInterface
     private Id $id;
 
     /**
-     * @var DateTimeImmutable $cancelDate
+     * @var ?DateTimeImmutable $cancelDate
      */
-    private DateTimeImmutable $cancelDate;
+    private ?DateTimeImmutable $cancelDate;
 
     /**
-     * @var Reason $reason
+     * @var ?Reason $reason
      */
-    private Reason $reason;
+    private ?Reason $reason;
 
     /**
-     * @var SendEmail $sendEmail
+     * @var ?SendEmail $sendEmail
      */
-    private SendEmail $sendEmail;
+    private ?SendEmail $sendEmail;
 
     /**
-     * @var KeepActiveUntilNextRebill $keepActiveUntilNextRebill
+     * @var ?KeepActiveUntilNextRebill $keepActiveUntilNextRebill
      */
-    private KeepActiveUntilNextRebill $keepActiveUntilNextRebill;
+    private ?KeepActiveUntilNextRebill $keepActiveUntilNextRebill;
 
     public function __construct(
         Id $id,
-        DateTimeImmutable $cancelDate = null,
-        Reason $reason = null,
-        SendEmail $sendEmail = null,
-        KeepActiveUntilNextRebill $keepActiveUntilNextRebill = null,
+        ?DateTimeImmutable $cancelDate = null,
+        ?Reason $reason = null,
+        ?SendEmail $sendEmail = null,
+        ?KeepActiveUntilNextRebill $keepActiveUntilNextRebill = null
     ) {
         $this->id = $id;
         $this->cancelDate = $cancelDate;

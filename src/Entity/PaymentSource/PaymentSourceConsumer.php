@@ -9,23 +9,17 @@ use Centrobill\Sdk\ValueObject\Value;
 class PaymentSourceConsumer extends AbstractPaymentSource
 {
     /**
-     * @var PaymentSourceType $type
-     */
-    private PaymentSourceType $type;
-
-    /**
      * @var Value $value
      */
     private Value $value;
 
     /**
-     * @var EmulateCode $emulateCode
+     * @var ?EmulateCode $emulateCode
      */
-    private EmulateCode $emulateCode;
+    private ?EmulateCode $emulateCode;
 
-    public function __construct(PaymentSourceType $type, Value $value, EmulateCode $emulateCode = null)
+    public function __construct(Value $value, ?EmulateCode $emulateCode = null)
     {
-        $this->type = $type;
         $this->value = $value;
         $this->emulateCode = $emulateCode;
     }
@@ -39,7 +33,7 @@ class PaymentSourceConsumer extends AbstractPaymentSource
     public function toArray()
     {
         $data = [
-            'type' => (string)$this->type,
+            'type' => PaymentSourceType::PAYMENT_SOURCE_CONSUMER,
             'value' => (string)$this->value,
         ];
 

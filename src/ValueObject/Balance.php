@@ -21,6 +21,7 @@ final class Balance
         if (empty($value)) {
             throw BalanceException::emptyValue();
         }
+        
         if (strlen($value) < self::MIN_LENGTH || strlen($value) > self::MAX_LENGTH) {
             throw BalanceException::invalidLength();
         }

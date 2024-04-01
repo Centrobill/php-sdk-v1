@@ -5,7 +5,6 @@ namespace Centrobill\Sdk\Http\Request;
 use Centrobill\Sdk\ValueObject\Balance;
 use Centrobill\Sdk\ValueObject\Ip;
 use Centrobill\Sdk\ValueObject\PaymentSourceType;
-use Centrobill\Sdk\ValueObject\Type;
 
 class CreateTestPaymentDataRequest implements RequestInterface
 {
@@ -20,16 +19,16 @@ class CreateTestPaymentDataRequest implements RequestInterface
     private $emulate3ds;
 
     /**
-     * @var Balance $balance
+     * @var ?Balance $balance
      */
-    private Balance $balance;
+    private ?Balance $balance;
 
     /**
      * @var Array<Ip> $allowedIps
      */
     private $allowedIps;
 
-    public function __construct(PaymentSourceType $type, $allowedIps = [], $emulate3ds = false, Balance $balance = null)
+    public function __construct(PaymentSourceType $type, $allowedIps = [], $emulate3ds = false, ?Balance $balance = null)
     {
         $this->type = $type;
         $this->allowedIps = $allowedIps;

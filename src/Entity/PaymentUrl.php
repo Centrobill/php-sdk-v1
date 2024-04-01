@@ -2,34 +2,33 @@
 
 namespace Centrobill\Sdk\Entity;
 
-use Centrobill\Sdk\ValueObject\IpnUrl;
-use Centrobill\Sdk\ValueObject\RedirectUrl;
+use Centrobill\Sdk\ValueObject\Url;
 
 class PaymentUrl
 {
     /**
-     * @var IpnUrl $ipnUrl
+     * @var ?Url $ipnUrl
      */
-    private IpnUrl $ipnUrl;
+    private ?Url $ipnUrl;
 
     /**
-     * @var RedirectUrl $redirectUrl
+     * @var ?Url $redirectUrl
      */
-    private RedirectUrl $redirectUrl;
+    private ?Url $redirectUrl;
 
-    public function __construct(IpnUrl $ipnUrl = null, RedirectUrl $redirectUrl = null)
+    public function __construct(?Url $ipnUrl = null, ?Url $redirectUrl = null)
     {
         $this->ipnUrl = $ipnUrl;
         $this->redirectUrl = $redirectUrl;
     }
 
-    public function setIpnUrl(IpnUrl $ipnUrl)
+    public function setIpnUrl(Url $ipnUrl)
     {
         $this->ipnUrl = $ipnUrl;
         return $this;
     }
 
-    public function setRedirectUrl(RedirectUrl $redirectUrl)
+    public function setRedirectUrl(Url $redirectUrl)
     {
         $this->redirectUrl = $redirectUrl;
         return $this;

@@ -7,11 +7,11 @@ use Centrobill\Sdk\ValueObject\Url;
 class PayoutUrl
 {
     /**
-     * @var Url $ipnUrl
+     * @var ?Url $ipnUrl
      */
-    private Url $ipnUrl;
+    private ?Url $ipnUrl;
 
-    public function __construct(Url $ipnUrl = null)
+    public function __construct(?Url $ipnUrl = null)
     {
         $this->ipnUrl = $ipnUrl;
     }

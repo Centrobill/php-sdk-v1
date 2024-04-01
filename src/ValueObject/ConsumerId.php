@@ -11,13 +11,13 @@ final class ConsumerId
     use ValueToStringTrait;
 
     public const MIN_LENGTH = 5;
+
     public const MAX_LENGTH = 36;
 
     /**
      * @throws SDKExceptionInterface
      */
     function checkValue($value)
-
     {
         if (empty($value)) {
             throw ConsumerIdException::emptyValue();

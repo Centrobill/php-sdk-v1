@@ -15,31 +15,31 @@ class UpdateSiteRequest implements RequestInterface
     private Id $id;
 
     /**
-     * @var Name $name
+     * @var ?Name $name
      */
-    private Name $name;
+    private ?Name $name;
 
     /**
-     * @var ExternalId $externalId
+     * @var ?ExternalId $externalId
      */
-    private ExternalId $externalId;
+    private ?ExternalId $externalId;
 
     /**
-     * @var Url $ipnUrl
+     * @var ?Url $ipnUrl
      */
-    private Url $ipnUrl;
+    private ?Url $ipnUrl;
 
     /**
-     * @var Url $redirectUrl
+     * @var ?Url $redirectUrl
      */
-    private Url $redirectUrl;
+    private ?Url $redirectUrl;
 
     public function __construct(
         Id $id,
-        Name $name = null,
-        ExternalId $externalId = null,
-        Url $ipnUrl = null,
-        Url $redirectUrl = null,
+        ?Name $name = null,
+        ?ExternalId $externalId = null,
+        ?Url $ipnUrl = null,
+        ?Url $redirectUrl = null,
     ) {
         $this->id = $id;
         $this->name = $name;

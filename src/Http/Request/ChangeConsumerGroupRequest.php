@@ -10,11 +10,11 @@ class ChangeConsumerGroupRequest implements RequestInterface
     private Id $id;
 
     /**
-     * @var GroupId $groupId
+     * @var ?GroupId $groupId
      */
-    private GroupId $groupId;
+    private ?GroupId $groupId;
 
-    public function __construct(Id $id, GroupId $groupId = null)
+    public function __construct(Id $id, ?GroupId $groupId = null)
     {
         $this->id = $id;
         $this->groupId = $groupId;

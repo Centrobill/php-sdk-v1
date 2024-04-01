@@ -11,6 +11,7 @@ final class ExpirationMonth
     use ValueToStringTrait;
 
     public const MIN_LENGTH = 2;
+    
     public const MAX_LENGTH = 2;
 
     /**

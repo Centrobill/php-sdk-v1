@@ -2,6 +2,7 @@
 
 namespace Centrobill\Sdk\Http\Request;
 
+use Centrobill\Sdk\Entity\Price;
 use Centrobill\Sdk\ValueObject\Id;
 
 class ChangeSubscriptionRequest implements RequestInterface
@@ -12,7 +13,7 @@ class ChangeSubscriptionRequest implements RequestInterface
     private Id $id;
 
     /**
-     * @var array $price
+     * @var Array<Price> $price
      */
     private $price;
 
@@ -32,8 +33,10 @@ class ChangeSubscriptionRequest implements RequestInterface
     {
         $data = [];
 
-        if ($this->price !== null) {
-            $data['price'] = $this->price;
+        if (!empty($this->price)) {
+            $data['price'] = array_map(function(Price $price) {
+                return $price->toArray();
+            }, $this->price);
         }
 
         return $data;

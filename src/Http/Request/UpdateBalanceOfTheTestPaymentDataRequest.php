@@ -13,11 +13,11 @@ class UpdateBalanceOfTheTestPaymentDataRequest implements RequestInterface
     private Id $id;
 
     /**
-     * @var Balance $balance
+     * @var ?Balance $balance
      */
-    private Balance $balance;
+    private ?Balance $balance;
 
-    public function __construct(Id $id, Balance $balance = null)
+    public function __construct(Id $id, ?Balance $balance = null)
     {
         $this->id = $id;
         $this->balance = $balance;

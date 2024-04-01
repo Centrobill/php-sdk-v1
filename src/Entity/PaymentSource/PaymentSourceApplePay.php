@@ -14,13 +14,12 @@ class PaymentSourceApplePay extends AbstractPaymentSource
     private Token $token;
 
     /**
-     * @var EmulateCode $emulateCode
+     * @var ?EmulateCode $emulateCode
      */
-    private EmulateCode $emulateCode;
+    private ?EmulateCode $emulateCode;
 
-    public function __construct(PaymentSourceType $type, Token $token, EmulateCode $emulateCode = null)
+    public function __construct(Token $token, ?EmulateCode $emulateCode = null)
     {
-        $this->type = $type;
         $this->token = $token;
         $this->emulateCode = $emulateCode;
     }
@@ -34,7 +33,7 @@ class PaymentSourceApplePay extends AbstractPaymentSource
     public function toArray()
     {
         $data = [
-            'type' => (string)$this->type,
+            'type' => PaymentSourceType::PAYMENT_SOURCE_APPLEPAY,
             'token' => (string)$this->token,
         ];
 

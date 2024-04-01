@@ -7,7 +7,6 @@ use Centrobill\Sdk\ValueObject\DomainName;
 use Centrobill\Sdk\ValueObject\EmulateCode;
 use Centrobill\Sdk\ValueObject\Mid;
 use Centrobill\Sdk\ValueObject\PaymentMethod;
-use Centrobill\Sdk\ValueObject\TerminalMode;
 
 class Payment
 {
@@ -17,9 +16,9 @@ class Payment
     private $method;
 
     /**
-     * @var PaymentMethod $selected
+     * @var ?PaymentMethod $selected
      */
-    private PaymentMethod $selected;
+    private ?PaymentMethod $selected;
 
     /**
      * @var bool $secure
@@ -37,9 +36,9 @@ class Payment
     private $emulateCode;
 
     /**
-     * @var Mid $mid
+     * @var ?Mid $mid
      */
-    private Mid $mid;
+    private ?Mid $mid;
 
     /**
      * @var bool $terminalMode
@@ -47,22 +46,22 @@ class Payment
     private $terminalMode;
 
     /**
-     * @var Bin $bin
+     * @var ?Bin $bin
      */
-    private Bin $bin;
+    private ?Bin $bin;
 
     /**
-     * @var DomainName $domain
+     * @var ?DomainName $domain
      */
-    private DomainName $domain;
+    private ?DomainName $domain;
 
     public function __construct(
         $method = [],
-        PaymentMethod $selected = null,
-        EmulateCode $emulateCode = null,
-        Mid $mid = null,
-        Bin $bin = null,
-        DomainName $domain = null,
+        ?PaymentMethod $selected = null,
+        ?EmulateCode $emulateCode = null,
+        ?Mid $mid = null,
+        ?Bin $bin = null,
+        ?DomainName $domain = null,
         $terminalMode = false,
         $secure = false,
         $test = false
@@ -114,7 +113,7 @@ class Payment
         return $this;
     }
 
-    public function setTerminalMode(TerminalMode $terminalMode)
+    public function setTerminalMode($terminalMode)
     {
         $this->terminalMode = $terminalMode;
         return $this;

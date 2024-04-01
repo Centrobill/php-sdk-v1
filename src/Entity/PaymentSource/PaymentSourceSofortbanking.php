@@ -10,28 +10,22 @@ use Centrobill\Sdk\ValueObject\PaymentSourceType;
 class PaymentSourceSofortbanking extends AbstractPaymentSource
 {
     /**
-     * @var PaymentSourceType $type
+     * @var ?Bic $bic
      */
-    private PaymentSourceType $type;
+    private ?Bic $bic;
 
     /**
-     * @var Bic $bic
+     * @var ?EmulateCode $emulateCode
      */
-    private Bic $bic;
+    private ?EmulateCode $emulateCode;
 
     /**
-     * @var EmulateCode $emulateCode
+     * @var ?Mid $mid
      */
-    private EmulateCode $emulateCode;
+    private ?Mid $mid;
 
-    /**
-     * @var Mid $mid
-     */
-    private Mid $mid;
-
-    public function __construct(PaymentSourceType $type, Bic $bic = null, EmulateCode $emulateCode = null, Mid $mid = null)
+    public function __construct(?Bic $bic = null, ?EmulateCode $emulateCode = null, ?Mid $mid = null)
     {
-        $this->type = $type;
         $this->bic = $bic;
         $this->emulateCode = $emulateCode;
         $this->mid = $mid;
@@ -58,7 +52,7 @@ class PaymentSourceSofortbanking extends AbstractPaymentSource
     public function toArray()
     {
         $data = [
-            'type' => (string)$this->type,
+            'type' => PaymentSourceType::PAYMENT_SOURCE_SOFORTBANKING,
         ];
 
         if ($this->bic !== null) {

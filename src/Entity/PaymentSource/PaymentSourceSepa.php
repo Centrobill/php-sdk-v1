@@ -11,38 +11,31 @@ use Centrobill\Sdk\ValueObject\PaymentSourceType;
 class PaymentSourceSepa extends AbstractPaymentSource
 {
     /**
-     * @var PaymentSourceType $type
-     */
-    private PaymentSourceType $type;
-
-    /**
      * @var Iban $iban
      */
     private Iban $iban;
 
     /**
-     * @var Bic $bic
+     * @var ?Bic $bic
      */
-    private Bic $bic;
+    private ?Bic $bic;
 
     /**
-     * @var EmulateCode $emulateCode
+     * @var ?EmulateCode $emulateCode
      */
-    private EmulateCode $emulateCode;
+    private ?EmulateCode $emulateCode;
 
     /**
-     * @var Mid $mid
+     * @var ?Mid $mid
      */
-    private Mid $mid;
+    private ?Mid $mid;
 
     public function __construct(
-        PaymentSourceType $type,
         Iban $iban,
-        Bic $bic = null,
-        EmulateCode $emulateCode = null,
-        Mid $mid = null,
+        ?Bic $bic = null,
+        ?EmulateCode $emulateCode = null,
+        ?Mid $mid = null,
     ) {
-        $this->type = $type;
         $this->iban = $iban;
         $this->bic = $bic;
         $this->emulateCode = $emulateCode;
@@ -70,7 +63,7 @@ class PaymentSourceSepa extends AbstractPaymentSource
     public function toArray()
     {
         $data = [
-            'type' => (string)$this->type,
+            'type' => PaymentSourceType::PAYMENT_SOURCE_SEPA,
             'iban' => (string)$this->iban,
         ];
 

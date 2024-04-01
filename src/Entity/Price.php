@@ -9,19 +9,19 @@ use Centrobill\Sdk\ValueObject\Offset;
 class Price
 {
     /**
-     * @var Offset $offset
+     * @var ?Offset $offset
      */
-    private Offset $offset;
+    private ?Offset $offset;
 
     /**
-     * @var Amount $amount
+     * @var ?Amount $amount
      */
-    private Amount $amount;
+    private ?Amount $amount;
 
     /**
-     * @var Currency $currency
+     * @var ?Currency $currency
      */
-    private Currency $currency;
+    private ?Currency $currency;
 
     /**
      * @var bool $repeat
@@ -29,9 +29,9 @@ class Price
     private $repeat;
 
     public function __construct(
-        Offset $offset = null,
-        Amount $amount = null,
-        Currency $currency = null,
+        ?Offset $offset = null,
+        ?Amount $amount = null,
+        ?Currency $currency = null,
         $repeat = false,
     ) {
         $this->offset = $offset;

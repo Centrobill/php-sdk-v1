@@ -5,15 +5,9 @@ namespace Centrobill\Sdk\Entity\PaymentSource;
 use Centrobill\Sdk\ValueObject\EmulateCode;
 use Centrobill\Sdk\ValueObject\PaymentSourceType;
 use Centrobill\Sdk\ValueObject\Value;
-use Centrobill\Sdk\ValueObject\threeDs;
 
 class PaymentSourceToken extends AbstractPaymentSource
 {
-    /**
-     * @var PaymentSourceType $type
-     */
-    private PaymentSourceType $type;
-
     /**
      * @var Value $value
      */
@@ -25,13 +19,12 @@ class PaymentSourceToken extends AbstractPaymentSource
     private $threeDs;
 
     /**
-     * @var EmulateCode $emulateCode
+     * @var ?EmulateCode $emulateCode
      */
-    private EmulateCode $emulateCode;
+    private ?EmulateCode $emulateCode;
 
-    public function __construct(PaymentSourceType $type, Value $value, $threeDs = false, EmulateCode $emulateCode = null)
+    public function __construct(Value $value, $threeDs = false, ?EmulateCode $emulateCode = null)
     {
-        $this->type = $type;
         $this->value = $value;
         $this->threeDs = $threeDs;
         $this->emulateCode = $emulateCode;
@@ -52,7 +45,7 @@ class PaymentSourceToken extends AbstractPaymentSource
     public function toArray()
     {
         $data = [
-            'type' => (string)$this->type,
+            'type' => PaymentSourceType::PAYMENT_SOURCE_TOKEN,
             'value' => (string)$this->value,
         ];
 

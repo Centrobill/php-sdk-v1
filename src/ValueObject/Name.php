@@ -14,7 +14,6 @@ final class Name
      * @throws SDKExceptionInterface
      */
     function checkValue($value)
-
     {
         if (empty($value)) {
             throw NameException::emptyValue();

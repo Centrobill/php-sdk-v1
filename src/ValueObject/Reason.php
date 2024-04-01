@@ -16,11 +16,11 @@ final class Reason
      * @throws SDKExceptionInterface
      */
     function checkValue($value)
-
     {
         if (empty($value)) {
             throw ReasonException::emptyValue();
         }
+
         if (strlen($value) > self::MAX_LENGTH) {
             throw ReasonException::invalidLength();
         }

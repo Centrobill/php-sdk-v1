@@ -20,11 +20,12 @@ final class Blockchain extends Enum
     const BLOCKCHAIN_USDT_ERC20 = 'usdt_erc20';
     const BLOCKCHAIN_USDT_BEP20 = 'usdt_bep20';
 
-    static function isValid($value)
+    public static function isValid($value)
     {
         if (empty($value)) {
             throw BlockchainException::emptyValue();
         }
+
         if (!in_array($value, Blockchain::toArray())) {
             throw BlockchainException::invalidValue($value);
         }

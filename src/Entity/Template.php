@@ -8,14 +8,14 @@ use Centrobill\Sdk\ValueObject\Layout;
 class Template
 {
     /**
-     * @var Language $language
+     * @var ?Language $language
      */
-    private Language $language;
+    private ?Language $language;
 
     /**
-     * @var Layout $layout
+     * @var ?Layout $layout
      */
-    private Layout $layout;
+    private ?Layout $layout;
 
     /**
      * @var array $templateParameters
@@ -23,8 +23,8 @@ class Template
     private $templateParameters;
 
     public function __construct(
-        Language $language = null,
-        Layout $layout = null,
+        ?Language $language = null,
+        ?Layout $layout = null,
         $templateParameters = [],
     ) {
         $this->language = $language;

@@ -19,11 +19,11 @@ class SendMessageWithVerificationCodeRequest implements RequestInterface
     private Phone $phone;
 
     /**
-     * @var From $from
+     * @var ?From $from
      */
-    private From $from;
+    private ?From $from;
 
-    public function __construct(Channel $channel, Phone $phone, From $from = null)
+    public function __construct(Channel $channel, Phone $phone, ?From $from = null)
     {
         $this->channel = $channel;
         $this->phone = $phone;

@@ -11,6 +11,7 @@ final class State
     use ValueToStringTrait;
 
     public const MIN_LENGTH = 1;
+
     public const MAX_LENGTH = 32;
 
     /**

@@ -10,6 +10,7 @@ final class Username
     use ValueToStringTrait;
 
     public const MIN_LENGTH = 1;
+
     public const MAX_LENGTH = 255;
 
     function checkValue($value)
@@ -17,6 +18,7 @@ final class Username
         if (empty($value)) {
             throw UsernameException::emptyValue();
         }
+
         if (strlen($value) < self::MIN_LENGTH || strlen($value) > self::MAX_LENGTH) {
             throw UsernameException::invalidLength();
         }

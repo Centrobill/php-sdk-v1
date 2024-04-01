@@ -14,6 +14,6 @@ class IdException extends Exception implements SDKExceptionInterface
 
     public static function invalidLength()
     {
-        return new self('Id should be between 5 and 36 characters long.');
+        return new self('Id should be not more than 36 characters long.');
     }
 }

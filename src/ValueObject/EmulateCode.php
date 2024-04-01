@@ -11,6 +11,7 @@ final class EmulateCode
     use ValueToStringTrait;
 
     public const MIN_LENGTH = 4;
+
     public const MAX_LENGTH = 6;
 
     /**

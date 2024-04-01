@@ -3,7 +3,7 @@
 namespace Centrobill\Sdk\ValueObject;
 
 use Centrobill\Sdk\Exception\IbanException;
-use Centrobill\Sdk\ValueObject\Traitss\ValueToStringTrait;
+use Centrobill\Sdk\ValueObject\Traits\ValueToStringTrait;
 
 final class Iban
 {
@@ -17,6 +17,7 @@ final class Iban
         if (empty($value)) {
             throw IbanException::emptyValue();
         }
+        
         if (strlen($value) < self::MIN_LENGTH || strlen($value) > self::MAX_LENGTH) {
             throw IbanException::invalidLength();
         }

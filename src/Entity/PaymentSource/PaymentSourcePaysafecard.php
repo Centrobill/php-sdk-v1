@@ -8,18 +8,12 @@ use Centrobill\Sdk\ValueObject\PaymentSourceType;
 class PaymentSourcePaysafecard extends AbstractPaymentSource
 {
     /**
-     * @var PaymentSourceType $type
+     * @var ?EmulateCode $emulateCode
      */
-    private PaymentSourceType $type;
+    private ?EmulateCode $emulateCode;
 
-    /**
-     * @var EmulateCode $emulateCode
-     */
-    private EmulateCode $emulateCode;
-
-    public function __construct(PaymentSourceType $type, EmulateCode $emulateCode = null)
+    public function __construct(?EmulateCode $emulateCode = null)
     {
-        $this->type = $type;
         $this->emulateCode = $emulateCode;
     }
 
@@ -32,7 +26,7 @@ class PaymentSourcePaysafecard extends AbstractPaymentSource
     public function toArray()
     {
         $data = [
-            'type' => (string)$this->type,
+            'type' => PaymentSourceType::PAYMENT_SOURCE_PAYSAFECARD,
         ];
 
         if ($this->emulateCode !== null) {
