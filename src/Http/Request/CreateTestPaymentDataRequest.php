@@ -2,16 +2,23 @@
 
 namespace Centrobill\Sdk\Http\Request;
 
-use Centrobill\Sdk\ValueObject\Balance;
+use Centrobill\Sdk\ValueObject\Amount;
+use Centrobill\Sdk\ValueObject\ApiKey;
+use Centrobill\Sdk\ValueObject\Currency;
 use Centrobill\Sdk\ValueObject\Ip;
-use Centrobill\Sdk\ValueObject\PaymentSourceType;
+use Centrobill\Sdk\ValueObject\TestPaymentDataType;
 
 class CreateTestPaymentDataRequest implements RequestInterface
 {
     /**
-     * @var PaymentSourceType $type
+     * @var ApiKey $apiKey
      */
-    private PaymentSourceType $type;
+    private ApiKey $apiKey;
+
+    /**
+     * @var TestPaymentDataType $type
+     */
+    private TestPaymentDataType $type;
 
     /**
      * @var bool $emulate3ds
@@ -19,21 +26,34 @@ class CreateTestPaymentDataRequest implements RequestInterface
     private $emulate3ds;
 
     /**
-     * @var ?Balance $balance
+     * @var ?Amount $balance
      */
-    private ?Balance $balance;
+    private ?Amount $balance;
+
+    /**
+     * @var ?Currency $currency
+     */
+    private ?Currency $currency;
 
     /**
      * @var Array<Ip> $allowedIps
      */
     private $allowedIps;
 
-    public function __construct(PaymentSourceType $type, $allowedIps = [], $emulate3ds = false, ?Balance $balance = null)
-    {
+    public function __construct(
+        ApiKey $apiKey,
+        TestPaymentDataType $type,
+        $allowedIps = [],
+        $emulate3ds = false,
+        ?Amount $balance = null,
+        ?Currency $currency = null
+    ) {
+        $this->apiKey = $apiKey;
         $this->type = $type;
         $this->allowedIps = $allowedIps;
         $this->emulate3ds = $emulate3ds;
         $this->balance = $balance;
+        $this->currency = $currency;
     }
 
     public function setAllowedIps($allowedIps)
@@ -48,7 +68,7 @@ class CreateTestPaymentDataRequest implements RequestInterface
         return $this;
     }
 
-    public function setBalance(Balance $balance)
+    public function setBalance(Amount $balance)
     {
         $this->balance = $balance;
         return $this;
@@ -71,7 +91,11 @@ class CreateTestPaymentDataRequest implements RequestInterface
         }
 
         if ($this->balance !== null) {
-            $data['balance'] = (string)$this->balance;
+            $data['balance'] = $this->balance->getValue();
+        }
+
+        if ($this->currency !== null) {
+            $data['currency'] = (string)$this->currency;
         }
 
         return $data;
@@ -91,6 +115,7 @@ class CreateTestPaymentDataRequest implements RequestInterface
     {
         return [
             'X-Requested-With' => 'XMLHttpRequest',
+            'Authorization' => (string)$this->apiKey,
         ];
     }
 }

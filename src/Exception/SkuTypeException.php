@@ -22,5 +22,4 @@ class SkuTypeException extends Exception implements SDKExceptionInterface
             )
         );
     }
-
 }

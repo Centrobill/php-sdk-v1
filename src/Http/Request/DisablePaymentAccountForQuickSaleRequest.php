@@ -2,17 +2,24 @@
 
 namespace Centrobill\Sdk\Http\Request;
 
+use Centrobill\Sdk\ValueObject\ApiKey;
 use Centrobill\Sdk\ValueObject\PaymentAccountId;
 
 class DisablePaymentAccountForQuickSaleRequest implements RequestInterface
 {
     /**
+     * @var ApiKey $apiKey
+     */
+    private ApiKey $apiKey;
+    
+    /**
      * @var PaymentAccountId $paymentAccountId
      */
     private PaymentAccountId $paymentAccountId;
 
-    public function __construct(PaymentAccountId $paymentAccountId)
+    public function __construct(ApiKey $apiKey, PaymentAccountId $paymentAccountId)
     {
+        $this->apiKey = $apiKey;
         $this->paymentAccountId = $paymentAccountId;
     }
 
@@ -30,6 +37,7 @@ class DisablePaymentAccountForQuickSaleRequest implements RequestInterface
     {
         return [
             'X-Requested-With' => 'XMLHttpRequest',
+            'Authorization' => (string)$this->apiKey,
         ];
     }
 

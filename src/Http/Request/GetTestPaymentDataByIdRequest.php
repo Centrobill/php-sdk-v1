@@ -5,7 +5,7 @@ namespace Centrobill\Sdk\Http\Request;
 use Centrobill\Sdk\ValueObject\ApiKey;
 use Centrobill\Sdk\ValueObject\Id;
 
-class GetChargebackIdRepaidLinkRequest implements RequestInterface
+class GetTestPaymentDataByIdRequest implements RequestInterface
 {
     /**
      * @var ApiKey $apiKey
@@ -17,15 +17,22 @@ class GetChargebackIdRepaidLinkRequest implements RequestInterface
      */
     private Id $id;
 
-    public function __construct(ApiKey $apiKey, Id $id)
-    {
+    public function __construct(
+        ApiKey $apiKey,
+        Id $id
+    ) {
         $this->apiKey = $apiKey;
         $this->id = $id;
     }
 
+    public function getPayload(): array
+    {
+        return [];
+    }
+
     public function getUri(): string
     {
-        return sprintf('chargeback/%s/repaidLink', (string)$this->id);
+        return sprintf('testPaymentData/%s', (string)$this->id);
     }
 
     public function getHttpMethod(): string
@@ -39,10 +46,5 @@ class GetChargebackIdRepaidLinkRequest implements RequestInterface
             'X-Requested-With' => 'XMLHttpRequest',
             'Authorization' => (string)$this->apiKey,
         ];
-    }
-
-    public function getPayload(): array
-    {
-        return [];
     }
 }

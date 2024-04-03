@@ -2,30 +2,37 @@
 
 namespace Centrobill\Sdk\Http\Request;
 
-use Centrobill\Sdk\ValueObject\Balance;
+use Centrobill\Sdk\ValueObject\Amount;
+use Centrobill\Sdk\ValueObject\ApiKey;
 use Centrobill\Sdk\ValueObject\Id;
 
 class UpdateBalanceOfTheTestPaymentDataRequest implements RequestInterface
 {
+    /**
+     * @var ApiKey $apiKey
+     */
+    private ApiKey $apiKey;
+
     /**
      * @var Id $id
      */
     private Id $id;
 
     /**
-     * @var ?Balance $balance
+     * @var Amount $amount
      */
-    private ?Balance $balance;
+    private Amount $amount;
 
-    public function __construct(Id $id, ?Balance $balance = null)
+    public function __construct(ApiKey $apiKey, Id $id, Amount $amount)
     {
+        $this->apiKey = $apiKey;
         $this->id = $id;
-        $this->balance = $balance;
+        $this->amount = $amount;
     }
 
-    public function setBalance(Balance $balance)
+    public function setAmount(Amount $amount)
     {
-        $this->balance = $balance;
+        $this->amount = $amount;
         return $this;
     }
 
@@ -33,8 +40,8 @@ class UpdateBalanceOfTheTestPaymentDataRequest implements RequestInterface
     {
         $data = [];
 
-        if ($this->balance !== null) {
-            $data['balance'] = (string)$this->balance;
+        if ($this->amount !== null) {
+            $data['amount'] = $this->amount->getValue();
         }
 
         return $data;
@@ -54,6 +61,7 @@ class UpdateBalanceOfTheTestPaymentDataRequest implements RequestInterface
     {
         return [
             'X-Requested-With' => 'XMLHttpRequest',
+            'Authorization' => (string)$this->apiKey,
         ];
     }
 }

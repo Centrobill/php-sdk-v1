@@ -27,9 +27,11 @@ use Centrobill\Sdk\Http\Request\GetConsumerRequest;
 use Centrobill\Sdk\Http\Request\GetCurrencyExchangeRatesRequest;
 use Centrobill\Sdk\Http\Request\GetExchangeRateByIso3Request;
 use Centrobill\Sdk\Http\Request\GetListOfExternalIpsRequest;
+use Centrobill\Sdk\Http\Request\GetListOfTestPaymentDataRequest;
 use Centrobill\Sdk\Http\Request\GetProductRequest;
 use Centrobill\Sdk\Http\Request\GetSiteRequest;
 use Centrobill\Sdk\Http\Request\GetSubscriptionRequest;
+use Centrobill\Sdk\Http\Request\GetTestPaymentDataByIdRequest;
 use Centrobill\Sdk\Http\Request\ListPaymentaccountIDsByConsumerIdRequest;
 use Centrobill\Sdk\Http\Request\NotEmulate3DsForTestPaymentDataRequest;
 use Centrobill\Sdk\Http\Request\PayoutRequest;
@@ -289,6 +291,17 @@ class Client implements ClientInterface
     }
 
     /**
+     * @param GetTestPaymentDataByIdRequest $request
+     * @return GetTestPaymentDataByIdResponse|ErrorResponse
+     */
+    public function getTestPaymentDataById(
+        GetTestPaymentDataByIdRequest $request
+    ): ResponseInterface
+    {
+        return $this->request($request);
+    }
+
+    /**
      * @param DeleteTestPaymentDataByIDRequest $request
      * @return DeleteTestPaymentDataByIDResponse|ErrorResponse
      */
@@ -315,6 +328,16 @@ class Client implements ClientInterface
      * @return CreateTestPaymentDataResponse|ErrorResponse
      */
     public function createTestPaymentData(CreateTestPaymentDataRequest $request): ResponseInterface
+    {
+        return $this->request($request);
+    }
+
+    // getlistoftestpaymentdata
+    /**
+     * @param GetListOfTestPaymentDataRequest $request
+     * @return GetListOfTestPaymentDataResponse|ErrorResponse
+     */
+    public function getListOfTestPaymentData(GetListOfTestPaymentDataRequest $request): ResponseInterface
     {
         return $this->request($request);
     }
