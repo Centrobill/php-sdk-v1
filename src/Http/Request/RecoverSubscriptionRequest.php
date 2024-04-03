@@ -2,17 +2,24 @@
 
 namespace Centrobill\Sdk\Http\Request;
 
+use Centrobill\Sdk\ValueObject\ApiKey;
 use Centrobill\Sdk\ValueObject\Id;
 
 class RecoverSubscriptionRequest implements RequestInterface
 {
     /**
+     * @var ApiKey $apiKey
+     */
+    private ApiKey $apiKey;
+
+    /**
      * @var Id $id
      */
     private Id $id;
 
-    public function __construct(Id $id)
+    public function __construct(ApiKey $apiKey, Id $id)
     {
+        $this->apiKey = $apiKey;
         $this->id = $id;
     }
 
@@ -30,6 +37,7 @@ class RecoverSubscriptionRequest implements RequestInterface
     {
         return [
             'X-Requested-With' => 'XMLHttpRequest',
+            'Authorization' => (string)$this->apiKey,
         ];
     }
 

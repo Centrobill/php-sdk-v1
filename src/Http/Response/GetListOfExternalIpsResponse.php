@@ -2,9 +2,6 @@
 
 namespace Centrobill\Sdk\Http\Response;
 
-use Centrobill\Sdk\Utils\Utils;
-use stdClass;
-
 class GetListOfExternalIpsResponse implements ResponseInterface
 {
     private array $data;

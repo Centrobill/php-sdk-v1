@@ -23,11 +23,13 @@ use Centrobill\Sdk\Http\Request\GenerateUrlToPaymentPageRequest;
 use Centrobill\Sdk\Http\Request\GetApplePaySessionRequest;
 use Centrobill\Sdk\Http\Request\GetAvailableChannelsOfCodeVerificationRequest;
 use Centrobill\Sdk\Http\Request\GetChargebackIdRepaidLinkRequest;
+use Centrobill\Sdk\Http\Request\GetConsumerRequest;
 use Centrobill\Sdk\Http\Request\GetCurrencyExchangeRatesRequest;
 use Centrobill\Sdk\Http\Request\GetExchangeRateByIso3Request;
 use Centrobill\Sdk\Http\Request\GetListOfExternalIpsRequest;
 use Centrobill\Sdk\Http\Request\GetProductRequest;
 use Centrobill\Sdk\Http\Request\GetSiteRequest;
+use Centrobill\Sdk\Http\Request\GetSubscriptionRequest;
 use Centrobill\Sdk\Http\Request\ListPaymentaccountIDsByConsumerIdRequest;
 use Centrobill\Sdk\Http\Request\NotEmulate3DsForTestPaymentDataRequest;
 use Centrobill\Sdk\Http\Request\PayoutRequest;
@@ -61,10 +63,12 @@ use Centrobill\Sdk\Http\Response\GenerateUrlToPaymentPageResponse;
 use Centrobill\Sdk\Http\Response\GetApplePaySessionResponse;
 use Centrobill\Sdk\Http\Response\GetAvailableChannelsOfCodeVerificationResponse;
 use Centrobill\Sdk\Http\Response\GetChargebackIdRepaidLinkResponse;
+use Centrobill\Sdk\Http\Response\GetConsumerResponse;
 use Centrobill\Sdk\Http\Response\GetCurrencyExchangeRatesResponse;
 use Centrobill\Sdk\Http\Response\GetExchangeRateByIso3Response;
 use Centrobill\Sdk\Http\Response\GetListOfExternalIpsResponse;
 use Centrobill\Sdk\Http\Response\GetProductResponse;
+use Centrobill\Sdk\Http\Response\GetSubscriptionResponse;
 use Centrobill\Sdk\Http\Response\ListPaymentaccountIDsByConsumerIdResponse;
 use Centrobill\Sdk\Http\Response\NotEmulate3DsForTestPaymentDataResponse;
 use Centrobill\Sdk\Http\Response\PayoutResponse;
@@ -157,7 +161,16 @@ class Client implements ClientInterface
     {
         return $this->request($request);
     }
-
+    
+    /**
+     * @param GetSubscriptionRequest $request
+     * @return GetSubscriptionResponse|ErrorResponse
+     */
+    public function getSubscription(GetSubscriptionRequest $request): ResponseInterface
+    {
+        return $this->request($request);
+    }
+    
     /**
      * @param ChangeSubscriptionRequest $request
      * @return ChangeSubscriptionResponse|ErrorResponse
@@ -244,6 +257,15 @@ class Client implements ClientInterface
      * @return CreateConsumerResponse|ErrorResponse
      */
     public function createConsumer(CreateConsumerRequest $request): ResponseInterface
+    {
+        return $this->request($request);
+    }
+
+    /**
+     * @param GetConsumerRequest $request
+     * @return GetConsumerResponse|ErrorResponse
+     */
+    public function getConsumer(GetConsumerRequest $request): ResponseInterface
     {
         return $this->request($request);
     }

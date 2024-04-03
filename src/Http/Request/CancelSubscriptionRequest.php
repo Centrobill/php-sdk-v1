@@ -2,14 +2,21 @@
 
 namespace Centrobill\Sdk\Http\Request;
 
+use Centrobill\Sdk\ValueObject\ApiKey;
 use Centrobill\Sdk\ValueObject\Id;
-use Centrobill\Sdk\ValueObject\KeepActiveUntilNextRebill;
 use Centrobill\Sdk\ValueObject\Reason;
-use Centrobill\Sdk\ValueObject\SendEmail;
 use DateTimeImmutable;
 
 class CancelSubscriptionRequest implements RequestInterface
 {
+    /**
+     * @var ApiKey $apiKey
+     */
+    private ApiKey $apiKey;
+
+    /**
+     * @var Id $id
+     */
     private Id $id;
 
     /**
@@ -23,22 +30,24 @@ class CancelSubscriptionRequest implements RequestInterface
     private ?Reason $reason;
 
     /**
-     * @var ?SendEmail $sendEmail
+     * @var bool $sendEmail
      */
-    private ?SendEmail $sendEmail;
+    private $sendEmail;
 
     /**
-     * @var ?KeepActiveUntilNextRebill $keepActiveUntilNextRebill
+     * @var bool $keepActiveUntilNextRebill
      */
-    private ?KeepActiveUntilNextRebill $keepActiveUntilNextRebill;
+    private $keepActiveUntilNextRebill;
 
     public function __construct(
+        ApiKey $apiKey,
         Id $id,
         ?DateTimeImmutable $cancelDate = null,
         ?Reason $reason = null,
-        ?SendEmail $sendEmail = null,
-        ?KeepActiveUntilNextRebill $keepActiveUntilNextRebill = null
+        $sendEmail = false,
+        $keepActiveUntilNextRebill = false
     ) {
+        $this->apiKey = $apiKey;
         $this->id = $id;
         $this->cancelDate = $cancelDate;
         $this->reason = $reason;
@@ -58,13 +67,13 @@ class CancelSubscriptionRequest implements RequestInterface
         return $this;
     }
 
-    public function setSendEmail(SendEmail $sendEmail)
+    public function setSendEmail($sendEmail)
     {
         $this->sendEmail = $sendEmail;
         return $this;
     }
 
-    public function setKeepActiveUntilNextRebill(KeepActiveUntilNextRebill $keepActiveUntilNextRebill)
+    public function setKeepActiveUntilNextRebill($keepActiveUntilNextRebill)
     {
         $this->keepActiveUntilNextRebill = $keepActiveUntilNextRebill;
         return $this;
@@ -72,7 +81,10 @@ class CancelSubscriptionRequest implements RequestInterface
 
     public function getPayload(): array
     {
-        $data = [];
+        $data = [
+            'sendEmail' => $this->sendEmail,
+            'keepActiveUntilNextRebill' => $this->keepActiveUntilNextRebill,
+        ];
 
         if ($this->cancelDate !== null) {
             $data['cancelDate'] = $this->cancelDate->format('Y-m-d H:i:s');
@@ -80,14 +92,6 @@ class CancelSubscriptionRequest implements RequestInterface
 
         if ($this->reason !== null) {
             $data['reason'] = (string)$this->reason;
-        }
-
-        if ($this->sendEmail !== null) {
-            $data['sendEmail'] = (string)$this->sendEmail;
-        }
-
-        if ($this->keepActiveUntilNextRebill !== null) {
-            $data['keepActiveUntilNextRebill'] = (string)$this->keepActiveUntilNextRebill;
         }
 
         return $data;
@@ -107,6 +111,7 @@ class CancelSubscriptionRequest implements RequestInterface
     {
         return [
             'X-Requested-With' => 'XMLHttpRequest',
+            'Authorization' => (string)$this->apiKey,
         ];
     }
 }

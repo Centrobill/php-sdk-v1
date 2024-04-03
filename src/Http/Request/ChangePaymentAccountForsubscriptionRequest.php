@@ -3,28 +3,35 @@
 namespace Centrobill\Sdk\Http\Request;
 
 use Centrobill\Sdk\Entity\Consumer;
+use Centrobill\Sdk\Entity\PaymentSource\AbstractPaymentSource;
+use Centrobill\Sdk\ValueObject\ApiKey;
 use Centrobill\Sdk\ValueObject\Id;
-use Centrobill\Sdk\ValueObject\PaymentSourceType;
 
 class ChangePaymentAccountForsubscriptionRequest implements RequestInterface
 {
+    /**
+     * @var ApiKey $apiKey
+     */
+    private ApiKey $apiKey;
+    
     /**
      * @var Id $id
      */
     private Id $id;
     
     /**
-     * @var PaymentSourceType $paymentSource
+     * @var AbstractPaymentSource $paymentSource
      */
-    private PaymentSourceType $paymentSource;
+    private AbstractPaymentSource $paymentSource;
 
     /**
      * @var Consumer $consumer
      */
     private Consumer $consumer;
 
-    public function __construct(Id $id, PaymentSourceType $paymentSource, Consumer $consumer)
+    public function __construct(ApiKey $apiKey, Id $id, AbstractPaymentSource $paymentSource, Consumer $consumer)
     {
+        $this->apiKey = $apiKey;
         $this->id = $id;
         $this->paymentSource = $paymentSource;
         $this->consumer = $consumer;
@@ -33,7 +40,7 @@ class ChangePaymentAccountForsubscriptionRequest implements RequestInterface
     public function getPayload(): array
     {
         $data = [
-            'paymentSource' => (string)$this->paymentSource,
+            'paymentSource' => $this->paymentSource->toArray(),
             'consumer' => $this->consumer->toArray(),
         ];
 
@@ -54,6 +61,7 @@ class ChangePaymentAccountForsubscriptionRequest implements RequestInterface
     {
         return [
             'X-Requested-With' => 'XMLHttpRequest',
+            'Authorization' => (string)$this->apiKey,
         ];
     }
 }

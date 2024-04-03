@@ -2,6 +2,7 @@
 
 namespace Centrobill\Sdk\Http\Request;
 
+use Centrobill\Sdk\ValueObject\ApiKey;
 use Centrobill\Sdk\ValueObject\Country;
 use Centrobill\Sdk\ValueObject\Email;
 use Centrobill\Sdk\ValueObject\ExternalId;
@@ -13,6 +14,11 @@ use DateTimeImmutable;
 
 class CreateConsumerRequest implements RequestInterface
 {
+    /**
+     * @var ApiKey $apiKey
+     */
+    private ApiKey $apiKey;
+
     /**
      * @var ExternalId $externalId
      */
@@ -54,6 +60,7 @@ class CreateConsumerRequest implements RequestInterface
     private ?GroupId $groupId;
 
     public function __construct(
+        ApiKey $apiKey,
         ExternalId $externalId,
         ?Username $username = null,
         ?Email $email = null,
@@ -63,6 +70,7 @@ class CreateConsumerRequest implements RequestInterface
         ?Country $country = null,
         ?GroupId $groupId = null
     ) {
+        $this->apiKey = $apiKey;
         $this->externalId = $externalId;
         $this->username = $username;
         $this->email = $email;
@@ -166,6 +174,7 @@ class CreateConsumerRequest implements RequestInterface
     {
         return [
             'X-Requested-With' => 'XMLHttpRequest',
+            'Authorization' => (string)$this->apiKey,
         ];
     }
 }
