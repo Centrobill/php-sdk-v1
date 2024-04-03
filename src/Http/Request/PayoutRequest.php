@@ -68,7 +68,7 @@ class PayoutRequest implements RequestInterface
         ?SiteId $siteId = null,
         ?Parameters $parameters = null,
         ?PayoutUrl $url = null,
-        $metadata = [],
+        $metadata = []
     ) {
         $this->apiKey = $apiKey;
         $this->amount = $amount;

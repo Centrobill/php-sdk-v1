@@ -61,7 +61,7 @@ class UpdateProductRequest implements RequestInterface
         $price = [],
         ?ExternalId $externalId = null,
         ?Amount $amount = null,
-        ?Currency $currency = null,
+        ?Currency $currency = null
     ) {
         $this->name = $name;
         $this->siteId = $siteId;

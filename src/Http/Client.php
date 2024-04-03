@@ -26,6 +26,8 @@ use Centrobill\Sdk\Http\Request\GetChargebackIdRepaidLinkRequest;
 use Centrobill\Sdk\Http\Request\GetCurrencyExchangeRatesRequest;
 use Centrobill\Sdk\Http\Request\GetExchangeRateByIso3Request;
 use Centrobill\Sdk\Http\Request\GetListOfExternalIpsRequest;
+use Centrobill\Sdk\Http\Request\GetProductRequest;
+use Centrobill\Sdk\Http\Request\GetSiteRequest;
 use Centrobill\Sdk\Http\Request\ListPaymentaccountIDsByConsumerIdRequest;
 use Centrobill\Sdk\Http\Request\NotEmulate3DsForTestPaymentDataRequest;
 use Centrobill\Sdk\Http\Request\PayoutRequest;
@@ -62,6 +64,7 @@ use Centrobill\Sdk\Http\Response\GetChargebackIdRepaidLinkResponse;
 use Centrobill\Sdk\Http\Response\GetCurrencyExchangeRatesResponse;
 use Centrobill\Sdk\Http\Response\GetExchangeRateByIso3Response;
 use Centrobill\Sdk\Http\Response\GetListOfExternalIpsResponse;
+use Centrobill\Sdk\Http\Response\GetProductResponse;
 use Centrobill\Sdk\Http\Response\ListPaymentaccountIDsByConsumerIdResponse;
 use Centrobill\Sdk\Http\Response\NotEmulate3DsForTestPaymentDataResponse;
 use Centrobill\Sdk\Http\Response\PayoutResponse;
@@ -192,6 +195,15 @@ class Client implements ClientInterface
     }
 
     /**
+     * @param GetSiteRequest $request
+     * @return GetSiteResponse|ErrorResponse
+     */
+    public function getSite(GetSiteRequest $request): ResponseInterface
+    {
+        return $this->request($request);
+    }
+
+    /**
      * @param UpdateSiteRequest $request
      * @return UpdateSiteResponse|ErrorResponse
      */
@@ -205,6 +217,15 @@ class Client implements ClientInterface
      * @return CreateProductResponse|ErrorResponse
      */
     public function createProduct(CreateProductRequest $request): ResponseInterface
+    {
+        return $this->request($request);
+    }
+
+    /**
+     * @param GetProductRequest $request
+     * @return GetProductResponse|ErrorResponse
+     */
+    public function getProduct(GetProductRequest $request): ResponseInterface
     {
         return $this->request($request);
     }
@@ -460,8 +481,23 @@ class Client implements ClientInterface
 
     private function getParametersKey(RequestInterface $request): string
     {
-        return ($request->getHttpMethod() === RequestInterface::HTTP_METHOD_POST) 
-            ? RequestOptions::JSON : RequestOptions::QUERY;
+        if (in_array(
+            $request->getHttpMethod(),
+            [
+                RequestInterface::HTTP_METHOD_GET,
+                RequestInterface::HTTP_METHOD_DELETE
+            ]
+        )) {
+            return RequestOptions::QUERY;
+        } elseif (in_array(
+            $request->getHttpMethod(),
+            [
+                RequestInterface::HTTP_METHOD_POST,
+                RequestInterface::HTTP_METHOD_PUT
+            ]
+        )) {
+            return RequestOptions::JSON;
+        }
     }
 
     private function getHeaders(RequestInterface $request): array

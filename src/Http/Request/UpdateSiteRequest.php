@@ -2,22 +2,28 @@
 
 namespace Centrobill\Sdk\Http\Request;
 
+use Centrobill\Sdk\ValueObject\ApiKey;
 use Centrobill\Sdk\ValueObject\ExternalId;
 use Centrobill\Sdk\ValueObject\Id;
-use Centrobill\Sdk\ValueObject\Name;
+use Centrobill\Sdk\ValueObject\SiteName;
 use Centrobill\Sdk\ValueObject\Url;
 
 class UpdateSiteRequest implements RequestInterface
 {
+    /**
+     * @var ApiKey $apiKey
+     */
+    private ApiKey $apiKey;
+
     /**
      * @var Id $id
      */
     private Id $id;
 
     /**
-     * @var ?Name $name
+     * @var ?SiteName $name
      */
-    private ?Name $name;
+    private ?SiteName $name;
 
     /**
      * @var ?ExternalId $externalId
@@ -35,12 +41,14 @@ class UpdateSiteRequest implements RequestInterface
     private ?Url $redirectUrl;
 
     public function __construct(
+        ApiKey $apiKey,
         Id $id,
-        ?Name $name = null,
+        ?SiteName $name = null,
         ?ExternalId $externalId = null,
         ?Url $ipnUrl = null,
-        ?Url $redirectUrl = null,
+        ?Url $redirectUrl = null
     ) {
+        $this->apiKey = $apiKey;
         $this->id = $id;
         $this->name = $name;
         $this->externalId = $externalId;
@@ -48,7 +56,7 @@ class UpdateSiteRequest implements RequestInterface
         $this->redirectUrl = $redirectUrl;
     }
 
-    public function setName(Name $name)
+    public function setName(SiteName $name)
     {
         $this->name = $name;
         return $this;
@@ -75,7 +83,7 @@ class UpdateSiteRequest implements RequestInterface
     public function getPayload(): array
     {
         $data = [];
-
+        
         if ($this->name !== null) {
             $data['name'] = (string)$this->name;
         }
@@ -109,6 +117,7 @@ class UpdateSiteRequest implements RequestInterface
     {
         return [
             'X-Requested-With' => 'XMLHttpRequest',
+            'Authorization' => (string)$this->apiKey,
         ];
     }
 }

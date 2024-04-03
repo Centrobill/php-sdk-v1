@@ -2,7 +2,7 @@
 
 namespace Centrobill\Sdk\Http\Response;
 
-class UpdateSiteResponse extends AbstractResponse implements ResponseInterface
+class GetProductResponse extends AbstractResponse implements ResponseInterface
 {
     public function isSuccessful()
     {

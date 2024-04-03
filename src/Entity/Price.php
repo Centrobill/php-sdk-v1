@@ -32,7 +32,7 @@ class Price
         ?Offset $offset = null,
         ?Amount $amount = null,
         ?Currency $currency = null,
-        $repeat = false,
+        $repeat = false
     ) {
         $this->offset = $offset;
         $this->amount = $amount;

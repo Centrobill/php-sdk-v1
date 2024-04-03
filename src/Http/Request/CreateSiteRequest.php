@@ -2,21 +2,27 @@
 
 namespace Centrobill\Sdk\Http\Request;
 
+use Centrobill\Sdk\ValueObject\ApiKey;
 use Centrobill\Sdk\ValueObject\ExternalId;
-use Centrobill\Sdk\ValueObject\Name;
+use Centrobill\Sdk\ValueObject\SiteName;
 use Centrobill\Sdk\ValueObject\Url;
 
 class CreateSiteRequest implements RequestInterface
 {
     /**
-     * @var Name $name
+     * @var ApiKey $apiKey
      */
-    private Name $name;
+    private ApiKey $apiKey;
 
     /**
-     * @var ?ExternalId $externalId
+     * @var SiteName $name
      */
-    private ?ExternalId $externalId;
+    private SiteName $name;
+
+    /**
+     * @var ExternalId $externalId
+     */
+    private ExternalId $externalId;
 
     /**
      * @var Url $ipnUrl
@@ -24,16 +30,18 @@ class CreateSiteRequest implements RequestInterface
     private Url $ipnUrl;
 
     /**
-     * @var ?Url $redirectUrl
+     * @var Url $redirectUrl
      */
-    private ?Url $redirectUrl;
+    private Url $redirectUrl;
 
     public function __construct(
-        Name $name,
+        ApiKey $apiKey,
+        SiteName $name,
+        ExternalId $externalId,
         Url $ipnUrl,
-        ?ExternalId $externalId = null,
-        ?Url $redirectUrl = null,
+        Url $redirectUrl
     ) {
+        $this->apiKey = $apiKey;
         $this->name = $name;
         $this->ipnUrl = $ipnUrl;
         $this->externalId = $externalId;
@@ -57,15 +65,9 @@ class CreateSiteRequest implements RequestInterface
         $data = [
             'name' => (string)$this->name,
             'ipnUrl' => (string)$this->ipnUrl,
+            'externalId' => (string)$this->externalId,
+            'redirectUrl' => (string)$this->redirectUrl,
         ];
-
-        if ($this->externalId !== null) {
-            $data['externalId'] = (string)$this->externalId;
-        }
-
-        if ($this->redirectUrl !== null) {
-            $data['redirectUrl'] = (string)$this->redirectUrl;
-        }
 
         return $data;
     }
@@ -84,6 +86,7 @@ class CreateSiteRequest implements RequestInterface
     {
         return [
             'X-Requested-With' => 'XMLHttpRequest',
+            'Authorization' => (string)$this->apiKey,
         ];
     }
 }

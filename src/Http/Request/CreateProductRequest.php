@@ -4,6 +4,7 @@ namespace Centrobill\Sdk\Http\Request;
 
 use Centrobill\Sdk\Entity\Price;
 use Centrobill\Sdk\ValueObject\Amount;
+use Centrobill\Sdk\ValueObject\ApiKey;
 use Centrobill\Sdk\ValueObject\Currency;
 use Centrobill\Sdk\ValueObject\ExternalId;
 use Centrobill\Sdk\ValueObject\Sku\SiteId;
@@ -12,6 +13,11 @@ use Centrobill\Sdk\ValueObject\Sku\Title;
 
 class CreateProductRequest implements RequestInterface
 {
+    /**
+     * @var ApiKey $apiKey
+     */
+    private ApiKey $apiKey;
+
     /**
      * @var SiteId $siteId
      */
@@ -48,18 +54,20 @@ class CreateProductRequest implements RequestInterface
     private ?Currency $currency;
 
     public function __construct(
-        $price = [],
+        ApiKey $apiKey,
         SiteId $siteId,
         Title $title,
         SkuType $type,
+        $price = [],
         ?ExternalId $externalId = null,
         ?Amount $amount = null,
-        ?Currency $currency = null,
+        ?Currency $currency = null
     ) {
-        $this->price = $price;
+        $this->apiKey = $apiKey;
         $this->siteId = $siteId;
         $this->title = $title;
         $this->type = $type;
+        $this->price = $price;
         $this->externalId = $externalId;
         $this->amount = $amount;
         $this->currency = $currency;
@@ -93,7 +101,7 @@ class CreateProductRequest implements RequestInterface
 
         if (!empty($this->price)) {
             $data['price'] = array_map(function (Price $price) {
-                return $price->toArray();
+                return (object)$price->toArray();
             }, $this->price);
         }
 
@@ -126,6 +134,7 @@ class CreateProductRequest implements RequestInterface
     {
         return [
             'X-Requested-With' => 'XMLHttpRequest',
+            'Authorization' => (string)$this->apiKey,
         ];
     }
 }
