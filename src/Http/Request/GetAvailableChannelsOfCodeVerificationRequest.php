@@ -2,17 +2,24 @@
 
 namespace Centrobill\Sdk\Http\Request;
 
+use Centrobill\Sdk\ValueObject\ApiKey;
 use Centrobill\Sdk\ValueObject\Phone;
 
 class GetAvailableChannelsOfCodeVerificationRequest implements RequestInterface
 {
     /**
+     * @var ApiKey $apiKey
+     */
+    private ApiKey $apiKey;
+
+    /**
      * @var Phone $phone
      */
     private Phone $phone;
     
-    public function __construct(Phone $phone)
+    public function __construct(ApiKey $apiKey, Phone $phone)
     {
+        $this->apiKey = $apiKey;
         $this->phone = $phone;
     }
 
@@ -28,7 +35,10 @@ class GetAvailableChannelsOfCodeVerificationRequest implements RequestInterface
 
     public function getHeaders(): array
     {
-        return [];
+        return [
+            'X-Requested-With' => 'XMLHttpRequest',
+            'Authorization' => (string)$this->apiKey,
+        ];
     }
 
     public function getPayload(): array

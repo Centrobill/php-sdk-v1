@@ -2,11 +2,17 @@
 
 namespace Centrobill\Sdk\Http\Request;
 
+use Centrobill\Sdk\ValueObject\ApiKey;
 use Centrobill\Sdk\ValueObject\Code;
 use Centrobill\Sdk\ValueObject\Phone;
 
 class CheckVerificationCodeRequest implements RequestInterface
 {
+    /**
+     * @var ApiKey $apiKey
+     */
+    private ApiKey $apiKey;
+
     /**
      * @var Phone $phone
      */
@@ -17,8 +23,9 @@ class CheckVerificationCodeRequest implements RequestInterface
      */
     private Code $code;
 
-    public function __construct(Phone $phone, Code $code)
+    public function __construct(ApiKey $apiKey, Phone $phone, Code $code)
     {
+        $this->apiKey = $apiKey;
         $this->phone = $phone;
         $this->code = $code;
     }
@@ -37,6 +44,7 @@ class CheckVerificationCodeRequest implements RequestInterface
     {
         return [
             'X-Requested-With' => 'XMLHttpRequest',
+            'Authorization' => (string)$this->apiKey,
         ];
     }
 
