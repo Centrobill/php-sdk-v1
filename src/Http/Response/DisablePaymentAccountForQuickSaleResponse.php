@@ -8,4 +8,9 @@ class DisablePaymentAccountForQuickSaleResponse extends AbstractResponse impleme
     {
         return true;
     }
+
+    public function getPaymentAccountId(): string
+    {
+        return $this->data->paymentAccountId;
+    }
 }

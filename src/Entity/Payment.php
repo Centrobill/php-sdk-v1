@@ -3,10 +3,10 @@
 namespace Centrobill\Sdk\Entity;
 
 use Centrobill\Sdk\ValueObject\Bin;
-use Centrobill\Sdk\ValueObject\DomainName;
 use Centrobill\Sdk\ValueObject\EmulateCode;
 use Centrobill\Sdk\ValueObject\Mid;
 use Centrobill\Sdk\ValueObject\PaymentMethod;
+use Centrobill\Sdk\ValueObject\SiteName;
 
 class Payment
 {
@@ -51,9 +51,9 @@ class Payment
     private ?Bin $bin;
 
     /**
-     * @var ?DomainName $domain
+     * @var ?SiteName $domain
      */
-    private ?DomainName $domain;
+    private ?SiteName $domain;
 
     public function __construct(
         $method = [],
@@ -61,7 +61,7 @@ class Payment
         ?EmulateCode $emulateCode = null,
         ?Mid $mid = null,
         ?Bin $bin = null,
-        ?DomainName $domain = null,
+        ?SiteName $domain = null,
         $terminalMode = false,
         $secure = false,
         $test = false
@@ -125,7 +125,7 @@ class Payment
         return $this;
     }
 
-    public function setDomain(DomainName $domain)
+    public function setDomain(SiteName $domain)
     {
         $this->domain = $domain;
         return $this;

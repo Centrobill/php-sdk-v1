@@ -1,0 +1,19 @@
+{
+  "payment": {
+    "code": 0,
+    "description": "APPROVED",
+    "mode": "credit",
+    "status": "success",
+    "transactionId": "12345",
+    "descriptor": "example.com",
+    "source": {
+      "method": "card",
+      "number": "402400****6348",
+      "paymentAccountId": "ae853c41-2d85-4c8a-9a61-3a5daeea311d",
+      "brand": "visa",
+      "expirationMonth": 10,
+      "expirationYear": 24,
+      "disabled": true
+    }
+  }
+}
