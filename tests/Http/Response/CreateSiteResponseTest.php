@@ -16,6 +16,6 @@ class CreateSiteResponseTest extends TestCase
 
         self::assertTrue($response->isSuccessful());
         self::assertEquals(Utils::convertObjectToArray($data), $response->getData());
-        self::isInstanceOf($response->getSite(), Site::class);
+        self::assertInstanceOf($response->getSite(), Site::class);
     }
 }

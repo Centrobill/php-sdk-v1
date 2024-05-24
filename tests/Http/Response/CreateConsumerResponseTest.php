@@ -16,6 +16,6 @@ class CreateConsumerResponseTest extends TestCase
 
         self::assertTrue($response->isSuccessful());
         self::assertEquals(Utils::convertObjectToArray($data), $response->getData());
-        self::isInstanceOf($response->getConsumer(), Consumer::class);
+        self::assertInstanceOf($response->getConsumer(), Consumer::class);
     }
 }

@@ -16,6 +16,6 @@ class Emulate3DsForTestPaymentDataResponseTest extends TestCase
 
         self::assertTrue($response->isSuccessful());
         self::assertEquals(Utils::convertObjectToArray($data), $response->getData());
-        self::isInstanceOf($response->getTestPaymentData(), TestPaymentData::class);
+        self::assertInstanceOf($response->getTestPaymentData(), TestPaymentData::class);
     }
 }

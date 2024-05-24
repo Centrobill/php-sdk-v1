@@ -16,6 +16,6 @@ class CreateProductResponseTest extends TestCase
 
         self::assertTrue($response->isSuccessful());
         self::assertEquals(Utils::convertObjectToArray($data), $response->getData());
-        self::isInstanceOf($response->getProduct(), Sku::class);
+        self::assertInstanceOf($response->getProduct(), Sku::class);
     }
 }

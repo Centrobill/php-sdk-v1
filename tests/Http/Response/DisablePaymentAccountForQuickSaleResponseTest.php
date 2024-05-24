@@ -15,6 +15,6 @@ class DisablePaymentAccountForQuickSaleResponseTest extends TestCase
 
         self::assertTrue($response->isSuccessful());
         self::assertEquals(Utils::convertObjectToArray($data), $response->getData());
-        self::isInstanceOf($data->paymentAccountId, $response->getPaymentAccountId());
+        self::assertInstanceOf($data->paymentAccountId, $response->getPaymentAccountId());
     }
 }
