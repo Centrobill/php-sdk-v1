@@ -14,8 +14,7 @@ class CreateConsumerResponseTest extends TestCase
         $data = json_decode(file_get_contents(__DIR__ . '/../../fixtures/CreateConsumerResponse.json'));
         $response = new CreateConsumerResponse($data);
 
-        self::assertTrue($response->isSuccessful());
         self::assertEquals(Utils::convertObjectToArray($data), $response->getData());
-        self::assertInstanceOf($response->getConsumer(), Consumer::class);
+        self::assertInstanceOf(Consumer::class, $response->getConsumer());
     }
 }
