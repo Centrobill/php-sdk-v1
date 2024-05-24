@@ -1,0 +1,13 @@
+{
+  "id": 1234,
+  "type": "visa",
+  "emulate3ds": true,
+  "number": "4024007179366348",
+  "balance": 44,
+  "blocked": false,
+  "allowedIps": [
+    "string"
+  ],
+  "createdAt": "2022-01-27 10:11:39",
+  "updatedAt": "2022-01-27 10:11:39"
+}

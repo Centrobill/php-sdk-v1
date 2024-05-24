@@ -1,0 +1,44 @@
+{
+  "payment": {
+    "description": "APPROVED",
+    "action": "charge",
+    "url": "https://google.com/oijhflsfs9",
+    "mode": "sale",
+    "status": "success",
+    "amount": 9.99,
+    "currency": "USD",
+    "amountUsd": 9.99,
+    "orderId": "235324530",
+    "transactionId": "12345",
+    "descriptor": "centrohelp.com",
+    "source": {
+      "method": "card",
+      "number": "402400****6348",
+      "brand": "visa",
+      "paymentAccountId": "d86bdcbb-c369-46d9-a9d0-9c5010e3bfdb",
+      "disabled": true
+    }
+  },
+  "consumer": {
+    "id": "string",
+    "externalId": "14253ms92m0as",
+    "email": "jonny.sonny@google.com",
+    "firstName": "string",
+    "lastName": "string",
+    "phone": "+1987353539",
+    "country": "GBR",
+    "state": "string",
+    "city": "string",
+    "zip": "36101"
+  },
+  "subscription": {
+    "id": "string",
+    "status": "active",
+    "renewalDate": "2020-04-17 13:43:02",
+    "cancelDate": "2020-11-17 13:43:02",
+    "cycle": 0
+  },
+  "metadata": {
+    "foo": "bar"
+  }
+}

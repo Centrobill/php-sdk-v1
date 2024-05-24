@@ -1,0 +1,10 @@
+{
+  "id": "string",
+  "status": "active",
+  "cycle": 0,
+  "skuName": "TEST_EN",
+  "siteId": "983759353",
+  "renewalDate": "2020-04-17 13:43:02",
+  "cancelDate": "2020-11-17 13:43:02",
+  "consumerId": "string"
+}

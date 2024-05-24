@@ -1,0 +1,32 @@
+{
+    "name": "centrobill/php-sdk-v1",
+    "version": "0.0.1",
+    "description": "Centrobill SDK",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Centrobill\\Sdk\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "files": [
+            "src/constants.php"
+        ],
+        "psr-4": {
+            "Tests\\Centrobill\\Sdk\\": "tests/"
+        }
+    },
+    "require": {
+        "php": ">=7.4",
+        "guzzlehttp/guzzle": "^7.8",
+        "myclabs/php-enum": "^1.8"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^5.7"
+    },
+    "config": {
+        "sort-packages": true,
+        "optimize-autoloader": true
+    }
+}
