@@ -2,18 +2,12 @@
 
 namespace Centrobill\Sdk\Http\Request;
 
-use Centrobill\Sdk\ValueObject\ApiKey;
 use Centrobill\Sdk\ValueObject\Id;
 use Centrobill\Sdk\ValueObject\Reason;
 use DateTimeImmutable;
 
 class CancelSubscriptionRequest implements RequestInterface
 {
-    /**
-     * @var ApiKey $apiKey
-     */
-    private ApiKey $apiKey;
-
     /**
      * @var Id $id
      */
@@ -40,14 +34,12 @@ class CancelSubscriptionRequest implements RequestInterface
     private $keepActiveUntilNextRebill;
 
     public function __construct(
-        ApiKey $apiKey,
         Id $id,
         ?DateTimeImmutable $cancelDate = null,
         ?Reason $reason = null,
         $sendEmail = false,
         $keepActiveUntilNextRebill = false
     ) {
-        $this->apiKey = $apiKey;
         $this->id = $id;
         $this->cancelDate = $cancelDate;
         $this->reason = $reason;
@@ -111,7 +103,6 @@ class CancelSubscriptionRequest implements RequestInterface
     {
         return [
             'X-Requested-With' => 'XMLHttpRequest',
-            'Authorization' => (string)$this->apiKey,
         ];
     }
 }

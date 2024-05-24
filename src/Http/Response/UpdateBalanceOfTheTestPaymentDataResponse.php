@@ -9,10 +9,5 @@ class UpdateBalanceOfTheTestPaymentDataResponse extends AbstractResponse impleme
 {
     
 
-    public function isSuccessful()
-    {
-        return true;
-    }
-
     
 }

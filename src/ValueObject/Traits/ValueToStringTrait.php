@@ -19,7 +19,7 @@ trait ValueToStringTrait
     /**
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         return (string)$this->value;
     }
@@ -28,7 +28,7 @@ trait ValueToStringTrait
      * @codeCoverageIgnore
      * @param mixed $value
      */
-    protected function checkValue(string $value)
+    protected function checkValue(string $value): void
     {
     }
 }

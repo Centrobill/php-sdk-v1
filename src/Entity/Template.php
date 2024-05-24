@@ -25,32 +25,32 @@ class Template
     public function __construct(
         ?Language $language = null,
         ?Layout $layout = null,
-        $templateParameters = [],
+        $templateParameters = []
     ) {
         $this->language = $language;
         $this->layout = $layout;
         $this->templateParameters = $templateParameters;
     }
 
-    public function setLanguage(Language $language)
+    public function setLanguage(Language $language): self
     {
         $this->language = $language;
         return $this;
     }
 
-    public function setLayout(Layout $layout)
+    public function setLayout(Layout $layout): self
     {
         $this->layout = $layout;
         return $this;
     }
 
-    public function setTemplateParameters($templateParameters)
+    public function setTemplateParameters($templateParameters): self
     {
         $this->templateParameters = $templateParameters;
         return $this;
     }
 
-    public function toArray()
+    public function toArray(): array
     {
         $data = [
             'templateParameters' => $this->templateParameters,

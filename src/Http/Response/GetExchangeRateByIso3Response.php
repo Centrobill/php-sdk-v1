@@ -9,10 +9,5 @@ class GetExchangeRateByIso3Response extends AbstractResponse implements Response
 {
     
 
-    public function isSuccessful()
-    {
-        return true;
-    }
-
     
 }

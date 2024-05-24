@@ -316,7 +316,7 @@ class Consumer
         return $this;
     }
 
-    public function toArray()
+    public function toArray(): array
     {
         $data = [];
 

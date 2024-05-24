@@ -75,43 +75,43 @@ class Sku
         $this->xsell = $xsell;
     }
 
-    public function setSiteId(SiteId $siteId)
+    public function setSiteId(SiteId $siteId): self
     {
         $this->siteId = $siteId;
         return $this;
     }
 
-    public function setName(Name $name)
+    public function setName(Name $name): self
     {
         $this->name = $name;
         return $this;
     }
 
-    public function setTitle(Title $title)
+    public function setTitle(Title $title): self
     {
         $this->title = $title;
         return $this;
     }
 
-    public function setDomainName(DomainName $domainName)
+    public function setDomainName(DomainName $domainName): self
     {
         $this->domainName = $domainName;
         return $this;
     }
 
-    public function setAction(Action $action)
+    public function setAction(Action $action): self
     {
         $this->action = $action;
         return $this;
     }
 
-    public function setXsell(Xsell $xsell)
+    public function setXsell(Xsell $xsell): self
     {
         $this->xsell = $xsell;
         return $this;
     }
 
-    public function toArray()
+    public function toArray(): array
     {
         if ($this->siteId === null && $this->name === null) {
             throw new \InvalidArgumentException('SiteId or Name are required');

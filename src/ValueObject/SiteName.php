@@ -9,7 +9,7 @@ final class SiteName
 {
     use ValueToStringTrait;
 
-    function checkValue($value)
+    protected function checkValue($value)
     {
         if (empty($value)) {
             throw SiteNameException::emptyValue();

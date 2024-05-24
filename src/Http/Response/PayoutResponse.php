@@ -9,10 +9,5 @@ class PayoutResponse extends AbstractResponse implements ResponseInterface
 {
     
 
-    public function isSuccessful()
-    {
-        return true;
-    }
-
     
 }

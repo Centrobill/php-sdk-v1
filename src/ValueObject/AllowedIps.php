@@ -9,7 +9,7 @@ final class AllowedIps
 {
     use ValueToStringTrait;
 
-    function checkValue($value)
+    protected function checkValue($value)
     {
         if (empty($value)) {
             throw AllowedIpsException::emptyValue();

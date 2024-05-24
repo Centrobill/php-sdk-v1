@@ -12,7 +12,7 @@ final class SiteId
     public const MIN_LENGTH = 5;
     public const MAX_LENGTH = 36;
 
-    function checkValue($value)
+    protected protected function checkValue($value)
     {
         if (empty($value)) {
             throw SiteIdException::emptyValue();

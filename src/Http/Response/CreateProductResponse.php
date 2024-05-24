@@ -6,11 +6,6 @@ use Centrobill\Sdk\Http\Response\Entity\Sku;
 
 class CreateProductResponse extends AbstractResponse implements ResponseInterface
 {
-    public function isSuccessful()
-    {
-        return true;
-    }
-
     public function getProduct(): Sku
     {
         return new Sku($this->data);

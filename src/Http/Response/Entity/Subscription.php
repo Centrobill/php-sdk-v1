@@ -38,17 +38,17 @@ class Subscription
         return $this->data->cycle;
     }
 
-    public function getSkuName(): string
+    public function getSkuName(): ?string
     {
         return isset($this->data->skuName) ? $this->data->skuName : null;
     }
 
-    public function getSiteId(): string
+    public function getSiteId(): ?string
     {
         return isset($this->data->siteId) ? $this->data->siteId : null;
     }
 
-    public function getConsumerId(): string
+    public function getConsumerId(): ?string
     {
         return isset($this->data->consumerId) ? $this->data->consumerId : null;
     }

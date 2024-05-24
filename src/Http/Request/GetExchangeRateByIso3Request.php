@@ -2,24 +2,17 @@
 
 namespace Centrobill\Sdk\Http\Request;
 
-use Centrobill\Sdk\ValueObject\ApiKey;
 use Centrobill\Sdk\ValueObject\Currency;
 
 class GetExchangeRateByIso3Request implements RequestInterface
 {
     /**
-     * @var ApiKey $apiKey
-     */
-    private ApiKey $apiKey;
-
-    /**
      * @var Currency $currency
      */
     private Currency $currency;
 
-    public function __construct(ApiKey $apiKey, Currency $currency)
+    public function __construct(Currency $currency)
     {
-        $this->apiKey = $apiKey;
         $this->currency = $currency;
     }
 
@@ -37,7 +30,6 @@ class GetExchangeRateByIso3Request implements RequestInterface
     {
         return [
             'X-Requested-With' => 'XMLHttpRequest',
-            'Authorization' => (string)$this->apiKey,
         ];
     }
 

@@ -2,17 +2,11 @@
 
 namespace Centrobill\Sdk\Http\Request;
 
-use Centrobill\Sdk\ValueObject\ApiKey;
 use Centrobill\Sdk\ValueObject\Limit;
 use Centrobill\Sdk\ValueObject\TestPaymentDataType;
 
 class GetListOfTestPaymentDataRequest implements RequestInterface
 {
-    /**
-     * @var ApiKey $apiKey
-     */
-    private ApiKey $apiKey;
-
     /**
      * @var ?Limit $limit
      */
@@ -24,11 +18,9 @@ class GetListOfTestPaymentDataRequest implements RequestInterface
     private ?TestPaymentDataType $testPaymentDataType;
 
     public function __construct(
-        ApiKey $apiKey,
         ?Limit $limit = null,
         ?TestPaymentDataType $testPaymentDataType = null
     ) {
-        $this->apiKey = $apiKey;
         $this->limit = $limit;
         $this->testPaymentDataType = $testPaymentDataType;
     }
@@ -62,7 +54,6 @@ class GetListOfTestPaymentDataRequest implements RequestInterface
     {
         return [
             'X-Requested-With' => 'XMLHttpRequest',
-            'Authorization' => (string)$this->apiKey,
         ];
     }
 }

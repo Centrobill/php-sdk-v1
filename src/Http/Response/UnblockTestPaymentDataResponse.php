@@ -9,10 +9,5 @@ class UnblockTestPaymentDataResponse extends AbstractResponse implements Respons
 {
     
 
-    public function isSuccessful()
-    {
-        return true;
-    }
-
     
 }

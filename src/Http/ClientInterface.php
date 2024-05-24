@@ -277,19 +277,19 @@ interface ClientInterface
     public function updateAllowedIPs(UpdateAllowedIPsRequest $request): ResponseInterface;
 
     /**
-     * @param ListPaymentaccountIDsByConsumerIdRequest $request
-     * @return ListPaymentaccountIDsByConsumerIdResponse|ErrorResponse
+     * @param ListPaymentAccountIDsByConsumerIdRequest $request
+     * @return ListPaymentAccountIDsByConsumerIdResponse|ErrorResponse
      */
-    public function listPaymentaccountIDsByConsumerId(
-        ListPaymentaccountIDsByConsumerIdRequest $request
+    public function listPaymentAccountIdsByConsumerId(
+        ListPaymentAccountIDsByConsumerIdRequest $request
     ): ResponseInterface;
 
     /**
-     * @param ChangePaymentAccountForsubscriptionRequest $request
-     * @return ChangePaymentAccountForsubscriptionResponse|ErrorResponse
+     * @param ChangePaymentAccountForSubscriptionRequest $request
+     * @return ChangePaymentAccountForSubscriptionResponse|ErrorResponse
      */
-    public function changePaymentAccountForsubscription(
-        ChangePaymentAccountForsubscriptionRequest $request
+    public function changePaymentAccountForSubscription(
+        ChangePaymentAccountForSubscriptionRequest $request
     ): ResponseInterface;
 
     /**

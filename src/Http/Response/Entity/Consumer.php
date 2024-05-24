@@ -15,7 +15,7 @@ class Consumer
 
     public function getId(): ?string
     {
-        return isset($this->data->id) ? $this->data->id : null;
+        return isset($this->data->id) ? (string)$this->data->id : null;
     }
 
     public function getExternalId(): ?string

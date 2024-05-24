@@ -12,7 +12,7 @@ class Code
     /**
      * @throws SDKExceptionInterface
      */
-    function checkValue($value)
+    protected function checkValue($value)
     {
         if (empty($value)) {
             throw CodeException::emptyValue();

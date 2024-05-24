@@ -4,7 +4,6 @@ namespace Centrobill\Sdk\Http\Request;
 
 use Centrobill\Sdk\Entity\Price;
 use Centrobill\Sdk\ValueObject\Amount;
-use Centrobill\Sdk\ValueObject\ApiKey;
 use Centrobill\Sdk\ValueObject\Currency;
 use Centrobill\Sdk\ValueObject\ExternalId;
 use Centrobill\Sdk\ValueObject\Sku\Name;
@@ -14,11 +13,6 @@ use Centrobill\Sdk\ValueObject\Sku\Title;
 
 class UpdateProductRequest implements RequestInterface
 {
-    /**
-     * @var ApiKey $apiKey
-     */
-    private ApiKey $apiKey;
-
     /**
      * @var Name $name
      */
@@ -60,7 +54,6 @@ class UpdateProductRequest implements RequestInterface
     private ?Currency $currency;
 
     public function __construct(
-        ApiKey $apiKey,
         Name $name,
         SiteId $siteId,
         Title $title,
@@ -70,7 +63,6 @@ class UpdateProductRequest implements RequestInterface
         ?Amount $amount = null,
         ?Currency $currency = null
     ) {
-        $this->apiKey = $apiKey;
         $this->name = $name;
         $this->siteId = $siteId;
         $this->title = $title;
@@ -148,7 +140,6 @@ class UpdateProductRequest implements RequestInterface
     {
         return [
             'X-Requested-With' => 'XMLHttpRequest',
-            'Authorization' => (string)$this->apiKey,
         ];
     }
 }

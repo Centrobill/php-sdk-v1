@@ -6,7 +6,6 @@ use Centrobill\Sdk\Entity\Consumer;
 use Centrobill\Sdk\Entity\Payment;
 use Centrobill\Sdk\Entity\Sku;
 use Centrobill\Sdk\Entity\Template;
-use Centrobill\Sdk\ValueObject\ApiKey;
 use Centrobill\Sdk\ValueObject\Field;
 use Centrobill\Sdk\ValueObject\Ttl;
 
@@ -15,9 +14,6 @@ use Centrobill\Sdk\ValueObject\Ttl;
  */
 class GenerateUrlToPaymentPageRequest implements RequestInterface
 {
-    /** @var ApiKey $apiKey */
-    private ApiKey $apiKey;
-
     /** @var Array<Sku> $sku */
     private $sku;
 
@@ -40,7 +36,6 @@ class GenerateUrlToPaymentPageRequest implements RequestInterface
     private $emailOptions;
 
     public function __construct(
-        ApiKey $apiKey,
         $sku = [],
         ?Consumer $consumer = null,
         ?Template $template = null,
@@ -49,7 +44,6 @@ class GenerateUrlToPaymentPageRequest implements RequestInterface
         ?Ttl $ttl = null,
         $emailOptions = false
     ) {
-        $this->apiKey = $apiKey;
         $this->sku = $sku;
         $this->consumer = $consumer;
         $this->template = $template;
@@ -110,7 +104,6 @@ class GenerateUrlToPaymentPageRequest implements RequestInterface
     public function getPayload(): array
     {
         if (empty($this->sku)) {
-            // TODO create an exception class
             throw new \InvalidArgumentException('Sku cannot be empty');
         }
 
@@ -158,8 +151,6 @@ class GenerateUrlToPaymentPageRequest implements RequestInterface
 
     public function getHeaders(): array
     {
-        return [
-            'Authorization' => (string)$this->apiKey,
-        ];
+        return [];
     }
 }

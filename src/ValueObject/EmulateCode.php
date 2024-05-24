@@ -17,7 +17,7 @@ final class EmulateCode
     /**
      * @throws SDKExceptionInterface
      */
-    function checkValue($value)
+    protected function checkValue($value)
     {
         if (empty($value)) {
             throw EmulateCodeException::emptyValue();

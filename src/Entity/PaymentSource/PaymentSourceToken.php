@@ -30,19 +30,19 @@ class PaymentSourceToken extends AbstractPaymentSource
         $this->emulateCode = $emulateCode;
     }
 
-    public function set3ds($threeDs)
+    public function set3ds($threeDs): self
     {
         $this->threeDs = $threeDs;
         return $this;
     }
 
-    public function setEmulateCode(EmulateCode $emulateCode)
+    public function setEmulateCode(EmulateCode $emulateCode): self
     {
         $this->emulateCode = $emulateCode;
         return $this;
     }
 
-    public function toArray()
+    public function toArray(): array
     {
         $data = [
             'type' => PaymentSourceType::PAYMENT_SOURCE_TOKEN,

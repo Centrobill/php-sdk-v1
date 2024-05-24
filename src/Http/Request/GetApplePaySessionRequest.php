@@ -2,25 +2,17 @@
 
 namespace Centrobill\Sdk\Http\Request;
 
-use Centrobill\Sdk\ValueObject\ApiKey;
 use Centrobill\Sdk\ValueObject\SiteName;
-
 
 class GetApplePaySessionRequest implements RequestInterface
 {
-    /**
-     * @var ApiKey $apiKey
-     */
-    private ApiKey $apiKey;
-
     /**
      * @var SiteName $domain
      */
     private SiteName $domain;
 
-    public function __construct(ApiKey $apiKey, SiteName $domain)
+    public function __construct(SiteName $domain)
     {
-        $this->apiKey = $apiKey;
         $this->domain = $domain;
     }
 
@@ -47,7 +39,6 @@ class GetApplePaySessionRequest implements RequestInterface
     {
         return [
             'X-Requested-With' => 'XMLHttpRequest',
-            'Authorization' => (string)$this->apiKey,
         ];
     }
 }

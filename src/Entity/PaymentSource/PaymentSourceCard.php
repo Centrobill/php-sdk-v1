@@ -65,25 +65,25 @@ class PaymentSourceCard extends AbstractPaymentSource
         $this->mid = $mid;
     }
 
-    public function set3ds($threeDS)
+    public function set3ds($threeDS): self
     {
         $this->threeDS = $threeDS;
         return $this;
     }
 
-    public function setEmulateCode(EmulateCode $emulateCode)
+    public function setEmulateCode(EmulateCode $emulateCode): self
     {
         $this->emulateCode = $emulateCode;
         return $this;
     }
 
-    public function setMid(Mid $mid)
+    public function setMid(Mid $mid): self
     {
         $this->mid = $mid;
         return $this;
     }
 
-    public function toArray()
+    public function toArray(): array
     {
         $data = [
             'type' => PaymentSourceType::PAYMENT_SOURCE_CARD,

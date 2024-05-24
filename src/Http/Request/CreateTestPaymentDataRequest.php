@@ -3,18 +3,12 @@
 namespace Centrobill\Sdk\Http\Request;
 
 use Centrobill\Sdk\ValueObject\Amount;
-use Centrobill\Sdk\ValueObject\ApiKey;
 use Centrobill\Sdk\ValueObject\Currency;
 use Centrobill\Sdk\ValueObject\Ip;
 use Centrobill\Sdk\ValueObject\TestPaymentDataType;
 
 class CreateTestPaymentDataRequest implements RequestInterface
 {
-    /**
-     * @var ApiKey $apiKey
-     */
-    private ApiKey $apiKey;
-
     /**
      * @var TestPaymentDataType $type
      */
@@ -41,14 +35,12 @@ class CreateTestPaymentDataRequest implements RequestInterface
     private $allowedIps;
 
     public function __construct(
-        ApiKey $apiKey,
         TestPaymentDataType $type,
         $allowedIps = [],
         $emulate3ds = false,
         ?Amount $balance = null,
         ?Currency $currency = null
     ) {
-        $this->apiKey = $apiKey;
         $this->type = $type;
         $this->allowedIps = $allowedIps;
         $this->emulate3ds = $emulate3ds;
@@ -115,7 +107,6 @@ class CreateTestPaymentDataRequest implements RequestInterface
     {
         return [
             'X-Requested-With' => 'XMLHttpRequest',
-            'Authorization' => (string)$this->apiKey,
         ];
     }
 }

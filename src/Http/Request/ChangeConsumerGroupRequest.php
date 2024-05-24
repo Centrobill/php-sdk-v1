@@ -2,17 +2,11 @@
 
 namespace Centrobill\Sdk\Http\Request;
 
-use Centrobill\Sdk\ValueObject\ApiKey;
 use Centrobill\Sdk\ValueObject\GroupId;
 use Centrobill\Sdk\ValueObject\Id;
 
 class ChangeConsumerGroupRequest implements RequestInterface
 {
-    /**
-     * @var ApiKey $apiKey
-     */
-    private ApiKey $apiKey;
-
     /**
      * @var Id $id
      */
@@ -23,9 +17,8 @@ class ChangeConsumerGroupRequest implements RequestInterface
      */
     private GroupId $groupId;
 
-    public function __construct(ApiKey $apiKey, Id $id, GroupId $groupId = null)
+    public function __construct(Id $id, GroupId $groupId = null)
     {
-        $this->apiKey = $apiKey;
         $this->id = $id;
         $this->groupId = $groupId;
     }
@@ -61,7 +54,6 @@ class ChangeConsumerGroupRequest implements RequestInterface
     {
         return [
             'X-Requested-With' => 'XMLHttpRequest',
-            'Authorization' => (string)$this->apiKey,
         ];
     }
 }

@@ -2,20 +2,8 @@
 
 namespace Centrobill\Sdk\Http\Request;
 
-use Centrobill\Sdk\ValueObject\ApiKey;
-
 class GetCurrencyExchangeRatesRequest implements RequestInterface
 {
-    /**
-     * @var ApiKey $apiKey
-     */
-    private ApiKey $apiKey;
-
-    public function __construct(ApiKey $apiKey)
-    {
-        $this->apiKey = $apiKey;
-    }
-
     public function getUri(): string
     {
         return 'currency-exchange-rate';
@@ -30,7 +18,6 @@ class GetCurrencyExchangeRatesRequest implements RequestInterface
     {
         return [
             'X-Requested-With' => 'XMLHttpRequest',
-            'Authorization' => (string)$this->apiKey,
         ];
     }
 

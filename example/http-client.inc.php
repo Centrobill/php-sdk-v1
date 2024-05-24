@@ -2,14 +2,13 @@
 
 use Centrobill\Sdk\Http\Client;
 use Centrobill\Sdk\ValueObject\ApiKey;
-use const Centrobill\Sdk\API_KEY;
-use const Centrobill\Sdk\BASE_URL;
+use const Centrobill\Sdk\STAGE_URL;
+
 use GuzzleHttp\Client as HttpClient;
 
 $client = new Client(
     new HttpClient([
-        'base_uri' => BASE_URL,
+        'base_uri' => STAGE_URL,
     ]),
-    [], // TODO replace with history container 
-    new ApiKey(API_KEY)
+    new ApiKey('YOUR_API_KEY')
 );

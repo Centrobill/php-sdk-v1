@@ -11,7 +11,7 @@ final class Title
 
     public const MAX_LENGTH = 64;
 
-    function checkValue($value)
+    protected protected function checkValue($value)
     {
         if (empty($value)) {
             throw TitleException::emptyValue();

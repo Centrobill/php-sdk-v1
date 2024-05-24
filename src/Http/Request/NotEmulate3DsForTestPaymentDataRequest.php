@@ -2,16 +2,10 @@
 
 namespace Centrobill\Sdk\Http\Request;
 
-use Centrobill\Sdk\ValueObject\ApiKey;
 use Centrobill\Sdk\ValueObject\Id;
 
 class NotEmulate3DsForTestPaymentDataRequest implements RequestInterface
 {
-    /**
-     * @var ApiKey $apiKey
-     */
-    private ApiKey $apiKey;
-
     /**
      * @var Id $id
      */
@@ -22,9 +16,8 @@ class NotEmulate3DsForTestPaymentDataRequest implements RequestInterface
      */
     private $emulate3ds;
 
-    public function __construct(ApiKey $apiKey, Id $id, $emulate3ds = false)
+    public function __construct(Id $id, $emulate3ds = false)
     {
-        $this->apiKey = $apiKey;
         $this->id = $id;
         $this->emulate3ds = $emulate3ds;
     }
@@ -60,7 +53,6 @@ class NotEmulate3DsForTestPaymentDataRequest implements RequestInterface
     {
         return [
             'X-Requested-With' => 'XMLHttpRequest',
-            'Authorization' => (string)$this->apiKey,
         ];
     }
 }

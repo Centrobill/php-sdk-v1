@@ -40,31 +40,31 @@ class Price
         $this->repeat = $repeat;
     }
 
-    public function setOffset(Offset $offset)
+    public function setOffset(Offset $offset): self
     {
         $this->offset = $offset;
         return $this;
     }
 
-    public function setAmount(Amount $amount)
+    public function setAmount(Amount $amount): self
     {
         $this->amount = $amount;
         return $this;
     }
 
-    public function setCurrency(Currency $currency)
+    public function setCurrency(Currency $currency): self
     {
         $this->currency = $currency;
         return $this;
     }
 
-    public function setRepeat($repeat)
+    public function setRepeat($repeat): self
     {
         $this->repeat = $repeat;
         return $this;
     }
 
-    public function toArray()
+    public function toArray(): array
     {
         $data = [];
 

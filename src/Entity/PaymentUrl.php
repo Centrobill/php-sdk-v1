@@ -22,19 +22,19 @@ class PaymentUrl
         $this->redirectUrl = $redirectUrl;
     }
 
-    public function setIpnUrl(Url $ipnUrl)
+    public function setIpnUrl(Url $ipnUrl): self
     {
         $this->ipnUrl = $ipnUrl;
         return $this;
     }
 
-    public function setRedirectUrl(Url $redirectUrl)
+    public function setRedirectUrl(Url $redirectUrl): self
     {
         $this->redirectUrl = $redirectUrl;
         return $this;
     }
 
-    public function toArray()
+    public function toArray(): array
     {
         $data = [];
 

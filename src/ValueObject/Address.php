@@ -15,7 +15,7 @@ final class Address
     /**
      * @throws SDKExceptionInterface
      */
-    function checkValue($value): void
+    protected function checkValue($value): void
     {
         if (empty($value)) {
             throw AddressException::emptyValue();
