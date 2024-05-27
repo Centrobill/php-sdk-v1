@@ -13,8 +13,7 @@ class DisablePaymentAccountForQuickSaleResponseTest extends TestCase
         $data = json_decode(file_get_contents(__DIR__ . '/../../fixtures/DisablePaymentAccountForQuickSaleResponse.json'));
         $response = new DisablePaymentAccountForQuickSaleResponse($data);
 
-        self::assertTrue($response->isSuccessful());
         self::assertEquals(Utils::convertObjectToArray($data), $response->getData());
-        self::isInstanceOf($data->paymentAccountId, $response->getPaymentAccountId());
+        self::assertInstanceOf($data->paymentAccountId, $response->getPaymentAccountId());
     }
 }

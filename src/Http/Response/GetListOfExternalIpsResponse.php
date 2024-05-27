@@ -11,11 +11,6 @@ class GetListOfExternalIpsResponse implements ResponseInterface
         $this->data = $data;
     }
 
-    public function isSuccessful()
-    {
-        return true;
-    }
-
     public function getData(): array
     {
         return $this->data;

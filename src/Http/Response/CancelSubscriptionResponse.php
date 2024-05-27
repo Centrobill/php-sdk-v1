@@ -4,11 +4,6 @@ namespace Centrobill\Sdk\Http\Response;
 
 class CancelSubscriptionResponse extends AbstractResponse
 {
-    public function isSuccessful()
-    {
-        return true;
-    }
-
     public function getId(): string
     {
         return $this->data->id;

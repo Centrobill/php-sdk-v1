@@ -2,18 +2,12 @@
 
 namespace Centrobill\Sdk\Http\Request;
 
-use Centrobill\Sdk\ValueObject\ApiKey;
 use Centrobill\Sdk\ValueObject\ExternalId;
 use Centrobill\Sdk\ValueObject\SiteName;
 use Centrobill\Sdk\ValueObject\Url;
 
 class CreateSiteRequest implements RequestInterface
 {
-    /**
-     * @var ApiKey $apiKey
-     */
-    private ApiKey $apiKey;
-
     /**
      * @var SiteName $name
      */
@@ -35,13 +29,11 @@ class CreateSiteRequest implements RequestInterface
     private Url $redirectUrl;
 
     public function __construct(
-        ApiKey $apiKey,
         SiteName $name,
         ExternalId $externalId,
         Url $ipnUrl,
         Url $redirectUrl
     ) {
-        $this->apiKey = $apiKey;
         $this->name = $name;
         $this->ipnUrl = $ipnUrl;
         $this->externalId = $externalId;
@@ -86,7 +78,6 @@ class CreateSiteRequest implements RequestInterface
     {
         return [
             'X-Requested-With' => 'XMLHttpRequest',
-            'Authorization' => (string)$this->apiKey,
         ];
     }
 }

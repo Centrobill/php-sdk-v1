@@ -7,13 +7,8 @@ use Centrobill\Sdk\Http\Response\Entity\Payment;
 use Centrobill\Sdk\Http\Response\Entity\Subscription;
 use Centrobill\Sdk\Utils\Utils;
 
-class ChangePaymentAccountForsubscriptionResponse extends AbstractResponse implements ResponseInterface
+class ChangePaymentAccountForSubscriptionResponse extends AbstractResponse implements ResponseInterface
 {
-    public function isSuccessful()
-    {
-        return true;
-    }
-
     public function getPayment(): Payment
     {
         return new Payment($this->data->payment);

@@ -9,7 +9,7 @@ final class Ttl
 {
     use ValueToStringTrait;
 
-    function checkValue($value)
+    protected function checkValue($value)
     {
         if (empty($value)) {
             throw TtlException::emptyValue();

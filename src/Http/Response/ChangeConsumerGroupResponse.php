@@ -4,11 +4,6 @@ namespace Centrobill\Sdk\Http\Response;
 
 class ChangeConsumerGroupResponse extends AbstractResponse implements ResponseInterface
 {
-    public function isSuccessful()
-    {
-        return true;
-    }
-
     public function getId(): string
     {
         return $this->data->id;

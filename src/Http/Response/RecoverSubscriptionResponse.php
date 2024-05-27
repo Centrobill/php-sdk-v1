@@ -9,10 +9,5 @@ class RecoverSubscriptionResponse extends AbstractResponse implements ResponseIn
 {
     
 
-    public function isSuccessful()
-    {
-        return true;
-    }
-
     
 }

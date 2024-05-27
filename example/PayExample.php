@@ -7,7 +7,6 @@ use Centrobill\Sdk\Entity\Sku;
 use Centrobill\Sdk\Entity\Sku\Url;
 use Centrobill\Sdk\Http\Client;
 use Centrobill\Sdk\Http\Request\PayRequest;
-use Centrobill\Sdk\ValueObject\ApiKey;
 use Centrobill\Sdk\ValueObject\Cvv;
 use Centrobill\Sdk\ValueObject\Email;
 use Centrobill\Sdk\ValueObject\ExpirationMonth;
@@ -19,8 +18,6 @@ use Centrobill\Sdk\ValueObject\LastName;
 use Centrobill\Sdk\ValueObject\Number;
 use Centrobill\Sdk\ValueObject\Sku\Name;
 use Centrobill\Sdk\ValueObject\Url as UrlValue;
-
-use const Centrobill\Sdk\API_KEY;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/http-client.inc.php';
@@ -44,7 +41,6 @@ $consumer->setIp(new Ip('10.0.5.1'));
 /** @var Client $client */
 $response = $client->pay(
     new PayRequest(
-        new ApiKey(API_KEY),
         new PaymentSourceCard(
             new Number('4111111111111111'),
             new ExpirationYear('25'),

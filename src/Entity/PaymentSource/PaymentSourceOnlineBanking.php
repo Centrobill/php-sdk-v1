@@ -8,7 +8,7 @@ use Centrobill\Sdk\ValueObject\EmulateCode;
 use Centrobill\Sdk\ValueObject\Mid;
 use Centrobill\Sdk\ValueObject\PaymentSourceType;
 
-class PaymentSourceOnlinebanking extends AbstractPaymentSource
+class PaymentSourceOnlineBanking extends AbstractPaymentSource
 {
     /**
      * @var ?Bic $bic
@@ -42,31 +42,31 @@ class PaymentSourceOnlinebanking extends AbstractPaymentSource
         $this->bin = $bin;
     }
 
-    public function setBic(Bic $bic)
+    public function setBic(Bic $bic): self
     {
         $this->bic = $bic;
         return $this;
     }
 
-    public function setEmulateCode(EmulateCode $emulateCode)
+    public function setEmulateCode(EmulateCode $emulateCode): self
     {
         $this->emulateCode = $emulateCode;
         return $this;
     }
 
-    public function setMid(Mid $mid)
+    public function setMid(Mid $mid): self
     {
         $this->mid = $mid;
         return $this;
     }
 
-    public function setBin(Bin $bin)
+    public function setBin(Bin $bin): self
     {
         $this->bin = $bin;
         return $this;
     }
 
-    public function toArray()
+    public function toArray(): array
     {
         $data = [
             'type' => PaymentSourceType::PAYMENT_SOURCE_ONLINEBANKING,

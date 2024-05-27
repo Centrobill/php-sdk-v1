@@ -9,7 +9,7 @@ final class Payid
 {
     use ValueToStringTrait;
 
-    function checkValue($value)
+    protected function checkValue($value)
     {
         if (empty($value)) {
             throw PayidException::emptyValue();

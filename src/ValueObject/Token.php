@@ -11,7 +11,7 @@ final class Token
 
     public const MAX_LENGTH = 512;
 
-    function checkValue($value)
+    protected function checkValue($value)
     {
         if (empty($value)) {
             throw TokenException::emptyValue();

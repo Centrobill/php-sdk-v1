@@ -17,7 +17,7 @@ final class Mid
     /**
      * @throws SDKExceptionInterface
      */
-    function checkValue($value)
+    protected function checkValue($value)
     {
         if (empty($value)) {
             throw MidException::emptyValue();

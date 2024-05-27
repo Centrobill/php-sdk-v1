@@ -77,61 +77,61 @@ class Payment
         $this->domain = $domain;
     }
 
-    public function setMethod($method)
+    public function setMethod($method): self
     {
         $this->method = $method;
         return $this;
     }
 
-    public function setSelected($selected)
+    public function setSelected($selected): self
     {
         $this->selected = $selected;
         return $this;
     }
 
-    public function setSecure($secure)
+    public function setSecure($secure): self
     {
         $this->secure = $secure;
         return $this;
     }
 
-    public function setTest($test)
+    public function setTest($test): self
     {
         $this->test = $test;
         return $this;
     }
 
-    public function setEmulateCode(EmulateCode $emulateCode)
+    public function setEmulateCode(EmulateCode $emulateCode): self
     {
         $this->emulateCode = $emulateCode;
         return $this;
     }
 
-    public function setMid(Mid $mid)
+    public function setMid(Mid $mid): self
     {
         $this->mid = $mid;
         return $this;
     }
 
-    public function setTerminalMode($terminalMode)
+    public function setTerminalMode($terminalMode): self
     {
         $this->terminalMode = $terminalMode;
         return $this;
     }
 
-    public function setBin(Bin $bin)
+    public function setBin(Bin $bin): self
     {
         $this->bin = $bin;
         return $this;
     }
 
-    public function setDomain(SiteName $domain)
+    public function setDomain(SiteName $domain): self
     {
         $this->domain = $domain;
         return $this;
     }
 
-    public function toArray()
+    public function toArray(): array
     {
         $data = [
             'secure' => $this->secure,

@@ -34,7 +34,7 @@ class PaymentSourceAch extends AbstractPaymentSource
         $this->accountNumber = $accountNumber;
     }
 
-    public function toArray()
+    public function toArray(): array
     {
         $data = [
             'type' => PaymentSourceType::PAYMENT_SOURCE_ACH,

@@ -3,8 +3,7 @@
 use Centrobill\Sdk\Entity\Consumer;
 use Centrobill\Sdk\Entity\PaymentSource\PaymentSourceCard;
 use Centrobill\Sdk\Http\Client;
-use Centrobill\Sdk\Http\Request\ChangePaymentAccountForsubscriptionRequest;
-use Centrobill\Sdk\ValueObject\ApiKey;
+use Centrobill\Sdk\Http\Request\ChangePaymentAccountForSubscriptionRequest;
 use Centrobill\Sdk\ValueObject\Cvv;
 use Centrobill\Sdk\ValueObject\Email;
 use Centrobill\Sdk\ValueObject\ExpirationMonth;
@@ -15,7 +14,6 @@ use Centrobill\Sdk\ValueObject\Id;
 use Centrobill\Sdk\ValueObject\Ip;
 use Centrobill\Sdk\ValueObject\LastName;
 use Centrobill\Sdk\ValueObject\Number;
-use const Centrobill\Sdk\API_KEY;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/http-client.inc.php';
@@ -28,9 +26,8 @@ $consumer->setExternalId(new ExternalId('123123-test'));
 $consumer->setIp(new Ip('10.0.5.1'));
 
 /** @var Client $client */
-$response = $client->changePaymentAccountForsubscription(
-    new ChangePaymentAccountForsubscriptionRequest(
-        new ApiKey(API_KEY),
+$response = $client->changePaymentAccountForSubscription(
+    new ChangePaymentAccountForSubscriptionRequest(
         new Id('1276034'),
         new PaymentSourceCard(
             new Number('4111111111111111'),

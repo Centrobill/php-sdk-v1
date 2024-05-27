@@ -14,8 +14,7 @@ class UpdateProductResponseTest extends TestCase
         $data = json_decode(file_get_contents(__DIR__ . '/../../fixtures/UpdateProductResponse.json'));
         $response = new UpdateProductResponse($data);
 
-        self::assertTrue($response->isSuccessful());
         self::assertEquals(Utils::convertObjectToArray($data), $response->getData());
-        self::isInstanceOf($response->getProduct(), Sku::class);
+        self::assertInstanceOf(Sku::class, $response->getProduct());
     }
 }

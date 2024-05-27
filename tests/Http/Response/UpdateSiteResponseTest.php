@@ -14,8 +14,7 @@ class UpdateSiteResponseTest extends TestCase
         $data = json_decode(file_get_contents(__DIR__ . '/../../fixtures/UpdateSiteResponse.json'));
         $response = new UpdateSiteResponse($data);
 
-        self::assertTrue($response->isSuccessful());
         self::assertEquals(Utils::convertObjectToArray($data), $response->getData());
-        self::isInstanceOf($response->getSite(), Site::class);
+        self::assertInstanceOf(Site::class, $response->getSite());
     }
 }

@@ -14,8 +14,7 @@ class Emulate3DsForTestPaymentDataResponseTest extends TestCase
         $data = json_decode(file_get_contents(__DIR__ . '/../../fixtures/Emulate3DsForTestPaymentDataResponse.json'));
         $response = new Emulate3DsForTestPaymentDataResponse($data);
 
-        self::assertTrue($response->isSuccessful());
         self::assertEquals(Utils::convertObjectToArray($data), $response->getData());
-        self::isInstanceOf($response->getTestPaymentData(), TestPaymentData::class);
+        self::assertInstanceOf(TestPaymentData::class, $response->getTestPaymentData());
     }
 }

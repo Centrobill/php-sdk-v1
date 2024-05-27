@@ -14,8 +14,7 @@ class CreateTestPaymentDataResponseTest extends TestCase
         $data = json_decode(file_get_contents(__DIR__ . '/../../fixtures/CreateTestPaymentDataResponse.json'));
         $response = new CreateTestPaymentDataResponse($data);
 
-        self::assertTrue($response->isSuccessful());
         self::assertEquals(Utils::convertObjectToArray($data), $response->getData());
-        self::isInstanceOf($response->getTestPaymentData(), TestPaymentData::class);
+        self::assertInstanceOf(TestPaymentData::class, $response->getTestPaymentData());
     }
 }

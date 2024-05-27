@@ -17,7 +17,7 @@ final class Cvv
     /**
      * @throws SDKExceptionInterface
      */
-    function checkValue($value): void
+    protected function checkValue($value): void
     {
         if (empty($value)) {
             throw CvvException::emptyValue();

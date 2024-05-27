@@ -11,7 +11,7 @@ final class UserAgent
 
     public const MAX_LENGTH = 255;
 
-    function checkValue($value)
+    protected function checkValue($value)
     {
         if (empty($value)) {
             throw UserAgentException::emptyValue();

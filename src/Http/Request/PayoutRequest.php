@@ -5,7 +5,6 @@ namespace Centrobill\Sdk\Http\Request;
 use Centrobill\Sdk\Entity\Parameters;
 use Centrobill\Sdk\Entity\PayoutUrl;
 use Centrobill\Sdk\ValueObject\Amount;
-use Centrobill\Sdk\ValueObject\ApiKey;
 use Centrobill\Sdk\ValueObject\ConsumerId;
 use Centrobill\Sdk\ValueObject\Currency;
 use Centrobill\Sdk\ValueObject\Field;
@@ -14,11 +13,6 @@ use Centrobill\Sdk\ValueObject\Sku\SiteId;
 
 class PayoutRequest implements RequestInterface
 {
-    /**
-     * @var ApiKey $apiKey
-     */
-    private ApiKey $apiKey;
-    
     /**
      * @var ?ConsumerId $consumerId
      */
@@ -60,7 +54,6 @@ class PayoutRequest implements RequestInterface
     private $metadata;
 
     public function __construct(
-        ApiKey $apiKey,
         Amount $amount,
         Currency $currency,
         ?ConsumerId $consumerId = null,
@@ -70,7 +63,6 @@ class PayoutRequest implements RequestInterface
         ?PayoutUrl $url = null,
         $metadata = []
     ) {
-        $this->apiKey = $apiKey;
         $this->amount = $amount;
         $this->currency = $currency;
         $this->consumerId = $consumerId;
@@ -174,7 +166,6 @@ class PayoutRequest implements RequestInterface
     {
         return [
             'X-Requested-With' => 'XMLHttpRequest',
-            'Authorization' => (string)$this->apiKey,
         ];
     }
 }

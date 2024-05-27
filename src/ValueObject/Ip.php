@@ -16,7 +16,7 @@ final class Ip
     /**
      * @throws SDKExceptionInterface
      */
-    function checkValue($value)
+    protected function checkValue($value)
     {
         if (empty($value)) {
             throw IpException::emptyValue();

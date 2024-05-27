@@ -17,7 +17,7 @@ class Parameters
         $this->payout = $payout;
     }
 
-    public function toArray()
+    public function toArray(): array
     {
         return $this->payout->toArray();
     }

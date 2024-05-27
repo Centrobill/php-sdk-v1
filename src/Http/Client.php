@@ -2,6 +2,7 @@
 
 namespace Centrobill\Sdk\Http;
 
+use Centrobill\Sdk\Http\Request\ApiRequestInterface;
 use Centrobill\Sdk\Http\Request\BlockTestPaymentDataRequest;
 use Centrobill\Sdk\Http\Request\CancelSubscriptionRequest;
 use Centrobill\Sdk\Http\Request\ChangeConsumerGroupRequest;
@@ -32,7 +33,7 @@ use Centrobill\Sdk\Http\Request\GetProductRequest;
 use Centrobill\Sdk\Http\Request\GetSiteRequest;
 use Centrobill\Sdk\Http\Request\GetSubscriptionRequest;
 use Centrobill\Sdk\Http\Request\GetTestPaymentDataByIdRequest;
-use Centrobill\Sdk\Http\Request\ListPaymentaccountIDsByConsumerIdRequest;
+use Centrobill\Sdk\Http\Request\ListPaymentAccountIDsByConsumerIdRequest;
 use Centrobill\Sdk\Http\Request\NotEmulate3DsForTestPaymentDataRequest;
 use Centrobill\Sdk\Http\Request\PayoutRequest;
 use Centrobill\Sdk\Http\Request\PayRequest;
@@ -47,7 +48,7 @@ use Centrobill\Sdk\Http\Request\UpdateSiteRequest;
 use Centrobill\Sdk\Http\Response\BlockTestPaymentDataResponse;
 use Centrobill\Sdk\Http\Response\CancelSubscriptionResponse;
 use Centrobill\Sdk\Http\Response\ChangeConsumerGroupResponse;
-use Centrobill\Sdk\Http\Response\ChangePaymentAccountForsubscriptionResponse;
+use Centrobill\Sdk\Http\Response\ChangePaymentAccountForSubscriptionResponse;
 use Centrobill\Sdk\Http\Response\ChangeSubscriptionResponse;
 use Centrobill\Sdk\Http\Response\CheckVerificationCodeResponse;
 use Centrobill\Sdk\Http\Response\CreateConsumerResponse;
@@ -59,6 +60,7 @@ use Centrobill\Sdk\Http\Response\DeleteTestPaymentDataByIDResponse;
 use Centrobill\Sdk\Http\Response\DisablePaymentAccountForQuickSaleResponse;
 use Centrobill\Sdk\Http\Response\Emulate3DsForTestPaymentDataResponse;
 use Centrobill\Sdk\Http\Response\EnablePaymentAccountForQuickSaleResponse;
+use Centrobill\Sdk\Http\Response\ErrorResponse;
 use Centrobill\Sdk\Http\Response\GenerateCardDataTokenResponse;
 use Centrobill\Sdk\Http\Response\GenerateCardDataTokenUsingPaymentAccountIdResponse;
 use Centrobill\Sdk\Http\Response\GenerateUrlToPaymentPageResponse;
@@ -83,8 +85,9 @@ use Centrobill\Sdk\Http\Response\UnblockTestPaymentDataResponse;
 use Centrobill\Sdk\Http\Response\UpdateAllowedIPsResponse;
 use Centrobill\Sdk\Http\Response\UpdateBalanceOfTheTestPaymentDataResponse;
 use Centrobill\Sdk\Http\Response\UpdateProductResponse;
-use Centrobill\Sdk\Http\Response\UpdateSiteResponse;
 use GuzzleHttp\ClientInterface as HttpClientInterface;
+use Centrobill\Sdk\Http\Response\UpdateSiteResponse;
+use Centrobill\Sdk\ValueObject\ApiKey;
 use GuzzleHttp\Exception\ClientException as GuzzleClientException;
 use GuzzleHttp\RequestOptions;
 
@@ -96,14 +99,14 @@ class Client implements ClientInterface
 
     private HttpClientInterface $client;
 
-    private array $historyContainer;
+    private ApiKey $apiKey;
 
     public function __construct(
         HttpClientInterface $client,
-        array $historyContainer
+        ApiKey $apiKey
      ) {
         $this->client = $client;
-        $this->historyContainer = $historyContainer;
+        $this->apiKey = $apiKey;
     }
 
     /**
@@ -454,22 +457,22 @@ class Client implements ClientInterface
     }
 
     /**
-     * @param ListPaymentaccountIDsByConsumerIdRequest $request
-     * @return ListPaymentaccountIDsByConsumerIdResponse|ErrorResponse
+     * @param ListPaymentAccountIDsByConsumerIdRequest $request
+     * @return ListPaymentAccountIDsByConsumerIdResponse|ErrorResponse
      */
-    public function listPaymentaccountIDsByConsumerId(
-        ListPaymentaccountIDsByConsumerIdRequest $request
+    public function listPaymentAccountIdsByConsumerId(
+        ListPaymentAccountIDsByConsumerIdRequest $request
     ): ResponseInterface
     {
         return $this->request($request);
     }
 
     /**
-     * @param ChangePaymentAccountForsubscriptionRequest $request
-     * @return ChangePaymentAccountForsubscriptionResponse|ErrorResponse
+     * @param ChangePaymentAccountForSubscriptionRequest $request
+     * @return ChangePaymentAccountForSubscriptionResponse|ErrorResponse
      */
-    public function changePaymentAccountForsubscription(
-        ChangePaymentAccountForsubscriptionRequest $request
+    public function changePaymentAccountForSubscription(
+        ChangePaymentAccountForSubscriptionRequest $request
     ): ResponseInterface
     {
         return $this->request($request);
@@ -524,31 +527,32 @@ class Client implements ClientInterface
         }
     }
 
-    private function getParametersKey(RequestInterface $request): string
+    private function getParametersKey(ApiRequestInterface $request): string
     {
         if (in_array(
             $request->getHttpMethod(),
             [
-                RequestInterface::HTTP_METHOD_GET,
-                RequestInterface::HTTP_METHOD_DELETE
+                ApiRequestInterface::HTTP_METHOD_GET,
+                ApiRequestInterface::HTTP_METHOD_DELETE
             ]
         )) {
             return RequestOptions::QUERY;
         } elseif (in_array(
             $request->getHttpMethod(),
             [
-                RequestInterface::HTTP_METHOD_POST,
-                RequestInterface::HTTP_METHOD_PUT
+                ApiRequestInterface::HTTP_METHOD_POST,
+                ApiRequestInterface::HTTP_METHOD_PUT
             ]
         )) {
             return RequestOptions::JSON;
         }
     }
 
-    private function getHeaders(RequestInterface $request): array
+    private function getHeaders(ApiRequestInterface $request): array
     {
         return [
             'Accept' => 'application/json',
+            'Authorization' => (string)$this->apiKey,
             self::HEADER_USER_AGENT => self::USER_AGENT,
         ] + $request->getHeaders();
     }
