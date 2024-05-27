@@ -4,5 +4,5 @@ namespace Centrobill\Sdk\Entity\PaymentSource;
 
 abstract class AbstractPaymentSource
 {
-    abstract public function toArray();
+    abstract public function toArray(): array;
 }

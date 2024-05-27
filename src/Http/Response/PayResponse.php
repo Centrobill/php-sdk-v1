@@ -9,11 +9,6 @@ use Centrobill\Sdk\Utils\Utils;
 
 class PayResponse extends AbstractResponse implements ResponseInterface
 {
-    public function isSuccessful()
-    {
-        return true;
-    }
-
     public function getPayment(): Payment
     {
         return new Payment($this->data->payment);

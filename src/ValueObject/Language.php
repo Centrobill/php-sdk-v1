@@ -15,7 +15,7 @@ final class Language
     /**
      * @throws SDKExceptionInterface
      */
-    function checkValue($value)
+    protected function checkValue($value)
     {
         if (empty($value)) {
             throw LanguageException::emptyValue();

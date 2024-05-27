@@ -4,11 +4,6 @@ namespace Centrobill\Sdk\Http\Response;
 
 class BlockTestPaymentDataResponse extends AbstractResponse implements ResponseInterface
 {
-    public function isSuccessful()
-    {
-        return true;
-    }
-
     public function getId()
     {
         return $this->data->id;

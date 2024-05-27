@@ -12,7 +12,7 @@ final class FullName
     public const MIN_LENGTH = 1;
     public const MAX_LENGTH = 64;
 
-    function checkValue($value)
+    protected function checkValue($value)
     {
         if (empty($value)) {
             throw FullNameException::emptyValue();

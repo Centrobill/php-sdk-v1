@@ -2,17 +2,12 @@
 
 namespace Centrobill\Sdk\Http\Request;
 
-use Centrobill\Sdk\ValueObject\ApiKey;
 use Centrobill\Sdk\ValueObject\Id;
 use Centrobill\Sdk\ValueObject\Ip;
+use Exception;
 
 class UpdateAllowedIPsRequest implements RequestInterface
 {
-    /**
-     * @var ApiKey $apiKey
-     */
-    private ApiKey $apiKey;
-
     /**
      * @var Id $id
      */
@@ -23,9 +18,8 @@ class UpdateAllowedIPsRequest implements RequestInterface
      */
     private $items;
 
-    public function __construct(ApiKey $apiKey, Id $id, $items = [])
+    public function __construct(Id $id, $items = [])
     {
-        $this->apiKey = $apiKey;
         $this->id = $id;
         $this->items = $items;
     }
@@ -46,12 +40,12 @@ class UpdateAllowedIPsRequest implements RequestInterface
     {
         $data = [];
 
-        // TODO throw an exception when items are empty
-
         if (!empty($this->items)) {
             $data['ips'] = array_map(function (Ip $item) {
                 return (string)$item;
             }, $this->items);
+        } else {
+            throw new Exception('Items are empty');
         }
 
         return $data;
@@ -71,7 +65,6 @@ class UpdateAllowedIPsRequest implements RequestInterface
     {
         return [
             'X-Requested-With' => 'XMLHttpRequest',
-            'Authorization' => (string)$this->apiKey,
         ];
     }
 }

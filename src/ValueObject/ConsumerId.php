@@ -17,7 +17,7 @@ final class ConsumerId
     /**
      * @throws SDKExceptionInterface
      */
-    function checkValue($value)
+    protected function checkValue($value)
     {
         if (empty($value)) {
             throw ConsumerIdException::emptyValue();

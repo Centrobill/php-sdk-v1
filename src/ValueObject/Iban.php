@@ -12,7 +12,7 @@ final class Iban
     public const MIN_LENGTH = 5;
     public const MAX_LENGTH = 34;
 
-    function checkValue($value)
+    protected function checkValue($value)
     {
         if (empty($value)) {
             throw IbanException::emptyValue();

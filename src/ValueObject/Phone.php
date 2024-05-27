@@ -16,7 +16,7 @@ final class Phone
     /**
      * @throws SDKExceptionInterface
      */
-    function checkValue($value)
+    protected function checkValue($value)
 
     {
         if (empty($value)) {

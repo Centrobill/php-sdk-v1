@@ -27,20 +27,20 @@ class PaymentSourcePaymentAccountIdWithCvv extends AbstractPaymentSource
     public function __construct(
         PaymentAccountId $paymentAccountId,
         Cvv $cvv,
-        ?EmulateCode $emulateCode = null,
+        ?EmulateCode $emulateCode = null
     ) {
         $this->paymentAccountId = $paymentAccountId;
         $this->cvv = $cvv;
         $this->emulateCode = $emulateCode;
     }
 
-    public function setEmulateCode(EmulateCode $emulateCode)
+    public function setEmulateCode(EmulateCode $emulateCode): self
     {
         $this->emulateCode = $emulateCode;
         return $this;
     }
 
-    public function toArray()
+    public function toArray(): array
     {
         $data = [
             'type' => PaymentSourceType::PAYMENT_SOURCE_PAYMENT_ACCOUNT_ID_WITH_CVV,

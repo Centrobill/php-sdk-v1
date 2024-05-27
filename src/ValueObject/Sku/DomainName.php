@@ -13,7 +13,7 @@ final class DomainName
 
     public const MAX_LENGTH = 36;
 
-    function checkValue($value)
+    protected protected function checkValue($value)
     {
         if (empty($value)) {
             throw DomainNameException::emptyValue();

@@ -16,11 +16,10 @@ class PayResponseTest extends TestCase
         $data = json_decode(file_get_contents(__DIR__ . '/../../fixtures/PayResponse.json'));
         $response = new PayResponse($data);
 
-        self::assertTrue($response->isSuccessful());
         self::assertEquals(Utils::convertObjectToArray($data), $response->getData());
-        self::isInstanceOf($response->getPayment(), Payment::class);
-        self::isInstanceOf($response->getConsumer(), Consumer::class);
-        self::isInstanceOf($response->getSubscription(), Subscription::class);
+        self::assertInstanceOf(Payment::class, $response->getPayment());
+        self::assertInstanceOf(Consumer::class, $response->getConsumer());
+        self::assertInstanceOf(Subscription::class, $response->getSubscription());
         self::assertEquals((array)$data->metadata, $response->getMetadata());
     }
 }

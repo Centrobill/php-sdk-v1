@@ -24,19 +24,19 @@ class PaymentSourcePayid extends AbstractPaymentSource
         $this->mid = $mid;
     }
 
-    public function setEmulateCode(EmulateCode $emulateCode)
+    public function setEmulateCode(EmulateCode $emulateCode): self
     {
         $this->emulateCode = $emulateCode;
         return $this;
     }
 
-    public function setMid(Mid $mid)
+    public function setMid(Mid $mid): self
     {
         $this->mid = $mid;
         return $this;
     }
 
-    public function toArray()
+    public function toArray(): array
     {
         $data = [
             'type' => PaymentSourceType::PAYMENT_SOURCE_PAYID,

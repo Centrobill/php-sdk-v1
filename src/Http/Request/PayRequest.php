@@ -6,16 +6,10 @@ use Centrobill\Sdk\Entity\Consumer;
 use Centrobill\Sdk\Entity\PaymentSource\AbstractPaymentSource;
 use Centrobill\Sdk\Entity\PaymentUrl;
 use Centrobill\Sdk\Entity\Sku;
-use Centrobill\Sdk\ValueObject\ApiKey;
 use Centrobill\Sdk\ValueObject\Field;
 
 class PayRequest implements RequestInterface
 {
-    /**
-     * @var ApiKey $apiKey
-     */
-    private ApiKey $apiKey;
-
     /**
      * @var AbstractPaymentSource $paymentSource
      */
@@ -47,7 +41,6 @@ class PayRequest implements RequestInterface
     private $emailOptions;
 
     public function __construct(
-        ApiKey $apiKey,
         AbstractPaymentSource $paymentSource,
         Sku $sku,
         Consumer $consumer,
@@ -55,7 +48,6 @@ class PayRequest implements RequestInterface
         $metadata = [],
         $emailOptions = false
     ) {
-        $this->apiKey = $apiKey;
         $this->paymentSource = $paymentSource;
         $this->sku = $sku;
         $this->consumer = $consumer;
@@ -116,7 +108,6 @@ class PayRequest implements RequestInterface
     {
         return [
             'X-Requested-With' => 'XMLHttpRequest',
-            'Authorization' => (string)$this->apiKey,
         ];
     }
 }

@@ -17,7 +17,7 @@ final class ExpirationMonth
     /**
      * @throws SDKExceptionInterface
      */
-    function checkValue($value)
+    protected function checkValue($value)
     {
         if (empty($value)) {
             throw ExpirationMonthException::emptyValue();

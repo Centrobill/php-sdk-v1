@@ -3,16 +3,10 @@
 namespace Centrobill\Sdk\Http\Request;
 
 use Centrobill\Sdk\Entity\Price;
-use Centrobill\Sdk\ValueObject\ApiKey;
 use Centrobill\Sdk\ValueObject\Id;
 
 class ChangeSubscriptionRequest implements RequestInterface
 {
-    /**
-     * @var ApiKey $apiKey
-     */
-    private ApiKey $apiKey;
-
     /**
      * @var Id $id
      */
@@ -23,9 +17,8 @@ class ChangeSubscriptionRequest implements RequestInterface
      */
     private $price;
 
-    public function __construct(ApiKey $apiKey, Id $id, $price = [])
+    public function __construct(Id $id, $price = [])
     {
-        $this->apiKey = $apiKey;
         $this->id = $id;
         $this->price = $price;
     }
@@ -63,7 +56,6 @@ class ChangeSubscriptionRequest implements RequestInterface
     {
         return [
             'X-Requested-With' => 'XMLHttpRequest',
-            'Authorization' => (string)$this->apiKey,
         ];
     }
 }

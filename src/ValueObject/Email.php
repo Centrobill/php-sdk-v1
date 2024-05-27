@@ -13,7 +13,7 @@ final class Email
     /**
      * @throws SDKExceptionInterface
      */
-    function checkValue($value)
+    protected function checkValue($value)
     {
         if (empty($value)) {
             throw EmailException::emptyValue();

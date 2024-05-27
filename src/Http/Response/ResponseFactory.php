@@ -2,28 +2,32 @@
 
 namespace Centrobill\Sdk\Http\Response;
 
-use Centrobill\Sdk\Http\Request\RequestInterface;
+use Centrobill\Sdk\Http\Request\ApiRequestInterface;
 use GuzzleHttp\Psr7\Response as GuzzleResponseInterface;
+use GuzzleHttp\Utils;
 
 class ResponseFactory
 {
     public static function createResponse(
-        RequestInterface $request,
+        ApiRequestInterface $request,
         GuzzleResponseInterface $response
     ): ResponseInterface {
-        if ($response->getStatusCode() >= 400 && $response->getStatusCode() <= 500) {
-            return new ErrorResponse(json_decode($response->getBody()->getContents()));
+        $content = Utils::jsonDecode($response->getBody()->getContents());
+
+        if ($response->getStatusCode() >= 400 && $response->getStatusCode() < 500) {
+            return new ClientErrorResponse($content);
+        }
+
+        if ($response->getStatusCode() >= 500) {
+            return new ErrorResponse($content);
         }
 
         $responseClassName = self::getResponseClassName($request);
-        return new $responseClassName(json_decode($response->getBody()->getContents()));
+        return new $responseClassName($content);
     }
 
-    private function getResponseClassName(RequestInterface $request)
+    private function getResponseClassName(ApiRequestInterface $request): string
     {
-        $className = get_class($request);
-        $className = str_replace('Request', 'Response', $className);
-
-        return $className;
+        return str_replace('Request', 'Response', get_class($request));
     }
 }

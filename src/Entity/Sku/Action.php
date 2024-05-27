@@ -8,14 +8,14 @@ use Centrobill\Sdk\ValueObject\Id;
 class Action
 {
     /**
-     * @var ActionType $type
+     * @var ?ActionType $type
      */
-    private ActionType $type;
+    private ?ActionType $type;
 
     /**
-     * @var Id $id
+     * @var ?Id $id
      */
-    private Id $id;
+    private ?Id $id;
 
     public function __construct(ActionType $type = null, Id $id = null)
     {
@@ -23,19 +23,19 @@ class Action
         $this->id = $id;
     }
 
-    public function setType(ActionType $type)
+    public function setType(ActionType $type): self
     {
         $this->type = $type;
         return $this;
     }
 
-    public function setId(Id $id)
+    public function setId(Id $id): self
     {
         $this->id = $id;
         return $this;
     }
 
-    public function toArray()
+    public function toArray(): array
     {
         $data = [];
 

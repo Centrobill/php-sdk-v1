@@ -11,7 +11,7 @@ final class Offset
 
     public const MAX_LENGTH = 5;
 
-    function checkValue($value)
+    protected function checkValue($value)
     {
         if (empty($value)) {
             throw OffsetException::emptyValue();

@@ -2,23 +2,16 @@
 
 namespace Centrobill\Sdk\Http\Request;
 
-use Centrobill\Sdk\ValueObject\ApiKey;
 use Centrobill\Sdk\ValueObject\Id;
 
 class BlockTestPaymentDataRequest implements RequestInterface
 {
     /**
-     * @var ApiKey $apiKey
-     */
-    private ApiKey $apiKey;
-
-    /**
      * @var Id $id
      */
     private Id $id;
 
-    public function __construct(ApiKey $apiKey, Id $id) {
-        $this->apiKey = $apiKey;
+    public function __construct(Id $id) {
         $this->id = $id;
     }
 
@@ -41,7 +34,6 @@ class BlockTestPaymentDataRequest implements RequestInterface
     {
         return [
             'X-Requested-With' => 'XMLHttpRequest',
-            'Authorization' => (string)$this->apiKey,
         ];
     }
 

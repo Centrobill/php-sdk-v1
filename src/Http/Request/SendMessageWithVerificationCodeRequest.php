@@ -2,18 +2,12 @@
 
 namespace Centrobill\Sdk\Http\Request;
 
-use Centrobill\Sdk\ValueObject\ApiKey;
 use Centrobill\Sdk\ValueObject\Channel;
 use Centrobill\Sdk\ValueObject\From;
 use Centrobill\Sdk\ValueObject\Phone;
 
 class SendMessageWithVerificationCodeRequest implements RequestInterface
 {
-    /**
-     * @var ApiKey $apiKey
-     */
-    private ApiKey $apiKey;
-    
     /**
      * @var Channel $channel
      */
@@ -29,9 +23,8 @@ class SendMessageWithVerificationCodeRequest implements RequestInterface
      */
     private ?From $from;
 
-    public function __construct(ApiKey $apiKey, Channel $channel, Phone $phone, ?From $from = null)
+    public function __construct(Channel $channel, Phone $phone, ?From $from = null)
     {
-        $this->apiKey = $apiKey;
         $this->channel = $channel;
         $this->phone = $phone;
         $this->from = $from;
@@ -70,7 +63,6 @@ class SendMessageWithVerificationCodeRequest implements RequestInterface
     {
         return [
             'X-Requested-With' => 'XMLHttpRequest',
-            'Authorization' => (string)$this->apiKey,
         ];
     }
 }

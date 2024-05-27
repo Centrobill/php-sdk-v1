@@ -7,14 +7,14 @@ use Centrobill\Sdk\ValueObject\Url as UrlValue;
 class Url
 {
     /**
-     * @var UrlValue $ipnUrl
+     * @var ?UrlValue $ipnUrl
      */
-    private UrlValue $ipnUrl;
+    private ?UrlValue $ipnUrl;
 
     /**
-     * @var UrlValue $redirectUrl
+     * @var ?UrlValue $redirectUrl
      */
-    private UrlValue $redirectUrl;
+    private ?UrlValue $redirectUrl;
 
     public function __construct(UrlValue $ipnUrl = null, UrlValue $redirectUrl = null)
     {
@@ -22,19 +22,19 @@ class Url
         $this->redirectUrl = $redirectUrl;
     }
 
-    public function setIpnUrl(UrlValue $ipnUrl)
+    public function setIpnUrl(UrlValue $ipnUrl): self
     {
         $this->ipnUrl = $ipnUrl;
         return $this;
     }
 
-    public function setRedirectUrl(UrlValue $redirectUrl)
+    public function setRedirectUrl(UrlValue $redirectUrl): self
     {
         $this->redirectUrl = $redirectUrl;
         return $this;
     }
 
-    public function toArray()
+    public function toArray(): array
     {
         $data = [];
 
