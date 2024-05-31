@@ -2,14 +2,14 @@
 
 namespace Centrobill\Sdk\Http\Response;
 
-use Centrobill\Sdk\Http\Request\ApiRequestInterface;
+use Centrobill\Sdk\Http\Request\RequestInterface;
 use GuzzleHttp\Psr7\Response as GuzzleResponseInterface;
 use GuzzleHttp\Utils;
 
 class ResponseFactory
 {
     public static function createResponse(
-        ApiRequestInterface $request,
+        RequestInterface $request,
         GuzzleResponseInterface $response
     ): ResponseInterface {
         $content = Utils::jsonDecode($response->getBody()->getContents());
@@ -26,7 +26,7 @@ class ResponseFactory
         return new $responseClassName($content);
     }
 
-    private function getResponseClassName(ApiRequestInterface $request): string
+    private function getResponseClassName(RequestInterface $request): string
     {
         return str_replace('Request', 'Response', get_class($request));
     }

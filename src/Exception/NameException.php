@@ -11,4 +11,9 @@ class NameException extends Exception implements SDKExceptionInterface
     {
         return new self('Name should not be empty.');
     }
+
+    public static function invalidLength()
+    {
+        return new self('Name length should be between 5 and 36 characters.');
+    }
 }

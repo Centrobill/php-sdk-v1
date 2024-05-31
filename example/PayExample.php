@@ -33,27 +33,29 @@ $sku->setName(new Name('QA1_CENTROBILL_COM_USD_21'));
 
 $consumer = new Consumer();
 $consumer->setFirstName(new FirstName('John'));
-$consumer->setLastName(new LastName('Doe'));
-$consumer->setEmail(new Email('test123123@centrobill.com'));
+$consumer->setLastName(new LastName('Dssoe'));
+$consumer->setEmail(new Email('test1231243@centrobill.com'));
 $consumer->setExternalId(new ExternalId('123123-test'));
-$consumer->setIp(new Ip('10.0.5.1'));
+$consumer->setIp(new Ip('116.203.154.165'));
 
-/** @var Client $client */
-$response = $client->pay(
-    new PayRequest(
-        new PaymentSourceCard(
-            new Number('4111111111111111'),
-            new ExpirationYear('25'),
-            new ExpirationMonth('12'),
-            new Cvv('123')
-        ),
-        $sku,
-        $consumer,
-        new PaymentUrl(
-            new UrlValue('https://example.com/ipn'),
-            new UrlValue('https://example.com/redirect')
-        )
+$request = new PayRequest(
+    new PaymentSourceCard(
+        new Number('4000006966642547'),
+        new ExpirationYear('25'),
+        new ExpirationMonth('12'),
+        new Cvv('123')
+    ),
+    $sku,
+    $consumer,
+    new PaymentUrl(
+        new UrlValue('https://example.com/ipn'),
+        new UrlValue('https://example.com/redirect')
     )
 );
+
+var_dump($request->getPayload());
+
+/** @var Client $client */
+$response = $client->pay($request);
 
 var_dump($response->getData());

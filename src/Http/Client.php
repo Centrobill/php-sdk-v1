@@ -6,7 +6,7 @@ use Centrobill\Sdk\Http\Request\ApiRequestInterface;
 use Centrobill\Sdk\Http\Request\BlockTestPaymentDataRequest;
 use Centrobill\Sdk\Http\Request\CancelSubscriptionRequest;
 use Centrobill\Sdk\Http\Request\ChangeConsumerGroupRequest;
-use Centrobill\Sdk\Http\Request\ChangePaymentAccountForsubscriptionRequest;
+use Centrobill\Sdk\Http\Request\ChangePaymentAccountForSubscriptionRequest;
 use Centrobill\Sdk\Http\Request\ChangeSubscriptionRequest;
 use Centrobill\Sdk\Http\Request\CheckVerificationCodeRequest;
 use Centrobill\Sdk\Http\Request\CreateConsumerRequest;
@@ -73,7 +73,7 @@ use Centrobill\Sdk\Http\Response\GetExchangeRateByIso3Response;
 use Centrobill\Sdk\Http\Response\GetListOfExternalIpsResponse;
 use Centrobill\Sdk\Http\Response\GetProductResponse;
 use Centrobill\Sdk\Http\Response\GetSubscriptionResponse;
-use Centrobill\Sdk\Http\Response\ListPaymentaccountIDsByConsumerIdResponse;
+use Centrobill\Sdk\Http\Response\ListPaymentAccountIDsByConsumerIdResponse;
 use Centrobill\Sdk\Http\Response\NotEmulate3DsForTestPaymentDataResponse;
 use Centrobill\Sdk\Http\Response\PayoutResponse;
 use Centrobill\Sdk\Http\Response\PayResponse;
@@ -527,28 +527,28 @@ class Client implements ClientInterface
         }
     }
 
-    private function getParametersKey(ApiRequestInterface $request): string
+    private function getParametersKey(RequestInterface $request): string
     {
         if (in_array(
             $request->getHttpMethod(),
             [
-                ApiRequestInterface::HTTP_METHOD_GET,
-                ApiRequestInterface::HTTP_METHOD_DELETE
+                RequestInterface::HTTP_METHOD_GET,
+                RequestInterface::HTTP_METHOD_DELETE
             ]
         )) {
             return RequestOptions::QUERY;
         } elseif (in_array(
             $request->getHttpMethod(),
             [
-                ApiRequestInterface::HTTP_METHOD_POST,
-                ApiRequestInterface::HTTP_METHOD_PUT
+                RequestInterface::HTTP_METHOD_POST,
+                RequestInterface::HTTP_METHOD_PUT
             ]
         )) {
             return RequestOptions::JSON;
         }
     }
 
-    private function getHeaders(ApiRequestInterface $request): array
+    private function getHeaders(RequestInterface $request): array
     {
         return [
             'Accept' => 'application/json',
