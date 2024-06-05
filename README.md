@@ -1,3 +1,7 @@
+## Requirements
+- PHP 7.4+
+- exstensions json, curl, intl
+
 ## Installation
 
 To install package using composer first add repository location to the **composer.json** either by adding it using cli command or just adding manually to **composer.json**
@@ -29,3 +33,8 @@ The package will be installed under vendor folder
 ## Using package
 
 To view different usages of API endpoints please refer to **example** folder
+
+## Contact
+In case you are missing some crucial information about your account please contact our Sales or Account manager in Centrobill:
+
+https://centrobill.com
