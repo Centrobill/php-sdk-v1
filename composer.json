@@ -1,6 +1,6 @@
 {
     "name": "centrobill/php-sdk-v1",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Centrobill SDK",
     "type": "library",
     "license": "MIT",
