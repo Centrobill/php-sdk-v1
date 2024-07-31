@@ -22,12 +22,7 @@ class ResponseFactory
             return new ErrorResponse($content);
         }
 
-        $responseClassName = self::getResponseClassName($request);
+        $responseClassName = str_replace('Request', 'Response', get_class($request));
         return new $responseClassName($content);
-    }
-
-    private function getResponseClassName(RequestInterface $request): string
-    {
-        return str_replace('Request', 'Response', get_class($request));
     }
 }
