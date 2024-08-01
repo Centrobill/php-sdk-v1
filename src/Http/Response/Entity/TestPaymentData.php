@@ -16,47 +16,62 @@ final class TestPaymentData
         $this->data = $data;
     }
 
-    public function getId()
+    public function getId(): int
     {
         return $this->data->id;
     }
 
-    public function getType()
+    public function getType(): string
     {
         return $this->data->type;
     }
 
-    public function getEmulate3ds()
+    public function getComment(): ?string
+    {
+        return isset($this->data->comment) ? $this->data->comment : null;
+    }
+
+    public function getTransactions(): int
+    {
+        return $this->data->transactions;
+    }
+
+    public function isEmulate3ds(): bool
     {
         return $this->data->emulate3ds;
     }
 
-    public function getNumber()
+    public function getNumber(): string
     {
         return $this->data->number;
     }
 
-    public function getBalance()
+    public function getBalance(): float
     {
-        return $this->data->balance;
+        return (float)$this->data->balance;
     }
 
-    public function getBlocked()
+    public function isBlocked(): bool
     {
         return $this->data->blocked;
     }
 
-    public function getAllowedIps()
+    public function isExpired(): bool
+    {
+        return $this->data->expired;
+    }
+
+    public function getAllowedIps(): array
     {
         return $this->data->allowedIps;
     }
 
-    public function getCreatedAt()
+    public function getCreatedAt(): string
     {
         return $this->data->createdAt;
     }
 
-    public function getUpdatedAt()
+    public function getUpdatedAt(): string
     {
         return $this->data->updatedAt;
     }

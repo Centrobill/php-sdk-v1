@@ -77,4 +77,19 @@ class Consumer
     {
         return isset($this->data->birthday) ? $this->data->birthday : null;
     }
+
+    public function isBlocked(): bool
+    {
+        return (bool)$this->data->blocked;
+    }
+
+    public function getCreatedAt(): ?Timestamp
+    {
+        return isset($this->data->createdAt) ? new Timestamp($this->data->createdAt) : null;
+    }
+
+    public function getUpdatedAt(): ?Timestamp
+    {
+        return isset($this->data->updatedAt) ? new Timestamp($this->data->updatedAt) : null;
+    }
 }

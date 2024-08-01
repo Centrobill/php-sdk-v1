@@ -2,10 +2,17 @@
 
 namespace Centrobill\Sdk\Http\Response;
 
-class DisablePaymentAccountForQuickSaleResponse extends AbstractResponse implements ResponseInterface
+class DisablePaymentAccountForQuickSaleResponse implements ResponseInterface
 {
-    public function getPaymentAccountId(): string
+    private $data;
+
+    public function __construct(string $data)
     {
-        return $this->data->paymentAccountId;
+        $this->data = $data;
+    }
+
+    public function getData()
+    {
+        return $this->data;
     }
 }

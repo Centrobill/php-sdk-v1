@@ -15,6 +15,6 @@ class GenerateCardDataTokenUsingPaymentAccountIdResponseTest extends TestCase
 
         self::assertEquals(Utils::convertObjectToArray($data), $response->getData());
         self::assertEquals($data->token, $response->getToken());
-        self::assertEquals($data->expiredAt, $response->getExpiredAt());
+        self::assertEquals($data->expireAt, $response->getExpireAt());
     }
 }

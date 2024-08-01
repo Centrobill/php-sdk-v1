@@ -50,7 +50,7 @@ class PaymentSourceToken extends AbstractPaymentSource
         ];
 
         if ($this->threeDs !== null) {
-            $data['3ds'] = (string)$this->threeDs;
+            $data['3ds'] = $this->threeDs;
         }
 
         if ($this->emulateCode !== null) {

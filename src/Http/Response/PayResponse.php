@@ -5,7 +5,7 @@ namespace Centrobill\Sdk\Http\Response;
 use Centrobill\Sdk\Http\Response\Entity\Consumer;
 use Centrobill\Sdk\Http\Response\Entity\Payment;
 use Centrobill\Sdk\Http\Response\Entity\Subscription;
-use Centrobill\Sdk\Utils\Utils;
+use Centrobill\Sdk\Http\Response\Entity\Timestamp;
 
 class PayResponse extends AbstractResponse implements ResponseInterface
 {
@@ -19,13 +19,14 @@ class PayResponse extends AbstractResponse implements ResponseInterface
         return new Consumer($this->data->consumer);
     }
 
-    public function getSubscription(): Subscription
+    public function getSubscription(): ?Subscription
     {
-        return new Subscription($this->data->subscription);
+        return isset($this->data->subscription) ? new Subscription($this->data->subscription) : null;
     }
 
     public function getMetadata(): array
     {
-        return Utils::convertObjectToArray($this->data->metadata);
+        return $this->data->metadata;
     }
+
 }

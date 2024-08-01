@@ -13,19 +13,19 @@ class UpdateBalanceOfTheTestPaymentDataRequest implements RequestInterface
     private Id $id;
 
     /**
-     * @var Amount $amount
+     * @var Amount $balance
      */
-    private Amount $amount;
+    private Amount $balance;
 
-    public function __construct(Id $id, Amount $amount)
+    public function __construct(Id $id, Amount $balance)
     {
         $this->id = $id;
-        $this->amount = $amount;
+        $this->balance = $balance;
     }
 
-    public function setAmount(Amount $amount)
+    public function setBalance(Amount $balance)
     {
-        $this->amount = $amount;
+        $this->balance = $balance;
         return $this;
     }
 
@@ -33,8 +33,8 @@ class UpdateBalanceOfTheTestPaymentDataRequest implements RequestInterface
     {
         $data = [];
 
-        if ($this->amount !== null) {
-            $data['amount'] = $this->amount->getValue();
+        if ($this->balance !== null) {
+            $data['balance'] = $this->balance->getValue();
         }
 
         return $data;

@@ -12,7 +12,11 @@ class ResponseFactory
         RequestInterface $request,
         GuzzleResponseInterface $response
     ): ResponseInterface {
-        $content = Utils::jsonDecode($response->getBody()->getContents());
+        try {
+            $content = Utils::jsonDecode($response->getBody()->getContents());
+        } catch (\Exception $e) {
+            $content = '';
+        }
 
         if ($response->getStatusCode() >= 400 && $response->getStatusCode() < 500) {
             return new ClientErrorResponse($content);

@@ -29,8 +29,8 @@ class Price
     private $repeat;
 
     public function __construct(
-        ?Offset $offset = null,
         ?Amount $amount = null,
+        ?Offset $offset = null,
         ?Currency $currency = null,
         $repeat = false
     ) {
