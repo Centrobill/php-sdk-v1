@@ -30,11 +30,9 @@ class NotEmulate3DsForTestPaymentDataRequest implements RequestInterface
 
     public function getPayload(): array
     {
-        $data = [];
-
-        if ($this->emulate3ds !== null) {
-            $data['emulate3ds'] = (string)$this->emulate3ds;
-        }
+        $data = [
+            'emulate3ds' => $this->emulate3ds,
+        ];
 
         return $data;
     }

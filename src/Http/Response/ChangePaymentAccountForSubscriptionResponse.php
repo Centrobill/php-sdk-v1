@@ -5,7 +5,6 @@ namespace Centrobill\Sdk\Http\Response;
 use Centrobill\Sdk\Http\Response\Entity\Consumer;
 use Centrobill\Sdk\Http\Response\Entity\Payment;
 use Centrobill\Sdk\Http\Response\Entity\Subscription;
-use Centrobill\Sdk\Utils\Utils;
 
 class ChangePaymentAccountForSubscriptionResponse extends AbstractResponse implements ResponseInterface
 {
@@ -26,6 +25,6 @@ class ChangePaymentAccountForSubscriptionResponse extends AbstractResponse imple
 
     public function getMetadata(): array
     {
-        return Utils::convertObjectToArray($this->data->metadata);
+        return $this->data->metadata;
     }
 }

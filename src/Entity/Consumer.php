@@ -107,7 +107,7 @@ class Consumer
     private ?BrowserAcceptHeader $browserAcceptHeader;
 
     /**
-     * @var ?bool $browserJavaEnabled
+     * @var bool $browserJavaEnabled
      */
     private $browserJavaEnabled;
 

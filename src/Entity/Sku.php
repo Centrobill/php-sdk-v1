@@ -34,9 +34,9 @@ class Sku
     private $price;
 
     /**
-     * @var Url $url
+     * @var ?Url $url
      */
-    private Url $url;
+    private ?Url $url;
 
     /**
      * @var ?Action $action
@@ -54,8 +54,8 @@ class Sku
     private ?Name $name;
 
     public function __construct(
-        Url $url,
         $price = [],
+        ?Url $url = null,
         ?SiteId $siteId = null,
         ?Name $name = null,
         ?Title $title = null,
@@ -73,6 +73,18 @@ class Sku
         $this->domainName = $domainName;
         $this->action = $action;
         $this->xsell = $xsell;
+    }
+
+    public function addPrice(Price $price): self
+    {
+        $this->price[] = $price;
+        return $this;
+    }
+
+    public function setUrl(Url $url): self
+    {
+        $this->url = $url;
+        return $this;
     }
 
     public function setSiteId(SiteId $siteId): self
@@ -121,8 +133,11 @@ class Sku
             'price' => array_map(function($item) {
                 return $item->toArray();
             }, $this->price),
-            'url' => $this->url->toArray(),
         ];
+
+        if ($this->url !== null) {
+            $data['url'] = $this->url->toArray();
+        }
 
         if ($this->siteId !== null) {
             $data['siteId'] = (string)$this->siteId;

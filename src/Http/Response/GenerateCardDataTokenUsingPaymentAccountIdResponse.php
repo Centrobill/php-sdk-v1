@@ -9,8 +9,8 @@ class GenerateCardDataTokenUsingPaymentAccountIdResponse extends AbstractRespons
         return $this->data->token;
     }
 
-    public function getExpiredAt()
+    public function getExpireAt()
     {
-        return $this->data->expiredAt;
+        return $this->data->expireAt;
     }
 }

@@ -2,6 +2,8 @@
 
 namespace Centrobill\Sdk\Http\Response;
 
+use Centrobill\Sdk\Utils\Utils;
+
 class ErrorResponse extends AbstractResponse
 {
     public function getMessage(): string
@@ -11,6 +13,6 @@ class ErrorResponse extends AbstractResponse
 
     public function getErrors(): array
     {
-        return $this->data->errors;
+        return Utils::convertObjectToArray($this->data->errors);
     }
 }

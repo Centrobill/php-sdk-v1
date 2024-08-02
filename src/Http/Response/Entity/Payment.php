@@ -74,8 +74,18 @@ final class Payment
         return isset($this->data->descriptor) ? $this->data->descriptor : null;
     }
 
+    public function getApiPaymentSource(): ?string
+    {
+        return isset($this->data->apiPaymentSource) ? $this->data->apiPaymentSource : null;
+    }
+
     public function getSource(): array
     {
         return isset($this->data->source) ? Utils::convertObjectToArray($this->data->source) : [];
+    }
+    
+    public function getTimestamp(): ?Timestamp
+    {
+        return isset($this->data->timestamp) ? new Timestamp($this->data->timestamp) : null;
     }
 }

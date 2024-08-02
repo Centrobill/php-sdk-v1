@@ -31,7 +31,7 @@ class Payment
     private $test;
 
     /**
-     * @var bool $emulateCode
+     * @var EmulateCode $emulateCode
      */
     private $emulateCode;
 
