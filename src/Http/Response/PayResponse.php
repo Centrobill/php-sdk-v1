@@ -5,10 +5,12 @@ namespace Centrobill\Sdk\Http\Response;
 use Centrobill\Sdk\Http\Response\Entity\Consumer;
 use Centrobill\Sdk\Http\Response\Entity\Payment;
 use Centrobill\Sdk\Http\Response\Entity\Subscription;
-use Centrobill\Sdk\Http\Response\Entity\Timestamp;
+use Centrobill\Sdk\Http\Response\Traits\HasMetadata;
 
 class PayResponse extends AbstractResponse implements ResponseInterface
 {
+    use HasMetadata;
+    
     public function getPayment(): Payment
     {
         return new Payment($this->data->payment);
@@ -23,10 +25,4 @@ class PayResponse extends AbstractResponse implements ResponseInterface
     {
         return isset($this->data->subscription) ? new Subscription($this->data->subscription) : null;
     }
-
-    public function getMetadata(): array
-    {
-        return $this->data->metadata;
-    }
-
 }
