@@ -22,7 +22,9 @@ use Centrobill\Sdk\ValueObject\Url as UrlValue;
 require_once __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/http-client.inc.php';
 
-$sku = new Sku(
+$sku = new Sku();
+
+$sku->setUrl(
     new Url(
         new UrlValue('https://example.com/'),
         new UrlValue('https://example.com/')
@@ -34,9 +36,9 @@ $sku->setName(new Name('QA1_CENTROBILL_COM_USD_21'));
 $consumer = new Consumer();
 $consumer->setFirstName(new FirstName('John'));
 $consumer->setLastName(new LastName('Dssoe'));
-$consumer->setEmail(new Email('test1231243@centrobill.com'));
-$consumer->setExternalId(new ExternalId('123123-test'));
-$consumer->setIp(new Ip('116.203.154.165'));
+$consumer->setEmail(new Email('test@centrobill.com'));
+$consumer->setExternalId(new ExternalId('test'));
+$consumer->setIp(new Ip('127.0.0.1'));
 
 $request = new PayRequest(
     new PaymentSourceCard(
