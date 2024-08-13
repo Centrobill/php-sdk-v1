@@ -24,7 +24,7 @@ class Price
     private ?Currency $currency;
 
     /**
-     * @var bool $repeat
+     * @var bool|null $repeat
      */
     private $repeat;
 
@@ -32,7 +32,7 @@ class Price
         ?Amount $amount = null,
         ?Offset $offset = null,
         ?Currency $currency = null,
-        $repeat = false
+        $repeat = null
     ) {
         $this->offset = $offset;
         $this->amount = $amount;

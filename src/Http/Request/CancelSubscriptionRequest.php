@@ -24,12 +24,12 @@ class CancelSubscriptionRequest implements RequestInterface
     private ?Reason $reason;
 
     /**
-     * @var bool $sendEmail
+     * @var bool|null $sendEmail
      */
     private $sendEmail;
 
     /**
-     * @var bool $keepActiveUntilNextRebill
+     * @var bool|null $keepActiveUntilNextRebill
      */
     private $keepActiveUntilNextRebill;
 
@@ -37,8 +37,8 @@ class CancelSubscriptionRequest implements RequestInterface
         Id $id,
         ?DateTimeImmutable $cancelDate = null,
         ?Reason $reason = null,
-        $sendEmail = false,
-        $keepActiveUntilNextRebill = false
+        $sendEmail = null,
+        $keepActiveUntilNextRebill = null
     ) {
         $this->id = $id;
         $this->cancelDate = $cancelDate;
@@ -73,10 +73,15 @@ class CancelSubscriptionRequest implements RequestInterface
 
     public function getPayload(): array
     {
-        $data = [
-            'sendEmail' => $this->sendEmail,
-            'keepActiveUntilNextRebill' => $this->keepActiveUntilNextRebill,
-        ];
+        $data = [];
+
+        if ($this->sendEmail !== null) {
+            $data['sendEmail'] = $this->sendEmail;
+        }
+
+        if ($this->keepActiveUntilNextRebill !== null) {
+            $data['keepActiveUntilNextRebill'] = $this->keepActiveUntilNextRebill;
+        }
 
         if ($this->cancelDate !== null) {
             $data['cancelDate'] = $this->cancelDate->format('Y-m-d H:i:s');

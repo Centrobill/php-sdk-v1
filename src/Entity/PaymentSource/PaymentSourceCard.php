@@ -33,7 +33,7 @@ class PaymentSourceCard extends AbstractPaymentSource
     private Cvv $cvv;
 
     /**
-     * @var bool $threeDS
+     * @var bool|null $threeDS
      */
     private $threeDS;
 
@@ -52,7 +52,7 @@ class PaymentSourceCard extends AbstractPaymentSource
         ExpirationYear $expirationYear,
         ExpirationMonth $expirationMonth,
         Cvv $cvv,
-        $threeDS = false,
+        $threeDS = null,
         ?EmulateCode $emulateCode = null,
         ?Mid $mid = null
     ) {
@@ -91,8 +91,11 @@ class PaymentSourceCard extends AbstractPaymentSource
             'expirationYear' => (string)$this->expirationYear,
             'expirationMonth' => (string)$this->expirationMonth,
             'cvv' => (string)$this->cvv,
-            '3ds' => $this->threeDS,
         ];
+
+        if ($this->threeDS !== null) {
+            $data['threeDS'] = $this->threeDS;
+        }
 
         if ($this->emulateCode !== null) {
             $data['emulateCode'] = (string)$this->emulateCode;

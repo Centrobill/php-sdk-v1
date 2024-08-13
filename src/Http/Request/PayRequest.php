@@ -36,7 +36,7 @@ class PayRequest implements RequestInterface
     private $metadata;
 
     /**
-     * @var bool $emailOptions
+     * @var bool|null $emailOptions
      */
     private $emailOptions;
 
@@ -46,7 +46,7 @@ class PayRequest implements RequestInterface
         Consumer $consumer,
         PaymentUrl $url,
         $metadata = [],
-        $emailOptions = false
+        $emailOptions = null
     ) {
         $this->paymentSource = $paymentSource;
         $this->sku = $sku;
@@ -80,9 +80,12 @@ class PayRequest implements RequestInterface
             'paymentSource' => $this->paymentSource->toArray(),
             'sku' => $this->sku->toArray(),
             'consumer' => $this->consumer->toArray(),
-            'url' => $this->url->toArray(),
-            'emailOptions' => $this->emailOptions,
+            'url' => $this->url->toArray()
         ];
+
+        if ($this->emailOptions !== null) {
+            $data['emailOptions'] = $this->emailOptions;
+        }
 
         if (!empty($this->metadata)) {
             foreach($this->metadata as $field) {
