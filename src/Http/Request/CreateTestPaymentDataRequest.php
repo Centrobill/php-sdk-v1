@@ -15,7 +15,7 @@ class CreateTestPaymentDataRequest implements RequestInterface
     private TestPaymentDataType $type;
 
     /**
-     * @var bool $emulate3ds
+     * @var bool|null $emulate3ds
      */
     private $emulate3ds;
 
@@ -37,7 +37,7 @@ class CreateTestPaymentDataRequest implements RequestInterface
     public function __construct(
         TestPaymentDataType $type,
         $allowedIps = [],
-        $emulate3ds = false,
+        $emulate3ds = null,
         ?Amount $balance = null,
         ?Currency $currency = null
     ) {

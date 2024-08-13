@@ -32,7 +32,7 @@ class GenerateUrlToPaymentPageRequest implements RequestInterface
     /** @var ?Ttl $ttl */
     private ?Ttl $ttl;
 
-    /** @var bool $emailOptions */
+    /** @var bool|null $emailOptions */
     private $emailOptions;
 
     public function __construct(
@@ -42,7 +42,7 @@ class GenerateUrlToPaymentPageRequest implements RequestInterface
         ?Payment $payment = null,
         $metadata = [],
         ?Ttl $ttl = null,
-        $emailOptions = false
+        $emailOptions = null
     ) {
         $this->sku = $sku;
         $this->consumer = $consumer;
@@ -110,9 +110,12 @@ class GenerateUrlToPaymentPageRequest implements RequestInterface
         $data = [
             'sku' => array_map(function($item) {
                 return $item->toArray();
-            }, $this->sku),
-            'emailOptions' => $this->emailOptions
+            }, $this->sku)
         ];
+
+        if ($this->emailOptions !== null) {
+            $data['emailOptions'] = $this->emailOptions;
+        }
 
         if ($this->consumer !== null) {
             $data['consumer'] = $this->consumer->toArray();

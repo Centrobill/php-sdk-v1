@@ -21,19 +21,19 @@ class Payment
     private ?PaymentMethod $selected;
 
     /**
-     * @var bool $secure
+     * @var bool|null $secure
      */
     private $secure;
 
     /**
-     * @var bool $test
+     * @var bool|null $test
      */
     private $test;
 
     /**
-     * @var EmulateCode $emulateCode
+     * @var ?EmulateCode $emulateCode
      */
-    private $emulateCode;
+    private ?EmulateCode $emulateCode;
 
     /**
      * @var ?Mid $mid
@@ -41,7 +41,7 @@ class Payment
     private ?Mid $mid;
 
     /**
-     * @var bool $terminalMode
+     * @var bool|null $terminalMode
      */
     private $terminalMode;
 
@@ -62,9 +62,9 @@ class Payment
         ?Mid $mid = null,
         ?Bin $bin = null,
         ?SiteName $domain = null,
-        $terminalMode = false,
-        $secure = false,
-        $test = false
+        $terminalMode = null,
+        $secure = null,
+        $test = null
     ) {
         $this->method = $method;
         $this->selected = $selected;
@@ -133,11 +133,19 @@ class Payment
 
     public function toArray(): array
     {
-        $data = [
-            'secure' => $this->secure,
-            'test' => $this->test,
-            'terminalMode' => $this->terminalMode,
-        ];
+        $data = [];
+
+        if ($this->secure !== null) {
+            $data['secure'] = $this->secure;
+        }
+
+        if ($this->test !== null) {
+            $data['test'] = $this->test;
+        }
+
+        if ($this->terminalMode !== null) {
+            $data['terminalMode'] = $this->terminalMode;
+        }
 
         $data['method'] = array_map(function($item) {
             return (string)$item;

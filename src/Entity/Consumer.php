@@ -107,7 +107,7 @@ class Consumer
     private ?BrowserAcceptHeader $browserAcceptHeader;
 
     /**
-     * @var bool $browserJavaEnabled
+     * @var bool|null $browserJavaEnabled
      */
     private $browserJavaEnabled;
 
@@ -153,7 +153,7 @@ class Consumer
         ?UserAgent $userAgent = null,
         ?DeviceId $deviceId = null,
         ?BrowserAcceptHeader $browserAcceptHeader = null,
-        $browserJavaEnabled = false,
+        $browserJavaEnabled = null,
         ?BrowserLanguage $browserLanguage = null,
         ?BrowserColorDepth $browserColorDepth = null,
         ?BrowserScreenHeight $browserScreenHeight = null,

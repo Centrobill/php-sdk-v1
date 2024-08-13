@@ -14,7 +14,7 @@ class PaymentSourceToken extends AbstractPaymentSource
     private Value $value;
 
     /**
-     * @var bool $threeDs
+     * @var bool|null $threeDs
      */
     private $threeDs;
 
@@ -23,7 +23,7 @@ class PaymentSourceToken extends AbstractPaymentSource
      */
     private ?EmulateCode $emulateCode;
 
-    public function __construct(Value $value, $threeDs = false, ?EmulateCode $emulateCode = null)
+    public function __construct(Value $value, $threeDs = null, ?EmulateCode $emulateCode = null)
     {
         $this->value = $value;
         $this->threeDs = $threeDs;

@@ -12,11 +12,11 @@ class Emulate3DsForTestPaymentDataRequest implements RequestInterface
     private Id $id;
 
     /**
-     * @var bool $emulate3ds
+     * @var bool|null $emulate3ds
      */
     private $emulate3ds;
 
-    public function __construct(Id $id, $emulate3ds = false)
+    public function __construct(Id $id, $emulate3ds = null)
     {
         $this->id = $id;
         $this->emulate3ds = $emulate3ds;
@@ -30,9 +30,11 @@ class Emulate3DsForTestPaymentDataRequest implements RequestInterface
 
     public function getPayload(): array
     {
-        $data = [
-            'emulate3ds' => $this->emulate3ds,
-        ];
+        $data = [];
+
+        if ($this->emulate3ds !== null) {
+            $data['emulate3ds'] = $this->emulate3ds;
+        }
 
         return $data;
     }
