@@ -18,7 +18,7 @@ class ListPaymentAccountIDsByConsumerIdRequest implements RequestInterface
 
     public function getUri(): string
     {
-        return sprintf('consumer/%s/paymentAccounts', (string)$this->id);
+        return sprintf('consumer/%s/paymentAccounts', $this->id);
     }
 
     public function getHttpMethod(): string

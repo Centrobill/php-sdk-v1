@@ -27,7 +27,7 @@ final class Field
         $this->value = $value;
         $this->key = $key;
     }
-    
+
     public function getKey()
     {
         return $this->key;

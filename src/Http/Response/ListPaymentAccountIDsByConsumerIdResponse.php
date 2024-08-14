@@ -13,14 +13,14 @@ class ListPaymentAccountIDsByConsumerIdResponse implements ResponseInterface
         $this->data = $data;
     }
 
-    public function getPaymentAccounts()
+    public function getPaymentAccounts(): array
     {
         return array_map(function ($paymentAccount) {
             return new PaymentAccount($paymentAccount);
         }, $this->data);
     }
 
-    public function getData()
+    public function getData(): array
     {
         return $this->data;
     }

@@ -2,18 +2,17 @@
 
 namespace Centrobill\Sdk\Exception;
 
-use Centrobill\Sdk\Exception\SDKExceptionInterface;
 use Centrobill\Sdk\ValueObject\TestPaymentDataType;
 use Exception;
 
 class TestPaymentDataTypeException extends Exception implements SDKExceptionInterface
 {
-    public static function emptyValue()
+    public static function emptyValue(): TestPaymentDataTypeException
     {
         return new self('Type should not be empty.');
     }
 
-    public static function invalidValue()
+    public static function invalidValue(): TestPaymentDataTypeException
     {
         return new self(
             sprintf(

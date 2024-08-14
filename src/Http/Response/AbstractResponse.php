@@ -14,7 +14,7 @@ abstract class AbstractResponse implements ResponseInterface
         $this->data = $data;
     }
 
-    public function getData()
+    public function getData(): array
     {
         return Utils::convertObjectToArray($this->data);
     }

@@ -7,12 +7,12 @@ use Exception;
 
 class PaymentSourceTypeException extends Exception implements SDKExceptionInterface
 {
-    public static function emptyValue()
+    public static function emptyValue(): PaymentSourceTypeException
     {
         return new self('Source type should not be empty.');
     }
 
-    public static function invalidValue()
+    public static function invalidValue(): PaymentSourceTypeException
     {
         return new self(
             sprintf(

@@ -23,7 +23,7 @@ class UpdateBalanceOfTheTestPaymentDataRequest implements RequestInterface
         $this->balance = $balance;
     }
 
-    public function setBalance(Amount $balance)
+    public function setBalance(Amount $balance): UpdateBalanceOfTheTestPaymentDataRequest
     {
         $this->balance = $balance;
         return $this;
@@ -31,18 +31,14 @@ class UpdateBalanceOfTheTestPaymentDataRequest implements RequestInterface
 
     public function getPayload(): array
     {
-        $data = [];
-
-        if ($this->balance !== null) {
-            $data['balance'] = $this->balance->getValue();
-        }
-
-        return $data;
+        return [
+            'balance' => $this->balance->getValue(),
+        ];
     }
 
     public function getUri(): string
     {
-        return sprintf('testPaymentData/%s/balance', (string)$this->id);
+        return sprintf('testPaymentData/%s/balance', $this->id);
     }
 
     public function getHttpMethod(): string

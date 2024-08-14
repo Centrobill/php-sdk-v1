@@ -184,133 +184,133 @@ class Consumer
         $this->browserTimezone = $browserTimezone;
     }
 
-    public function setId(Id $id)
+    public function setId(Id $id): Consumer
     {
         $this->id = $id;
         return $this;
     }
 
-    public function setExternalId(ExternalId $externalId)
+    public function setExternalId(ExternalId $externalId): Consumer
     {
         $this->externalId = $externalId;
         return $this;
     }
 
-    public function setEmail(Email $email)
+    public function setEmail(Email $email): Consumer
     {
         $this->email = $email;
         return $this;
     }
 
-    public function setFirstName(FirstName $firstName)
+    public function setFirstName(FirstName $firstName): Consumer
     {
         $this->firstName = $firstName;
         return $this;
     }
 
-    public function setLastName(LastName $lastName)
+    public function setLastName(LastName $lastName): Consumer
     {
         $this->lastName = $lastName;
         return $this;
     }
 
-    public function setBirthday(DateTimeImmutable $birthday)
+    public function setBirthday(DateTimeImmutable $birthday): Consumer
     {
         $this->birthday = $birthday;
         return $this;
     }
 
-    public function setPhone(Phone $phone)
+    public function setPhone(Phone $phone): Consumer
     {
         $this->phone = $phone;
         return $this;
     }
 
-    public function setCountry(Country $country)
+    public function setCountry(Country $country): Consumer
     {
         $this->country = $country;
         return $this;
     }
 
-    public function setState(State $state)
+    public function setState(State $state): Consumer
     {
         $this->state = $state;
         return $this;
     }
 
-    public function setCity(City $city)
+    public function setCity(City $city): Consumer
     {
         $this->city = $city;
         return $this;
     }
 
-    public function setAddress(Address $address)
+    public function setAddress(Address $address): Consumer
     {
         $this->address = $address;
         return $this;
     }
 
-    public function setZip(Zip $zip)
+    public function setZip(Zip $zip): Consumer
     {
         $this->zip = $zip;
         return $this;
     }
 
-    public function setIp(Ip $ip)
+    public function setIp(Ip $ip): Consumer
     {
         $this->ip = $ip;
         return $this;
     }
 
-    public function setUserAgent(UserAgent $userAgent)
+    public function setUserAgent(UserAgent $userAgent): Consumer
     {
         $this->userAgent = $userAgent;
         return $this;
     }
 
-    public function setDeviceId(DeviceId $deviceId)
+    public function setDeviceId(DeviceId $deviceId): Consumer
     {
         $this->deviceId = $deviceId;
         return $this;
     }
 
-    public function setBrowserAcceptHeader(BrowserAcceptHeader $browserAcceptHeader)
+    public function setBrowserAcceptHeader(BrowserAcceptHeader $browserAcceptHeader): Consumer
     {
         $this->browserAcceptHeader = $browserAcceptHeader;
         return $this;
     }
 
-    public function setBrowserJavaEnabled($browserJavaEnabled)
+    public function setBrowserJavaEnabled($browserJavaEnabled): Consumer
     {
         $this->browserJavaEnabled = $browserJavaEnabled;
         return $this;
     }
 
-    public function setBrowserLanguage(BrowserLanguage $browserLanguage)
+    public function setBrowserLanguage(BrowserLanguage $browserLanguage): Consumer
     {
         $this->browserLanguage = $browserLanguage;
         return $this;
     }
 
-    public function setBrowserColorDepth(BrowserColorDepth $browserColorDepth)
+    public function setBrowserColorDepth(BrowserColorDepth $browserColorDepth): Consumer
     {
         $this->browserColorDepth = $browserColorDepth;
         return $this;
     }
 
-    public function setBrowserScreenHeight(BrowserScreenHeight $browserScreenHeight)
+    public function setBrowserScreenHeight(BrowserScreenHeight $browserScreenHeight): Consumer
     {
         $this->browserScreenHeight = $browserScreenHeight;
         return $this;
     }
 
-    public function setBrowserScreenWidth(BrowserScreenWidth $browserScreenWidth)
+    public function setBrowserScreenWidth(BrowserScreenWidth $browserScreenWidth): Consumer
     {
         $this->browserScreenWidth = $browserScreenWidth;
         return $this;
     }
 
-    public function setBrowserTimezone(BrowserTimezone $browserTimezone)
+    public function setBrowserTimezone(BrowserTimezone $browserTimezone): Consumer
     {
         $this->browserTimezone = $browserTimezone;
         return $this;

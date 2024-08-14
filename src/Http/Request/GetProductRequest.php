@@ -11,7 +11,8 @@ class GetProductRequest implements RequestInterface
      */
     private Name $name;
 
-    public function __construct(Name $name) {
+    public function __construct(Name $name)
+    {
         $this->name = $name;
     }
 
@@ -22,7 +23,7 @@ class GetProductRequest implements RequestInterface
 
     public function getUri(): string
     {
-        return sprintf('sku/%s', (string)$this->name);
+        return sprintf('sku/%s', $this->name);
     }
 
     public function getHttpMethod(): string

@@ -10,7 +10,7 @@ final class BrowserColorDepth
     /**
      * @var int
      */
-    private $value;
+    private int $value;
 
     /**
      * @throws SDKExceptionInterface
@@ -20,7 +20,7 @@ final class BrowserColorDepth
         if (empty($value)) {
             throw BrowserColorDepthException::emptyValue();
         }
-        
+
         if (filter_var($value, FILTER_VALIDATE_INT) === false || (int)$value < 0) {
             throw BrowserColorDepthException::invalidValue();
         }
@@ -31,7 +31,7 @@ final class BrowserColorDepth
     /**
      * @return int
      */
-    public function getValue()
+    public function getValue(): int
     {
         return $this->value;
     }

@@ -28,12 +28,10 @@ class SepaPayout extends AbstractPayout
 
     public function toArray(): array
     {
-        $data = [
+        return [
             'type' => PayoutType::PAYOUT_TYPE_SEPA,
             'iban' => (string)$this->iban,
             'full_name' => (string)$this->fullName,
         ];
-
-        return $data;
     }
 }

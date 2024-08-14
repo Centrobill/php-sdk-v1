@@ -18,7 +18,7 @@ class UnblockTestPaymentDataRequest implements RequestInterface
 
     public function getUri(): string
     {
-        return sprintf('testPaymentData/%s/unblock', (string)$this->id);
+        return sprintf('testPaymentData/%s/unblock', $this->id);
     }
 
     public function getHttpMethod(): string

@@ -2,13 +2,15 @@
 
 namespace Centrobill\Sdk\ValueObject\Traits;
 
+use Centrobill\Sdk\Exception\SDKExceptionInterface;
+
 trait ValueToStringTrait
 {
-    /**
-     * @var string
-     */
-    private $value;
+    private string $value;
 
+    /**
+     * @throws SDKExceptionInterface
+     */
     public function __construct(string $value)
     {
         $this->checkValue($value);

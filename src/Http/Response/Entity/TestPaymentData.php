@@ -28,7 +28,7 @@ final class TestPaymentData
 
     public function getComment(): ?string
     {
-        return isset($this->data->comment) ? $this->data->comment : null;
+        return $this->data->comment ?? null;
     }
 
     public function getTransactions(): int

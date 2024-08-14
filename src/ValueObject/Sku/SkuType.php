@@ -15,10 +15,13 @@ class SkuType extends Enum
         if (is_string($value)) {
             $value = trim(filter_var($value, FILTER_UNSAFE_RAW));
         }
-        
+
         parent::__construct($value);
     }
 
+    /**
+     * @throws SkuTypeException
+     */
     public static function isValid($value)
     {
         if (empty($value)) {
@@ -26,7 +29,7 @@ class SkuType extends Enum
         }
 
         if (!in_array($value, SkuType::toArray())) {
-            throw SkuTypeException::invalidValue($value);
+            throw SkuTypeException::invalidValue();
         }
     }
 }

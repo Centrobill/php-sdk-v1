@@ -2,17 +2,16 @@
 
 namespace Centrobill\Sdk\Exception;
 
-use Centrobill\Sdk\Exception\SDKExceptionInterface;
 use Exception;
 
 class BrowserColorDepthException extends Exception implements SDKExceptionInterface
 {
-    public static function emptyValue()
+    public static function emptyValue(): BrowserColorDepthException
     {
         return new self('Browser color depth should not be empty.');
     }
 
-    public static function invalidValue()
+    public static function invalidValue(): BrowserColorDepthException
     {
         return new self('Browser color depth is not valid.');
     }

@@ -11,20 +11,21 @@ class BlockTestPaymentDataRequest implements RequestInterface
      */
     private Id $id;
 
-    public function __construct(Id $id) {
+    public function __construct(Id $id)
+    {
         $this->id = $id;
     }
 
     public function getUri(): string
     {
-        return sprintf('testPaymentData/%s/block', (string)$this->id);
+        return sprintf('testPaymentData/%s/block', $this->id);
     }
 
     public function getHttpMethod(): string
     {
         return self::HTTP_METHOD_POST;
     }
-    
+
     /**
      * Get headers
      *

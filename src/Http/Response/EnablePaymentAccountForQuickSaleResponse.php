@@ -11,7 +11,7 @@ class EnablePaymentAccountForQuickSaleResponse implements ResponseInterface
         $this->data = $data;
     }
 
-    public function getData()
+    public function getData(): string
     {
         return $this->data;
     }

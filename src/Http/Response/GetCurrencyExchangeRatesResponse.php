@@ -23,7 +23,7 @@ class GetCurrencyExchangeRatesResponse implements ResponseInterface
         }, $this->data);
     }
 
-    public function getData()
+    public function getData(): array
     {
         return $this->data;
     }

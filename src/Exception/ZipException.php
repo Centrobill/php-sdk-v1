@@ -2,17 +2,16 @@
 
 namespace Centrobill\Sdk\Exception;
 
-use Centrobill\Sdk\Exception\SDKExceptionInterface;
 use Exception;
 
 class ZipException extends Exception implements SDKExceptionInterface
 {
-    public static function emptyValue()
+    public static function emptyValue(): ZipException
     {
         return new self('Zip should not be empty.');
     }
 
-    public static function invalidLength()
+    public static function invalidLength(): ZipException
     {
         return new self('Zip should be between 1 and 16 characters long.');
     }

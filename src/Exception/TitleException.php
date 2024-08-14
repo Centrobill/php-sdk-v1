@@ -2,7 +2,6 @@
 
 namespace Centrobill\Sdk\Exception;
 
-use Centrobill\Sdk\Exception\SDKExceptionInterface;
 use Exception;
 
 class TitleException extends Exception implements SDKExceptionInterface

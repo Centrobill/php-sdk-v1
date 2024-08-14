@@ -18,7 +18,7 @@ class DisablePaymentAccountForQuickSaleRequest implements RequestInterface
 
     public function getUri(): string
     {
-        return sprintf('paymentAccount/%s/disable', (string)$this->paymentAccountId);
+        return sprintf('paymentAccount/%s/disable', $this->paymentAccountId);
     }
 
     public function getHttpMethod(): string

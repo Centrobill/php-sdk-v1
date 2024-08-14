@@ -18,7 +18,7 @@ final class PaymentAccountId
         if (empty($value)) {
             throw PaymentAccountIdException::emptyValue();
         }
-        
+
         if (!preg_match('/^[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i', $value)) {
             throw PaymentAccountIdException::invalidFormat();
         }

@@ -15,6 +15,7 @@ final class Limit
      * Amount constructor.
      *
      * @param mixed $value
+     * @throws LimitException
      */
     public function __construct($value)
     {

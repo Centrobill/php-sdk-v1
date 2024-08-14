@@ -24,7 +24,7 @@ class UpdateAllowedIPsRequest implements RequestInterface
         $this->items = $items;
     }
 
-    public function addItem(Ip $item)
+    public function addItem(Ip $item): UpdateAllowedIPsRequest
     {
         $this->items[] = $item;
         return $this;
@@ -36,6 +36,9 @@ class UpdateAllowedIPsRequest implements RequestInterface
         return $this;
     }
 
+    /**
+     * @throws Exception
+     */
     public function getPayload(): array
     {
         $data = [];
@@ -53,7 +56,7 @@ class UpdateAllowedIPsRequest implements RequestInterface
 
     public function getUri(): string
     {
-        return sprintf('testPaymentData/%s/allowedIps', (string)$this->id);
+        return sprintf('testPaymentData/%s/allowedIps', $this->id);
     }
 
     public function getHttpMethod(): string

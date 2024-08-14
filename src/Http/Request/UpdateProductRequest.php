@@ -73,25 +73,25 @@ class UpdateProductRequest implements RequestInterface
         $this->currency = $currency;
     }
 
-    public function setPrice($price)
+    public function setPrice($price): UpdateProductRequest
     {
         $this->price = $price;
         return $this;
     }
 
-    public function setExternalId(ExternalId $externalId)
+    public function setExternalId(ExternalId $externalId): UpdateProductRequest
     {
         $this->externalId = $externalId;
         return $this;
     }
 
-    public function setAmount(Amount $amount)
+    public function setAmount(Amount $amount): UpdateProductRequest
     {
         $this->amount = $amount;
         return $this;
     }
 
-    public function setCurrency(Currency $currency)
+    public function setCurrency(Currency $currency): UpdateProductRequest
     {
         $this->currency = $currency;
         return $this;
@@ -128,7 +128,7 @@ class UpdateProductRequest implements RequestInterface
 
     public function getUri(): string
     {
-        return sprintf('sku/%s', (string)$this->name);
+        return sprintf('sku/%s', $this->name);
     }
 
     public function getHttpMethod(): string

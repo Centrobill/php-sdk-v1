@@ -11,12 +11,15 @@ final class UserAgent
 
     public const MAX_LENGTH = 255;
 
+    /**
+     * @throws UserAgentException
+     */
     protected function checkValue($value)
     {
         if (empty($value)) {
             throw UserAgentException::emptyValue();
         }
-        
+
         if (strlen($value) > self::MAX_LENGTH) {
             throw UserAgentException::invalidLength();
         }

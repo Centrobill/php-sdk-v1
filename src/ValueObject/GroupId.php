@@ -13,6 +13,9 @@ final class GroupId extends Enum
     const GROUP_SENIOR    = '4';
     const GROUP_EXPERT    = '5';
 
+    /**
+     * @throws GroupIdException
+     */
     public static function isValid($value)
     {
         if (empty($value)) {
@@ -20,7 +23,7 @@ final class GroupId extends Enum
         }
 
         if (!in_array($value, GroupId::toArray())) {
-            throw GroupIdException::invalidValue($value);
+            throw GroupIdException::invalidValue();
         }
     }
 
@@ -29,7 +32,7 @@ final class GroupId extends Enum
         if (is_string($value)) {
             $value = trim(filter_var($value, FILTER_UNSAFE_RAW));
         }
-        
+
         parent::__construct($value);
     }
 }

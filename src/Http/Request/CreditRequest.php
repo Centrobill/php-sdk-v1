@@ -12,7 +12,7 @@ class CreditRequest implements RequestInterface
      * @var Id $id
      */
     private Id $id;
-    
+
     /**
      * @var ?Amount $amount
      */
@@ -51,7 +51,7 @@ class CreditRequest implements RequestInterface
 
     public function getUri(): string
     {
-        return sprintf('payment/%s/credit', (string)$this->id);
+        return sprintf('payment/%s/credit', $this->id);
     }
 
     public function getHttpMethod(): string

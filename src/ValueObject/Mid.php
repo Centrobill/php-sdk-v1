@@ -22,7 +22,7 @@ final class Mid
         if (empty($value)) {
             throw MidException::emptyValue();
         }
-        
+
         if (strlen($value) < self::MIN_LENGTH || strlen($value) > self::MAX_LENGTH) {
             throw MidException::invalidLength();
         }

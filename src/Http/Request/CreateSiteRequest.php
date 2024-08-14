@@ -40,13 +40,13 @@ class CreateSiteRequest implements RequestInterface
         $this->redirectUrl = $redirectUrl;
     }
 
-    public function setExternalId(ExternalId $externalId)
+    public function setExternalId(ExternalId $externalId): CreateSiteRequest
     {
         $this->externalId = $externalId;
         return $this;
     }
 
-    public function setRedirectUrl(Url $redirectUrl)
+    public function setRedirectUrl(Url $redirectUrl): CreateSiteRequest
     {
         $this->redirectUrl = $redirectUrl;
         return $this;
@@ -54,14 +54,12 @@ class CreateSiteRequest implements RequestInterface
 
     public function getPayload(): array
     {
-        $data = [
+        return [
             'name' => (string)$this->name,
             'ipnUrl' => (string)$this->ipnUrl,
             'externalId' => (string)$this->externalId,
             'redirectUrl' => (string)$this->redirectUrl,
         ];
-
-        return $data;
     }
 
     public function getUri(): string

@@ -32,16 +32,14 @@ class GenerateCardDataTokenUsingPaymentAccountIdRequest implements RequestInterf
 
     public function getPayload(): array
     {
-        $data = [
+        return [
             'paymentAccountId' => (string)$this->paymentAccountId,
             'consumerId' => (string)$this->consumerId,
             'cvv' => (string)$this->cvv,
         ];
-
-        return $data;
     }
 
-    public function getUri(): string 
+    public function getUri(): string
     {
         return 'tokenizeWithPaymentAccountId';
     }

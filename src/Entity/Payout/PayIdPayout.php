@@ -11,7 +11,7 @@ class PayIdPayout extends AbstractPayout
      * @var Payid $payId
      */
     private Payid $payId;
-    
+
     public function __construct(
         Payid $payId
     ) {
@@ -20,11 +20,9 @@ class PayIdPayout extends AbstractPayout
 
     public function toArray(): array
     {
-        $data = [
+        return [
             'type' => PayoutType::PAYOUT_TYPE_PAYID,
             'payId' => (string)$this->payId,
         ];
-
-        return $data;
     }
 }

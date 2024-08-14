@@ -73,43 +73,43 @@ class CreateConsumerRequest implements RequestInterface
         $this->groupId = $groupId;
     }
 
-    public function setUsername(Username $username)
+    public function setUsername(Username $username): CreateConsumerRequest
     {
         $this->username = $username;
         return $this;
     }
 
-    public function setEmail(Email $email)
+    public function setEmail(Email $email): CreateConsumerRequest
     {
         $this->email = $email;
         return $this;
     }
 
-    public function setFirstName(FirstName $firstName)
+    public function setFirstName(FirstName $firstName): CreateConsumerRequest
     {
         $this->firstName = $firstName;
         return $this;
     }
 
-    public function setLastName(LastName $lastName)
+    public function setLastName(LastName $lastName): CreateConsumerRequest
     {
         $this->lastName = $lastName;
         return $this;
     }
 
-    public function setBirthday(DateTimeImmutable $birthday)
+    public function setBirthday(DateTimeImmutable $birthday): CreateConsumerRequest
     {
         $this->birthday = $birthday;
         return $this;
     }
 
-    public function setCountry(Country $country)
+    public function setCountry(Country $country): CreateConsumerRequest
     {
         $this->country = $country;
         return $this;
     }
 
-    public function setGroupId(GroupId $groupId)
+    public function setGroupId(GroupId $groupId): CreateConsumerRequest
     {
         $this->groupId = $groupId;
         return $this;

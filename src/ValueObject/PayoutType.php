@@ -17,10 +17,13 @@ final class PayoutType extends Enum
         if (is_string($value)) {
             $value = trim(filter_var($value, FILTER_UNSAFE_RAW));
         }
-        
+
         parent::__construct($value);
     }
 
+    /**
+     * @throws PayoutTypeException
+     */
     public static function isValid($value)
     {
         if (empty($value)) {

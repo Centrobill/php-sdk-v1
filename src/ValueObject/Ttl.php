@@ -9,6 +9,9 @@ final class Ttl
 {
     use ValueToStringTrait;
 
+    /**
+     * @throws TtlException
+     */
     protected function checkValue($value)
     {
         if (empty($value)) {

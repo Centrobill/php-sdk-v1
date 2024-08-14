@@ -11,7 +11,7 @@ final class Bin
     use ValueToStringTrait;
 
     public const MIN_LENGTH = 6;
-    
+
     public const MAX_LENGTH = 8;
 
     /**

@@ -10,7 +10,7 @@ final class Utils
      * @param  stdClass $data
      * @return array
      */
-    public static function convertObjectToArray(stdClass $data)
+    public static function convertObjectToArray(stdClass $data): array
     {
         $array = [];
 
@@ -24,6 +24,4 @@ final class Utils
 
         return $array;
     }
-
-    
 }

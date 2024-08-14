@@ -23,12 +23,12 @@ class CheckVerificationCodeRequest implements RequestInterface
         $this->code = $code;
     }
 
-    public function getUri(): string 
+    public function getUri(): string
     {
-        return sprintf('antifraud/verification/%s/%s', (string)$this->phone, (string)$this->code);
+        return sprintf('antifraud/verification/%s/%s', $this->phone, $this->code);
     }
 
-    public function getHttpMethod(): string 
+    public function getHttpMethod(): string
     {
         return self::HTTP_METHOD_GET;
     }

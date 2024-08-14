@@ -2,18 +2,17 @@
 
 namespace Centrobill\Sdk\Exception;
 
-use Centrobill\Sdk\Exception\SDKExceptionInterface;
 use Centrobill\Sdk\ValueObject\Sku\SkuType;
 use Exception;
 
 class SkuTypeException extends Exception implements SDKExceptionInterface
 {
-    public static function emptyValue()
+    public static function emptyValue(): SkuTypeException
     {
         return new self('Sku type should not be empty.');
     }
 
-    public static function invalidValue()
+    public static function invalidValue(): SkuTypeException
     {
         return new self(
             sprintf(

@@ -30,7 +30,7 @@ class SendMessageWithVerificationCodeRequest implements RequestInterface
         $this->from = $from;
     }
 
-    public function setFrom(From $from)
+    public function setFrom(From $from): SendMessageWithVerificationCodeRequest
     {
         $this->from = $from;
         return $this;
@@ -51,7 +51,7 @@ class SendMessageWithVerificationCodeRequest implements RequestInterface
 
     public function getUri(): string
     {
-        return sprintf('antifraud/verification/%s/send', (string)$this->channel);
+        return sprintf('antifraud/verification/%s/send', $this->channel);
     }
 
     public function getHttpMethod(): string

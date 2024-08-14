@@ -10,7 +10,7 @@ use Centrobill\Sdk\Http\Response\Traits\HasMetadata;
 class PayResponse extends AbstractResponse implements ResponseInterface
 {
     use HasMetadata;
-    
+
     public function getPayment(): Payment
     {
         return new Payment($this->data->payment);

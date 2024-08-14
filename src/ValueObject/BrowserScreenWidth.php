@@ -10,7 +10,7 @@ final class BrowserScreenWidth
     /**
      * @var int
      */
-    private $value;
+    private int $value;
 
     /**
      * @throws SDKExceptionInterface
@@ -20,7 +20,7 @@ final class BrowserScreenWidth
         if (empty($value)) {
             throw BrowserScreenWidthException::emptyValue();
         }
-        
+
         if (filter_var($value, FILTER_VALIDATE_INT) === false || (int)$value < 0) {
             throw BrowserScreenWidthException::invalidValue();
         }
@@ -31,7 +31,7 @@ final class BrowserScreenWidth
     /**
      * @return int
      */
-    public function getValue()
+    public function getValue(): int
     {
         return $this->value;
     }

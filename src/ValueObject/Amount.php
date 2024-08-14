@@ -6,15 +6,13 @@ use Centrobill\Sdk\Exception\AmountException;
 
 final class Amount
 {
-    /**
-     * @var float
-     */
-    private $value;
+    private float $value;
 
     /**
      * Amount constructor.
      *
      * @param mixed $value
+     * @throws AmountException
      */
     public function __construct($value)
     {
@@ -28,7 +26,7 @@ final class Amount
     /**
      * @return float
      */
-    public function getValue()
+    public function getValue(): float
     {
         return $this->value;
     }

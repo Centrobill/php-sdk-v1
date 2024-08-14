@@ -3,6 +3,7 @@
 namespace Centrobill\Sdk\Http\Response;
 
 use Centrobill\Sdk\Http\Request\RequestInterface;
+use Exception;
 use GuzzleHttp\Psr7\Response as GuzzleResponseInterface;
 use GuzzleHttp\Utils;
 
@@ -14,7 +15,7 @@ class ResponseFactory
     ): ResponseInterface {
         try {
             $content = Utils::jsonDecode($response->getBody()->getContents());
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $content = '';
         }
 

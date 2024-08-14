@@ -47,25 +47,25 @@ class CancelSubscriptionRequest implements RequestInterface
         $this->keepActiveUntilNextRebill = $keepActiveUntilNextRebill;
     }
 
-    public function setCancelDate(DateTimeImmutable $cancelDate)
+    public function setCancelDate(DateTimeImmutable $cancelDate): CancelSubscriptionRequest
     {
         $this->cancelDate = $cancelDate;
         return $this;
     }
 
-    public function setReason(Reason $reason)
+    public function setReason(Reason $reason): CancelSubscriptionRequest
     {
         $this->reason = $reason;
         return $this;
     }
 
-    public function setSendEmail($sendEmail)
+    public function setSendEmail($sendEmail): CancelSubscriptionRequest
     {
         $this->sendEmail = $sendEmail;
         return $this;
     }
 
-    public function setKeepActiveUntilNextRebill($keepActiveUntilNextRebill)
+    public function setKeepActiveUntilNextRebill($keepActiveUntilNextRebill): CancelSubscriptionRequest
     {
         $this->keepActiveUntilNextRebill = $keepActiveUntilNextRebill;
         return $this;
@@ -94,9 +94,9 @@ class CancelSubscriptionRequest implements RequestInterface
         return $data;
     }
 
-    public function getUri(): string 
+    public function getUri(): string
     {
-        return sprintf('subscription/%s/cancel', (string)$this->id);
+        return sprintf('subscription/%s/cancel', $this->id);
     }
 
     public function getHttpMethod(): string

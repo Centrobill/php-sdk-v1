@@ -7,12 +7,12 @@ use Exception;
 
 class PaymentMethodException extends Exception implements SDKExceptionInterface
 {
-    public static function emptyValue()
+    public static function emptyValue(): PaymentMethodException
     {
         return new self('Method should not be empty.');
     }
 
-    public static function invalidValue($value)
+    public static function invalidValue(): PaymentMethodException
     {
         return new self(
             sprintf(

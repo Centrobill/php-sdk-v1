@@ -2,17 +2,16 @@
 
 namespace Centrobill\Sdk\Exception;
 
-use Centrobill\Sdk\Exception\SDKExceptionInterface;
 use Exception;
 
 class BrowserScreenWidthException extends Exception implements SDKExceptionInterface
 {
-    public static function emptyValue()
+    public static function emptyValue(): BrowserScreenWidthException
     {
         return new self('Browser screen width should not be empty.');
     }
 
-    public static function invalidValue()
+    public static function invalidValue(): BrowserScreenWidthException
     {
         return new self('Browser screen width is not valid.');
     }

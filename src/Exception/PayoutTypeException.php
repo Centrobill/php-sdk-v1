@@ -7,12 +7,12 @@ use Exception;
 
 class PayoutTypeException extends Exception implements SDKExceptionInterface
 {
-    public static function emptyValue()
+    public static function emptyValue(): PayoutTypeException
     {
         return new self('Payout type should not be empty.');
     }
 
-    public static function invalidValue()
+    public static function invalidValue(): PayoutTypeException
     {
         return new self(
             sprintf(
