@@ -52,6 +52,7 @@ use Centrobill\Sdk\Http\Response\DeleteTestPaymentDataByIDResponse;
 use Centrobill\Sdk\Http\Response\DisablePaymentAccountForQuickSaleResponse;
 use Centrobill\Sdk\Http\Response\Emulate3DsForTestPaymentDataResponse;
 use Centrobill\Sdk\Http\Response\EnablePaymentAccountForQuickSaleResponse;
+use Centrobill\Sdk\Http\Response\ErrorResponse;
 use Centrobill\Sdk\Http\Response\GenerateCardDataTokenResponse;
 use Centrobill\Sdk\Http\Response\GenerateCardDataTokenUsingPaymentAccountIdResponse;
 use Centrobill\Sdk\Http\Response\GenerateUrlToPaymentPageResponse;

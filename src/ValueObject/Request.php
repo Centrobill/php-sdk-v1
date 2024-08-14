@@ -9,6 +9,9 @@ final class Request
 {
     use ValueToStringTrait;
 
+    /**
+     * @throws RequestException
+     */
     protected function checkValue($value)
     {
         if (empty($value)) {

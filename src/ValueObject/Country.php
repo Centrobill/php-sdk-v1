@@ -262,10 +262,13 @@ final class Country extends Enum
         if (is_string($value)) {
             $value = trim(filter_var($value, FILTER_UNSAFE_RAW));
         }
-        
+
         parent::__construct($value);
     }
 
+    /**
+     * @throws CountryException
+     */
     public static function isValid($value)
     {
         if (empty($value)) {
@@ -273,7 +276,7 @@ final class Country extends Enum
         }
 
         if (!in_array($value, Country::toArray())) {
-            throw CountryException::invalidValue($value);
+            throw CountryException::invalidValue();
         }
     }
 }

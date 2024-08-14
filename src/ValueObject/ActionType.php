@@ -12,6 +12,9 @@ final class ActionType
     public const MIN_LENGTH = 5;
     public const MAX_LENGTH = 36;
 
+    /**
+     * @throws ActionTypeException
+     */
     protected function checkValue($value)
     {
         if (empty($value)) {

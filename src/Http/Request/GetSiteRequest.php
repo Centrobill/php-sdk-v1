@@ -11,7 +11,8 @@ class GetSiteRequest implements RequestInterface
      */
     private Id $id;
 
-    public function __construct(Id $id) {
+    public function __construct(Id $id)
+    {
         $this->id = $id;
     }
 
@@ -22,7 +23,7 @@ class GetSiteRequest implements RequestInterface
 
     public function getUri(): string
     {
-        return sprintf('site/%s', (string)$this->id);
+        return sprintf('site/%s', $this->id);
     }
 
     public function getHttpMethod(): string

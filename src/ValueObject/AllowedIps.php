@@ -9,6 +9,9 @@ final class AllowedIps
 {
     use ValueToStringTrait;
 
+    /**
+     * @throws AllowedIpsException
+     */
     protected function checkValue($value)
     {
         if (empty($value)) {

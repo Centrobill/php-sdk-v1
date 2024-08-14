@@ -43,87 +43,87 @@ final class Site
 
     public function isCorsEnabled(): bool
     {
-        return isset($this->data->corsEnabled) ? $this->data->corsEnabled : false;
+        return $this->data->corsEnabled ?? false;
     }
 
     public function getStatus(): bool
     {
-        return isset($this->data->status) ? $this->data->status : false;
+        return $this->data->status ?? false;
     }
 
     public function isAutoRedirect(): bool
     {
-        return isset($this->data->autoRedirect) ? $this->data->autoRedirect : false;
+        return $this->data->autoRedirect ?? false;
     }
 
     public function getTrackingCode(): ?string
     {
-        return isset($this->data->trackingCode) ? $this->data->trackingCode : null;
+        return $this->data->trackingCode ?? null;
     }
 
     public function getRebillRetryPolicy(): ?string
     {
-        return isset($this->data->rebillRetryPolicy) ? $this->data->rebillRetryPolicy : null;
+        return $this->data->rebillRetryPolicy ?? null;
     }
 
     public function getMemberExpirationDatePadding(): ?string
     {
-        return isset($this->data->memberExpirationDatePadding) ? $this->data->memberExpirationDatePadding : null;
+        return $this->data->memberExpirationDatePadding ?? null;
     }
 
     public function getDeclineUrl(): ?string
     {
-        return isset($this->data->declineUrl) ? $this->data->declineUrl : null;
+        return $this->data->declineUrl ?? null;
     }
 
     public function getBgBodyColor(): ?string
     {
-        return isset($this->data->bgBodyColor) ? $this->data->bgBodyColor : null;
+        return $this->data->bgBodyColor ?? null;
     }
 
     public function getLinkColor(): ?string
     {
-        return isset($this->data->linkColor) ? $this->data->linkColor : null;
+        return $this->data->linkColor ?? null;
     }
 
     public function getTextColor(): ?string
     {
-        return isset($this->data->textColor) ? $this->data->textColor : null;
+        return $this->data->textColor ?? null;
     }
 
     public function getBgColor1(): ?string
     {
-        return isset($this->data->bgColor1) ? $this->data->bgColor1 : null;
+        return $this->data->bgColor1 ?? null;
     }
 
     public function getBgColor2(): ?string
     {
-        return isset($this->data->bgColor2) ? $this->data->bgColor2 : null;
+        return $this->data->bgColor2 ?? null;
     }
 
     public function getBgColor3(): ?string
     {
-        return isset($this->data->bgColor3) ? $this->data->bgColor3 : null;
+        return $this->data->bgColor3 ?? null;
     }
 
     public function getTextColor1(): ?string
     {
-        return isset($this->data->textColor1) ? $this->data->textColor1 : null;
+        return $this->data->textColor1 ?? null;
     }
 
     public function getTextColor2(): ?string
     {
-        return isset($this->data->textColor2) ? $this->data->textColor2 : null;
+        return $this->data->textColor2 ?? null;
     }
 
     public function getTextColor3(): ?string
     {
-        return isset($this->data->textColor3) ? $this->data->textColor3 : null;
+        return $this->data->textColor3 ?? null;
     }
 
     public function getLogoBase64(): ?string
     {
-        return isset($this->data->logoBase64) ? $this->data->logoBase64 : null;
+        return $this->data->logoBase64 ?? null;
     }
 
     public function getCreatedAt(): string

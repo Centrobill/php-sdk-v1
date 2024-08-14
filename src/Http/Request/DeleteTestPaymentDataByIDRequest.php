@@ -18,7 +18,7 @@ class DeleteTestPaymentDataByIDRequest implements RequestInterface
 
     public function getUri(): string
     {
-        return sprintf('testPaymentData/%s', (string)$this->id);
+        return sprintf('testPaymentData/%s', $this->id);
     }
 
     public function getHttpMethod(): string

@@ -13,6 +13,9 @@ final class Username
 
     public const MAX_LENGTH = 255;
 
+    /**
+     * @throws UsernameException
+     */
     protected function checkValue($value)
     {
         if (empty($value)) {

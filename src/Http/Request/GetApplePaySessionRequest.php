@@ -18,11 +18,9 @@ class GetApplePaySessionRequest implements RequestInterface
 
     public function getPayload(): array
     {
-        $data = [
+        return [
             'domain' => (string)$this->domain,
         ];
-
-        return $data;
     }
 
     public function getUri(): string

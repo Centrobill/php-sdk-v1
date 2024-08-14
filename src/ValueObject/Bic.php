@@ -13,12 +13,15 @@ final class Bic
 
     public const MAX_LENGTH = 11;
 
+    /**
+     * @throws BicException
+     */
     protected function checkValue($value)
     {
         if (empty($value)) {
             throw BicException::emptyValue();
         }
-        
+
         if (strlen($value) < self::MIN_LENGTH || strlen($value) > self::MAX_LENGTH) {
             throw BicException::invalidLength();
         }

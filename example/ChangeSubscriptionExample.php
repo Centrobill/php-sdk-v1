@@ -4,7 +4,6 @@ use Centrobill\Sdk\Entity\Price;
 use Centrobill\Sdk\Http\Client;
 use Centrobill\Sdk\Http\Request\ChangeSubscriptionRequest;
 use Centrobill\Sdk\ValueObject\Amount;
-
 use Centrobill\Sdk\ValueObject\Currency;
 use Centrobill\Sdk\ValueObject\Id;
 use Centrobill\Sdk\ValueObject\Offset;

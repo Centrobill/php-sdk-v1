@@ -21,7 +21,7 @@ final class LastName
         if (empty($value)) {
             throw LastNameException::emptyValue();
         }
-        
+
         if (strlen($value) < self::MIN_LENGTH || strlen($value) > self::MAX_LENGTH) {
             throw LastNameException::invalidLength();
         }

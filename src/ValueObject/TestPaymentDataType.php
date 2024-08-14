@@ -16,16 +16,19 @@ final class TestPaymentDataType extends Enum
     const TEST_PAYMENT_DATE_TYPE_JCB = 'jcb';
     const TEST_PAYMENT_DATE_TYPE_DINERS_INTERNATIONAL = 'diners';
     const TEST_PAYMENT_DATE_TYPE_AMEX = 'amex';
-    
+
     public function __construct($value)
     {
         if (is_string($value)) {
             $value = trim(filter_var($value, FILTER_UNSAFE_RAW));
         }
-        
+
         parent::__construct($value);
     }
 
+    /**
+     * @throws TestPaymentDataTypeException
+     */
     public static function isValid($value)
     {
         if (empty($value)) {

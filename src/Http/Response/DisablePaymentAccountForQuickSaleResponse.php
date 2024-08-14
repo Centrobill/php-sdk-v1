@@ -4,14 +4,14 @@ namespace Centrobill\Sdk\Http\Response;
 
 class DisablePaymentAccountForQuickSaleResponse implements ResponseInterface
 {
-    private $data;
+    private string $data;
 
     public function __construct(string $data)
     {
         $this->data = $data;
     }
 
-    public function getData()
+    public function getData(): string
     {
         return $this->data;
     }

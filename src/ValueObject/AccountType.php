@@ -7,9 +7,12 @@ use MyCLabs\Enum\Enum;
 
 final class AccountType extends Enum
 {
-    const ACCOUNT_TYPE_С = 'С';
+    const ACCOUNT_TYPE_C = 'С';
     const ACCOUNT_TYPE_S = 'S';
 
+    /**
+     * @throws AccountTypeException
+     */
     public static function isValid($value)
     {
         if (empty($value)) {
@@ -17,7 +20,7 @@ final class AccountType extends Enum
         }
 
         if (!in_array($value, AccountType::toArray())) {
-            throw AccountTypeException::invalidValue($value);
+            throw AccountTypeException::invalidValue();
         }
     }
 

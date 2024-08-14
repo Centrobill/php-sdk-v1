@@ -48,25 +48,25 @@ class UpdateSiteRequest implements RequestInterface
         $this->redirectUrl = $redirectUrl;
     }
 
-    public function setName(SiteName $name)
+    public function setName(SiteName $name): UpdateSiteRequest
     {
         $this->name = $name;
         return $this;
     }
 
-    public function setExternalId(ExternalId $externalId)
+    public function setExternalId(ExternalId $externalId): UpdateSiteRequest
     {
         $this->externalId = $externalId;
         return $this;
     }
 
-    public function setIpnUrl(Url $ipnUrl)
+    public function setIpnUrl(Url $ipnUrl): UpdateSiteRequest
     {
         $this->ipnUrl = $ipnUrl;
         return $this;
     }
 
-    public function setRedirectUrl(Url $redirectUrl)
+    public function setRedirectUrl(Url $redirectUrl): UpdateSiteRequest
     {
         $this->redirectUrl = $redirectUrl;
         return $this;
@@ -75,7 +75,7 @@ class UpdateSiteRequest implements RequestInterface
     public function getPayload(): array
     {
         $data = [];
-        
+
         if ($this->name !== null) {
             $data['name'] = (string)$this->name;
         }
@@ -97,7 +97,7 @@ class UpdateSiteRequest implements RequestInterface
 
     public function getUri(): string
     {
-        return sprintf('site/%s', (string)$this->id);
+        return sprintf('site/%s', $this->id);
     }
 
     public function getHttpMethod(): string

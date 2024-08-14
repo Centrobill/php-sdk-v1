@@ -48,19 +48,19 @@ class CreateTestPaymentDataRequest implements RequestInterface
         $this->currency = $currency;
     }
 
-    public function setAllowedIps($allowedIps)
+    public function setAllowedIps($allowedIps): CreateTestPaymentDataRequest
     {
         $this->allowedIps = $allowedIps;
         return $this;
     }
 
-    public function setEmulate3ds(bool $emulate3ds)
+    public function setEmulate3ds(bool $emulate3ds): CreateTestPaymentDataRequest
     {
         $this->emulate3ds = $emulate3ds;
         return $this;
     }
 
-    public function setBalance(Amount $balance)
+    public function setBalance(Amount $balance): CreateTestPaymentDataRequest
     {
         $this->balance = $balance;
         return $this;

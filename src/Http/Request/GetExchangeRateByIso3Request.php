@@ -18,7 +18,7 @@ class GetExchangeRateByIso3Request implements RequestInterface
 
     public function getUri(): string
     {
-        return sprintf('currency-exchange-rate/%s', (string)$this->currency);
+        return sprintf('currency-exchange-rate/%s', $this->currency);
     }
 
     public function getHttpMethod(): string

@@ -2,9 +2,9 @@
 
 namespace Centrobill\Sdk\Entity;
 
-use Centrobill\Sdk\Entity\Price;
 use Centrobill\Sdk\Entity\Sku\Action;
 use Centrobill\Sdk\Entity\Sku\Url;
+use Centrobill\Sdk\Exception\SDKExceptionInterface;
 use Centrobill\Sdk\ValueObject\Sku\DomainName;
 use Centrobill\Sdk\ValueObject\Sku\Name;
 use Centrobill\Sdk\ValueObject\Sku\SiteId;
@@ -123,14 +123,17 @@ class Sku
         return $this;
     }
 
+    /**
+     * @throws SDKExceptionInterface
+     */
     public function toArray(): array
     {
         if ($this->siteId === null && $this->name === null) {
-            throw new \InvalidArgumentException('SiteId or Name are required');
+            throw SkuEntityException::siteIdNameEmpty();
         }
 
         $data = [
-            'price' => array_map(function($item) {
+            'price' => array_map(function ($item) {
                 return $item->toArray();
             }, $this->price),
         ];

@@ -12,7 +12,7 @@ class ChangePaymentAccountForSubscriptionRequest implements RequestInterface
      * @var Id $id
      */
     private Id $id;
-    
+
     /**
      * @var AbstractPaymentSource $paymentSource
      */
@@ -32,17 +32,15 @@ class ChangePaymentAccountForSubscriptionRequest implements RequestInterface
 
     public function getPayload(): array
     {
-        $data = [
+        return [
             'paymentSource' => $this->paymentSource->toArray(),
             'consumer' => $this->consumer->toArray(),
         ];
-
-        return $data;
     }
 
     public function getUri(): string
     {
-        return sprintf('subscription/%s/paymentAccount', (string)$this->id);
+        return sprintf('subscription/%s/paymentAccount', $this->id);
     }
 
     public function getHttpMethod(): string

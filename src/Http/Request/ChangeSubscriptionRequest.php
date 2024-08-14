@@ -23,7 +23,7 @@ class ChangeSubscriptionRequest implements RequestInterface
         $this->price = $price;
     }
 
-    public function setPrice($price)
+    public function setPrice($price): ChangeSubscriptionRequest
     {
         $this->price = $price;
         return $this;
@@ -34,7 +34,7 @@ class ChangeSubscriptionRequest implements RequestInterface
         $data = [];
 
         if (!empty($this->price)) {
-            $data['price'] = array_map(function(Price $price) {
+            $data['price'] = array_map(function (Price $price) {
                 return $price->toArray();
             }, $this->price);
         }
@@ -42,9 +42,9 @@ class ChangeSubscriptionRequest implements RequestInterface
         return $data;
     }
 
-    public function getUri(): string 
+    public function getUri(): string
     {
-        return sprintf('subscription/%s', (string)$this->id);
+        return sprintf('subscription/%s', $this->id);
     }
 
     public function getHttpMethod(): string

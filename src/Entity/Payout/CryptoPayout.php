@@ -28,12 +28,10 @@ class CryptoPayout extends AbstractPayout
 
     public function toArray(): array
     {
-        $data = [
+        return [
             'type' => PayoutType::PAYOUT_TYPE_CRYPTO,
             'address' => (string)$this->address,
             'currency' => (string)$this->currency,
         ];
-
-        return $data;
     }
 }

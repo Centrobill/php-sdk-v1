@@ -11,7 +11,8 @@ class GetSubscriptionRequest implements RequestInterface
      */
     private Id $id;
 
-    public function __construct(Id $id) {
+    public function __construct(Id $id)
+    {
         $this->id = $id;
     }
 
@@ -22,7 +23,7 @@ class GetSubscriptionRequest implements RequestInterface
 
     public function getUri(): string
     {
-        return sprintf('subscription/%s', (string)$this->id);
+        return sprintf('subscription/%s', $this->id);
     }
 
     public function getHttpMethod(): string

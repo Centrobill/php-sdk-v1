@@ -54,7 +54,10 @@ final class PaymentMethod extends Enum
     const PAYMENT_METHOD_MULTIBANCO = "multibanco";
     const PAYMENT_METHOD_BNCR = "bncr";
     const PAYMENT_METHOD_MBWAY = "mbway";
-    
+
+    /**
+     * @throws PaymentMethodException
+     */
     public static function isValid($value)
     {
         if (empty($value)) {
@@ -62,7 +65,7 @@ final class PaymentMethod extends Enum
         }
 
         if (!in_array($value, PaymentMethod::toArray())) {
-            throw PaymentMethodException::invalidValue($value);
+            throw PaymentMethodException::invalidValue();
         }
     }
 }

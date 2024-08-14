@@ -11,6 +11,9 @@ final class AccountNumber
 
     public const MAX_LENGTH = 32;
 
+    /**
+     * @throws AccountNumberException
+     */
     protected function checkValue($value)
     {
         if (empty($value)) {

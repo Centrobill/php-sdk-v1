@@ -1,7 +1,6 @@
 <?php
 
 use Centrobill\Sdk\Http\Client;
-
 use Centrobill\Sdk\Http\Request\ListPaymentAccountIDsByConsumerIdRequest;
 use Centrobill\Sdk\ValueObject\Id;
 

@@ -2,12 +2,11 @@
 
 namespace Centrobill\Sdk\Exception;
 
-use Centrobill\Sdk\Exception\SDKExceptionInterface;
 use Exception;
 
 class AmountException extends Exception implements SDKExceptionInterface
 {
-    public static function invalidValue(): self
+    public static function invalidValue(): AmountException
     {
         return new self('Amount is not valid.');
     }

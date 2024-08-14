@@ -159,10 +159,13 @@ final class Currency extends Enum
         if (is_string($value)) {
             $value = trim(filter_var($value, FILTER_UNSAFE_RAW));
         }
-        
+
         parent::__construct($value);
     }
 
+    /**
+     * @throws CurrencyException
+     */
     public static function isValid($value)
     {
         if (empty($value)) {
@@ -170,7 +173,7 @@ final class Currency extends Enum
         }
 
         if (!in_array($value, Currency::toArray())) {
-            throw CurrencyException::invalidValue($value);
+            throw CurrencyException::invalidValue();
         }
     }
 }

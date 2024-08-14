@@ -9,7 +9,7 @@ use Centrobill\Sdk\ValueObject\Traits\ValueToStringTrait;
 final class CryptoAddress
 {
     use ValueToStringTrait;
-    
+
     /**
      * @throws SDKExceptionInterface
      */

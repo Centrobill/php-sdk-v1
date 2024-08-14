@@ -65,25 +65,25 @@ class CreateProductRequest implements RequestInterface
         $this->currency = $currency;
     }
 
-    public function addPrice(Price $price)
+    public function addPrice(Price $price): CreateProductRequest
     {
         $this->price[] = $price;
         return $this;
     }
 
-    public function setExternalId(ExternalId $externalId)
+    public function setExternalId(ExternalId $externalId): CreateProductRequest
     {
         $this->externalId = $externalId;
         return $this;
     }
 
-    public function setAmount(Amount $amount)
+    public function setAmount(Amount $amount): CreateProductRequest
     {
         $this->amount = $amount;
         return $this;
     }
 
-    public function setCurrency(Currency $currency)
+    public function setCurrency(Currency $currency): CreateProductRequest
     {
         $this->currency = $currency;
         return $this;

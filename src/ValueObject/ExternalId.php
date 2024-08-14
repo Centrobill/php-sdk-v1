@@ -17,12 +17,11 @@ final class ExternalId
      * @throws SDKExceptionInterface
      */
     protected function checkValue($value)
-
     {
         if (empty($value)) {
             throw ExternalIdException::emptyValue();
         }
-        
+
         if (strlen($value) < self::MIN_LENGTH || strlen($value) > self::MAX_LENGTH) {
             throw ExternalIdException::invalidLength();
         }

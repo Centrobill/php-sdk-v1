@@ -147,7 +147,7 @@ class Payment
             $data['terminalMode'] = $this->terminalMode;
         }
 
-        $data['method'] = array_map(function($item) {
+        $data['method'] = array_map(function ($item) {
             return (string)$item;
         }, $this->method);
 

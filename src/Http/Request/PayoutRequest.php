@@ -73,31 +73,31 @@ class PayoutRequest implements RequestInterface
         $this->metadata = $metadata;
     }
 
-    public function setConsumerId(ConsumerId $consumerId)
+    public function setConsumerId(ConsumerId $consumerId): PayoutRequest
     {
         $this->consumerId = $consumerId;
         return $this;
     }
 
-    public function setPaymentAccountId(PaymentAccountId $paymentAccountId)
+    public function setPaymentAccountId(PaymentAccountId $paymentAccountId): PayoutRequest
     {
         $this->paymentAccountId = $paymentAccountId;
         return $this;
     }
 
-    public function setSiteId(SiteId $siteId)
+    public function setSiteId(SiteId $siteId): PayoutRequest
     {
         $this->siteId = $siteId;
         return $this;
     }
 
-    public function setParameters(Parameters $parameters)
+    public function setParameters(Parameters $parameters): PayoutRequest
     {
         $this->parameters = $parameters;
         return $this;
     }
 
-    public function setUrl(PayoutUrl $url)
+    public function setUrl(PayoutUrl $url): PayoutRequest
     {
         $this->url = $url;
         return $this;
@@ -143,9 +143,8 @@ class PayoutRequest implements RequestInterface
         }
 
         if (!empty($this->metadata)) {
-            foreach($this->metadata as $field) {
+            foreach ($this->metadata as $field) {
                 $data['metadata'][$field->getKey()] = $field->getValue();
-                
             }
         }
 

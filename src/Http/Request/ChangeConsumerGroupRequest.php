@@ -13,9 +13,9 @@ class ChangeConsumerGroupRequest implements RequestInterface
     private Id $id;
 
     /**
-     * @var GroupId $groupId
+     * @var ?GroupId $groupId
      */
-    private GroupId $groupId;
+    private ?GroupId $groupId;
 
     public function __construct(Id $id, GroupId $groupId = null)
     {
@@ -23,7 +23,7 @@ class ChangeConsumerGroupRequest implements RequestInterface
         $this->groupId = $groupId;
     }
 
-    public function setGroupId(GroupId $groupId)
+    public function setGroupId(GroupId $groupId): ChangeConsumerGroupRequest
     {
         $this->groupId = $groupId;
         return $this;
@@ -42,7 +42,7 @@ class ChangeConsumerGroupRequest implements RequestInterface
 
     public function getUri(): string
     {
-        return sprintf('consumer/%s', (string)$this->id);
+        return sprintf('consumer/%s', $this->id);
     }
 
     public function getHttpMethod(): string

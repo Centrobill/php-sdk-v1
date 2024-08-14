@@ -4,7 +4,7 @@ namespace Centrobill\Sdk\Exception;
 
 use Exception;
 
-class OffsetException extends Exception
+class OffsetException extends Exception implements SDKExceptionInterface
 {
     public static function emptyValue(): self
     {

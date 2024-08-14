@@ -20,7 +20,7 @@ class Subscription
 
     public function getType()
     {
-        return isset($this->data->type) ? $this->data->type : null;
+        return $this->data->type ?? null;
     }
 
     public function getStatus(): string
@@ -28,14 +28,14 @@ class Subscription
         return $this->data->status;
     }
 
-    public function getRenewalDate(): string
+    public function getRenewalDate(): ?string
     {
-        return isset($this->data->renewalDate) ? $this->data->renewalDate : null;
+        return $this->data->renewalDate ?? null;
     }
 
     public function getCancelDate(): ?string
     {
-        return isset($this->data->cancelDate) ? $this->data->cancelDate : null;
+        return $this->data->cancelDate ?? null;
     }
 
     public function getCycle(): int
@@ -45,26 +45,26 @@ class Subscription
 
     public function getSkuName(): ?string
     {
-        return isset($this->data->skuName) ? $this->data->skuName : null;
+        return $this->data->skuName ?? null;
     }
 
     public function getSiteId(): ?string
     {
-        return isset($this->data->siteId) ? $this->data->siteId : null;
+        return $this->data->siteId ?? null;
     }
 
     public function getConsumerId(): ?string
     {
-        return isset($this->data->consumerId) ? $this->data->consumerId : null;
+        return $this->data->consumerId ?? null;
     }
 
     public function getEventTime(): ?string
     {
-        return isset($this->data->eventTime) ? $this->data->eventTime : null;
+        return $this->data->eventTime ?? null;
     }
 
     public function getTimezone(): ?string
     {
-        return isset($this->data->timezone) ? $this->data->timezone : null;
+        return $this->data->timezone ?? null;
     }
 }

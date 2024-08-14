@@ -11,7 +11,7 @@ final class ExpirationMonth
     use ValueToStringTrait;
 
     public const MIN_LENGTH = 2;
-    
+
     public const MAX_LENGTH = 2;
 
     /**
@@ -27,7 +27,7 @@ final class ExpirationMonth
             throw ExpirationMonthException::invalidLength();
         }
 
-        if ($value == '00'|| !preg_match('/^(0[1-9]|1[0-2])$/', $value)) {
+        if ($value == '00' || !preg_match('/^(0[1-9]|1[0-2])$/', $value)) {
             throw ExpirationMonthException::invalidValue();
         }
     }

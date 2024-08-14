@@ -10,7 +10,7 @@ class NotEmulate3DsForTestPaymentDataRequest implements RequestInterface
      * @var Id $id
      */
     private Id $id;
-    
+
     /**
      * @var bool|null $emulate3ds
      */
@@ -22,7 +22,7 @@ class NotEmulate3DsForTestPaymentDataRequest implements RequestInterface
         $this->emulate3ds = $emulate3ds;
     }
 
-    public function setEmulate3ds($emulate3ds)
+    public function setEmulate3ds($emulate3ds): NotEmulate3DsForTestPaymentDataRequest
     {
         $this->emulate3ds = $emulate3ds;
         return $this;
@@ -41,7 +41,7 @@ class NotEmulate3DsForTestPaymentDataRequest implements RequestInterface
 
     public function getUri(): string
     {
-        return sprintf('testPaymentData/%s/notEmulate3ds', (string)$this->id);
+        return sprintf('testPaymentData/%s/notEmulate3ds', $this->id);
     }
 
     public function getHttpMethod(): string

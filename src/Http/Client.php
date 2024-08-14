@@ -2,7 +2,6 @@
 
 namespace Centrobill\Sdk\Http;
 
-use Centrobill\Sdk\Http\Request\ApiRequestInterface;
 use Centrobill\Sdk\Http\Request\BlockTestPaymentDataRequest;
 use Centrobill\Sdk\Http\Request\CancelSubscriptionRequest;
 use Centrobill\Sdk\Http\Request\ChangeConsumerGroupRequest;
@@ -71,8 +70,11 @@ use Centrobill\Sdk\Http\Response\GetConsumerResponse;
 use Centrobill\Sdk\Http\Response\GetCurrencyExchangeRatesResponse;
 use Centrobill\Sdk\Http\Response\GetExchangeRateByIso3Response;
 use Centrobill\Sdk\Http\Response\GetListOfExternalIpsResponse;
+use Centrobill\Sdk\Http\Response\GetListOfTestPaymentDataResponse;
 use Centrobill\Sdk\Http\Response\GetProductResponse;
+use Centrobill\Sdk\Http\Response\GetSiteResponse;
 use Centrobill\Sdk\Http\Response\GetSubscriptionResponse;
+use Centrobill\Sdk\Http\Response\GetTestPaymentDataByIdResponse;
 use Centrobill\Sdk\Http\Response\ListPaymentAccountIDsByConsumerIdResponse;
 use Centrobill\Sdk\Http\Response\NotEmulate3DsForTestPaymentDataResponse;
 use Centrobill\Sdk\Http\Response\PayoutResponse;
@@ -104,7 +106,7 @@ class Client implements ClientInterface
     public function __construct(
         HttpClientInterface $client,
         ApiKey $apiKey
-     ) {
+    ) {
         $this->client = $client;
         $this->apiKey = $apiKey;
     }
@@ -124,8 +126,7 @@ class Client implements ClientInterface
      */
     public function generateCardDataTokenUsingPaymentAccountId(
         GenerateCardDataTokenUsingPaymentAccountIdRequest $request
-    ): ResponseInterface
-    {
+    ): ResponseInterface {
         return $this->request($request);
     }
 
@@ -144,8 +145,7 @@ class Client implements ClientInterface
      */
     public function generateUrlToPaymentPage(
         GenerateUrlToPaymentPageRequest $request
-    ): ResponseInterface
-    {
+    ): ResponseInterface {
         return $this->request($request);
     }
 
@@ -166,7 +166,7 @@ class Client implements ClientInterface
     {
         return $this->request($request);
     }
-    
+
     /**
      * @param GetSubscriptionRequest $request
      * @return GetSubscriptionResponse|ErrorResponse
@@ -175,7 +175,7 @@ class Client implements ClientInterface
     {
         return $this->request($request);
     }
-    
+
     /**
      * @param ChangeSubscriptionRequest $request
      * @return ChangeSubscriptionResponse|ErrorResponse
@@ -299,8 +299,7 @@ class Client implements ClientInterface
      */
     public function getTestPaymentDataById(
         GetTestPaymentDataByIdRequest $request
-    ): ResponseInterface
-    {
+    ): ResponseInterface {
         return $this->request($request);
     }
 
@@ -310,8 +309,7 @@ class Client implements ClientInterface
      */
     public function deleteTestPaymentDataByID(
         DeleteTestPaymentDataByIDRequest $request
-    ): ResponseInterface
-    {
+    ): ResponseInterface {
         return $this->request($request);
     }
 
@@ -321,8 +319,7 @@ class Client implements ClientInterface
      */
     public function updateBalanceOfTheTestPaymentData(
         UpdateBalanceOfTheTestPaymentDataRequest $request
-    ): ResponseInterface
-    {
+    ): ResponseInterface {
         return $this->request($request);
     }
 
@@ -369,8 +366,7 @@ class Client implements ClientInterface
      */
     public function emulate3DsForTestPaymentData(
         Emulate3DsForTestPaymentDataRequest $request
-    ): ResponseInterface
-    {
+    ): ResponseInterface {
         return $this->request($request);
     }
 
@@ -380,8 +376,7 @@ class Client implements ClientInterface
      */
     public function notEmulate3DsForTestPaymentData(
         NotEmulate3DsForTestPaymentDataRequest $request
-    ): ResponseInterface
-    {
+    ): ResponseInterface {
         return $this->request($request);
     }
 
@@ -391,8 +386,7 @@ class Client implements ClientInterface
      */
     public function getAvailableChannelsOfCodeVerification(
         GetAvailableChannelsOfCodeVerificationRequest $request
-    ): ResponseInterface
-    {
+    ): ResponseInterface {
         return $this->request($request);
     }
 
@@ -402,8 +396,7 @@ class Client implements ClientInterface
      */
     public function sendMessageWithVerificationCode(
         SendMessageWithVerificationCodeRequest $request
-    ): ResponseInterface
-    {
+    ): ResponseInterface {
         return $this->request($request);
     }
 
@@ -422,8 +415,7 @@ class Client implements ClientInterface
      */
     public function getCurrencyExchangeRates(
         GetCurrencyExchangeRatesRequest $request
-    ): ResponseInterface
-    {
+    ): ResponseInterface {
         return $this->request($request);
     }
 
@@ -442,8 +434,7 @@ class Client implements ClientInterface
      */
     public function getChargebackIdRepaidLink(
         GetChargebackIdRepaidLinkRequest $request
-    ): ResponseInterface
-    {
+    ): ResponseInterface {
         return $this->request($request);
     }
 
@@ -462,8 +453,7 @@ class Client implements ClientInterface
      */
     public function listPaymentAccountIdsByConsumerId(
         ListPaymentAccountIDsByConsumerIdRequest $request
-    ): ResponseInterface
-    {
+    ): ResponseInterface {
         return $this->request($request);
     }
 
@@ -473,8 +463,7 @@ class Client implements ClientInterface
      */
     public function changePaymentAccountForSubscription(
         ChangePaymentAccountForSubscriptionRequest $request
-    ): ResponseInterface
-    {
+    ): ResponseInterface {
         return $this->request($request);
     }
 
@@ -484,8 +473,7 @@ class Client implements ClientInterface
      */
     public function disablePaymentAccountForQuickSale(
         DisablePaymentAccountForQuickSaleRequest $request
-    ): ResponseInterface
-    {
+    ): ResponseInterface {
         return $this->request($request);
     }
 
@@ -495,8 +483,7 @@ class Client implements ClientInterface
      */
     public function enablePaymentAccountForQuickSale(
         EnablePaymentAccountForQuickSaleRequest $request
-    ): ResponseInterface
-    {
+    ): ResponseInterface {
         return $this->request($request);
     }
 
@@ -509,7 +496,7 @@ class Client implements ClientInterface
         return $this->request($request);
     }
 
-    private function request(RequestInterface $request)
+    private function request(RequestInterface $request): ResponseInterface
     {
         try {
             $response = $this->client->request(
@@ -529,23 +516,29 @@ class Client implements ClientInterface
 
     private function getParametersKey(RequestInterface $request): string
     {
-        if (in_array(
-            $request->getHttpMethod(),
-            [
+        if (
+            in_array(
+                $request->getHttpMethod(),
+                [
                 RequestInterface::HTTP_METHOD_GET,
                 RequestInterface::HTTP_METHOD_DELETE
-            ]
-        )) {
+                ]
+            )
+        ) {
             return RequestOptions::QUERY;
-        } elseif (in_array(
-            $request->getHttpMethod(),
-            [
+        } elseif (
+            in_array(
+                $request->getHttpMethod(),
+                [
                 RequestInterface::HTTP_METHOD_POST,
                 RequestInterface::HTTP_METHOD_PUT
-            ]
-        )) {
+                ]
+            )
+        ) {
             return RequestOptions::JSON;
         }
+
+        return RequestOptions::JSON;
     }
 
     private function getHeaders(RequestInterface $request): array

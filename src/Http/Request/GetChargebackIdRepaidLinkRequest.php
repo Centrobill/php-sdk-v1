@@ -18,7 +18,7 @@ class GetChargebackIdRepaidLinkRequest implements RequestInterface
 
     public function getUri(): string
     {
-        return sprintf('chargeback/%s/repaidLink', (string)$this->id);
+        return sprintf('chargeback/%s/repaidLink', $this->id);
     }
 
     public function getHttpMethod(): string

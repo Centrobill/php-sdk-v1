@@ -3,16 +3,12 @@
 namespace Centrobill\Sdk\Exception;
 
 use Error;
-use Centrobill\Sdk\Exception\SDKExceptionInterface;
 use Exception;
 use GuzzleHttp\Exception\BadResponseException;
 
 class ClientException extends Exception implements SDKExceptionInterface
 {
-    /**
-     * @var Error|null
-     */
-    private $error;
+    private ?Error $error;
 
     /**
      * @param string         $message
@@ -32,7 +28,7 @@ class ClientException extends Exception implements SDKExceptionInterface
     /**
      * @return Error|null
      */
-    public function getError()
+    public function getError(): ?Error
     {
         return $this->error;
     }
@@ -40,7 +36,7 @@ class ClientException extends Exception implements SDKExceptionInterface
     /**
      * @return bool
      */
-    public function hasError()
+    public function hasError(): bool
     {
         return $this->error !== null;
     }
@@ -50,7 +46,7 @@ class ClientException extends Exception implements SDKExceptionInterface
      *
      * @return ClientException
      */
-    public static function requireOption($name)
+    public static function requireOption(string $name): ClientException
     {
         return new self(sprintf('Missed mandatory option "%s".', $name));
     }

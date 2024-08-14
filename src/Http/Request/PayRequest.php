@@ -88,16 +88,15 @@ class PayRequest implements RequestInterface
         }
 
         if (!empty($this->metadata)) {
-            foreach($this->metadata as $field) {
+            foreach ($this->metadata as $field) {
                 $data['metadata'][$field->getKey()] = $field->getValue();
-                
             }
         }
 
         return $data;
     }
 
-    public function getUri(): string 
+    public function getUri(): string
     {
         return 'payment';
     }

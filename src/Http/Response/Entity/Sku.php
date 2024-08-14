@@ -2,7 +2,6 @@
 
 namespace Centrobill\Sdk\Http\Response\Entity;
 
-use Centrobill\Sdk\Http\Response\Entity\Price;
 use stdClass;
 
 final class Sku
@@ -47,7 +46,10 @@ final class Sku
         return $this->data->showOnPaymentPage;
     }
 
-    public function getPrice(): mixed
+    /**
+     * @return Price|Price[]
+     */
+    public function getPrice()
     {
         if (is_numeric($this->data->price)) {
             return $this->data->price;
@@ -60,7 +62,7 @@ final class Sku
 
     public function getCurrency(): ?string
     {
-        return isset($this->data->currency) ? $this->data->currency : null;
+        return $this->data->currency ?? null;
     }
 
     public function getCreatedAt(): string

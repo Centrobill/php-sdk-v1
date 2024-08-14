@@ -11,12 +11,15 @@ final class Title
 
     public const MAX_LENGTH = 64;
 
+    /**
+     * @throws TitleException
+     */
     protected function checkValue($value)
     {
         if (empty($value)) {
             throw TitleException::emptyValue();
         }
-        
+
         if (strlen($value) > self::MAX_LENGTH) {
             throw TitleException::invalidLength();
         }

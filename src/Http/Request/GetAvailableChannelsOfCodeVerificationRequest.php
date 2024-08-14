@@ -10,7 +10,7 @@ class GetAvailableChannelsOfCodeVerificationRequest implements RequestInterface
      * @var Phone $phone
      */
     private Phone $phone;
-    
+
     public function __construct(Phone $phone)
     {
         $this->phone = $phone;
@@ -18,7 +18,7 @@ class GetAvailableChannelsOfCodeVerificationRequest implements RequestInterface
 
     public function getUri(): string
     {
-        return sprintf('antifraud/verification/%s', (string)$this->phone);
+        return sprintf('antifraud/verification/%s', $this->phone);
     }
 
     public function getHttpMethod(): string

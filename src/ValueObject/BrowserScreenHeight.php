@@ -10,7 +10,7 @@ final class BrowserScreenHeight
     /**
      * @var int
      */
-    private $value;
+    private int $value;
 
     /**
      * @throws SDKExceptionInterface
@@ -20,7 +20,7 @@ final class BrowserScreenHeight
         if (empty($value)) {
             throw BrowserScreenHeightException::emptyValue();
         }
-        
+
         if (filter_var($value, FILTER_VALIDATE_INT) === false || (int)$value < 0) {
             throw BrowserScreenHeightException::invalidValue();
         }
@@ -31,7 +31,7 @@ final class BrowserScreenHeight
     /**
      * @return int
      */
-    public function getValue()
+    public function getValue(): int
     {
         return $this->value;
     }

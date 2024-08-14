@@ -10,6 +10,9 @@ final class Xsell extends Enum
     const XSELL_CHECKED = 'checked';
     const XSELL_UNCHECKED = 'unchecked';
 
+    /**
+     * @throws XsellException
+     */
     public static function isValid($value)
     {
         if (empty($value)) {
@@ -17,7 +20,7 @@ final class Xsell extends Enum
         }
 
         if (!in_array($value, Xsell::toArray())) {
-            throw XsellException::invalidValue($value);
+            throw XsellException::invalidValue();
         }
     }
 

@@ -11,7 +11,8 @@ class GetConsumerRequest implements RequestInterface
      */
     private Id $id;
 
-    public function __construct(Id $id) {
+    public function __construct(Id $id)
+    {
         $this->id = $id;
     }
 
@@ -22,7 +23,7 @@ class GetConsumerRequest implements RequestInterface
 
     public function getUri(): string
     {
-        return sprintf('consumer/%s', (string)$this->id);
+        return sprintf('consumer/%s', $this->id);
     }
 
     public function getHttpMethod(): string

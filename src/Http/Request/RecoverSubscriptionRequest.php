@@ -18,7 +18,7 @@ class RecoverSubscriptionRequest implements RequestInterface
 
     public function getUri(): string
     {
-        return sprintf('subscription/%s/recover', (string)$this->id);
+        return sprintf('subscription/%s/recover', $this->id);
     }
 
     public function getHttpMethod(): string

@@ -12,6 +12,9 @@ final class Name
     public const MIN_LENGTH = 5;
     public const MAX_LENGTH = 36;
 
+    /**
+     * @throws NameException
+     */
     protected function checkValue($value)
     {
         if (empty($value)) {

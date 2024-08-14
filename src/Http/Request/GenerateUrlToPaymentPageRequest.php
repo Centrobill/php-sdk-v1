@@ -6,6 +6,8 @@ use Centrobill\Sdk\Entity\Consumer;
 use Centrobill\Sdk\Entity\Payment;
 use Centrobill\Sdk\Entity\Sku;
 use Centrobill\Sdk\Entity\Template;
+use Centrobill\Sdk\Exception\SDKExceptionInterface;
+use Centrobill\Sdk\Exception\SkuException;
 use Centrobill\Sdk\ValueObject\Field;
 use Centrobill\Sdk\ValueObject\Ttl;
 
@@ -101,14 +103,17 @@ class GenerateUrlToPaymentPageRequest implements RequestInterface
         return $this;
     }
 
+    /**
+     * @throws SDKExceptionInterface
+     */
     public function getPayload(): array
     {
         if (empty($this->sku)) {
-            throw new \InvalidArgumentException('Sku cannot be empty');
+            throw SkuException::emptyValue();
         }
 
         $data = [
-            'sku' => array_map(function($item) {
+            'sku' => array_map(function ($item) {
                 return $item->toArray();
             }, $this->sku)
         ];
@@ -130,7 +135,7 @@ class GenerateUrlToPaymentPageRequest implements RequestInterface
         }
 
         if (!empty($this->metadata)) {
-            foreach($this->metadata as $field) {
+            foreach ($this->metadata as $field) {
                 $data['metadata'][$field->getKey()] = $field->getValue();
             }
         }

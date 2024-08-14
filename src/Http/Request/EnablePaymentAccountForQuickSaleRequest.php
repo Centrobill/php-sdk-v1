@@ -18,7 +18,7 @@ class EnablePaymentAccountForQuickSaleRequest implements RequestInterface
 
     public function getUri(): string
     {
-        return sprintf('paymentAccount/%s/enable', (string)$this->paymentAccountId);
+        return sprintf('paymentAccount/%s/enable', $this->paymentAccountId);
     }
 
     public function getHttpMethod(): string
