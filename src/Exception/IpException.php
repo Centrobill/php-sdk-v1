@@ -13,7 +13,7 @@ class IpException extends Exception implements SDKExceptionInterface
 
     public static function invalidLength(): IpException
     {
-        return new self('Ip should be between 1 and 16 characters long.');
+        return new self('Ip should be between 1 and 39 characters long.');
     }
 
     public static function invalidFormat(): IpException

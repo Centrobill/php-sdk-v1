@@ -11,7 +11,7 @@ final class Ip
     use ValueToStringTrait;
 
     public const MIN_LENGTH = 1;
-    public const MAX_LENGTH = 16;
+    public const MAX_LENGTH = 39;
 
     /**
      * @throws SDKExceptionInterface
@@ -29,5 +29,5 @@ final class Ip
         if (filter_var($value, FILTER_VALIDATE_IP) === false) {
             throw IpException::invalidFormat();
         }
-    }
+        }
 }
