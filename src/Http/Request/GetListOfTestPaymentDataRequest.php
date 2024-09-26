@@ -7,6 +7,8 @@ use Centrobill\Sdk\ValueObject\TestPaymentDataType;
 
 class GetListOfTestPaymentDataRequest implements RequestInterface
 {
+    use HasRequestId;
+
     /**
      * @var ?Limit $limit
      */
@@ -52,8 +54,12 @@ class GetListOfTestPaymentDataRequest implements RequestInterface
 
     public function getHeaders(): array
     {
-        return [
-            'X-Requested-With' => 'XMLHttpRequest',
-        ];
+        if ($this->getRequestId() !== null) {
+            return [
+                'X-Request-ID' => $this->getRequestId(),
+            ];
+        }
+
+        return [];
     }
 }

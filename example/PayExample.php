@@ -16,6 +16,7 @@ use Centrobill\Sdk\ValueObject\FirstName;
 use Centrobill\Sdk\ValueObject\Ip;
 use Centrobill\Sdk\ValueObject\LastName;
 use Centrobill\Sdk\ValueObject\Number;
+use Centrobill\Sdk\ValueObject\RequestId;
 use Centrobill\Sdk\ValueObject\Sku\Name;
 use Centrobill\Sdk\ValueObject\Url as UrlValue;
 
@@ -54,6 +55,8 @@ $request = new PayRequest(
         new UrlValue('https://example.com/redirect')
     )
 );
+
+$request->setRequestId(new RequestId('test'));
 
 var_dump($request->getPayload());
 

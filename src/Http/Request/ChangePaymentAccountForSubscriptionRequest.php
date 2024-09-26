@@ -8,6 +8,8 @@ use Centrobill\Sdk\ValueObject\Id;
 
 class ChangePaymentAccountForSubscriptionRequest implements RequestInterface
 {
+    use HasRequestId;
+
     /**
      * @var Id $id
      */
@@ -50,8 +52,12 @@ class ChangePaymentAccountForSubscriptionRequest implements RequestInterface
 
     public function getHeaders(): array
     {
-        return [
-            'X-Requested-With' => 'XMLHttpRequest',
-        ];
+        if ($this->getRequestId() !== null) {
+            return [
+                'X-Request-Id' => $this->getRequestId(),
+            ];
+        }
+
+        return [];
     }
 }

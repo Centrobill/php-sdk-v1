@@ -11,6 +11,8 @@ use Centrobill\Sdk\ValueObject\Zip;
 
 class GenerateCardDataTokenRequest implements RequestInterface
 {
+    use HasRequestId;
+
     /** @var Number $number */
     private Number $number;
 
@@ -98,8 +100,14 @@ class GenerateCardDataTokenRequest implements RequestInterface
 
     public function getHeaders(): array
     {
-        return [
+        $headers = [
             'X-Requested-With' => 'XMLHttpRequest',
         ];
+
+        if ($this->getRequestId() !== null) {
+            $headers['X-Request-ID'] = $this->getRequestId();
+        }
+
+        return $headers;
     }
 }

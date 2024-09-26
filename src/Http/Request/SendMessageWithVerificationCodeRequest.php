@@ -8,6 +8,8 @@ use Centrobill\Sdk\ValueObject\Phone;
 
 class SendMessageWithVerificationCodeRequest implements RequestInterface
 {
+    use HasRequestId;
+
     /**
      * @var Channel $channel
      */
@@ -61,8 +63,12 @@ class SendMessageWithVerificationCodeRequest implements RequestInterface
 
     public function getHeaders(): array
     {
-        return [
-            'X-Requested-With' => 'XMLHttpRequest',
-        ];
+        if ($this->getRequestId() !== null) {
+            return [
+                'X-Request-ID' => $this->getRequestId(),
+            ];
+        }
+
+        return [];
     }
 }

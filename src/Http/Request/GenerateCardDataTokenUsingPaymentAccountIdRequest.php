@@ -8,6 +8,8 @@ use Centrobill\Sdk\ValueObject\PaymentAccountId;
 
 class GenerateCardDataTokenUsingPaymentAccountIdRequest implements RequestInterface
 {
+    use HasRequestId;
+
     /**
      * @var PaymentAccountId $paymentAccountId
      */
@@ -51,8 +53,14 @@ class GenerateCardDataTokenUsingPaymentAccountIdRequest implements RequestInterf
 
     public function getHeaders(): array
     {
-        return [
+        $headers = [
             'X-Requested-With' => 'XMLHttpRequest',
         ];
+
+        if ($this->getRequestId() !== null) {
+            $headers['X-Request-ID'] = $this->getRequestId();
+        }
+
+        return $headers;
     }
 }

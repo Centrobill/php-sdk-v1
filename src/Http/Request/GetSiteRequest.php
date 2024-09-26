@@ -6,6 +6,8 @@ use Centrobill\Sdk\ValueObject\Id;
 
 class GetSiteRequest implements RequestInterface
 {
+    use HasRequestId;
+
     /**
      * @var Id $id
      */
@@ -33,8 +35,12 @@ class GetSiteRequest implements RequestInterface
 
     public function getHeaders(): array
     {
-        return [
-            'X-Requested-With' => 'XMLHttpRequest',
-        ];
+        if ($this->getRequestId() !== null) {
+            return [
+                'X-Request-ID' => $this->getRequestId(),
+            ];
+        }
+
+        return [];
     }
 }

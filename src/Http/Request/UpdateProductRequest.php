@@ -13,6 +13,8 @@ use Centrobill\Sdk\ValueObject\Sku\Title;
 
 class UpdateProductRequest implements RequestInterface
 {
+    use HasRequestId;
+
     /**
      * @var Name $name
      */
@@ -138,8 +140,12 @@ class UpdateProductRequest implements RequestInterface
 
     public function getHeaders(): array
     {
-        return [
-            'X-Requested-With' => 'XMLHttpRequest',
-        ];
+        if ($this->getRequestId() !== null) {
+            return [
+                'X-Request-ID' => $this->getRequestId(),
+            ];
+        }
+
+        return [];
     }
 }

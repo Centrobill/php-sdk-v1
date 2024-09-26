@@ -6,6 +6,8 @@ use Centrobill\Sdk\ValueObject\Currency;
 
 class GetExchangeRateByIso3Request implements RequestInterface
 {
+    use HasRequestId;
+
     /**
      * @var Currency $currency
      */
@@ -28,9 +30,13 @@ class GetExchangeRateByIso3Request implements RequestInterface
 
     public function getHeaders(): array
     {
-        return [
-            'X-Requested-With' => 'XMLHttpRequest',
-        ];
+        if ($this->getRequestId() !== null) {
+            return [
+                'X-Request-ID' => $this->getRequestId(),
+            ];
+        }
+
+        return [];
     }
 
     public function getPayload(): array
