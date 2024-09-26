@@ -75,6 +75,7 @@ use Centrobill\Sdk\Http\Response\GetProductResponse;
 use Centrobill\Sdk\Http\Response\GetSiteResponse;
 use Centrobill\Sdk\Http\Response\GetSubscriptionResponse;
 use Centrobill\Sdk\Http\Response\GetTestPaymentDataByIdResponse;
+use Centrobill\Sdk\Http\Response\IpnResponse;
 use Centrobill\Sdk\Http\Response\ListPaymentAccountIDsByConsumerIdResponse;
 use Centrobill\Sdk\Http\Response\NotEmulate3DsForTestPaymentDataResponse;
 use Centrobill\Sdk\Http\Response\PayoutResponse;
@@ -87,11 +88,12 @@ use Centrobill\Sdk\Http\Response\UnblockTestPaymentDataResponse;
 use Centrobill\Sdk\Http\Response\UpdateAllowedIPsResponse;
 use Centrobill\Sdk\Http\Response\UpdateBalanceOfTheTestPaymentDataResponse;
 use Centrobill\Sdk\Http\Response\UpdateProductResponse;
-use GuzzleHttp\ClientInterface as HttpClientInterface;
 use Centrobill\Sdk\Http\Response\UpdateSiteResponse;
 use Centrobill\Sdk\ValueObject\ApiKey;
+use GuzzleHttp\ClientInterface as HttpClientInterface;
 use GuzzleHttp\Exception\ClientException as GuzzleClientException;
 use GuzzleHttp\RequestOptions;
+use GuzzleHttp\Utils;
 
 class Client implements ClientInterface
 {
@@ -109,6 +111,11 @@ class Client implements ClientInterface
     ) {
         $this->client = $client;
         $this->apiKey = $apiKey;
+    }
+
+    public function getApiKey(): ApiKey
+    {
+        return $this->apiKey;
     }
 
     /**
@@ -494,6 +501,11 @@ class Client implements ClientInterface
     public function getApplePaySession(GetApplePaySessionRequest $request): ResponseInterface
     {
         return $this->request($request);
+    }
+
+    public function parseIpnPayload(string $payload): IpnResponse
+    {
+        return new IpnResponse(Utils::jsonDecode($payload));
     }
 
     private function request(RequestInterface $request): ResponseInterface
