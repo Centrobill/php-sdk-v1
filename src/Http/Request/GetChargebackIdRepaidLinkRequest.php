@@ -28,9 +28,7 @@ class GetChargebackIdRepaidLinkRequest implements RequestInterface
 
     public function getHeaders(): array
     {
-        return [
-            'X-Requested-With' => 'XMLHttpRequest',
-        ];
+        return [];
     }
 
     public function getPayload(): array

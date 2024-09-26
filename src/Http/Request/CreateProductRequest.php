@@ -12,6 +12,8 @@ use Centrobill\Sdk\ValueObject\Sku\Title;
 
 class CreateProductRequest implements RequestInterface
 {
+    use HasRequestId;
+
     /**
      * @var SiteId $siteId
      */
@@ -130,8 +132,12 @@ class CreateProductRequest implements RequestInterface
 
     public function getHeaders(): array
     {
-        return [
-            'X-Requested-With' => 'XMLHttpRequest',
-        ];
+        if ($this->getRequestId() !== null) {
+            return [
+                'X-Request-Id' => $this->getRequestId(),
+            ];
+        }
+
+        return [];
     }
 }

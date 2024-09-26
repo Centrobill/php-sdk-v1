@@ -5,6 +5,7 @@ namespace Centrobill\Sdk\Entity;
 use Centrobill\Sdk\Entity\Sku\Action;
 use Centrobill\Sdk\Entity\Sku\Url;
 use Centrobill\Sdk\Exception\SDKExceptionInterface;
+use Centrobill\Sdk\Exception\SkuEntityException;
 use Centrobill\Sdk\ValueObject\Sku\DomainName;
 use Centrobill\Sdk\ValueObject\Sku\Name;
 use Centrobill\Sdk\ValueObject\Sku\SiteId;

@@ -4,6 +4,8 @@ namespace Centrobill\Sdk\Http\Request;
 
 class GetCurrencyExchangeRatesRequest implements RequestInterface
 {
+    use HasRequestId;
+
     public function getUri(): string
     {
         return 'currency-exchange-rate';
@@ -16,9 +18,13 @@ class GetCurrencyExchangeRatesRequest implements RequestInterface
 
     public function getHeaders(): array
     {
-        return [
-            'X-Requested-With' => 'XMLHttpRequest',
-        ];
+        if ($this->getRequestId() !== null) {
+            return [
+                'X-Request-ID' => $this->getRequestId(),
+            ];
+        }
+
+        return [];
     }
 
     public function getPayload(): array

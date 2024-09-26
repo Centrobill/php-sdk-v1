@@ -8,6 +8,8 @@ use DateTimeImmutable;
 
 class CancelSubscriptionRequest implements RequestInterface
 {
+    use HasRequestId;
+
     /**
      * @var Id $id
      */
@@ -106,8 +108,12 @@ class CancelSubscriptionRequest implements RequestInterface
 
     public function getHeaders(): array
     {
-        return [
-            'X-Requested-With' => 'XMLHttpRequest',
-        ];
+        if ($this->getRequestId() !== null) {
+            return [
+                'X-Request-Id' => $this->getRequestId(),
+            ];
+        }
+
+        return [];
     }
 }

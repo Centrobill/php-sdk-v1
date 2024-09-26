@@ -62,6 +62,7 @@ use Centrobill\Sdk\Http\Response\GetChargebackIdRepaidLinkResponse;
 use Centrobill\Sdk\Http\Response\GetCurrencyExchangeRatesResponse;
 use Centrobill\Sdk\Http\Response\GetExchangeRateByIso3Response;
 use Centrobill\Sdk\Http\Response\GetListOfExternalIpsResponse;
+use Centrobill\Sdk\Http\Response\IpnResponse;
 use Centrobill\Sdk\Http\Response\ListPaymentaccountIDsByConsumerIdResponse;
 use Centrobill\Sdk\Http\Response\NotEmulate3DsForTestPaymentDataResponse;
 use Centrobill\Sdk\Http\Response\PayoutResponse;
@@ -314,4 +315,10 @@ interface ClientInterface
      * @return GetApplePaySessionResponse|ErrorResponse
      */
     public function getApplePaySession(GetApplePaySessionRequest $request): ResponseInterface;
+
+    /**
+     * @param string $payload
+     * @return IpnResponse
+     */
+    public function parseIpnPayload(string $payload): IpnResponse;
 }

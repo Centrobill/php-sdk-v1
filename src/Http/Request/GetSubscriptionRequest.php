@@ -6,6 +6,8 @@ use Centrobill\Sdk\ValueObject\Id;
 
 class GetSubscriptionRequest implements RequestInterface
 {
+    use HasRequestId;
+
     /**
      * @var Id $id
      */
@@ -33,8 +35,12 @@ class GetSubscriptionRequest implements RequestInterface
 
     public function getHeaders(): array
     {
-        return [
-            'X-Requested-With' => 'XMLHttpRequest',
-        ];
+        if ($this->getRequestId() !== null) {
+            return [
+                'X-Request-ID' => $this->getRequestId(),
+            ];
+        }
+
+        return [];
     }
 }

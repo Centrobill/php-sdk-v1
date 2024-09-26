@@ -16,6 +16,8 @@ use Centrobill\Sdk\ValueObject\Ttl;
  */
 class GenerateUrlToPaymentPageRequest implements RequestInterface
 {
+    use HasRequestId;
+
     /** @var Array<Sku> $sku */
     private $sku;
 
@@ -159,6 +161,12 @@ class GenerateUrlToPaymentPageRequest implements RequestInterface
 
     public function getHeaders(): array
     {
+        if ($this->getRequestId() !== null) {
+            return [
+                'X-Request-ID' => $this->getRequestId(),
+            ];
+        }
+
         return [];
     }
 }

@@ -51,8 +51,6 @@ class NotEmulate3DsForTestPaymentDataRequest implements RequestInterface
 
     public function getHeaders(): array
     {
-        return [
-            'X-Requested-With' => 'XMLHttpRequest',
-        ];
+        return [];
     }
 }

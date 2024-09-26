@@ -10,6 +10,8 @@ use Centrobill\Sdk\ValueObject\Field;
 
 class PayRequest implements RequestInterface
 {
+    use HasRequestId;
+
     /**
      * @var AbstractPaymentSource $paymentSource
      */
@@ -108,8 +110,12 @@ class PayRequest implements RequestInterface
 
     public function getHeaders(): array
     {
-        return [
-            'X-Requested-With' => 'XMLHttpRequest',
-        ];
+        if ($this->getRequestId() !== null) {
+            return [
+                'X-Request-ID' => $this->getRequestId(),
+            ];
+        }
+
+        return [];
     }
 }

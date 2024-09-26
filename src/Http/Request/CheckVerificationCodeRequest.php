@@ -7,6 +7,8 @@ use Centrobill\Sdk\ValueObject\Phone;
 
 class CheckVerificationCodeRequest implements RequestInterface
 {
+    use HasRequestId;
+
     /**
      * @var Phone $phone
      */
@@ -35,9 +37,13 @@ class CheckVerificationCodeRequest implements RequestInterface
 
     public function getHeaders(): array
     {
-        return [
-            'X-Requested-With' => 'XMLHttpRequest',
-        ];
+        if ($this->getRequestId() !== null) {
+            return [
+                'X-Request-Id' => $this->getRequestId(),
+            ];
+        }
+
+        return [];
     }
 
     public function getPayload(): array

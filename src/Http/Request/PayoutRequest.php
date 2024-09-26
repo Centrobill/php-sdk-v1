@@ -13,6 +13,8 @@ use Centrobill\Sdk\ValueObject\Sku\SiteId;
 
 class PayoutRequest implements RequestInterface
 {
+    use HasRequestId;
+
     /**
      * @var ?ConsumerId $consumerId
      */
@@ -163,8 +165,12 @@ class PayoutRequest implements RequestInterface
 
     public function getHeaders(): array
     {
-        return [
-            'X-Requested-With' => 'XMLHttpRequest',
-        ];
+        if ($this->getRequestId() !== null) {
+            return [
+                'X-Request-ID' => $this->getRequestId(),
+            ];
+        }
+
+        return [];
     }
 }
