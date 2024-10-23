@@ -19,11 +19,6 @@ class PaymentSourceBancontact extends AbstractPaymentSource
      */
     private ?EmulateCode $emulateCode;
 
-    /**
-     * @var ?Mid $mid
-     */
-    private ?Mid $mid;
-
     public function __construct(
         ?Bic $bic = null,
         ?EmulateCode $emulateCode = null,
@@ -46,12 +41,6 @@ class PaymentSourceBancontact extends AbstractPaymentSource
         return $this;
     }
 
-    public function setMid(Mid $mid): self
-    {
-        $this->mid = $mid;
-        return $this;
-    }
-
     public function toArray(): array
     {
         $data = [
@@ -66,10 +55,6 @@ class PaymentSourceBancontact extends AbstractPaymentSource
             $data['emulateCode'] = (string)$this->emulateCode;
         }
 
-        if ($this->mid !== null) {
-            $data['mid'] = (string)$this->mid;
-        }
-
-        return $data;
+        return array_merge($data, parent::toArray());
     }
 }

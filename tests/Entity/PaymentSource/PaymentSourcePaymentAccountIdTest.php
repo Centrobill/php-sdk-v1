@@ -1,0 +1,51 @@
+<?php
+
+namespace Tests\Centrobill\Sdk\Entity\PaymentSource;
+
+use Centrobill\Sdk\Entity\PaymentSource\PaymentSourcePaymentAccountId;
+use Centrobill\Sdk\ValueObject\EmulateCode;
+use Centrobill\Sdk\ValueObject\Mid;
+use Centrobill\Sdk\ValueObject\PaymentAccountId;
+use Centrobill\Sdk\ValueObject\PaymentSourceType;
+use PHPUnit\Framework\TestCase;
+
+class PaymentSourcePaymentAccountIdTest extends TestCase
+{
+    private PaymentSourcePaymentAccountId $paymentSource;
+
+    public function testConstruct()
+    {
+        $this->createEntity();
+        self::assertInstanceOf(PaymentSourcePaymentAccountId::class, $this->paymentSource);
+    }
+
+    public function testToArrayWithoutMid()
+    {
+        $this->createEntity();
+        self::assertEquals([
+            'type' => PaymentSourceType::PAYMENT_SOURCE_PAYMENTACCOUNTID,
+            'paymentAccountId' => 'a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11',
+            'emulateCode' => '1234',
+        ], $this->paymentSource->toArray());
+    }
+
+    public function testToArrayWithMid()
+    {
+        $this->createEntity();
+        $this->paymentSource->setMid(new Mid('MidTest'));
+        self::assertEquals([
+            'type' => PaymentSourceType::PAYMENT_SOURCE_PAYMENTACCOUNTID,
+            'paymentAccountId' => 'a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11',
+            'emulateCode' => '1234',
+            'mid' => 'MidTest',
+        ], $this->paymentSource->toArray());
+    }
+
+    private function createEntity()
+    {
+        $this->paymentSource = new PaymentSourcePaymentAccountId(
+            new PaymentAccountId('a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11'),
+            new EmulateCode('1234')
+        );
+    }
+}

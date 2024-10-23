@@ -13,11 +13,6 @@ class PaymentSourcePayid extends AbstractPaymentSource
      */
     private ?EmulateCode $emulateCode;
 
-    /**
-     * @var ?Mid $mid
-     */
-    private ?Mid $mid;
-
     public function __construct(?EmulateCode $emulateCode = null, ?Mid $mid = null)
     {
         $this->emulateCode = $emulateCode;
@@ -27,12 +22,6 @@ class PaymentSourcePayid extends AbstractPaymentSource
     public function setEmulateCode(EmulateCode $emulateCode): self
     {
         $this->emulateCode = $emulateCode;
-        return $this;
-    }
-
-    public function setMid(Mid $mid): self
-    {
-        $this->mid = $mid;
         return $this;
     }
 
@@ -46,10 +35,6 @@ class PaymentSourcePayid extends AbstractPaymentSource
             $data['emulateCode'] = (string)$this->emulateCode;
         }
 
-        if ($this->mid !== null) {
-            $data['mid'] = (string)$this->mid;
-        }
-
-        return $data;
+        return array_merge($data, parent::toArray());
     }
 }

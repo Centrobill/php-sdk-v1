@@ -36,11 +36,13 @@ class PaymentSourceAch extends AbstractPaymentSource
 
     public function toArray(): array
     {
-        return [
+        $data = [
             'type' => PaymentSourceType::PAYMENT_SOURCE_ACH,
             'accountPaymentSourceType' => (string)$this->accountType,
             'abaNumber' => (string)$this->abaNumber,
             'accountNumber' => (string)$this->accountNumber,
         ];
+
+        return array_merge($data, parent::toArray());
     }
 }
