@@ -52,6 +52,6 @@ class PaymentSourcePaymentAccountIdWithCvv extends AbstractPaymentSource
             $data['emulateCode'] = (string)$this->emulateCode;
         }
 
-        return $data;
+        return array_merge($data, parent::toArray());
     }
 }

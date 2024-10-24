@@ -25,11 +25,6 @@ class PaymentSourceSepa extends AbstractPaymentSource
      */
     private ?EmulateCode $emulateCode;
 
-    /**
-     * @var ?Mid $mid
-     */
-    private ?Mid $mid;
-
     public function __construct(
         Iban $iban,
         ?Bic $bic = null,
@@ -54,12 +49,6 @@ class PaymentSourceSepa extends AbstractPaymentSource
         return $this;
     }
 
-    public function setMid(Mid $mid): self
-    {
-        $this->mid = $mid;
-        return $this;
-    }
-
     public function toArray(): array
     {
         $data = [
@@ -75,10 +64,6 @@ class PaymentSourceSepa extends AbstractPaymentSource
             $data['emulateCode'] = (string)$this->emulateCode;
         }
 
-        if ($this->mid !== null) {
-            $data['mid'] = (string)$this->mid;
-        }
-
-        return $data;
+        return array_merge($data, parent::toArray());
     }
 }

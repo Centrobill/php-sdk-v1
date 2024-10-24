@@ -21,11 +21,6 @@ class PaymentSourceOnlineBanking extends AbstractPaymentSource
     private ?EmulateCode $emulateCode;
 
     /**
-     * @var ?Mid $mid
-     */
-    private ?Mid $mid;
-
-    /**
      * @var ?Bin $bin
      */
     private ?Bin $bin;
@@ -54,12 +49,6 @@ class PaymentSourceOnlineBanking extends AbstractPaymentSource
         return $this;
     }
 
-    public function setMid(Mid $mid): self
-    {
-        $this->mid = $mid;
-        return $this;
-    }
-
     public function setBin(Bin $bin): self
     {
         $this->bin = $bin;
@@ -80,14 +69,10 @@ class PaymentSourceOnlineBanking extends AbstractPaymentSource
             $data['emulateCode'] = (string)$this->emulateCode;
         }
 
-        if ($this->mid !== null) {
-            $data['mid'] = (string)$this->mid;
-        }
-
         if ($this->bin !== null) {
             $data['bin'] = (string)$this->bin;
         }
 
-        return $data;
+        return array_merge($data, parent::toArray());
     }
 }

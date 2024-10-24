@@ -42,11 +42,6 @@ class PaymentSourceCard extends AbstractPaymentSource
      */
     private ?EmulateCode $emulateCode;
 
-    /**
-     * @var ?Mid $mid
-     */
-    private ?Mid $mid;
-
     public function __construct(
         Number $number,
         ExpirationYear $expirationYear,
@@ -77,12 +72,6 @@ class PaymentSourceCard extends AbstractPaymentSource
         return $this;
     }
 
-    public function setMid(Mid $mid): self
-    {
-        $this->mid = $mid;
-        return $this;
-    }
-
     public function toArray(): array
     {
         $data = [
@@ -101,10 +90,6 @@ class PaymentSourceCard extends AbstractPaymentSource
             $data['emulateCode'] = (string)$this->emulateCode;
         }
 
-        if ($this->mid !== null) {
-            $data['mid'] = (string)$this->mid;
-        }
-
-        return $data;
+        return array_merge($data, parent::toArray());
     }
 }

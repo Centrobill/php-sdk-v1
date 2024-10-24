@@ -29,5 +29,5 @@ final class Ip
         if (filter_var($value, FILTER_VALIDATE_IP) === false) {
             throw IpException::invalidFormat();
         }
-        }
+    }
 }
