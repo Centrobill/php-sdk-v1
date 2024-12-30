@@ -3,24 +3,24 @@
 namespace Centrobill\Sdk\Entity\PaymentSource;
 
 use Centrobill\Sdk\ValueObject\EmulateCode;
-use Centrobill\Sdk\ValueObject\Token;
+use Centrobill\Sdk\ValueObject\ApplePayPayload;
 use Centrobill\Sdk\ValueObject\PaymentSourceType;
 
 class PaymentSourceApplePay extends AbstractPaymentSource
 {
     /**
-     * @var Token $token
+     * @var ApplePayPayload $payload
      */
-    private Token $token;
+    private ApplePayPayload $payload;
 
     /**
      * @var ?EmulateCode $emulateCode
      */
     private ?EmulateCode $emulateCode;
 
-    public function __construct(Token $token, ?EmulateCode $emulateCode = null)
+    public function __construct(ApplePayPayload $payload, ?EmulateCode $emulateCode = null)
     {
-        $this->token = $token;
+        $this->payload = $payload;
         $this->emulateCode = $emulateCode;
     }
 
@@ -34,7 +34,7 @@ class PaymentSourceApplePay extends AbstractPaymentSource
     {
         $data = [
             'type' => PaymentSourceType::PAYMENT_SOURCE_APPLEPAY,
-            'token' => (string)$this->token,
+            'token' => $this->payload->getPayload(),
         ];
 
         if ($this->emulateCode !== null) {
