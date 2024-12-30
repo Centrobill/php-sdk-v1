@@ -9,7 +9,7 @@ final class Offset
 {
     use ValueToStringTrait;
 
-    public const MAX_LENGTH = 5;
+    public const MAX_LENGTH = 13;
 
     /**
      * @throws OffsetException

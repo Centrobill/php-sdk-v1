@@ -29,6 +29,9 @@ Next, install the package by running:
 
 The package will be installed under the **vendor** folder.
 
+## Documentation
+To learn more about the API endpoints and their usage, please refer to the official Centrobill API documentation:
+https://readme.centrobill.com/docs
 
 ## Package usage
 

@@ -65,8 +65,6 @@ class Sku
         ?Xsell $xsell = null
     ) {
         $this->siteId = $siteId;
-
-
         $this->name = $name;
         $this->price = $price;
         $this->url = $url;

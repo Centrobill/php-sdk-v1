@@ -13,7 +13,7 @@ class OffsetException extends Exception implements SDKExceptionInterface
 
     public static function invalidLength(): self
     {
-        return new self('Offset should be at most 5 characters long.');
+        return new self('Offset should be at most 13 characters long.');
     }
 
     public static function invalidValue(): self
