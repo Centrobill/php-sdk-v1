@@ -2,6 +2,7 @@
 
 namespace Centrobill\Sdk\Entity\PaymentSource;
 
+use Centrobill\Sdk\Exception\CardException;
 use Centrobill\Sdk\ValueObject\Cvv;
 use Centrobill\Sdk\ValueObject\EmulateCode;
 use Centrobill\Sdk\ValueObject\ExpirationMonth;
@@ -51,6 +52,10 @@ class PaymentSourceCard extends AbstractPaymentSource
         ?EmulateCode $emulateCode = null,
         ?Mid $mid = null
     ) {
+        if ((string)$expirationYear == date('y') && (string)$expirationMonth < date('m')) {
+            throw CardException::expired();
+        }
+
         $this->number = $number;
         $this->expirationYear = $expirationYear;
         $this->expirationMonth = $expirationMonth;

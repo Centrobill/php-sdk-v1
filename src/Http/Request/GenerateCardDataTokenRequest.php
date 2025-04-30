@@ -2,6 +2,7 @@
 
 namespace Centrobill\Sdk\Http\Request;
 
+use Centrobill\Sdk\Exception\CardException;
 use Centrobill\Sdk\ValueObject\CardHolder;
 use Centrobill\Sdk\ValueObject\Cvv;
 use Centrobill\Sdk\ValueObject\ExpirationMonth;
@@ -39,6 +40,10 @@ class GenerateCardDataTokenRequest implements RequestInterface
         ?CardHolder $cardHolder = null,
         ?Zip $zip = null
     ) {
+        if ((string)$expirationYear == date('y') && (string)$expirationMonth < date('m')) {
+            throw CardException::expired();
+        }
+
         $this->number = $number;
         $this->expirationYear = $expirationYear;
         $this->expirationMonth = $expirationMonth;

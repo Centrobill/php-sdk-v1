@@ -3,6 +3,7 @@
 namespace Tests\Centrobill\Sdk\Entity\PaymentSource;
 
 use Centrobill\Sdk\Entity\PaymentSource\PaymentSourceCard;
+use Centrobill\Sdk\Exception\CardException;
 use Centrobill\Sdk\ValueObject\Cvv;
 use Centrobill\Sdk\ValueObject\EmulateCode;
 use Centrobill\Sdk\ValueObject\ExpirationMonth;
@@ -50,6 +51,19 @@ class PaymentSourceCardTest extends TestCase
             'mid' => 'MidTest',
             'threeDS' => false,
         ], $this->paymentSource->toArray());
+    }
+
+    public function testExpiredCard()
+    {
+        $this->expectException(CardException::class);
+        new PaymentSourceCard(
+            new Number('4111111111111111'),
+            new ExpirationYear(date('y')),
+            new ExpirationMonth(date('m', strtotime('-1 month'))),
+            new Cvv('123'),
+            false,
+            new EmulateCode('1234')
+        );
     }
 
     private function createEntity()
