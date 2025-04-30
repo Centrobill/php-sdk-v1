@@ -26,7 +26,7 @@ final class ExpirationYear
             throw ExpirationYearException::invalidLength();
         }
 
-        if ($value <= date('y')) {
+        if ($value < date('y')) {
             throw ExpirationYearException::invalidValue();
         }
     }
