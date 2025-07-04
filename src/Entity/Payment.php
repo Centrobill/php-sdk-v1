@@ -6,7 +6,7 @@ use Centrobill\Sdk\ValueObject\Bin;
 use Centrobill\Sdk\ValueObject\EmulateCode;
 use Centrobill\Sdk\ValueObject\Mid;
 use Centrobill\Sdk\ValueObject\PaymentMethod;
-use Centrobill\Sdk\ValueObject\SiteName;
+use Centrobill\Sdk\ValueObject\Domain;
 
 class Payment
 {
@@ -51,9 +51,9 @@ class Payment
     private ?Bin $bin;
 
     /**
-     * @var ?SiteName $domain
+     * @var ?Domain $domain
      */
-    private ?SiteName $domain;
+    private ?Domain $domain;
 
     public function __construct(
         $method = [],
@@ -61,7 +61,7 @@ class Payment
         ?EmulateCode $emulateCode = null,
         ?Mid $mid = null,
         ?Bin $bin = null,
-        ?SiteName $domain = null,
+        ?Domain $domain = null,
         $terminalMode = null,
         $secure = null,
         $test = null
@@ -125,7 +125,7 @@ class Payment
         return $this;
     }
 
-    public function setDomain(SiteName $domain): self
+    public function setDomain(Domain $domain): self
     {
         $this->domain = $domain;
         return $this;
