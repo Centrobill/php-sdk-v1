@@ -3,6 +3,7 @@
 namespace Centrobill\Sdk\Http\Request;
 
 use Centrobill\Sdk\Entity\Consumer;
+use Centrobill\Sdk\Entity\Fee;
 use Centrobill\Sdk\Entity\Payment;
 use Centrobill\Sdk\Entity\Sku;
 use Centrobill\Sdk\Entity\Template;
@@ -20,6 +21,9 @@ class GenerateUrlToPaymentPageRequest implements RequestInterface
 
     /** @var Array<Sku> $sku */
     private $sku;
+
+    /** @var Array<Fee> $fees */
+    private $fees = [];
 
     /** @var ?Consumer $consumer */
     private ?Consumer $consumer;
@@ -41,6 +45,7 @@ class GenerateUrlToPaymentPageRequest implements RequestInterface
 
     public function __construct(
         $sku = [],
+        $fees = [],
         ?Consumer $consumer = null,
         ?Template $template = null,
         ?Payment $payment = null,
@@ -49,6 +54,7 @@ class GenerateUrlToPaymentPageRequest implements RequestInterface
         $emailOptions = null
     ) {
         $this->sku = $sku;
+        $this->fees = $fees;
         $this->consumer = $consumer;
         $this->template = $template;
         $this->payment = $payment;
@@ -57,9 +63,21 @@ class GenerateUrlToPaymentPageRequest implements RequestInterface
         $this->emailOptions = $emailOptions;
     }
 
+    public function addFee(Fee $fee): self
+    {
+        $this->fees[] = $fee;
+        return $this;
+    }
+
     public function addSku(Sku $sku): self
     {
         $this->sku[] = $sku;
+        return $this;
+    }
+
+    public function setFees(array $fees): self
+    {
+        $this->fees = $fees;
         return $this;
     }
 
@@ -87,7 +105,7 @@ class GenerateUrlToPaymentPageRequest implements RequestInterface
         return $this;
     }
 
-    public function setMetadata($metadata): self
+    public function setMetadata(array $metadata): self
     {
         $this->metadata = $metadata;
         return $this;
@@ -117,7 +135,10 @@ class GenerateUrlToPaymentPageRequest implements RequestInterface
         $data = [
             'sku' => array_map(function ($item) {
                 return $item->toArray();
-            }, $this->sku)
+            }, $this->sku),
+            'fees' => array_map(function (Fee $fee) {
+                return$fee->toArray();
+            }, $this->fees),
         ];
 
         if ($this->emailOptions !== null) {
