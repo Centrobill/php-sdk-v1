@@ -17,6 +17,7 @@ final class PaymentSourceType extends Enum
     public const PAYMENT_SOURCE_XONE = 'xone';
     public const PAYMENT_SOURCE_IDEAL = 'ideal';
     public const PAYMENT_SOURCE_TOKEN = 'token';
+    public const PAYMENT_SOURCE_CC_TOKEN = 'cc_token';
     public const PAYMENT_SOURCE_ONLINEBANKING = 'onlinebanking';
     public const PAYMENT_SOURCE_PAYSAFECARD = 'paysafecard';
     public const PAYMENT_SOURCE_EPS = 'eps';

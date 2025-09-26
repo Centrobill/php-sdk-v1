@@ -8,6 +8,7 @@ use MyCLabs\Enum\Enum;
 final class PaymentMethod extends Enum
 {
     const PAYMENT_METHOD_CARD = "card";
+    const PAYMENT_METHOD_CC_TOKEN = "cc_token";
     const PAYMENT_METHOD_APPLEPAY = "applepay";
     const PAYMENT_METHOD_SEPA = "sepa";
     const PAYMENT_METHOD_SOFORTBANKING = "sofortbanking";
