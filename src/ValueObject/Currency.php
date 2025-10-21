@@ -166,7 +166,7 @@ final class Currency extends Enum
     /**
      * @throws CurrencyException
      */
-    public static function isValid($value)
+    public static function isValid($value): bool
     {
         if (empty($value)) {
             throw CurrencyException::emptyValue();
@@ -175,5 +175,7 @@ final class Currency extends Enum
         if (!in_array($value, Currency::toArray())) {
             throw CurrencyException::invalidValue();
         }
+
+        return true;
     }
 }

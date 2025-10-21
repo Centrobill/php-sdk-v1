@@ -6,9 +6,9 @@ use Exception;
 
 class OffsetException extends Exception implements SDKExceptionInterface
 {
-    public static function emptyValue(): self
+    public static function positiveInteger(): self
     {
-        return new self('Offset should not be empty.');
+        return new self('Offset should be positive integer or 0.');
     }
 
     public static function invalidLength(): self

@@ -11,5 +11,5 @@ $client = new Client(
     new HttpClient([
         'base_uri' => STAGE_URL,
     ]),
-    new ApiKey('YOUR_API_KEY')
+    new ApiKey('api key here')
 );

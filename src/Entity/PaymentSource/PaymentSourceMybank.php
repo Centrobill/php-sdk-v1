@@ -44,7 +44,7 @@ class PaymentSourceMybank extends AbstractPaymentSource
     public function toArray(): array
     {
         $data = [
-            'type' => PaymentSourceType::PAYMENT_SOURCE_MYBANK,
+            'type' => $this->getType(),
         ];
 
         if ($this->bic !== null) {
@@ -56,5 +56,10 @@ class PaymentSourceMybank extends AbstractPaymentSource
         }
 
         return array_merge($data, parent::toArray());
+    }
+
+    public function getType(): string
+    {
+        return PaymentSourceType::PAYMENT_SOURCE_MYBANK;
     }
 }

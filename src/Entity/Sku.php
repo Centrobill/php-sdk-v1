@@ -131,11 +131,13 @@ class Sku
             throw SkuEntityException::siteIdNameEmpty();
         }
 
-        $data = [
-            'price' => array_map(function ($item) {
+        $data = [];
+
+        if (!empty($this->price)) {
+            $data['price'] = array_map(function ($item) {
                 return $item->toArray();
-            }, $this->price),
-        ];
+            }, $this->price);
+        }
 
         if ($this->url !== null) {
             $data['url'] = $this->url->toArray();

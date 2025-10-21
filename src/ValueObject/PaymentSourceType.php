@@ -30,6 +30,10 @@ final class PaymentSourceType extends Enum
     public const PAYMENT_SOURCE_ACH = 'ach';
     public const PAYMENT_SOURCE_GIROPAY = 'giropay';
     public const PAYMENT_SOURCE_PAYMENT_ACCOUNT_ID_WITH_CVV = 'paymentAccountIdWithCvv';
+    public const PAYMENT_SOURCE_PIX = 'pix';
+    public const PAYMENT_SOURCE_BANKTRANSFER_CHILE = 'banktransferChile';
+    public const PAYMENT_SOURCE_WEBPAY_CHILE = 'webpayChile';
+    public const PAYMENT_SOURCE_BILL_FIRST = 'bill1st';
 
     public function __construct($value)
     {
@@ -43,7 +47,7 @@ final class PaymentSourceType extends Enum
     /**
      * @throws PaymentSourceTypeException
      */
-    public static function isValid($value)
+    public static function isValid($value): bool
     {
         if (empty($value)) {
             throw PaymentSourceTypeException::emptyValue();
@@ -52,5 +56,7 @@ final class PaymentSourceType extends Enum
         if (!in_array($value, PaymentSourceType::toArray())) {
             throw PaymentSourceTypeException::invalidValue();
         }
+
+        return true;
     }
 }

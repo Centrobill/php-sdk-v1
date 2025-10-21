@@ -22,7 +22,7 @@ class SkuType extends Enum
     /**
      * @throws SkuTypeException
      */
-    public static function isValid($value)
+    public static function isValid($value): bool
     {
         if (empty($value)) {
             throw SkuTypeException::emptyValue();
@@ -31,5 +31,7 @@ class SkuType extends Enum
         if (!in_array($value, SkuType::toArray())) {
             throw SkuTypeException::invalidValue();
         }
+
+        return true;
     }
 }

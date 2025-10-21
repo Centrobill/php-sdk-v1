@@ -7,10 +7,13 @@ use MyCLabs\Enum\Enum;
 
 final class PayoutType extends Enum
 {
-    const PAYOUT_TYPE_ACH = 'ach';
-    const PAYOUT_TYPE_PAYID = 'payid';
-    const PAYOUT_TYPE_CRYPTO = 'crypto';
-    const PAYOUT_TYPE_SEPA = 'sepa';
+    public const PAYOUT_TYPE_ACH = 'ach';
+    public const PAYOUT_TYPE_PAYID = 'payid';
+    public const PAYOUT_TYPE_CARD = 'card';
+    public const PAYOUT_TYPE_CRYPTO = 'crypto';
+    public const PAYOUT_TYPE_SEPA = 'sepa';
+    public const PAYOUT_TYPE_PIX = 'pix';
+    public const PAYOUT_TYPE_BANKTRANSFER = 'banktransfer';
 
     public function __construct($value)
     {
@@ -24,7 +27,7 @@ final class PayoutType extends Enum
     /**
      * @throws PayoutTypeException
      */
-    public static function isValid($value)
+    public static function isValid($value): bool
     {
         if (empty($value)) {
             throw PayoutTypeException::emptyValue();
@@ -33,5 +36,7 @@ final class PayoutType extends Enum
         if (!in_array($value, PaymentSourceType::toArray())) {
             throw PayoutTypeException::invalidValue();
         }
+
+        return true;
     }
 }

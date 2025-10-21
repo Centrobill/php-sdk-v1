@@ -8,7 +8,7 @@ use Exception;
 
 class GeoFeeException extends Exception implements SDKExceptionInterface
 {
-    public static function emptyItems()
+    public static function emptyItems(): GeoFeeException
     {
         return new self('GeoFee items cannot be empty.');
     }

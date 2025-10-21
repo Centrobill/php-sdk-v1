@@ -2,6 +2,7 @@
 
 namespace Centrobill\Sdk\Http\Request;
 
+use Centrobill\Sdk\ValueObject\ClientId;
 use Centrobill\Sdk\ValueObject\ExternalId;
 use Centrobill\Sdk\ValueObject\SiteName;
 use Centrobill\Sdk\ValueObject\Url;
@@ -26,20 +27,27 @@ class CreateSiteRequest implements RequestInterface
     private Url $ipnUrl;
 
     /**
-     * @var Url $redirectUrl
+     * @var Url|null $redirectUrl
      */
-    private Url $redirectUrl;
+    private ?Url $redirectUrl;
+
+    /**
+     * @var ClientId|null $clientId
+     */
+    private ?ClientId $clientId;
 
     public function __construct(
         SiteName $name,
         ExternalId $externalId,
         Url $ipnUrl,
-        Url $redirectUrl
+        ?Url $redirectUrl = null,
+        ?ClientId $clientId = null
     ) {
         $this->name = $name;
         $this->ipnUrl = $ipnUrl;
         $this->externalId = $externalId;
         $this->redirectUrl = $redirectUrl;
+        $this->clientId = $clientId;
     }
 
     public function setExternalId(ExternalId $externalId): CreateSiteRequest
@@ -54,14 +62,29 @@ class CreateSiteRequest implements RequestInterface
         return $this;
     }
 
+    public function setClientId(ClientId $clientId): CreateSiteRequest
+    {
+        $this->clientId = $clientId;
+        return $this;
+    }
+
     public function getPayload(): array
     {
-        return [
+        $payload = [
             'name' => (string)$this->name,
             'ipnUrl' => (string)$this->ipnUrl,
             'externalId' => (string)$this->externalId,
-            'redirectUrl' => (string)$this->redirectUrl,
         ];
+
+        if ($this->redirectUrl !== null) {
+            $payload['redirectUrl'] = (string)$this->redirectUrl;
+        }
+
+        if ($this->clientId !== null) {
+            $payload['clientId'] = (string)$this->clientId;
+        }
+
+        return $payload;
     }
 
     public function getUri(): string

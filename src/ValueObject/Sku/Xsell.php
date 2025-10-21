@@ -13,7 +13,7 @@ final class Xsell extends Enum
     /**
      * @throws XsellException
      */
-    public static function isValid($value)
+    public static function isValid($value): bool
     {
         if (empty($value)) {
             throw XsellException::emptyValue();
@@ -22,6 +22,8 @@ final class Xsell extends Enum
         if (!in_array($value, Xsell::toArray())) {
             throw XsellException::invalidValue();
         }
+
+        return true;
     }
 
     function __construct($value)

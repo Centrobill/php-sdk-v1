@@ -3,6 +3,7 @@
 namespace Centrobill\Sdk\Http\Request;
 
 use Centrobill\Sdk\Entity\Parameters;
+use Centrobill\Sdk\Entity\PayoutConsumer;
 use Centrobill\Sdk\Entity\PayoutUrl;
 use Centrobill\Sdk\ValueObject\Amount;
 use Centrobill\Sdk\ValueObject\ConsumerId;
@@ -55,9 +56,15 @@ class PayoutRequest implements RequestInterface
      */
     private $metadata;
 
+    /**
+     * @var ?PayoutConsumer $consumer
+     */
+    private ?PayoutConsumer $consumer;
+
     public function __construct(
         Amount $amount,
         Currency $currency,
+        ?PayoutConsumer $consumer,
         ?ConsumerId $consumerId = null,
         ?PaymentAccountId $paymentAccountId = null,
         ?SiteId $siteId = null,
@@ -67,6 +74,7 @@ class PayoutRequest implements RequestInterface
     ) {
         $this->amount = $amount;
         $this->currency = $currency;
+        $this->consumer = $consumer;
         $this->consumerId = $consumerId;
         $this->paymentAccountId = $paymentAccountId;
         $this->siteId = $siteId;
@@ -117,6 +125,12 @@ class PayoutRequest implements RequestInterface
         return $this;
     }
 
+    public function setConsumer(PayoutConsumer $consumer): self
+    {
+        $this->consumer = $consumer;
+        return $this;
+    }
+
     public function getPayload(): array
     {
         $data = [
@@ -126,6 +140,10 @@ class PayoutRequest implements RequestInterface
 
         if ($this->consumerId !== null) {
             $data['consumerId'] = (string)$this->consumerId;
+        }
+
+        if ($this->consumer !== null) {
+            $data['consumer'] = $this->consumer->toArray();
         }
 
         if ($this->paymentAccountId !== null) {

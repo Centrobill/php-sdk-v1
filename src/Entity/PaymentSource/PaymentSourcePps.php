@@ -28,7 +28,7 @@ class PaymentSourcePps extends AbstractPaymentSource
     public function toArray(): array
     {
         $data = [
-            'type' => PaymentSourceType::PAYMENT_SOURCE_PPS,
+            'type' => $this->getType(),
         ];
 
         if ($this->emulateCode !== null) {
@@ -36,5 +36,10 @@ class PaymentSourcePps extends AbstractPaymentSource
         }
 
         return array_merge($data, parent::toArray());
+    }
+
+    public function getType(): string
+    {
+        return PaymentSourceType::PAYMENT_SOURCE_PPS;
     }
 }

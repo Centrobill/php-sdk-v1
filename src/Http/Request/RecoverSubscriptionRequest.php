@@ -3,6 +3,7 @@
 namespace Centrobill\Sdk\Http\Request;
 
 use Centrobill\Sdk\ValueObject\Id;
+use Centrobill\Sdk\ValueObject\Reason;
 
 class RecoverSubscriptionRequest implements RequestInterface
 {
@@ -13,9 +14,21 @@ class RecoverSubscriptionRequest implements RequestInterface
      */
     private Id $id;
 
-    public function __construct(Id $id)
+    /**
+     * @var Reason|null $reason
+     */
+    private ?Reason $reason;
+
+    public function __construct(Id $id, ?Reason $reason = null)
     {
         $this->id = $id;
+        $this->reason = $reason;
+    }
+
+    public function setReason(Reason $reason): self
+    {
+        $this->reason = $reason;
+        return $this;
     }
 
     public function getUri(): string
@@ -41,6 +54,12 @@ class RecoverSubscriptionRequest implements RequestInterface
 
     public function getPayload(): array
     {
-        return [];
+        $payload = [];
+
+        if ($this->reason !== null) {
+            $payload['reason'] = (string)$this->reason;
+        }
+
+        return $payload;
     }
 }

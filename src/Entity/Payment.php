@@ -21,14 +21,14 @@ class Payment
     private ?PaymentMethod $selected;
 
     /**
-     * @var bool|null $secure
+     * @var ?bool $secure
      */
-    private $secure;
+    private ?bool $secure;
 
     /**
-     * @var bool|null $test
+     * @var ?bool $test
      */
-    private $test;
+    private ?bool $test;
 
     /**
      * @var ?EmulateCode $emulateCode
@@ -41,9 +41,9 @@ class Payment
     private ?Mid $mid;
 
     /**
-     * @var bool|null $terminalMode
+     * @var ?bool $terminalMode
      */
-    private $terminalMode;
+    private ?bool $terminalMode;
 
     /**
      * @var ?Bin $bin
@@ -83,10 +83,20 @@ class Payment
         return $this;
     }
 
+    public function getMethod(): array
+    {
+        return $this->method;
+    }
+
     public function setSelected($selected): self
     {
         $this->selected = $selected;
         return $this;
+    }
+
+    public function getSelected(): ?PaymentMethod
+    {
+        return $this->selected;
     }
 
     public function setSecure($secure): self
@@ -147,9 +157,11 @@ class Payment
             $data['terminalMode'] = $this->terminalMode;
         }
 
-        $data['method'] = array_map(function ($item) {
-            return (string)$item;
-        }, $this->method);
+        if (!empty($this->method)) {
+            $data['method'] = array_map(function ($method) {
+                return (string)$method;
+            }, $this->method);
+        }
 
         if ($this->selected !== null) {
             $data['selected'] = (string)$this->selected;

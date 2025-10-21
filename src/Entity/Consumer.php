@@ -11,6 +11,7 @@ use Centrobill\Sdk\ValueObject\BrowserScreenWidth;
 use Centrobill\Sdk\ValueObject\BrowserTimezone;
 use Centrobill\Sdk\ValueObject\City;
 use Centrobill\Sdk\ValueObject\Country;
+use Centrobill\Sdk\ValueObject\Cpf;
 use Centrobill\Sdk\ValueObject\DeviceId;
 use Centrobill\Sdk\ValueObject\Email;
 use Centrobill\Sdk\ValueObject\ExternalId;
@@ -109,7 +110,7 @@ class Consumer
     /**
      * @var bool|null $browserJavaEnabled
      */
-    private $browserJavaEnabled;
+    private bool $browserJavaEnabled;
 
     /**
      * @var ?BrowserLanguage $browserLanguage
@@ -136,6 +137,11 @@ class Consumer
      */
     private ?BrowserTimezone $browserTimezone;
 
+    /**
+     * @var ?Cpf $cpf
+     */
+    private ?Cpf $cpf;
+
     public function __construct(
         ?Id $id = null,
         ?ExternalId $externalId = null,
@@ -153,12 +159,13 @@ class Consumer
         ?UserAgent $userAgent = null,
         ?DeviceId $deviceId = null,
         ?BrowserAcceptHeader $browserAcceptHeader = null,
-        $browserJavaEnabled = null,
+        ?bool $browserJavaEnabled = null,
         ?BrowserLanguage $browserLanguage = null,
         ?BrowserColorDepth $browserColorDepth = null,
         ?BrowserScreenHeight $browserScreenHeight = null,
         ?BrowserScreenWidth $browserScreenWidth = null,
-        ?BrowserTimezone $browserTimezone = null
+        ?BrowserTimezone $browserTimezone = null,
+        ?Cpf $cpf = null
     ) {
         $this->id = $id;
         $this->externalId = $externalId;
@@ -182,6 +189,7 @@ class Consumer
         $this->browserScreenHeight = $browserScreenHeight;
         $this->browserScreenWidth = $browserScreenWidth;
         $this->browserTimezone = $browserTimezone;
+        $this->cpf = $cpf;
     }
 
     public function setId(Id $id): Consumer
@@ -316,6 +324,29 @@ class Consumer
         return $this;
     }
 
+    public function setCpf(Cpf $cpf): Consumer
+    {
+        $this->cpf = $cpf;
+        return $this;
+    }
+
+    public function getCpf(): ?Cpf
+    {
+        return $this->cpf;
+    }
+
+    public function isBrowserDataProvided(): bool
+    {
+        return $this->userAgent !== null
+            && $this->browserAcceptHeader !== null
+            && $this->browserJavaEnabled !== null
+            && $this->browserLanguage !== null
+            && $this->browserColorDepth !== null
+            && $this->browserScreenHeight !== null
+            && $this->browserScreenWidth !== null
+            && $this->browserTimezone !== null;
+    }
+
     public function toArray(): array
     {
         $data = [];
@@ -406,6 +437,10 @@ class Consumer
 
         if ($this->browserTimezone !== null) {
             $data['browserTimezone'] = (string)$this->browserTimezone;
+        }
+
+        if ($this->cpf !== null) {
+            $data['cpf'] = (string)$this->cpf;
         }
 
         return $data;

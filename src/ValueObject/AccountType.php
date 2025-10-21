@@ -13,7 +13,7 @@ final class AccountType extends Enum
     /**
      * @throws AccountTypeException
      */
-    public static function isValid($value)
+    public static function isValid($value): bool
     {
         if (empty($value)) {
             throw AccountTypeException::emptyValue();
@@ -22,6 +22,8 @@ final class AccountType extends Enum
         if (!in_array($value, AccountType::toArray())) {
             throw AccountTypeException::invalidValue();
         }
+
+        return true;
     }
 
     function __construct($value)
