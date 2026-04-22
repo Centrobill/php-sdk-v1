@@ -23,7 +23,7 @@ final class Blockchain extends Enum
     /**
      * @throws BlockchainException
      */
-    public static function isValid($value)
+    public static function isValid($value): bool
     {
         if (empty($value)) {
             throw BlockchainException::emptyValue();
@@ -32,6 +32,8 @@ final class Blockchain extends Enum
         if (!in_array($value, Blockchain::toArray())) {
             throw BlockchainException::invalidValue();
         }
+
+        return true;
     }
 
     function __construct($value)

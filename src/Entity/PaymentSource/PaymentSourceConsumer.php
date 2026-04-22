@@ -33,7 +33,7 @@ class PaymentSourceConsumer extends AbstractPaymentSource
     public function toArray(): array
     {
         $data = [
-            'type' => PaymentSourceType::PAYMENT_SOURCE_CONSUMER,
+            'type' => $this->getType(),
             'value' => (string)$this->value,
         ];
 
@@ -42,5 +42,10 @@ class PaymentSourceConsumer extends AbstractPaymentSource
         }
 
         return array_merge($data, parent::toArray());
+    }
+
+    public function getType(): string
+    {
+        return PaymentSourceType::PAYMENT_SOURCE_CONSUMER;
     }
 }

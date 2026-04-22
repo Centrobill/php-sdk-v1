@@ -29,7 +29,7 @@ final class TestPaymentDataType extends Enum
     /**
      * @throws TestPaymentDataTypeException
      */
-    public static function isValid($value)
+    public static function isValid($value): bool
     {
         if (empty($value)) {
             throw TestPaymentDataTypeException::emptyValue();
@@ -38,5 +38,7 @@ final class TestPaymentDataType extends Enum
         if (!in_array($value, PaymentSourceType::toArray())) {
             throw TestPaymentDataTypeException::invalidValue();
         }
+
+        return true;
     }
 }

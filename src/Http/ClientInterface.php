@@ -12,6 +12,7 @@ use Centrobill\Sdk\Http\Request\CreateConsumerRequest;
 use Centrobill\Sdk\Http\Request\CreateProductRequest;
 use Centrobill\Sdk\Http\Request\CreateSiteRequest;
 use Centrobill\Sdk\Http\Request\CreateTestPaymentDataRequest;
+use Centrobill\Sdk\Http\Request\CreateTransactionIdIpnRequest;
 use Centrobill\Sdk\Http\Request\CreditRequest;
 use Centrobill\Sdk\Http\Request\DeleteTestPaymentDataByIDRequest;
 use Centrobill\Sdk\Http\Request\DisablePaymentAccountForQuickSaleRequest;
@@ -26,6 +27,8 @@ use Centrobill\Sdk\Http\Request\GetChargebackIdRepaidLinkRequest;
 use Centrobill\Sdk\Http\Request\GetCurrencyExchangeRatesRequest;
 use Centrobill\Sdk\Http\Request\GetExchangeRateByIso3Request;
 use Centrobill\Sdk\Http\Request\GetListOfExternalIpsRequest;
+use Centrobill\Sdk\Http\Request\GetOrderIdIpnRequest;
+use Centrobill\Sdk\Http\Request\GetTransactionIdIpnRequest;
 use Centrobill\Sdk\Http\Request\ListPaymentaccountIDsByConsumerIdRequest;
 use Centrobill\Sdk\Http\Request\NotEmulate3DsForTestPaymentDataRequest;
 use Centrobill\Sdk\Http\Request\PayoutRequest;
@@ -47,6 +50,7 @@ use Centrobill\Sdk\Http\Response\CreateConsumerResponse;
 use Centrobill\Sdk\Http\Response\CreateProductResponse;
 use Centrobill\Sdk\Http\Response\CreateSiteResponse;
 use Centrobill\Sdk\Http\Response\CreateTestPaymentDataResponse;
+use Centrobill\Sdk\Http\Response\CreateTransactionIdIpnResponse;
 use Centrobill\Sdk\Http\Response\CreditResponse;
 use Centrobill\Sdk\Http\Response\DeleteTestPaymentDataByIDResponse;
 use Centrobill\Sdk\Http\Response\DisablePaymentAccountForQuickSaleResponse;
@@ -62,6 +66,8 @@ use Centrobill\Sdk\Http\Response\GetChargebackIdRepaidLinkResponse;
 use Centrobill\Sdk\Http\Response\GetCurrencyExchangeRatesResponse;
 use Centrobill\Sdk\Http\Response\GetExchangeRateByIso3Response;
 use Centrobill\Sdk\Http\Response\GetListOfExternalIpsResponse;
+use Centrobill\Sdk\Http\Response\GetOrderIdIpnResponse;
+use Centrobill\Sdk\Http\Response\GetTransactionIdIpnResponse;
 use Centrobill\Sdk\Http\Response\IpnResponse;
 use Centrobill\Sdk\Http\Response\ListPaymentaccountIDsByConsumerIdResponse;
 use Centrobill\Sdk\Http\Response\NotEmulate3DsForTestPaymentDataResponse;
@@ -315,6 +321,24 @@ interface ClientInterface
      * @return GetApplePaySessionResponse|ErrorResponse
      */
     public function getApplePaySession(GetApplePaySessionRequest $request): ResponseInterface;
+
+    /**
+     * @param GetTransactionIdIpnRequest $request
+     * @return GetTransactionIdIpnResponse|ErrorResponse
+     */
+    public function getTransactionIdIpn(GetTransactionIdIpnRequest $request): ResponseInterface;
+
+    /**
+     * @param GetOrderIdIpnRequest $request
+     * @return GetOrderIdIpnResponse|ErrorResponse
+     */
+    public function getOrderIdIpn(GetOrderIdIpnRequest $request): ResponseInterface;
+
+    /**
+     * @param CreateTransactionIdIpnRequest $request
+     * @return CreateTransactionIdIpnResponse|ErrorResponse
+     */
+    public function createTransactionIdIpn(CreateTransactionIdIpnRequest $request): ResponseInterface;
 
     /**
      * @param string $payload

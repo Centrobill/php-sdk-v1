@@ -9,6 +9,12 @@ use Centrobill\Sdk\ValueObject\Url;
 require_once __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/http-client.inc.php';
 
+/**
+ * For more information about the request parameters, please refer to the documentation:
+ *
+ * @link https://readme.centrobill.com/reference/createsite
+ */
+
 /** @var Client $client */
 $response = $client->createSite(
     new CreateSiteRequest(

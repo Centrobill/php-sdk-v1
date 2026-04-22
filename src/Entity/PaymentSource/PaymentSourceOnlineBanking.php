@@ -58,7 +58,7 @@ class PaymentSourceOnlineBanking extends AbstractPaymentSource
     public function toArray(): array
     {
         $data = [
-            'type' => PaymentSourceType::PAYMENT_SOURCE_ONLINEBANKING,
+            'type' => $this->getType(),
         ];
 
         if ($this->bic !== null) {
@@ -74,5 +74,10 @@ class PaymentSourceOnlineBanking extends AbstractPaymentSource
         }
 
         return array_merge($data, parent::toArray());
+    }
+
+    public function getType(): string
+    {
+        return PaymentSourceType::PAYMENT_SOURCE_ONLINEBANKING;
     }
 }

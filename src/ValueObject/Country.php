@@ -269,7 +269,7 @@ final class Country extends Enum
     /**
      * @throws CountryException
      */
-    public static function isValid($value)
+    public static function isValid($value): bool
     {
         if (empty($value)) {
             throw CountryException::emptyValue();
@@ -278,5 +278,7 @@ final class Country extends Enum
         if (!in_array($value, Country::toArray())) {
             throw CountryException::invalidValue();
         }
+
+        return true;
     }
 }

@@ -12,6 +12,8 @@ $request = new CancelSubscriptionRequest(new Id('1276034'));
 
 $request->setReason(new Reason('reason'));
 $request->setCancelDate(new DateTimeImmutable());
+$request->setKeepActiveUntilNextRebill(true);
+$request->setSendEmail(true);
 
 /** @var Client $client */
 $response = $client->cancelSubscription($request);

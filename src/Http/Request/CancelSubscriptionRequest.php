@@ -28,19 +28,19 @@ class CancelSubscriptionRequest implements RequestInterface
     /**
      * @var bool|null $sendEmail
      */
-    private $sendEmail;
+    private ?bool $sendEmail;
 
     /**
      * @var bool|null $keepActiveUntilNextRebill
      */
-    private $keepActiveUntilNextRebill;
+    private ?bool $keepActiveUntilNextRebill;
 
     public function __construct(
         Id $id,
         ?DateTimeImmutable $cancelDate = null,
         ?Reason $reason = null,
-        $sendEmail = null,
-        $keepActiveUntilNextRebill = null
+        ?bool $sendEmail = null,
+        ?bool $keepActiveUntilNextRebill = null
     ) {
         $this->id = $id;
         $this->cancelDate = $cancelDate;
@@ -61,13 +61,13 @@ class CancelSubscriptionRequest implements RequestInterface
         return $this;
     }
 
-    public function setSendEmail($sendEmail): CancelSubscriptionRequest
+    public function setSendEmail(bool $sendEmail): CancelSubscriptionRequest
     {
         $this->sendEmail = $sendEmail;
         return $this;
     }
 
-    public function setKeepActiveUntilNextRebill($keepActiveUntilNextRebill): CancelSubscriptionRequest
+    public function setKeepActiveUntilNextRebill(bool $keepActiveUntilNextRebill): CancelSubscriptionRequest
     {
         $this->keepActiveUntilNextRebill = $keepActiveUntilNextRebill;
         return $this;

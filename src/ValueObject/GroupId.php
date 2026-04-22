@@ -16,7 +16,7 @@ final class GroupId extends Enum
     /**
      * @throws GroupIdException
      */
-    public static function isValid($value)
+    public static function isValid($value): bool
     {
         if (empty($value)) {
             throw GroupIdException::emptyValue();
@@ -25,6 +25,8 @@ final class GroupId extends Enum
         if (!in_array($value, GroupId::toArray())) {
             throw GroupIdException::invalidValue();
         }
+
+        return true;
     }
 
     function __construct($value)

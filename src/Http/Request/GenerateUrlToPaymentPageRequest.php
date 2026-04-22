@@ -7,6 +7,7 @@ use Centrobill\Sdk\Entity\Fee;
 use Centrobill\Sdk\Entity\Payment;
 use Centrobill\Sdk\Entity\Sku;
 use Centrobill\Sdk\Entity\Template;
+use Centrobill\Sdk\Exception\GenerateUrlToPaymentPageRequestException;
 use Centrobill\Sdk\Exception\SDKExceptionInterface;
 use Centrobill\Sdk\Exception\SkuException;
 use Centrobill\Sdk\ValueObject\Field;
@@ -40,8 +41,8 @@ class GenerateUrlToPaymentPageRequest implements RequestInterface
     /** @var ?Ttl $ttl */
     private ?Ttl $ttl;
 
-    /** @var bool|null $emailOptions */
-    private $emailOptions;
+    /** @var ?bool $emailOptions */
+    private ?bool $emailOptions;
 
     public function __construct(
         $sku = [],
@@ -155,6 +156,12 @@ class GenerateUrlToPaymentPageRequest implements RequestInterface
 
         if ($this->payment !== null) {
             $data['payment'] = $this->payment->toArray();
+        }
+
+        if ((!empty($data['payment']['selected']) || !empty($data['payment']['method'])
+            && empty($data['consumer']['ip']))
+        ) {
+            throw GenerateUrlToPaymentPageRequestException::invalidValue();
         }
 
         if (!empty($this->metadata)) {

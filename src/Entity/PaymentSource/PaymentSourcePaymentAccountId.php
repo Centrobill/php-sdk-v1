@@ -43,4 +43,9 @@ class PaymentSourcePaymentAccountId extends AbstractPaymentSource
 
         return array_merge($data, parent::toArray());
     }
+
+    public function getType(): string
+    {
+        return PaymentSourceType::PAYMENT_SOURCE_PAYMENTACCOUNTID;
+    }
 }

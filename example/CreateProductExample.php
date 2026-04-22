@@ -6,6 +6,7 @@ use Centrobill\Sdk\Http\Request\CreateProductRequest;
 use Centrobill\Sdk\ValueObject\Amount;
 use Centrobill\Sdk\ValueObject\Currency;
 use Centrobill\Sdk\ValueObject\Offset;
+use Centrobill\Sdk\ValueObject\Repeat;
 use Centrobill\Sdk\ValueObject\Sku\SiteId;
 use Centrobill\Sdk\ValueObject\Sku\SkuType;
 use Centrobill\Sdk\ValueObject\Sku\Title;
@@ -17,8 +18,15 @@ $price = new Price();
 $price->setAmount(new Amount(100));
 $price->setCurrency(new Currency(Currency::CODE_USD));
 $price->setOffset(new Offset('3d'));
-$price->setRepeat(true);
+$price->setRepeat(new Repeat(-1));
 
+/**
+ * Before creating a product, you need to create a site.
+ *
+ * @see example/CreateSiteExample.php
+ * @link https://readme.centrobill.com/reference/createproduct
+ *
+ */
 $request = new CreateProductRequest(
     new SiteId('1276034'),
     new Title('product-title-3'),

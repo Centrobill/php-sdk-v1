@@ -16,16 +16,16 @@ final class Offset
      */
     protected function checkValue($value)
     {
-        if (empty($value)) {
-            throw OffsetException::emptyValue();
-        }
-
         if (strlen($value) > self::MAX_LENGTH) {
             throw OffsetException::invalidLength();
         }
 
         if (!preg_match('/^\d+d$/', $value)) {
             throw OffsetException::invalidValue();
+        }
+
+        if ((int)str_replace('d', '', $value) < 0) {
+            throw OffsetException::positiveInteger();
         }
     }
 }

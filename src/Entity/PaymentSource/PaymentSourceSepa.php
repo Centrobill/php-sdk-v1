@@ -52,7 +52,7 @@ class PaymentSourceSepa extends AbstractPaymentSource
     public function toArray(): array
     {
         $data = [
-            'type' => PaymentSourceType::PAYMENT_SOURCE_SEPA,
+            'type' => $this->getType(),
             'iban' => (string)$this->iban,
         ];
 
@@ -65,5 +65,10 @@ class PaymentSourceSepa extends AbstractPaymentSource
         }
 
         return array_merge($data, parent::toArray());
+    }
+
+    public function getType(): string
+    {
+        return PaymentSourceType::PAYMENT_SOURCE_SEPA;
     }
 }

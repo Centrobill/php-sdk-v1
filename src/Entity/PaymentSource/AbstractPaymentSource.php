@@ -8,6 +8,8 @@ abstract class AbstractPaymentSource
 {
     protected ?Mid $mid = null;
 
+    abstract public function getType(): string;
+
     public function toArray(): array
     {
         if ($this->mid !== null) {
